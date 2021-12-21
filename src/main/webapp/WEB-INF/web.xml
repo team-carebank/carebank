@@ -27,7 +27,7 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>*.do/</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
 	<!-- filter:: 들어오는 요청을 한번 "걸러서" 사용자화한다 -->
