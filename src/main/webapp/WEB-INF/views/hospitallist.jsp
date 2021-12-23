@@ -17,11 +17,10 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/hospital.js"></script>
 </head>
-
+<%@ include file="../../header.jsp"%>
 <body>
 	<div class="body-content">
 		<div class="content-top">
-			<h1>이용하기</h1>
 			<p class="content-desc">병원 정보를 찾으시나요?</p>
 			<ul class="category-list">
 			</ul>
@@ -34,6 +33,7 @@
 			</p>
 			<div class="info-list"></div>
 		</div>
+		<div class="pagination"></div>
 	</div>
 </body>
 

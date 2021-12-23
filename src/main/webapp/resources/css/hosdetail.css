@@ -1,7 +1,9 @@
-@charset "UTF-8"; 
+@charset "UTF-8";
 
-.body-content, .comment-area {
-	width: 100%;
+.body-content {
+	padding: 50px;
+	display: grid;
+	place-content: center;
 }
 
 .body-content a, .comment-area a, .menu-area a {
@@ -14,14 +16,6 @@
 	margin: 0;
 	margin-block: 20px;
 	margin-block-start: 0;
-}
-
-.body-content {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-gap: 20px;
-	padding: 100px;
-	padding-bottom: 0;
 }
 
 .comment-area {
@@ -44,7 +38,6 @@
 
 .content-desc {
 	font-size: x-large !important;
-	width: 400px;
 }
 
 #clinicName {

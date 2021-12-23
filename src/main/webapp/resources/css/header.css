@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-@import
-	url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css')
-	;
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 * {
 	font-family: 'Pretendard' !important;
@@ -13,9 +11,12 @@
     헤더의 전반적인 스타일을 적용
 */
 .header {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 10px;
 	background-color: #04AA6D;
-	padding: 50px;
 	position: sticky;
+	padding: 50px;
 }
 
 .header * {
@@ -29,22 +30,25 @@
 }
 
 .header div {
-	display: inline-block;
-	margin-inline: 100px;
+	grid-row: 1;
 	vertical-align: middle;
 	text-align: center;
 }
-
 /*
     헤더에서 로고/네비게이션/사용자 영역으로 나누고
     스타일을 적용
 */
 .header-logo {
-	margin-top: -10px;
-	float: left;
+	margin-top: -12.5px;
+	grid-column: 1;
+}
+
+.header-nav {
+	grid-column: 2;
 }
 
 .header-user {
+	grid-column: 3;
 	float: right;
 }
 

@@ -23,7 +23,7 @@
 <body>
 	<div class="body-content">
 		<div class="content-left">
-			<p class="content-desc">병원 정보를 안내할게요!</p>
+			<p class="content-desc">약국 정보를 안내할게요!</p>
 			<hr>
 			<div>
 				<span id="clinicName">${dto.yadmNm }</span> <span id="clinicAddress">${dto.addr }</span>
