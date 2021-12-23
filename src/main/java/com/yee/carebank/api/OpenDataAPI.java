@@ -88,4 +88,31 @@ public class OpenDataAPI {
 		return item;
 
 	}
+
+	public JSONObject getPharmacyInfo(String yadmNm, String sgguCd) throws MalformedURLException, IOException {
+		String url = PHARMACY_URL + "&yadmNm=" + URLEncoder.encode(yadmNm, "UTF-8") + "&sgguCd" + sgguCd;
+
+		HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+		conn.connect();
+		BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+		BufferedReader reader = new BufferedReader(new InputStreamReader(bis));
+		StringBuffer st = new StringBuffer();
+		String line;
+		while ((line = reader.readLine()) != null) {
+			st.append(line);
+		}
+
+		JSONObject xmlJSONObj = XML.toJSONObject(st.toString());
+		JSONObject item = null;
+
+		System.out.println(xmlJSONObj.toString(4));
+		try {
+			item = xmlJSONObj.getJSONObject("response").getJSONObject("body").getJSONObject("items")
+					.getJSONObject("item");
+		} catch (Exception e) {
+			item = xmlJSONObj.getJSONObject("response").getJSONObject("body").getJSONObject("items")
+					.getJSONArray("item").getJSONObject(0);
+		}
+		return item;
+	}
 }

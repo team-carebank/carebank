@@ -27,9 +27,14 @@ public class OpenDataController {
 		return "hospitallist";
 	}
 
+	@RequestMapping("/pharmacymain.do")
+	public String pharmacyMain() {
+		return "pharmacylist";
+	}
+
 	@RequestMapping("/hospitallist.do")
 	@ResponseBody
-	public Map<String, JSONArray> hospitalList(@RequestBody String sgguCd) throws MalformedURLException, IOException {
+	public Map<String, JSONArray> listHospital(@RequestBody String sgguCd) throws MalformedURLException, IOException {
 		JSONArray res = biz.getHospitalList(sgguCd);
 
 		Map<String, JSONArray> map = new HashMap<String, JSONArray>();
@@ -39,8 +44,28 @@ public class OpenDataController {
 	}
 
 	@RequestMapping("/hospitalinfo.do")
-	public String hopitalinfo(Model model, String yadmNm, String sgguCd) throws MalformedURLException, IOException {
+	public String informHospital(Model model, String yadmNm, String sgguCd) throws MalformedURLException, IOException {
 		HospitalDto dto = biz.getHospitalInfo(yadmNm, sgguCd);
+
+		model.addAttribute("dto", dto);
+
+		return "hospitalinfo";
+	}
+
+	@RequestMapping("/pharmacylist.do")
+	@ResponseBody
+	public Map<String, JSONArray> listPharmacy(@RequestBody String sgguCd) throws MalformedURLException, IOException {
+		JSONArray res = biz.getPharmacyList(sgguCd);
+
+		Map<String, JSONArray> map = new HashMap<String, JSONArray>();
+		map.put("res", res);
+
+		return map;
+	}
+
+	@RequestMapping("/pharmacyinfo.do")
+	public String informPharmacy(Model model, String yadmNm, String sgguCd) throws MalformedURLException, IOException {
+		HospitalDto dto = biz.getPharmacyInfo(yadmNm, sgguCd);
 
 		model.addAttribute("dto", dto);
 

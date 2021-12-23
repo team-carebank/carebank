@@ -56,4 +56,34 @@ public class OpenDataBiz {
 	public JSONArray getPharmacyList(String sgguCd) throws MalformedURLException, IOException {
 		return api.getPharmacyList(sgguCd);
 	}
+
+	public HospitalDto getPharmacyInfo(String yadmNm, String sgguCd) throws MalformedURLException, IOException {
+		JSONObject res = api.getPharmacyInfo(yadmNm, sgguCd);
+		HospitalDto dto = new HospitalDto();
+
+		dto.setYadmNm(res.getString("yadmNm"));
+		dto.setAddr(res.getString("addr"));
+		try {
+			dto.setTelno(res.getString("telno"));
+		} catch (Exception e) {
+			dto.setTelno(null);
+		}
+		try {
+			String url = URLEncoder.encode(res.getString("hospUrl"), "UTF-8");
+			dto.setHospUrl(URLDecoder.decode(url));
+		} catch (Exception e) {
+			dto.setHospUrl(null);
+		}
+
+		try {
+			dto.setxPos(res.getDouble("XPos"));
+			dto.setyPos(res.getDouble("YPos"));
+		} catch (Exception e) {
+			dto.setxPos(null);
+			dto.setyPos(null);
+		}
+
+		return dto;
+
+	}
 }
