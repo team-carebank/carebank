@@ -11,74 +11,9 @@
 <title>Document</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/header.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/hosdetail.css" />
 <style>
-.body-content, .comment-area {
-	width: 100%;
-}
-
-.body-content a, .comment-area a, .menu-area a {
-	text-decoration: none;
-	color: black;
-}
-
-.body-content *:not(.content-right) {
-	display: block;
-	margin: 0;
-	margin-block: 20px;
-	margin-block-start: 0;
-}
-
-.body-content {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-gap: 20px;
-	padding: 100px;
-	padding-bottom: 0;
-}
-
-.comment-area {
-	padding: 100px;
-	padding-top: 0;
-}
-
-.menu-area a {
-	font-size: large;
-}
-
-.menu-area a:hover, #clinicURL:hover {
-	font-weight: bold;
-	color: yellowgreen;
-}
-
-.content-left p {
-	font-size: large;
-}
-
-.content-desc {
-	font-size: x-large !important;
-	width: 400px;
-}
-
-#clinicName {
-	font-size: x-large;
-	font-weight: bold;
-}
-
-#map div {
-	display: block;
-	margin-block: 0;
-}
-
-#map * {
-	margin: 0;
-	padding: 0;
-	text-align: center;
-}
-
-#map a {
-	display: inline-flex !important;
-	margin-inline: 10px !important;
-}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

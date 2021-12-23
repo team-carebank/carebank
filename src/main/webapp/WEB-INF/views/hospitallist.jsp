@@ -9,79 +9,8 @@
 <title>Document</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/header.css" />
-<style>
-.body-content {
-	padding: 100px;
-}
-
-.body-content a {
-	text-decoration: none;
-	color: black;
-}
-
-.body-content * {
-	display: block;
-	margin: 0;
-	margin-block: 20px;
-	margin-block-start: 0;
-	padding: 0;
-}
-
-.content-side a:hover {
-	color: yellowgreen;
-}
-
-.content-desc {
-	font-size: x-large;
-	width: 400px;
-}
-
-.content-desc * {
-	display: inline-block;
-}
-
-.category-list, .sub-category-list {
-	margin-block: 0;
-}
-
-.category-list li, .sub-category-list li {
-	display: inline-block;
-	margin-block: 5px;
-	margin-inline: 10px;
-	margin-inline-start: 0;
-}
-
-.category-list li a:hover, .sub-category-list li a:hover, .clinic-info a:hover
-	{
-	color: yellowgreen;
-}
-
-.category-list-item {
-	margin-inline-start: 0;
-	font-size: larger;
-}
-
-.category-list, .sub-category-list, .content-main {
-	display: none;
-}
-
-.info-list * {
-	margin-block: 20px;
-}
-
-.clinic-info {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-}
-
-.clinic-info *:first-child {
-	grid-column: 1/span 2;
-}
-
-.clinic-info * {
-	margin-block: 5px;
-}
-</style>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/hoslist.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
