@@ -8,6 +8,7 @@
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
 *{
+
   margin-left: 0;
   margin-right: 0;
   box-sizing: border-box; 
