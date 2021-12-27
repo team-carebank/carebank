@@ -44,6 +44,7 @@ public class LoginController {
 		
 		 Map<String, Boolean> map = new HashMap<String, Boolean>();
 		 map.put("check",check);
+		 //test//
 		return map;
 	}
 }
