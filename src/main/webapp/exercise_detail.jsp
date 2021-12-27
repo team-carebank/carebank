@@ -258,6 +258,7 @@ body{
         //시간간격은 1/1000초 단위(ms)로 작성. 예; 1초=1000, 3초=3000
 
 		    function count0Fn() {
+        	
 		      cnt0++;
 		      if (cnt0 >kcal) { 
 		        clearInterval(id0);
