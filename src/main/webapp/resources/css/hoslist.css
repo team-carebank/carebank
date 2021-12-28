@@ -54,6 +54,10 @@
 	margin-inline: 20px;
 }
 
+.pagination li:first-child {
+	color: #04AA6D !important;
+}
+
 .category-list li a:hover, .sub-category-list li a:hover, .clinic-info a:hover,
 	.pagination li a:hover {
 	color: yellowgreen;

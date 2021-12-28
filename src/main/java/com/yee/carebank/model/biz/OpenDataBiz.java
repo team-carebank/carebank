@@ -27,6 +27,10 @@ public class OpenDataBiz {
 		return api.getHospitalList(sgguCd);
 	}
 
+	public JSONArray getHospitalList(String sgguCd, String pageno) throws MalformedURLException, IOException {
+		return api.getHospitalList(sgguCd, pageno);
+	}
+
 	public HospitalDto getHospitalInfo(String yadmNm, String sgguCd) throws MalformedURLException, IOException {
 		JSONObject res = api.getHospitalInfo(yadmNm, sgguCd);
 		HospitalDto dto = new HospitalDto();

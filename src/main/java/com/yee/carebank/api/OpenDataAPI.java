@@ -26,7 +26,28 @@ public class OpenDataAPI {
 	public static int TOTAL_COUNT = 0;
 
 	public JSONArray getHospitalList(String sgguCd) throws MalformedURLException, IOException {
-		String url = HOSPITAL_URL + "&sgguCd=" + sgguCd; // + "&numOfRows=1000";
+		String url = HOSPITAL_URL + "&sgguCd=" + sgguCd;
+
+		HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+		conn.connect();
+		BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+		BufferedReader reader = new BufferedReader(new InputStreamReader(bis));
+		StringBuffer st = new StringBuffer();
+		String line;
+		while ((line = reader.readLine()) != null) {
+			st.append(line);
+		}
+
+		JSONObject xmlJSONObj = XML.toJSONObject(st.toString());
+		JSONArray item = xmlJSONObj.getJSONObject("response").getJSONObject("body").getJSONObject("items")
+				.getJSONArray("item");
+		TOTAL_COUNT = xmlJSONObj.getJSONObject("response").getJSONObject("body").getInt("totalCount");
+		return item;
+
+	}
+
+	public JSONArray getHospitalList(String sgguCd, String pageno) throws MalformedURLException, IOException {
+		String url = HOSPITAL_URL + "&sgguCd=" + sgguCd + "&pageNo=" + pageno;
 
 		HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
 		conn.connect();

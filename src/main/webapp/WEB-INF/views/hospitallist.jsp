@@ -29,7 +29,7 @@
 		</div>
 		<div class="content-main">
 			<p class="content-desc" style="width: 100%;">
-				<b class="sub-category-name">강남구</b>의 병원정보를 안내할게요.
+				<b class="sub-category-name"></b>의 병원정보를 안내할게요.
 			</p>
 			<div class="info-list"></div>
 		</div>

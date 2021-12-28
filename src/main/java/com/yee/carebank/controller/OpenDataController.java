@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.yee.carebank.model.biz.OpenDataBiz;
 import com.yee.carebank.model.dto.HospitalDto;
 
@@ -36,6 +38,20 @@ public class OpenDataController {
 	@ResponseBody
 	public Map<String, JSONArray> listHospital(@RequestBody String sgguCd) throws MalformedURLException, IOException {
 		JSONArray res = biz.getHospitalList(sgguCd);
+
+		Map<String, JSONArray> map = new HashMap<String, JSONArray>();
+		map.put("res", res);
+
+		return map;
+	}
+
+	@RequestMapping("/hospitalpage.do")
+	@ResponseBody
+	public Map<String, JSONArray> listHospitalByPage(@RequestBody String data)
+			throws MalformedURLException, IOException {
+		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
+
+		JSONArray res = biz.getHospitalList(jo.get("sgguCd").getAsString(), jo.get("pageno").getAsString());
 
 		Map<String, JSONArray> map = new HashMap<String, JSONArray>();
 		map.put("res", res);
