@@ -1,19 +1,14 @@
-package com.board.domain;
+package com.yee.carebank.model.dto;
 
 import java.util.Date;
 
-public class BoardVO {
-	/* 게시판 번호 */
+public class BoardDTO {
 	private int post_no;
-
 	private String post_title;
-
 	private String post_content;
-	/*
-	 * 게시판 파일 넣는 문장 private _______ Post_fifle;
-	 */
+   //	 * 게시판 파일 넣는 문장 private _______ Post_fifle;	 */
 	private Date regdate;
-	/*게시판 조회수 넣는 문장*/
+   /*게시판 조회수 넣는 문장*/
 	private int Post_view;
 	
 	
@@ -55,5 +50,5 @@ public class BoardVO {
 		return "BoardVO [post_no=" + post_no + ", post_title=" + post_title + ", post_content=" + post_content
 				+ ", regdate=" + regdate + ", Post_view=" + Post_view + "]";
 	}
-	
+
 }

@@ -129,7 +129,7 @@
                         </table>
 
 
-                        <!-- 페이징 처리 영역 
+                       <%--  <!-- 페이징 처리 영역 
                         <%  if(pageNumber != 1){
                          %>
                             <a href="bbs.jsp?pageNumber=<%=pageNumber - 1 %>"
@@ -142,7 +142,7 @@
                            <%
                          }
                         %>
-                        -->
+                        --> --%>
                     </div>
                 </div>
             </div>
