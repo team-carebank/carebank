@@ -260,7 +260,7 @@ img{
 						}
 					},
 				error: function(){
-					alert("통신실패");
+					alert("에러: 통신실패");
 				}
 			});
 		}

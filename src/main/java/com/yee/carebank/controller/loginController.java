@@ -37,9 +37,9 @@ public class LoginController {
 		UserDto res = userbiz.login(userdto);
 		
 		boolean check = false;
-		if(res != null) { //객체 존재: 디비에서 잘 읽어왔다 : 회원이 로그인을 성공했다
+		if(res != null) {
 			session.setAttribute("login", res);
-			check = true; //check가  true면 성공 false면 실패판단
+			check = true; 
 		}
 		
 		 Map<String, Boolean> map = new HashMap<String, Boolean>();
