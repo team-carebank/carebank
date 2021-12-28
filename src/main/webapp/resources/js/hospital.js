@@ -39,87 +39,17 @@ function clickSggu(e) {
 	$(".pagination").hide();
 	$(".content-main").hide();
 	var sgguName = $(e).text();
-	getHospital(sgguName);
+	getHospitalByPage(sgguName, 1);
 	$(".content-main").show("slow");
 	$(".pagination").show("slow");
-}
 
-function getHospital(sgguName) {
-	$(".sub-category-name").html(sgguName);
-	$(".info-list").empty();
-	$(".pagination").empty();
-	$.getJSON(ur2, function(data) {
-		$.each(data, function(key, model) {
-			if (model.시군구코드명 == sgguName) {
-				var sgguCd = model.시군구코드;
-				$.ajax({
-					type: "post",
-					url: "hospitallist.do",
-					data: JSON.stringify(sgguCd),
-					contentType: "application/json",
-					success: function(map) {
-						if (map != null) {
-							var res = map.res.myArrayList;
-							$.each(res, function(key, model) {
-								var yadmNm = model.map.yadmNm;
-								var addr = model.map.addr;
-								var hospUrl = model.map.hospUrl;
-								var telno = model.map.telno;
+	let stateObj = { sgguName: sgguName, pageno: 1 };
 
-								var clinicInfo = "<div class='clinic-info'><div>"
-									+ "<span style='font-size: large; font-weight: bold;'>"
-									+ yadmNm
-									+ "</span>"
-									+ "<span>" + addr + "</span>";
-								if (telno != null) {
-									clinicInfo += "<span>" + telno + "</span>"
-								}
-								clinicInfo = clinicInfo
-									+ "</div>"
-									+ "<div>"
-									+ "<span><a href='hospitalinfo.do?yadmNm=" + yadmNm + "&sgguCd=" + sgguCd + "'>상세정보 보기</a></span>";
-								if (hospUrl != null) {
-									clinicInfo += "<span><a href='" + hospUrl + "' target='_blank'>공식 홈페이지</a></span>";
-								}
-								clinicInfo += "</div></div>";
+	let renewURL = location.href;
+	renewURL = renewURL.replace(/\?page=([0-9]+)/ig, '');
+	renewURL += '?page=' + 1;
 
-								$(".info-list").append(clinicInfo);
-							})
-						}
-					},
-					error: function() {
-						alert("통신 실패");
-					}
-				}).done(function() {
-					$.ajax({
-						type: "post",
-						url: "getpages.do",
-						data: JSON.stringify(sgguCd),
-						contentType: "application/json",
-						success: function(count) {
-							var pageCnt = parseInt((count - 1) / 30);
-							if (pageCnt <= 10) {
-								for (var i = 1; i < pageCnt + 1; i++) {
-									var page = "<li class='page'><a href='javascript:clickPage(" + i + ")'>" + i + "</a></li>";
-									$(".pagination").append(page);
-								}
-							} else {
-								for (var i = 1; i < 11; i++) {
-									var page = "<li class='page'><a href='javascript:clickPage(" + i + ")'>" + i + "</a></li>";
-									$(".pagination").append(page);
-								}
-								var next = "<li><a href='javascript:nextPage()'>다음</a></li>";
-								$(".pagination").append(next);
-							}
-						},
-						error: function() {
-							alert("통신 실패");
-						}
-					});
-				});
-			}
-		});
-	});
+	history.pushState(stateObj, null, renewURL);
 }
 
 function getSgguName(sgguName) {
@@ -142,6 +72,14 @@ function clickPage(pageno) {
 	getHospitalByPage(sgguName, pageno);
 	$(".content-main").show("slow");
 	$(".pagination").show("slow");
+
+	let stateObj = { sgguName: sgguName, pageno: Number(pageno) };
+
+	let renewURL = location.href;
+	renewURL = renewURL.replace(/\?page=([0-9]+)/ig, '');
+	renewURL += '?page=' + pageno;
+
+	history.pushState(stateObj, null, renewURL);
 }
 
 function getHospitalByPage(sgguName, pageno) {
@@ -184,7 +122,7 @@ function getHospitalByPage(sgguName, pageno) {
 								clinicInfo += "</div></div>";
 
 								$(".info-list").append(clinicInfo);
-							})
+							});
 						}
 					},
 					error: function() {
@@ -225,7 +163,6 @@ function getHospitalByPage(sgguName, pageno) {
 			}
 		});
 	});
-
 }
 
 function nextPage() {
@@ -236,4 +173,11 @@ function nextPage() {
 function prevPage() {
 	var pageno = $(".page").first("a").text();
 	clickPage(Number(pageno) - 10);
+}
+
+window.onpopstate = function(event) {
+	var current = event.state;
+	getHospitalByPage(current.sgguName, current.pageno);
+	$(".content-main").show("slow");
+	$(".pagination").show("slow");
 }

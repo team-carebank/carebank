@@ -24,25 +24,17 @@ public class OpenDataController {
 	@Autowired
 	OpenDataBiz biz;
 
+	// 병원 정보 및 약국 정보 페이지에서 동일하게 사용되는 컨트롤러
+	@RequestMapping("/getpages.do")
+	@ResponseBody
+	public int getTotalCount(@RequestBody String sgguCd) {
+		return biz.getTotalCount(sgguCd);
+	}
+
+	// 병원 정보 관련 컨트롤러
 	@RequestMapping("/hospitalmain.do")
 	public String hopitalMain() {
 		return "hospitallist";
-	}
-
-	@RequestMapping("/pharmacymain.do")
-	public String pharmacyMain() {
-		return "pharmacylist";
-	}
-
-	@RequestMapping("/hospitallist.do")
-	@ResponseBody
-	public Map<String, JSONArray> listHospital(@RequestBody String sgguCd) throws MalformedURLException, IOException {
-		JSONArray res = biz.getHospitalList(sgguCd);
-
-		Map<String, JSONArray> map = new HashMap<String, JSONArray>();
-		map.put("res", res);
-
-		return map;
 	}
 
 	@RequestMapping("/hospitalpage.do")
@@ -59,12 +51,6 @@ public class OpenDataController {
 		return map;
 	}
 
-	@RequestMapping("/getpages.do")
-	@ResponseBody
-	public int getTotalCount(@RequestBody String sgguCd) {
-		return biz.getTotalCount(sgguCd);
-	}
-
 	@RequestMapping("/hospitalinfo.do")
 	public String informHospital(Model model, String yadmNm, String sgguCd) throws MalformedURLException, IOException {
 		HospitalDto dto = biz.getHospitalInfo(yadmNm, sgguCd);
@@ -74,10 +60,18 @@ public class OpenDataController {
 		return "hospitalinfo";
 	}
 
-	@RequestMapping("/pharmacylist.do")
+	// 약국 정보 관련 컨트롤러
+	@RequestMapping("/pharmacymain.do")
+	public String pharmacyMain(Model model) {
+		return "pharmacylist";
+	}
+
+	@RequestMapping("/pharmacypage.do")
 	@ResponseBody
-	public Map<String, JSONArray> listPharmacy(@RequestBody String sgguCd) throws MalformedURLException, IOException {
-		JSONArray res = biz.getPharmacyList(sgguCd);
+	public Map<String, JSONArray> listPharmacy(@RequestBody String data) throws MalformedURLException, IOException {
+		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
+
+		JSONArray res = biz.getPharmacyList(jo.get("sgguCd").getAsString(), jo.get("pageno").getAsString());
 
 		Map<String, JSONArray> map = new HashMap<String, JSONArray>();
 		map.put("res", res);
