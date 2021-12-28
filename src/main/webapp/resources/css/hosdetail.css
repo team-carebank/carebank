@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+.body-content {
+	padding: 50px;
+	display: grid;
+	place-content: center;
+}
+
+.body-content a, .comment-area a, .menu-area a {
+	text-decoration: none;
+	color: black;
+}
+
+.body-content *:not(.content-right) {
+	display: block;
+	margin: 0;
+	margin-block: 20px;
+	margin-block-start: 0;
+}
+
+.comment-area {
+	padding: 100px;
+	padding-top: 0;
+}
+
+.menu-area a {
+	font-size: large;
+}
+
+.menu-area a:hover, #clinicURL:hover {
+	font-weight: bold;
+	color: yellowgreen;
+}
+
+.content-left p {
+	font-size: large;
+}
+
+.content-desc {
+	font-size: x-large !important;
+}
+
+#clinicName {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+#map div {
+	display: block;
+	margin-block: 0;
+}
+
+#map * {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#map a {
+	display: inline-flex !important;
+	margin-inline: 10px !important;
+}
