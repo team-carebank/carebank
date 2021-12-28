@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,7 +9,6 @@
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
 *{
-
   margin-left: 0;
   margin-right: 0;
   box-sizing: border-box; 
@@ -111,11 +111,9 @@ td{
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
 th{
   font-weight:normal;
 }
-
 </style>
 </head>
 
@@ -155,7 +153,7 @@ th{
             <br><br><br><h3 class="sa sa-right">미뤄왔던 운동을 시작해보세요</h3>
             <p class="sa sa-right">어떤 운동을 해야할지 몰라 운동의 시작이 어려웠다면<br>
             고민에 꼭 필요한 운동 동작을 추천받아<br>
-            코스를 완성하고 목표량을 꾸준히 채워보세요<br><br><button class="button-68"  onclick="location.href='exercise_main.jsp'">workout</button>
+            코스를 완성하고 목표량을 꾸준히 채워보세요<br><br><button class="button-68"   onclick="location.href='exercise.do'">workout</button>
             </div>
             
             <div class="flexbox-item flexbox-item3-2"> 
@@ -216,4 +214,4 @@ th{
         window.addEventListener('scroll', saFunc);
       </script>
 </body>
-</html>
+</html> 
