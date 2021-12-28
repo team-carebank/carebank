@@ -115,7 +115,7 @@ function getHospitalByPage(sgguName, pageno) {
 								clinicInfo = clinicInfo
 									+ "</div>"
 									+ "<div>"
-									+ "<span><a href='hospitalinfo.do?yadmNm=" + yadmNm + "&sgguCd=" + sgguCd + "'>상세정보 보기</a></span>";
+									+ "<span><a href='hospitalinfo.do?yadmNm=" + yadmNm + "&sgguCd=" + sgguCd + "'>지도 보기</a></span>";
 								if (hospUrl != null) {
 									clinicInfo += "<span><a href='" + hospUrl + "' target='_blank'>공식 홈페이지</a></span>";
 								}
