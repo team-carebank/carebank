@@ -235,7 +235,7 @@ img{
 		var user_pw = $("#user_pw").val().trim();
 		console.log(user_id + user_pw);
 		
-		var loginInFo = {
+		var loginInfo = {
 				"user_id":user_id,
 				"user_pw":user_pw
 		};
