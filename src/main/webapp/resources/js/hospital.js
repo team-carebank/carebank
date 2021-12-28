@@ -3,6 +3,7 @@ const ur2 = "resources/json/sggCd.json";
 
 $(function() {
 	$.getJSON(url, function(data) {
+		$(".pagination").empty();
 		$(".category-list").empty();
 		$.each(data, function(key, model) {
 			$(".category-list").append(
@@ -14,6 +15,7 @@ $(function() {
 });
 
 function clickRegion(e) {
+	$(".pagination").hide();
 	$(".content-main").hide();
 	var region = $(e).text();
 	$.getJSON(ur2, function(data) {
@@ -31,10 +33,12 @@ function clickRegion(e) {
 }
 
 function clickDistrict(e) {
+	$(".pagination").hide();
 	$(".content-main").hide();
 	var subCategory = $(e).text();
 	$(".sub-category-name").html(subCategory);
 	$(".info-list").empty();
+	$(".pagination").empty();
 	$.getJSON(ur2, function(data) {
 		$.each(data, function(key, model) {
 			if (model.시군구코드명 == subCategory) {

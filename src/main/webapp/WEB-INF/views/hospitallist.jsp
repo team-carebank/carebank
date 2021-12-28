@@ -33,7 +33,10 @@
 			</p>
 			<div class="info-list"></div>
 		</div>
-		<div class="pagination"></div>
+		<div class="content-bottom">
+			<ul class="pagination">
+			</ul>
+		</div>
 	</div>
 </body>
 
