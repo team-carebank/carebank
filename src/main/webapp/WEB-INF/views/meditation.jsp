@@ -118,7 +118,7 @@ body{
     </div>
 
     <div class="carousel">
-        <div class="carousel-item" onclick="location.href='meditation_detail.jsp'">
+        <div class="carousel-item" onclick="location.href='meditation_detail.do'">
             <img src="resources/img/1명상.jpg">
             <h3>마음을 비우는 15분</h3>
         </div>
@@ -139,7 +139,7 @@ body{
     <div class="skipbutton">
         <div class="textbox2">
             <p>음..오늘은 달려볼게요</p> 
-            <button class="button-68"  onclick="location.href='exercise_main.jsp'">workout</button>
+            <button class="button-68"  onclick="location.href='exercise.do'">workout</button>
         </div>
     </div>
 
