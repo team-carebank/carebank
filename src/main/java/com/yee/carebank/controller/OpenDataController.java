@@ -43,6 +43,12 @@ public class OpenDataController {
 		return map;
 	}
 
+	@RequestMapping("/getpages.do")
+	@ResponseBody
+	public int getTotalCount(@RequestBody String sgguCd) {
+		return biz.getTotalCount(sgguCd);
+	}
+
 	@RequestMapping("/hospitalinfo.do")
 	public String informHospital(Model model, String yadmNm, String sgguCd) throws MalformedURLException, IOException {
 		HospitalDto dto = biz.getHospitalInfo(yadmNm, sgguCd);
@@ -69,7 +75,7 @@ public class OpenDataController {
 
 		model.addAttribute("dto", dto);
 
-		return "hospitalinfo";
+		return "pharmacyinfo";
 	}
 
 }

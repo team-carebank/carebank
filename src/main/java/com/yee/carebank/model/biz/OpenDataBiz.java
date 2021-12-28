@@ -19,6 +19,10 @@ public class OpenDataBiz {
 	@Autowired
 	OpenDataAPI api;
 
+	public int getTotalCount(String sgguCd) {
+		return OpenDataAPI.TOTAL_COUNT;
+	}
+
 	public JSONArray getHospitalList(String sgguCd) throws MalformedURLException, IOException {
 		return api.getHospitalList(sgguCd);
 	}

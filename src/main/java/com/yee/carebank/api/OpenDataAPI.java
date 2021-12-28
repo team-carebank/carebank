@@ -16,13 +16,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class OpenDataAPI {
-	public static int INDENT_FACTOR = 4;
-	private String HOSPITAL_KEY = "26ng9VOSOIPbi%2F9x6FJY3l1CWQICmsw0KMaKSRCXNt0FGG6sLsDkAjhYc44qf9mkGEeP5%2BmuPptEGpIDmMvK6A%3D%3D";
-	private String PHARMACY_KEY = "26ng9VOSOIPbi%2F9x6FJY3l1CWQICmsw0KMaKSRCXNt0FGG6sLsDkAjhYc44qf9mkGEeP5%2BmuPptEGpIDmMvK6A%3D%3D";
-	private String HOSPITAL_URL = "http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1?ServiceKey="
-			+ HOSPITAL_KEY;
-	private String PHARMACY_URL = "http://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList?ServiceKey="
-			+ PHARMACY_KEY;
+	private static final String HOSPITAL_KEY = "26ng9VOSOIPbi%2F9x6FJY3l1CWQICmsw0KMaKSRCXNt0FGG6sLsDkAjhYc44qf9mkGEeP5%2BmuPptEGpIDmMvK6A%3D%3D";
+	private static final String PHARMACY_KEY = "26ng9VOSOIPbi%2F9x6FJY3l1CWQICmsw0KMaKSRCXNt0FGG6sLsDkAjhYc44qf9mkGEeP5%2BmuPptEGpIDmMvK6A%3D%3D";
+	private static final String HOSPITAL_URL = "http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1?ServiceKey="
+			+ HOSPITAL_KEY + "&numOfRows=30";
+	private static final String PHARMACY_URL = "http://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList?ServiceKey="
+			+ PHARMACY_KEY + "&numOfRows=30";
+
+	public static int TOTAL_COUNT = 0;
 
 	public JSONArray getHospitalList(String sgguCd) throws MalformedURLException, IOException {
 		String url = HOSPITAL_URL + "&sgguCd=" + sgguCd; // + "&numOfRows=1000";
@@ -40,6 +41,7 @@ public class OpenDataAPI {
 		JSONObject xmlJSONObj = XML.toJSONObject(st.toString());
 		JSONArray item = xmlJSONObj.getJSONObject("response").getJSONObject("body").getJSONObject("items")
 				.getJSONArray("item");
+		TOTAL_COUNT = xmlJSONObj.getJSONObject("response").getJSONObject("body").getInt("totalCount");
 		return item;
 
 	}
@@ -85,6 +87,7 @@ public class OpenDataAPI {
 		JSONObject xmlJSONObj = XML.toJSONObject(st.toString());
 		JSONArray item = xmlJSONObj.getJSONObject("response").getJSONObject("body").getJSONObject("items")
 				.getJSONArray("item");
+		TOTAL_COUNT = xmlJSONObj.getJSONObject("response").getJSONObject("body").getInt("totalCount");
 		return item;
 
 	}
@@ -105,7 +108,6 @@ public class OpenDataAPI {
 		JSONObject xmlJSONObj = XML.toJSONObject(st.toString());
 		JSONObject item = null;
 
-		System.out.println(xmlJSONObj.toString(4));
 		try {
 			item = xmlJSONObj.getJSONObject("response").getJSONObject("body").getJSONObject("items")
 					.getJSONObject("item");
