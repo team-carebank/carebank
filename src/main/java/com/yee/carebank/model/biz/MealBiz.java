@@ -1,13 +1,12 @@
 package com.yee.carebank.model.biz;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yee.carebank.model.dao.MealDao;
+import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
 
 @Service
@@ -28,12 +27,12 @@ public class MealBiz {
 		return dao.selectCategory(subcat_id);
 	}
 
-	public Map<String, Object> selectOne(int meal_id) {
-		Map<String, Object> res = new HashMap<String, Object>();
-
-		res.put("meal", dao.selectOne(meal_id));
-		res.put("ingredient", dao.selectOne(meal_id));
-
-		return res;
+	public MealDto selectOne(int meal_id) {
+		return dao.selectOne(meal_id);
 	}
+
+	public List<FoodDto> selectIngredient(int meal_id) {
+		return dao.selectIngredient(meal_id);
+	}
+
 }

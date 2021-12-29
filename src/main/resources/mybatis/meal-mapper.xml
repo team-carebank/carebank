@@ -22,21 +22,8 @@
 	</select>
 	<select id="selectIngredient" resultType="foodDto"
 		parameterType="int">
-		SELECT
-		food,
-		description,
-		carbo,
-		protein,
-		fat,
-		calories
-		FROM
-		(meal
-		JOIN INGREDIENT i
-		USING(meal_name,
-		subcat_id))
-		JOIN NUTRIENT n
-		USING(food)
-		WHERE
-		meal_id = ${meal_id}
+		SELECT food, description, carbo, protein, fat, calories
+		FROM (meal JOIN INGREDIENT i USING(meal_name, subcat_id)) JOIN NUTRIENT n USING(food)
+		WHERE meal_id = ${meal_id}
 	</select>
 </mapper>

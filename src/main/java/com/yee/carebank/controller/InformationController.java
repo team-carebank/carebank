@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.MealBiz;
+import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
 
 @Controller
@@ -40,13 +41,23 @@ public class InformationController {
 
 		return res;
 	}
-	
+
 	@RequestMapping("/mealinfo.do")
 	public String selectMeal(Model model, int id) {
-		Map<String, Object> res = biz.selectOne(id);
-		
-		model.addAttribute(res);
-		
+		MealDto meal = biz.selectOne(id);
+		List<FoodDto> ingredient = biz.selectIngredient(id);
+
+		boolean flag = false;
+
+		model.addAttribute("meal", meal);
+		model.addAttribute("ingredient", ingredient);
+
+		if (ingredient.size() > 1) {
+			flag = true;
+		}
+
+		model.addAttribute("flag", flag);
+
 		return "mealinfo";
 	}
 
