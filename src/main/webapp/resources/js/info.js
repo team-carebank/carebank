@@ -28,3 +28,24 @@ $(function() {
 		$(".content-main").show("slow");
 	})
 });
+
+function clickMenu(subcat_id, info_type) {
+	if (info_type == 1) {
+		selectMeal(subcat_id);
+	}
+}
+
+function selectMeal(subcat_id) {
+	$.ajax({
+		type: "post",
+		url: "meallist.do",
+		data: JSON.stringify(subcat_id),
+		contentType: "application/json",
+		success: function(res) {
+			console.log(res);
+		},
+		error: function() {
+			alert("통신 실패");
+		}
+	});
+}

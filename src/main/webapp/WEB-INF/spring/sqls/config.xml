@@ -2,19 +2,19 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  <!--config 태그 추가 -->
-  
-  <configuration>
-  	<typeAliases>
-  	<!-- <typeAlias type = "com.yee.carebank.model.dto.BoardDto" alias = "boardDto"/>
-  		형식으로 추가해주면됌 -->
-  		
-  	</typeAliases>
-  	
-  	<mappers>
-  	<!-- <mapper resource = "/mybatis/board-mapper.xml"/>
-  		형식으로 매퍼 위치 추가 작성 -->
-  		
-  	</mappers>
-  
-  </configuration>
+<!--config 태그 추가 -->
+
+<configuration>
+	<typeAliases>
+		<!-- <typeAlias type = "com.yee.carebank.model.dto.BoardDto" alias = "boardDto"/> 
+			형식으로 추가해주면됌 -->
+		<typeAlias type="com.yee.carebank.model.dto.MealDto"
+			alias="mealDto" />
+	</typeAliases>
+
+	<mappers>
+		<!-- <mapper resource = "/mybatis/board-mapper.xml"/> 형식으로 매퍼 위치 추가 작성 -->
+		<mapper resource="/mybatis/meal-mapper.xml" />
+	</mappers>
+
+</configuration>
