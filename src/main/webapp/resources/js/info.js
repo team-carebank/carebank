@@ -33,12 +33,12 @@ function selectMeal(subcat_id) {
 		data: JSON.stringify(subcat_id),
 		contentType: "application/json",
 		success: function(res) {
-			var gallery = res.gallery;
+			var meal = res.meal;
 			var food = res.food;
 
 			$(".sub-category-desc").html(food.join(', '));
-			for (var i = 0; i < gallery.length; i++) {
-				createGallery(gallery[i]);
+			for (var i = 0; i < meal.length; i++) {
+				createGallery(meal[i]);
 			}
 		},
 		error: function() {
@@ -47,7 +47,8 @@ function selectMeal(subcat_id) {
 	});
 }
 
-function createGallery(element) {
+function createGallery(element, subcat_id) {
+	var meal_id = element.meal_id;
 	var meal_name = element.meal_name.trim();
 	var src;
 	if (element.src != null) {
@@ -56,14 +57,14 @@ function createGallery(element) {
 		src = NO_IMAGE;
 	}
 
-	var figure = createFigure(meal_name, src);
+	var figure = createFigure(meal_name, src, meal_id);
 	$(".content-gallery#default").append(figure);
 }
 
-function createFigure(name, src) {
-	var figure = '<figure onclick="clickFigure();">';
+function createFigure(name, src, meal_id) {
+	var figure = '<figure onclick="clickFigure(' + meal_id + ');">';
 	figure += '<img src="' + src + '" class ="content-gallery__img" alt="' + name + '">';
-	figure += '<span class="content-gallery__caption">' + name + '<span>';
+	figure += '<span class="content-gallery__caption">' + name + '</span>';
 	figure += '</figure>';
 
 	return figure;
@@ -74,6 +75,6 @@ function clickContinue() {
 	$(".content-gallery#continue").css("display", "grid");
 }
 
-function clickFigure() {
-	window.location.href = "#";
+function clickFigure(meal_id) {
+	window.location.href = "mealinfo.do?id=" + meal_id;
 }

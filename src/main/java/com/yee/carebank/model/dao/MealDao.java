@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
 
 @Repository
@@ -16,11 +17,11 @@ public class MealDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public List<MealDto> selectGallery(int subcat_id) {
+	public List<MealDto> selectMeal(int subcat_id) {
 		List<MealDto> list = new ArrayList<MealDto>();
 
 		try {
-			list = sqlSession.selectList(NAMESPACE + "selectGallery", subcat_id);
+			list = sqlSession.selectList(NAMESPACE + "selectMeal", subcat_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,6 +46,30 @@ public class MealDao {
 
 		try {
 			res = sqlSession.selectOne(NAMESPACE + "selectCategory", subcat_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public MealDto selectOne(int meal_id) {
+		MealDto res = null;
+
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "selectOne", meal_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public List<FoodDto> selectIngredient(int meal_id) {
+		List<FoodDto> res = new ArrayList<FoodDto>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectIngredient", meal_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

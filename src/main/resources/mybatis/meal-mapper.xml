@@ -3,15 +3,40 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meals">
-	<select id="selectGallery" resultType="mealDto" parameterType="int">
-		SELECT DISTINCT MEAL_NAME, SUBCAT_ID, SRC FROM MEAL WHERE SUBCAT_ID = ${subcat_id}
+	<select id="selectMeal" resultType="mealDto" parameterType="int">
+		SELECT DISTINCT * FROM MEAL WHERE SUBCAT_ID = ${subcat_id}
 	</select>
-	<select id="selectFood" resultType="String"
-		parameterType="int">
-		SELECT DISTINCT FOOD FROM MEAL WHERE SUBCAT_ID = ${subcat_id}
+	<select id="selectFood" resultType="String" parameterType="int">
+		SELECT DISTINCT FOOD FROM MEAL JOIN INGREDIENT USING(MEAL_NAME,
+		SUBCAT_ID) WHERE SUBCAT_ID = ${subcat_id}
 	</select>
 	<select id="selectCategory" resultType="String"
 		parameterType="int">
-		SELECT SUBCAT_NAME FROM CATEGORY WHERE SUBCAT_ID = ${subcat_id}
+		SELECT SUBCAT_NAME FROM CATEGORY WHERE SUBCAT_ID =
+		${subcat_id}
+	</select>
+	<select id="selectOne" resultType="mealDto" parameterType="int">
+		SELECT *
+		FROM MEAL
+		WHERE MEAL_ID = ${meal_id}
+	</select>
+	<select id="selectIngredient" resultType="foodDto"
+		parameterType="int">
+		SELECT
+		food,
+		description,
+		carbo,
+		protein,
+		fat,
+		calories
+		FROM
+		(meal
+		JOIN INGREDIENT i
+		USING(meal_name,
+		subcat_id))
+		JOIN NUTRIENT n
+		USING(food)
+		WHERE
+		meal_id = ${meal_id}
 	</select>
 </mapper>
