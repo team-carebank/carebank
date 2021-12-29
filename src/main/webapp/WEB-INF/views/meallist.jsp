@@ -52,7 +52,6 @@
 						<li><a href="javascript: clickMenu(16,1);">#스트레스_완화</a></li>
 						<li><a href="javascript: clickMenu(17,1);">#세로토닌_증진</a></li>
 						<li><a href="javascript: clickMenu(18,1);">#불면증</a></li>
-						<li><a href="javascript: clickMenu(19,1);">#명상</a></li>
 					</ul></li>
 				<li><a href="#" class="category-list-item">다이어트</a>
 					<ul class="sub-category-list">
@@ -69,16 +68,12 @@
 				</div>
 				<br>
 				<div>
-					<span class="sub-category-desc"><b></b>에는 <b></b>이(가) 들어간 음식을
-						먹는게 좋아요.</span>
+					<b style="font-size: large;">추천 푸드</b><br> <span
+						class="sub-category-desc"></span>
 				</div>
 			</div>
 			<div class="content-default">
 				<div class="content-gallery" id="default"></div>
-				<p class="content-gallery-continue" onclick="clickContinue();">더보기</p>
-				<div class="content-continue">
-					<div class="content-gallery" id="continue"></div>
-				</div>
 			</div>
 		</div>
 	</div>

@@ -33,11 +33,9 @@ public class InformationController {
 
 		List<MealDto> gallery = biz.selectGallery(subcat_id);
 		List<String> food = biz.selectFood(subcat_id);
-		String category = biz.selectCategory(subcat_id);
 
 		res.put("gallery", gallery);
 		res.put("food", food);
-		res.put("category", category);
 
 		return res;
 	}

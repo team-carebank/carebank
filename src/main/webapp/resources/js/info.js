@@ -15,9 +15,6 @@ $(function() {
 	$(".sub-category-list li").click(function() {
 		var subCategory = $(this).text();
 		$(".sub-category-name").html(subCategory);
-
-		$(".content-gallery#continue").hide();
-		$(".content-gallery-continue").show();
 		$(".content-main").show("slow");
 	})
 });
@@ -38,29 +35,29 @@ function selectMeal(subcat_id) {
 		success: function(res) {
 			var gallery = res.gallery;
 			var food = res.food;
-			var category = res.category;
-			
-			$(".sub-category-desc b:eq(0)").html(category);
 
-			if (gallery.length > 6) {
-				for (var i = 0; i < 6; i++) {
-					console.log(gallery[i]);
-					var meal_name = gallery[i].meal_name.trim();
-					var src;
-					if (gallery[i].src != null) {
-						src = gallery[i].src.trim();
-					} else {
-						src = NO_IMAGE;
-					}
-					var figure = createFigure(meal_name, src);
-					$(".content-gallery#default").append(figure);
-				}
+			$(".sub-category-desc").html(food.join(', '));
+			for (var i = 0; i < gallery.length; i++) {
+				createGallery(gallery[i]);
 			}
 		},
 		error: function() {
 			alert("통신 실패");
 		}
 	});
+}
+
+function createGallery(element) {
+	var meal_name = element.meal_name.trim();
+	var src;
+	if (element.src != null) {
+		src = element.src.trim();
+	} else {
+		src = NO_IMAGE;
+	}
+
+	var figure = createFigure(meal_name, src);
+	$(".content-gallery#default").append(figure);
 }
 
 function createFigure(name, src) {
