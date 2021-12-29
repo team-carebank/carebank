@@ -10,6 +10,8 @@
 			형식으로 추가해주면됌 -->
 		<typeAlias type="com.yee.carebank.model.dto.MealDto"
 			alias="mealDto" />
+		<typeAlias type="com.yee.carebank.model.dto.FoodDto"
+			alias="foodDto" />
 	</typeAliases>
 
 	<mappers>
