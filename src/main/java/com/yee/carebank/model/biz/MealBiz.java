@@ -14,7 +14,15 @@ public class MealBiz {
 	@Autowired
 	MealDao dao;
 
-	public List<MealDto> selectList(int subcat_id) {
-		return dao.selectList(subcat_id);
+	public List<MealDto> selectGallery(int subcat_id) {
+		return dao.selectGallery(subcat_id);
+	}
+
+	public List<String> selectFood(int subcat_id) {
+		return dao.selectFood(subcat_id);
+	}
+
+	public String selectCategory(int subcat_id) {
+		return dao.selectCategory(subcat_id);
 	}
 }

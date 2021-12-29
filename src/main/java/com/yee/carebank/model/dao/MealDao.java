@@ -16,16 +16,39 @@ public class MealDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public List<MealDto> selectList(int subcat_id) {
+	public List<MealDto> selectGallery(int subcat_id) {
 		List<MealDto> list = new ArrayList<MealDto>();
 
 		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList", subcat_id);
+			list = sqlSession.selectList(NAMESPACE + "selectGallery", subcat_id);
 		} catch (Exception e) {
-			System.out.println("[error] : select list");
 			e.printStackTrace();
 		}
 
 		return list;
+	}
+
+	public List<String> selectFood(int subcat_id) {
+		List<String> list = new ArrayList<String>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "selectFood", subcat_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	public String selectCategory(int subcat_id) {
+		String res = null;
+
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "selectCategory", subcat_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
 	}
 }

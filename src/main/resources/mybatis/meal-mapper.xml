@@ -3,10 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meals">
-	<select id="selectList" resultType="mealDto" parameterType="int">
-		SELECT MEAL_NAME, SRC, SUBCAT_ID FROM (
-		SELECT ROWNUM RN, M.* FROM (
-		SELECT DISTINCT MEAL_NAME, SRC, SUBCAT_ID FROM MEALS WHERE SUBCAT_ID =
-		${subcat_id} ORDER BY SUBCAT_ID) M)
+	<select id="selectGallery" resultType="mealDto" parameterType="int">
+		SELECT DISTINCT MEAL_NAME, SUBCAT_ID, SRC FROM MEAL WHERE SUBCAT_ID = ${subcat_id}
+	</select>
+	<select id="selectFood" resultType="String"
+		parameterType="int">
+		SELECT DISTINCT FOOD FROM MEAL WHERE SUBCAT_ID = ${subcat_id}
+	</select>
+	<select id="selectCategory" resultType="String"
+		parameterType="int">
+		SELECT SUBCAT_NAME FROM CATEGORY WHERE SUBCAT_ID = ${subcat_id}
 	</select>
 </mapper>

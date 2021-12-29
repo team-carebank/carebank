@@ -1,5 +1,6 @@
 package com.yee.carebank.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,10 +26,18 @@ public class InformationController {
 
 	@RequestMapping("/meallist.do")
 	@ResponseBody
-	public List<MealDto> selectMeal(@RequestBody String subcat_id_str) {
+	public Map<String, Object> selectMeal(@RequestBody String subcat_id_str) {
 		int subcat_id = Integer.parseInt(subcat_id_str);
 
-		List<MealDto> res = biz.selectList(subcat_id);
+		Map<String, Object> res = new HashMap<String, Object>();
+
+		List<MealDto> gallery = biz.selectGallery(subcat_id);
+		List<String> food = biz.selectFood(subcat_id);
+		String category = biz.selectCategory(subcat_id);
+
+		res.put("gallery", gallery);
+		res.put("food", food);
+		res.put("category", category);
 
 		return res;
 	}

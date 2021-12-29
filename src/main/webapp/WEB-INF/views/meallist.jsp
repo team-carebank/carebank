@@ -31,7 +31,7 @@
 						<li><a href="javascript: clickMenu(1,1);">#편두통</a></li>
 						<li><a href="javascript: clickMenu(2,1);">#변비</a></li>
 						<li><a href="javascript: clickMenu(3,1);">#여드름 #두피염 #아토피</a></li>
-						<li><a href="javascript: clickMenu(4,1);">#빈열 #어지럼증 #저혈압</a></li>
+						<li><a href="javascript: clickMenu(4,1);">#빈혈 #어지럼증 #저혈압</a></li>
 						<li><a href="javascript: clickMenu(5,1);">#비염</a></li>
 						<li><a href="javascript: clickMenu(6,1);">#소화불량</a></li>
 						<li><a href="javascript: clickMenu(7,1);">#심장_뻐근함 #혈액순환</a></li>
@@ -69,12 +69,12 @@
 				</div>
 				<br>
 				<div>
-					<span class="sub-category-desc"><b></b>에는 <b></b>이 들어간 음식을
+					<span class="sub-category-desc"><b></b>에는 <b></b>이(가) 들어간 음식을
 						먹는게 좋아요.</span>
 				</div>
 			</div>
 			<div class="content-default">
-				<div class="content-gallery"></div>
+				<div class="content-gallery" id="default"></div>
 				<p class="content-gallery-continue" onclick="clickContinue();">더보기</p>
 				<div class="content-continue">
 					<div class="content-gallery" id="continue"></div>

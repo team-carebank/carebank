@@ -4,7 +4,7 @@ public class MealDto {
 	private int meal_id;
 	private String meal_name;
 	private String recipe;
-	private String ingredient;
+	private String food;
 	private String description;
 	private int subcat_id;
 	private double carbo;
@@ -17,19 +17,20 @@ public class MealDto {
 		super();
 	}
 
-	public MealDto(int meal_id, String meal_name, String recipe, String ingredient, String description, int subcat_id,
-			double carbo, double protein, double fat, double calories) {
+	public MealDto(int meal_id, String meal_name, String recipe, String food, String description, int subcat_id,
+			double carbo, double protein, double fat, double calories, String src) {
 		super();
 		this.meal_id = meal_id;
 		this.meal_name = meal_name;
 		this.recipe = recipe;
-		this.ingredient = ingredient;
+		this.food = food;
 		this.description = description;
 		this.subcat_id = subcat_id;
 		this.carbo = carbo;
 		this.protein = protein;
 		this.fat = fat;
 		this.calories = calories;
+		this.src = src;
 	}
 
 	public int getMeal_id() {
@@ -56,12 +57,12 @@ public class MealDto {
 		this.recipe = recipe;
 	}
 
-	public String getIngredient() {
-		return ingredient;
+	public String getFood() {
+		return food;
 	}
 
-	public void setIngredient(String ingredient) {
-		this.ingredient = ingredient;
+	public void setFood(String food) {
+		this.food = food;
 	}
 
 	public String getDescription() {
@@ -110,6 +111,14 @@ public class MealDto {
 
 	public void setCalories(double calories) {
 		this.calories = calories;
+	}
+
+	public String getSrc() {
+		return src;
+	}
+
+	public void setSrc(String src) {
+		this.src = src;
 	}
 
 }
