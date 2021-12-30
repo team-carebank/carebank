@@ -27,7 +27,9 @@ public class InformationController {
 	SuppleBiz sBiz;
 
 	@RequestMapping("/mealmain.do")
-	public String main() {
+	public String main(Model model) {
+		model.addAttribute("category", biz.selectCatList());
+
 		return "meallist";
 	}
 
@@ -65,7 +67,9 @@ public class InformationController {
 	}
 
 	@RequestMapping("/supplemain.do")
-	public String sMain() {
+	public String sMain(Model model) {
+		model.addAttribute("category", sBiz.selectCatList());
+
 		return "supplelist";
 	}
 

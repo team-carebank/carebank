@@ -76,4 +76,16 @@ public class MealDao {
 
 		return res;
 	}
+
+	public List<Integer> selectCatList() {
+		List<Integer> res = new ArrayList<Integer>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectCatList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 }

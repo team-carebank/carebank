@@ -16,4 +16,8 @@
 		SELECT
 		DISTINCT DESCRIPTION FROM SUPPLE_EFFI WHERE SUPPLE_ID = ${supple_id}
 	</select>
+	<select id="selectCatList" resultType="Integer">
+		SELECT DISTINCT subcat_id
+		FROM SUPPLE_EFFI ORDER BY SUBCAT_ID
+	</select>
 </mapper>

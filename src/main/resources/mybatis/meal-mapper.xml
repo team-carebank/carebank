@@ -26,4 +26,8 @@
 		FROM (MEAL JOIN INGREDIENT i USING(MEAL_ID, SUBCAT_ID)) JOIN NUTRIENT n USING(FOOD)
 		WHERE MEAL_ID = ${meal_id}
 	</select>
+	<select id="selectCatList" resultType="Integer">
+		SELECT DISTINCT SUBCAT_ID
+		FROM MEAL ORDER BY SUBCAT_ID
+	</select>
 </mapper>

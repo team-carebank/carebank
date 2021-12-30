@@ -35,4 +35,8 @@ public class MealBiz {
 		return dao.selectIngredient(meal_id);
 	}
 
+	public List<Integer> selectCatList() {
+		return dao.selectCatList();
+	}
+
 }

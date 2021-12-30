@@ -24,4 +24,8 @@ public class SuppleBiz {
 	public SuppleDto selectOne(int supple_id) {
 		return dao.selectOne(supple_id);
 	}
+	
+	public List<Integer> selectCatList(){
+		return dao.selectCatList();
+	}
 }
