@@ -1,9 +1,23 @@
 @charset "UTF-8";
 
+.main-content {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto;
+	justify-items: center;
+	align-items: center;
+	margin-top: 100px;
+}
+
 .body-content {
-	padding: 50px;
+	width: 80%;
+}
+
+.body-content {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
+	justify-items: stretch;
 	grid-gap: 10px;
 	place-content: center;
 }

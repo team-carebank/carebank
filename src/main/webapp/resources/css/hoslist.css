@@ -1,22 +1,7 @@
 @charset "UTF-8";
 
 .body-content {
-	padding: 50px;
-	display: grid;
-	place-content: center;
-}
-
-.body-content a {
-	text-decoration: none;
-	color: black;
-}
-
-.body-content * {
-	display: block;
-	margin: 0;
-	margin-block: 20px;
-	margin-block-start: 0;
-	padding: 0;
+	grid-gap: 50px;
 }
 
 .content-side a:hover {
@@ -33,10 +18,6 @@
 
 .category-list, .sub-category-list, .pagination {
 	margin-block: 0;
-}
-
-.sub-category-list {
-	max-width: 1000px;
 }
 
 .category-list li, .sub-category-list li, .pagination li {
@@ -73,18 +54,22 @@
 }
 
 .info-list * {
-	margin-block: 20px;
+	margin-block: 0;
 }
 
 .clinic-info {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
+	justify-content: space-between;
 	grid-gap: 20px;
 }
 
-.clinic-info *:first-child {
-	grid-column: 1/span 2;
-	max-width: 600px;
+.clinic-info div:first-child {
+	grid-column: 1/3;
+}
+
+.clinic-info div:nth-child(2) {
+	text-align: right;
 }
 
 .clinic-info * {
@@ -94,5 +79,4 @@
 .content-bottom {
 	display: grid;
 	place-content: center;
-	max-width: 1000px;
 }

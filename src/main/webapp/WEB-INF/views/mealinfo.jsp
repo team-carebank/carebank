@@ -32,91 +32,66 @@
 </head>
 <%@ include file="../../header.jsp"%>
 <body>
-	<div class="body-content">
-		<div class="content-left">
-			<h1>${meal.meal_name }</h1>
-			<hr>
-			<div class="content-item">
-				<p>
-					<b>레시피</b>
-				</p>
-				<p class="content-item-description">${meal.recipe }</p>
+	<div class="main-content">
+		<div class="body-content">
+			<div class="content-left">
+				<h1>${meal.meal_name }</h1>
+				<hr>
+				<div class="content-item">
+					<p>
+						<b>레시피</b>
+					</p>
+					<p class="content-item-description">${meal.recipe }</p>
+				</div>
+				<hr>
+				<div class="content-item">
+					<p>
+						<b>메인 푸드</b>
+					</p>
+					<c:forEach var="food" items="${ingredient }">
+						<div class="food">
+							<span><b>${food.food }</b></span>
+							<p class="content-item-description">${fn:trim(food.description)}</p>
+							<span>탄수화물 ${food.carbo}g 단백질 ${food.protein } 지방
+								${food.fat }g</span> <span>칼로리 ${food.calories }kcal</span>
+						</div>
+					</c:forEach>
+					<p class="content-item-desc">* 영양소 정보는 100g을 기준으로 합니다.</p>
+				</div>
+				<hr>
+				<div class="menu-area">
+					<a href="javascript: history.back();">목록으로 돌아가기</a>
+				</div>
 			</div>
-			<hr>
-			<div class="content-item">
-				<p>
-					<b>메인 푸드</b>
-				</p>
-				<c:forEach var="food" items="${ingredient }">
-					<div class="food">
-						<span><b>${food.food }</b></span>
-						<p class="content-item-description">${fn:trim(food.description)}</p>
-						<span>탄수화물 ${food.carbo}g 단백질 ${food.protein } 지방
-							${food.fat }g</span> <span>칼로리 ${food.calories }kcal</span>
-					</div>
-				</c:forEach>
-				<p class="content-item-desc">* 영양소 정보는 100g을 기준으로 합니다.</p>
-			</div>
-			<hr>
-			<div class="menu-area">
-				<a href="javascript: history.back();">목록으로 돌아가기</a>
+			<div class="content-right">
+				<div class="content-image">
+					<c:choose>
+						<c:when test="${meal.src ne null }">
+							<img src="${meal.src }" alt="${meal.meal_name }">
+						</c:when>
+						<c:otherwise>
+							<img alt="${meal.meal_name }"
+								src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg">
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
-		<div class="content-right">
-			<div class="content-image">
-				<c:choose>
-					<c:when test="${meal.src ne null }">
-						<img src="${meal.src }" alt="${meal.meal_name }">
-					</c:when>
-					<c:otherwise>
-						<img alt="${meal.meal_name }"
-							src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg">
-					</c:otherwise>
-				</c:choose>
+		<hr>
+		<div class="comment-area">
+			<h2 class="content-desc">댓글</h2>
+			<div class="comment-write">
+				<form action="" method="post" onsubmit="return whenSubmit();">
+					<textarea name="" id="comment_content" cols="30" rows="10"
+						placeholder="내용을 입력하세요."></textarea>
+					<input type="submit" value="작성">
+				</form>
 			</div>
-		</div>
-	</div>
-	<div class="comment-area">
-		<p class="content-desc">
-			<b>댓글</b>
-		</p>
-		<div class="comment-write">
-			<form action="" method="post" onsubmit="return whenSubmit();">
-				<textarea name="" id="comment_content" cols="30" rows="10"
-					placeholder="내용을 입력하세요."></textarea>
-				<input type="submit" value="작성">
-			</form>
-		</div>
-		<div class="comment-list">
-			<ul>
-				<li>
-					<ul class="comment-item">
-						<li>닉네임</li>
-						<li>댓글 내용...댓글 내용...댓글 내용...댓글 내용...</li>
-						<li>2021-12-10</li>
-						<li><a href="#">수정</a></li>
-						<li><a href="#">삭제</a></li>
-					</ul>
-				</li>
-				<li>
-					<ul class="comment-item">
-						<li>닉네임</li>
-						<li>댓글 내용...댓글 내용...댓글 내용...댓글 내용...</li>
-						<li>2021-12-10</li>
-						<li><a href="#">수정</a></li>
-						<li><a href="#">삭제</a></li>
-					</ul>
-				</li>
-				<li>
-					<ul class="comment-item">
-						<li>닉네임</li>
-						<li>댓글 내용...댓글 내용...댓글 내용...댓글 내용...</li>
-						<li>2021-12-10</li>
-						<li><a href="#">수정</a></li>
-						<li><a href="#">삭제</a></li>
-					</ul>
-				</li>
-			</ul>
+			<div class="comment-list">
+				<div class="comment-item">
+					<div class="comment-item-info"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

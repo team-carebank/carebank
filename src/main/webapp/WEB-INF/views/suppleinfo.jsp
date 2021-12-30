@@ -60,100 +60,59 @@
 </head>
 <%@ include file="../../header.jsp"%>
 <body>
-	<div class="body-content">
-		<div class="content-left">
-			<h1>${supple.supple_name }</h1>
-			<hr>
-			<div class="content-item">
-				<p>
-					<b>효능</b>
-				</p>
-				<ul>
-					<c:forEach var="desc" items="${description }">
-						<li style='list-style-type: "\1F44D"; display: list-item;'>${desc }</li>
+	<div class="main-content">
+		<div class="body-content">
+			<div class="content-left">
+				<h1>${supple.supple_name }</h1>
+				<hr>
+				<div class="content-item">
+					<p>
+						<b>효능</b>
+					</p>
+					<ul>
+						<c:forEach var="desc" items="${description }">
+							<li style='list-style-type: "\1F44D"; display: list-item;'>${desc }</li>
+						</c:forEach>
+					</ul>
+				</div>
+				<hr>
+				<div class="content-item">
+					<p>
+						<b>쇼핑하기</b>
+					</p>
+					<c:forEach var="item" items="${shopping }">
+						<ul class="content-item-shopping">
+							<li>${item.title }</li>
+							<li>|</li>
+							<li>${item.maker }</li>
+							<li><img alt="네이버 쇼핑 링크"
+								src="${pageContext.request.contextPath }/resources/img/naver_shopping_logo.png"
+								onclick="window.location.href='${item.link}'"></li>
+						</ul>
 					</c:forEach>
-				</ul>
+					<br> <a
+						href="https://search.shopping.naver.com/search/all?query=${supple.supple_name }">직접
+						쇼핑하기</a>
+					<p class="content-item-desc">* 네이버 쇼핑 검색 결과를 기준으로 표시됩니다.</p>
+				</div>
+				<hr>
+				<div class="menu-area">
+					<a href="javascript: history.back();">목록으로 돌아가기</a>
+				</div>
 			</div>
-			<hr>
-			<div class="content-item">
-				<p>
-					<b>쇼핑하기</b>
-				</p>
-				<c:forEach var="item" items="${shopping }">
-					<ul class="content-item-shopping">
-						<li>${item.title }</li>
-						<li>|</li>
-						<li>${item.maker }</li>
-						<li><img alt="네이버 쇼핑 링크"
-							src="${pageContext.request.contextPath }/resources/img/naver_shopping_logo.png"
-							onclick="window.location.href='${item.link}'"></li>
-					</ul>
-				</c:forEach>
-				<br> <a
-					href="https://search.shopping.naver.com/search/all?query=${supple.supple_name }">직접
-					쇼핑하기</a>
-				<p class="content-item-desc">* 네이버 쇼핑 검색 결과를 기준으로 표시됩니다.</p>
+			<div class="content-right">
+				<div class="content-image">
+					<c:choose>
+						<c:when test="${supple.src ne null }">
+							<img src="${supple.src }" alt="${supple.supple_name }">
+						</c:when>
+						<c:otherwise>
+							<img alt="${supple.supple_name }"
+								src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg">
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
-			<hr>
-			<div class="menu-area">
-				<a href="javascript: history.back();">목록으로 돌아가기</a>
-			</div>
-		</div>
-		<div class="content-right">
-			<div class="content-image">
-				<c:choose>
-					<c:when test="${supple.src ne null }">
-						<img src="${supple.src }" alt="${supple.supple_name }">
-					</c:when>
-					<c:otherwise>
-						<img alt="${supple.supple_name }"
-							src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg">
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</div>
-	</div>
-	<div class="comment-area">
-		<p class="content-desc">
-			<b>댓글</b>
-		</p>
-		<div class="comment-write">
-			<form action="" method="post" onsubmit="return whenSubmit();">
-				<textarea name="" id="comment_content" cols="30" rows="10"
-					placeholder="내용을 입력하세요."></textarea>
-				<input type="submit" value="작성">
-			</form>
-		</div>
-		<div class="comment-list">
-			<ul>
-				<li>
-					<ul class="comment-item">
-						<li>닉네임</li>
-						<li>댓글 내용...댓글 내용...댓글 내용...댓글 내용...</li>
-						<li>2021-12-10</li>
-						<li><a href="#">수정</a></li>
-						<li><a href="#">삭제</a></li>
-					</ul>
-				</li>
-				<li>
-					<ul class="comment-item">
-						<li>닉네임</li>
-						<li>댓글 내용...댓글 내용...댓글 내용...댓글 내용...</li>
-						<li>2021-12-10</li>
-						<li><a href="#">수정</a></li>
-						<li><a href="#">삭제</a></li>
-					</ul>
-				</li>
-				<li>
-					<ul class="comment-item">
-						<li>닉네임</li>
-						<li>댓글 내용...댓글 내용...댓글 내용...댓글 내용...</li>
-						<li>2021-12-10</li>
-						<li><a href="#">수정</a></li>
-						<li><a href="#">삭제</a></li>
-					</ul>
-				</li>
-			</ul>
 		</div>
 	</div>
 </body>
