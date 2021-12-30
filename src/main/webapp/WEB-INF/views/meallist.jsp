@@ -136,12 +136,13 @@
 					<div>
 						<span><b class="sub-category-name"></b>에는 이 음식이 딱!</span>
 					</div>
-					<br>
+					<br> <br>
 					<div>
 						<b style="font-size: large;">추천 푸드</b><br> <span
 							class="sub-category-desc"></span>
 					</div>
 				</div>
+				<hr>
 				<div class="content-default">
 					<div class="content-gallery" id="default"></div>
 				</div>

@@ -40,8 +40,8 @@ function clickSggu(e) {
 	$(".content-main").hide();
 	var sgguName = $(e).text();
 	getHospitalByPage(sgguName, 1);
-	$(".content-main").show("slow");
-	$(".pagination").show("slow");
+	$(".content-main").show();
+	$(".pagination").show();
 
 	let stateObj = { sgguName: sgguName, pageno: 1 };
 
@@ -70,8 +70,8 @@ function clickPage(pageno) {
 	$(".content-main").hide();
 	var sgguName = getSgguName();
 	getHospitalByPage(sgguName, pageno);
-	$(".content-main").show("slow");
-	$(".pagination").show("slow");
+	$(".content-main").show();
+	$(".pagination").show();
 
 	let stateObj = { sgguName: sgguName, pageno: Number(pageno) };
 
@@ -178,6 +178,6 @@ function prevPage() {
 window.onpopstate = function(event) {
 	var current = event.state;
 	getHospitalByPage(current.sgguName, current.pageno);
-	$(".content-main").show("slow");
-	$(".pagination").show("slow");
+	$(".content-main").show();
+	$(".pagination").show();
 }

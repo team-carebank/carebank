@@ -53,6 +53,10 @@
 	display: none;
 }
 
+.sub-category-list * {
+	font-size: medium;
+}
+
 .info-list * {
 	margin-block: 0;
 }
