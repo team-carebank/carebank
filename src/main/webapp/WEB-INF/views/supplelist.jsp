@@ -28,30 +28,30 @@
 			<ul class="category-list">
 				<li><a href="#" class="category-list-item">만성질환</a>
 					<ul class="sub-category-list">
-						<li><a href="javascript: clickMenu(1,1);">#편두통</a></li>
-						<li><a href="javascript: clickMenu(2,1);">#변비</a></li>
-						<li><a href="javascript: clickMenu(3,1);">#여드름 #두피염 #아토피</a></li>
-						<li><a href="javascript: clickMenu(4,1);">#빈혈 #어지럼증 #저혈압</a></li>
-						<li><a href="javascript: clickMenu(5,1);">#비염</a></li>
-						<li><a href="javascript: clickMenu(6,1);">#소화불량</a></li>
-						<li><a href="javascript: clickMenu(7,1);">#심장_뻐근함 #혈액순환</a></li>
-						<li><a href="javascript: clickMenu(8,1);">#디스크 #허리통증 #관절</a></li>
-						<li><a href="javascript: clickMenu(9,1);">#고지혈증 #고혈압</a></li>
+						<li><a href="javascript: clickMenu(1);">#편두통</a></li>
+						<li><a href="javascript: clickMenu(2);">#변비</a></li>
+						<li><a href="javascript: clickMenu(3);">#여드름 #두피염 #아토피</a></li>
+						<li><a href="javascript: clickMenu(4);">#빈혈 #어지럼증 #저혈압</a></li>
+						<li><a href="javascript: clickMenu(5);">#비염</a></li>
+						<li><a href="javascript: clickMenu(6);">#소화불량</a></li>
+						<li><a href="javascript: clickMenu(7);">#심장_뻐근함 #혈액순환</a></li>
+						<li><a href="javascript: clickMenu(8);">#디스크 #허리통증 #관절</a></li>
+						<li><a href="javascript: clickMenu(9);">#고지혈증 #고혈압</a></li>
 					</ul></li>
 				<li><a href="#" class="category-list-item">건강증진</a>
 					<ul class="sub-category-list">
-						<li><a href="javascript: clickMenu(10,1);">#노화예방</a></li>
-						<li><a href="javascript: clickMenu(11,1);">#면역력_강화</a></li>
-						<li><a href="javascript: clickMenu(12,1);">#여성건강</a></li>
-						<li><a href="javascript: clickMenu(13,1);">#남성건강</a></li>
-						<li><a href="javascript: clickMenu(14,1);">#눈_건강</a></li>
-						<li><a href="javascript: clickMenu(15,1);">#흡연</a></li>
+						<li><a href="javascript: clickMenu(10);">#노화예방</a></li>
+						<li><a href="javascript: clickMenu(11);">#면역력_강화</a></li>
+						<li><a href="javascript: clickMenu(12);">#여성건강</a></li>
+						<li><a href="javascript: clickMenu(13);">#남성건강</a></li>
+						<li><a href="javascript: clickMenu(14);">#눈_건강</a></li>
+						<li><a href="javascript: clickMenu(15);">#흡연</a></li>
 					</ul></li>
 				<li><a href="#" class="category-list-item">멘탈케어</a>
 					<ul class="sub-category-list">
-						<li><a href="javascript: clickMenu(16,1);">#스트레스_완화</a></li>
-						<li><a href="javascript: clickMenu(17,1);">#세로토닌_증진</a></li>
-						<li><a href="javascript: clickMenu(18,1);">#불면증</a></li>
+						<li><a href="javascript: clickMenu(16);">#스트레스_완화</a></li>
+						<li><a href="javascript: clickMenu(17);">#세로토닌_증진</a></li>
+						<li><a href="javascript: clickMenu(18);">#불면증</a></li>
 					</ul></li>
 				<li><a href="#" class="category-list-item">다이어트</a>
 					<ul class="sub-category-list">

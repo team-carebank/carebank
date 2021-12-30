@@ -33,6 +33,8 @@ function select(subcat_id) {
 		success: function(res) {
 			var supple = res.supple;
 
+			console.log(supple);
+
 			for (var i = 0; i < supple.length; i++) {
 				createGallery(supple[i]);
 			}

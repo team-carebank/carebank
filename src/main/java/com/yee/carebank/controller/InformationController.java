@@ -12,14 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.MealBiz;
+import com.yee.carebank.model.biz.SuppleBiz;
 import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
+import com.yee.carebank.model.dto.SuppleDto;
 
 @Controller
 public class InformationController {
 
 	@Autowired
 	MealBiz biz;
+
+	@Autowired
+	SuppleBiz sBiz;
 
 	@RequestMapping("/mealmain.do")
 	public String main() {
@@ -28,9 +33,7 @@ public class InformationController {
 
 	@RequestMapping("/meallist.do")
 	@ResponseBody
-	public Map<String, Object> selectList(@RequestBody String subcat_id_str) {
-		int subcat_id = Integer.parseInt(subcat_id_str);
-
+	public Map<String, Object> selectList(@RequestBody int subcat_id) {
 		Map<String, Object> res = new HashMap<String, Object>();
 
 		List<MealDto> meal = biz.selectMeal(subcat_id);
@@ -59,6 +62,21 @@ public class InformationController {
 		model.addAttribute("flag", flag);
 
 		return "mealinfo";
+	}
+
+	@RequestMapping("/supplemain.do")
+	public String sMain() {
+		return "supplelist";
+	}
+
+	@RequestMapping("/supplelist.do")
+	@ResponseBody
+	public Map<String, Object> selectSList(@RequestBody int subcat_id) {
+		Map<String, Object> res = new HashMap<String, Object>();
+
+		res.put("supple", sBiz.selectList(subcat_id));
+		
+		return res;
 	}
 
 }

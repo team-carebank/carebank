@@ -12,11 +12,14 @@
 			alias="mealDto" />
 		<typeAlias type="com.yee.carebank.model.dto.FoodDto"
 			alias="foodDto" />
+		<typeAlias type="com.yee.carebank.model.dto.SuppleDto"
+			alias="suppleDto" />
 	</typeAliases>
 
 	<mappers>
 		<!-- <mapper resource = "/mybatis/board-mapper.xml"/> 형식으로 매퍼 위치 추가 작성 -->
 		<mapper resource="/mybatis/meal-mapper.xml" />
+		<mapper resource="/mybatis/supple-mapper.xml" />
 	</mappers>
 
 </configuration>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="supple">
+	<select id="selectList" parameterType="int"
+		resultType="suppleDto">
+		SELECT DISTINCT SUPPLE_ID, SUPPLE_NAME, SRC FROM
+		SUPPLE_EFFI WHERE SUBCAT_ID = ${subcat_id}
+	</select>
+</mapper>
