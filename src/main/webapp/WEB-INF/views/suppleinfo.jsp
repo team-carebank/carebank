@@ -42,7 +42,7 @@
 				</p>
 				<ul>
 					<c:forEach var="desc" items="${description }">
-						<li>${desc }</li>
+						<li style='list-style-type: "\1F44D"; display: list-item;'>${desc }</li>
 					</c:forEach>
 				</ul>
 			</div>

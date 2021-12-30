@@ -122,7 +122,13 @@
 }
 
 .content-image img {
-	max-width: 800px;
+	max-width: 150%;
+}
+
+@media screen and (max-width: 1600px) {
+	.content-image img {
+		max-width: 200%;
+	}
 }
 
 .food {
