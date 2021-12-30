@@ -12,27 +12,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script type = "text/javascript">
-
-
-
-
-		
-		
-
-
-
-
-
-</script>
-
-
-
-
-
-
-
-
 </head>
 <style>
 @font-face {
@@ -184,7 +163,7 @@ img{
                  </div>
                  <div class = "btns">
                     <button type="button" class="btn btn-success" id = "login_btn" onclick = "login(); return false;">로그인</button>
-                    <button type="button" class="btn btn-secondary" onclick = "">회원가입</button>
+                    <button type="button" class="btn btn-secondary" id = "regis_btn" onclick = "location.href = 'regisform.do'">회원가입</button>
                </div>
             </form>
           </div>  <hr>
