@@ -31,7 +31,7 @@
 	<div class="header">
 		<div class="header-logo">
 			<h1>
-				<a href="#">CareBank</a>
+				<a href="${pageContext.request.contextPath }/indexForTest.jsp">CareBank</a>
 			</h1>
 		</div>
 		<div class="header-nav">

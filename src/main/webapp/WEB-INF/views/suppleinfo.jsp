@@ -83,16 +83,16 @@
 					<ul class="content-item-shopping">
 						<li>${item.title }</li>
 						<li>|</li>
-						<li>${item.brand }</li>
-						<li>|</li>
+						<li>${item.maker }</li>
 						<li><img alt="네이버 쇼핑 링크"
 							src="${pageContext.request.contextPath }/resources/img/naver_shopping_logo.png"
 							onclick="window.location.href='${item.link}'"></li>
 					</ul>
 				</c:forEach>
-				<p class="content-item-desc">
-					<br>* 네이버 쇼핑 검색 결과를 기준으로 표시됩니다.
-				</p>
+				<br> <a
+					href="https://search.shopping.naver.com/search/all?query=${supple.supple_name }">직접
+					쇼핑하기</a>
+				<p class="content-item-desc">* 네이버 쇼핑 검색 결과를 기준으로 표시됩니다.</p>
 			</div>
 			<hr>
 			<div class="menu-area">

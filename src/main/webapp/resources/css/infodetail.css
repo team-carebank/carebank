@@ -34,8 +34,9 @@
 	font-weight: bold;
 }
 
-.menu-area a:hover {
+.menu-area a:hover, .content-item a:hover {
 	color: yellowgreen;
+	font-weight: bold;
 }
 
 .comment-area * {
