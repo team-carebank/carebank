@@ -12,149 +12,8 @@
 <title>Document</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/header.css" />
-<style>
-.body-content, .comment-area {
-	width: 100%;
-}
-
-.body-content a, .comment-area a, .menu-area a {
-	text-decoration: none;
-	color: black;
-}
-
-.body-content * {
-	display: block;
-	margin: 0;
-	margin-block: 20px;
-	margin-block-start: 0;
-}
-
-.body-content {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 20px;
-	padding: 100px;
-	padding-bottom: 0;
-}
-
-.comment-area {
-	padding: 100px;
-	padding-top: 0;
-}
-
-.menu-area a {
-	font-size: large;
-	font-weight: bold;
-}
-
-.menu-area a:hover {
-	color: yellowgreen;
-}
-
-.comment-area * {
-	margin-block: 10px;
-	display: inline-block;
-	width: 100%;
-}
-
-.comment-write * {
-	margin-inline: 5px;
-	margin-inline-start: 0;
-	vertical-align: middle;
-}
-
-.comment-write textarea {
-	width: 70%;
-	height: 50px;
-	border: none;
-	resize: none;
-}
-
-.comment-write input[type="submit"] {
-	width: 100px;
-	height: 50px;
-	border: 0;
-	border-radius: 1mm;
-	transition: 0.5s;
-}
-
-.comment-write input[type="submit"]:hover {
-	cursor: pointer;
-	background-color: yellowgreen;
-	color: white;
-}
-
-.comment-list {
-	display: block;
-	width: 80%;
-}
-
-.comment-list * {
-	margin-block: 5px;
-}
-
-.comment-list ul, li {
-	padding: 0;
-}
-
-.comment-item {
-	display: grid;
-	grid-template-columns: repeat(8, 1fr);
-	grid-gap: 10px;
-}
-
-.comment-item li:first-child {
-	grid-column: 1/span 2;
-	font-weight: bold;
-}
-
-.comment-item li:nth-child(2) {
-	grid-column: 3/span 3;
-}
-
-.content-left {
-	grid-column: 1/3;
-}
-
-.content-right {
-	grid-column: 3/4;
-	padding: 50px;
-}
-
-.content-left p {
-	font-size: large;
-}
-
-.content-desc {
-	font-size: x-large !important;
-}
-
-.content-item-desc {
-	font-size: small !important;
-	color: darkgray;
-}
-
-.content-image img {
-	max-width: 800px;
-}
-
-.food {
-	margin-block: 0;
-}
-
-.food * {
-	display: inline-flex;
-	margin-block: 5px;
-}
-
-.food p {
-	font-size: medium !important;
-}
-
-.food b {
-	font-size: large;
-}
-</style>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/infodetail.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -181,7 +40,7 @@
 				<p>
 					<b>레시피</b>
 				</p>
-				<span>${meal.recipe }</span>
+				<p class="content-item-description">${meal.recipe }</p>
 			</div>
 			<hr>
 			<div class="content-item">
@@ -191,7 +50,7 @@
 				<c:forEach var="food" items="${ingredient }">
 					<div class="food">
 						<span><b>${food.food }</b></span>
-						<p>${fn:trim(food.description)}</p>
+						<p class="content-item-description">${fn:trim(food.description)}</p>
 						<span>탄수화물 ${food.carbo}g 단백질 ${food.protein } 지방
 							${food.fat }g</span> <span>칼로리 ${food.calories }kcal</span>
 					</div>
