@@ -27,4 +27,28 @@ public class SuppleDao {
 
 		return res;
 	}
+
+	public List<String> selectInfo(int supple_id) {
+		List<String> res = new ArrayList<String>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectInfo", supple_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public SuppleDto selectOne(int supple_id) {
+		SuppleDto res = new SuppleDto();
+
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "selectOne", supple_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 }

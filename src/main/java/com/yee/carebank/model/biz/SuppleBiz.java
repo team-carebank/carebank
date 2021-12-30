@@ -16,4 +16,12 @@ public class SuppleBiz {
 	public List<SuppleDto> selectList(int subcat_id) {
 		return dao.selectList(subcat_id);
 	}
+
+	public List<String> selectInfo(int supple_id) {
+		return dao.selectInfo(supple_id);
+	}
+
+	public SuppleDto selectOne(int supple_id) {
+		return dao.selectOne(supple_id);
+	}
 }

@@ -40,7 +40,7 @@
 					<ul class="nav-sub">
 						<li><a href="mealmain.do">식단</a></li>
 						<li><a href="#">운동</a></li>
-						<li><a href="#">영양제</a></li>
+						<li><a href="supplemain.do">영양제</a></li>
 						<li><a href="#">명상</a></li>
 						<li><a href="hospitalmain.do">병원</a></li>
 						<li><a href="pharmacymain.do">약국</a></li>

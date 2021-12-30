@@ -75,8 +75,18 @@ public class InformationController {
 		Map<String, Object> res = new HashMap<String, Object>();
 
 		res.put("supple", sBiz.selectList(subcat_id));
-		
+
 		return res;
 	}
 
+	@RequestMapping("/suppleinfo.do")
+	public String selectSupple(Model model, int id) {
+		SuppleDto supple = sBiz.selectOne(id);
+		List<String> description = sBiz.selectInfo(id);
+
+		model.addAttribute("supple", supple);
+		model.addAttribute("description", description);
+
+		return "suppleinfo";
+	}
 }
