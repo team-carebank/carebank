@@ -8,13 +8,14 @@
   	<typeAliases>
   	<!-- <typeAlias type = "com.yee.carebank.model.dto.BoardDto" alias = "boardDto"/>
   		형식으로 추가해주면됌 -->
+  		<typeAlias type="com.yee.carebank.model.dto.ScheduleDto" alias="scheduleDto"/>
   		
   	</typeAliases>
   	
   	<mappers>
   	<!-- <mapper resource = "/mybatis/board-mapper.xml"/>
   		형식으로 매퍼 위치 추가 작성 -->
-  		
+  		<mapper resource = "/mybatis/schedule-mapper.xml"/>
   	</mappers>
   
   </configuration>

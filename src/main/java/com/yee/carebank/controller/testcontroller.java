@@ -27,7 +27,6 @@ public class testcontroller {
 	@RequestMapping("/diary.do")
 	public String diary(Model model) {
 		logger.info("mypage_diary");
-		 model.addAttribute("newschedule", biz.selectList());
 		return "mypage_diary";
 	}
 	
@@ -40,6 +39,7 @@ public class testcontroller {
 	@ResponseBody
 	@RequestMapping(value="/addschedule.do", method=RequestMethod.POST) 
 	public Map<Object, Object> insert(@RequestBody ScheduleDto dto){
+		logger.info("insert");
 		Map<Object, Object>map = new HashMap<Object, Object>();
 		 
 		biz.insert(dto);
