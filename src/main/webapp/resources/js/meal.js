@@ -19,11 +19,9 @@ $(function() {
 	})
 });
 
-function clickMenu(subcat_id, info_type) {
-	if (info_type == 1) {
-		$(".content-gallery").empty();
-		selectMeal(subcat_id);
-	}
+function clickMenu(subcat_id) {
+	$(".content-gallery").empty();
+	selectMeal(subcat_id);
 }
 
 function selectMeal(subcat_id) {
@@ -47,7 +45,7 @@ function selectMeal(subcat_id) {
 	});
 }
 
-function createGallery(element, subcat_id) {
+function createGallery(element) {
 	var meal_id = element.meal_id;
 	var meal_name = element.meal_name.trim();
 	var src;
