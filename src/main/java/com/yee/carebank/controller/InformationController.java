@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.yee.carebank.model.biz.MealBiz;
 import com.yee.carebank.model.biz.SuppleBiz;
 import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
+import com.yee.carebank.model.dto.ShoppingDto;
 import com.yee.carebank.model.dto.SuppleDto;
 
 @Controller
@@ -87,9 +90,11 @@ public class InformationController {
 	public String selectSupple(Model model, int id) {
 		SuppleDto supple = sBiz.selectOne(id);
 		List<String> description = sBiz.selectInfo(id);
+		List<ShoppingDto> shopping = sBiz.getShopping(supple.getSupple_name());
 
 		model.addAttribute("supple", supple);
 		model.addAttribute("description", description);
+		model.addAttribute("shopping", shopping);
 
 		return "suppleinfo";
 	}

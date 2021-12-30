@@ -29,6 +29,34 @@
 		return true;
 	}
 </script>
+<style>
+.content-item-shopping {
+	display: list-item;
+	list-style-type: none;
+	margin-block: 0;
+	padding-inline-start: 0 !important;
+}
+
+.content-item-shopping li {
+	display: inline-block;
+	margin-block: 10px;
+}
+
+.content-item-shopping li * {
+	display: inline-block;
+	vertical-align: middle;
+	margin-inline-start: 0;
+}
+
+.content-item-shopping img:hover {
+	cursor: pointer;
+}
+
+.content-item-shopping img {
+	margin: 0;
+	padding: 0;
+}
+</style>
 </head>
 <%@ include file="../../header.jsp"%>
 <body>
@@ -45,6 +73,26 @@
 						<li style='list-style-type: "\1F44D"; display: list-item;'>${desc }</li>
 					</c:forEach>
 				</ul>
+			</div>
+			<hr>
+			<div class="content-item">
+				<p>
+					<b>쇼핑하기</b>
+				</p>
+				<c:forEach var="item" items="${shopping }">
+					<ul class="content-item-shopping">
+						<li>${item.title }</li>
+						<li>|</li>
+						<li>${item.brand }</li>
+						<li>|</li>
+						<li><img alt="네이버 쇼핑 링크"
+							src="${pageContext.request.contextPath }/resources/img/naver_shopping_logo.png"
+							onclick="window.location.href='${item.link}'"></li>
+					</ul>
+				</c:forEach>
+				<p class="content-item-desc">
+					<br>* 네이버 쇼핑 검색 결과를 기준으로 표시됩니다.
+				</p>
 			</div>
 			<hr>
 			<div class="menu-area">
