@@ -1,6 +1,6 @@
 package com.yee.carebank.model.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class UserDto {
 	private int user_no;

@@ -14,6 +14,7 @@ public class UserDao {
 	
 	String NAMESPACE = "user.";
 	
+	//로그인 처리
 	public UserDto login(UserDto userdto) {
 		UserDto res = null;
 		try {
@@ -24,4 +25,19 @@ public class UserDao {
 		return res;
 	}
 
+	
+	//회원가입
+	public int regis(UserDto userdto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "register",userdto);
+		} catch (Exception e) {
+			System.out.println("[error] : register");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	
 }
