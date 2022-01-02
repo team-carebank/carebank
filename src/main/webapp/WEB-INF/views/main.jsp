@@ -8,9 +8,10 @@
 <title>Insert title here</title>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
+
 *{
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: 2vw;
+  margin-right: 2vw;
   box-sizing: border-box; 
   background-color: rgb(221, 217, 208);
   font-family: 'Noto Sans KR', sans-serif;
@@ -19,17 +20,32 @@
   margin-top:150px;
   height: 55vh;
   display:flex;
+  font-size: 1vw;
   justify-content:space-around ; /* 정렬 .+space-around, space-between*/
-  align-items: stretch; /*stretch가 기본(아이템들이 컨테이너에 맞게늘어남). flex-start는 아이템이 가진값만큼 딱맞게됨 여기서 중앙축에 정렬한 것이 center*/
+  align-items: center; /*stretch가 기본(아이템들이 컨테이너에 맞게늘어남). flex-start는 아이템이 가진값만큼 딱맞게됨 여기서 중앙축에 정렬한 것이 center*/
 }
-.flexbox-item-1,.flexbox-item2-1, .flexbox-item3-1, .flexbox-item4-1{
-  width:60vh;
+.flexbox-item2-1,.flexbox-item4-1{ /*text*/
+  width:40vw; 
+  min-width: 500px;
+  font-size:1vw; 
+  margin:10px; 
+}
+
+.flexbox-item-1,.flexbox-item-3-1{
+  width: 30vw;
+  left:60vw;
+  min-width: 500px;
+  font-size: 1vw;
   margin:10px;
-  min-height:100px;
 }
+
+
 .flexbox-item-2,.flexbox-item2-2,.flexbox-item3-2,.flexbox-item4-2{
-  width:70vh;
-  min-height:200px;
+  width:40vw; 
+  max-width: 700px;
+  min-width:400px; 
+  overflow: hidden;
+  font-size: 1vw;
 }
     /* 스크롤 애니메이션 */
 .sa {
@@ -143,7 +159,7 @@ th{
         
             <div class="flexbox-item flexbox-item2-1">
             <br><br><br><h3 class="sa sa-left">필요한 영양소를 보충하세요</h3>
-            <p class="sa sa-left">내 몸에 어떤 영양소가 필요한지 알아보는것이 번거로웠다면 
+            <p class="sa sa-left">내 몸에 어떤 영양소가 필요한지 알아보는것이 번거로웠다면 <br>
               케이뱅크에게 맡겨주세요<br><br><button class="button-68" role="button">nutrient</button>
             </div>
       </div>
@@ -153,7 +169,7 @@ th{
             <br><br><br><h3 class="sa sa-right">미뤄왔던 운동을 시작해보세요</h3>
             <p class="sa sa-right">어떤 운동을 해야할지 몰라 운동의 시작이 어려웠다면<br>
             고민에 꼭 필요한 운동 동작을 추천받아<br>
-            코스를 완성하고 목표량을 꾸준히 채워보세요<br><br><button class="button-68"   onclick="location.href='exercise.do'">workout</button>
+            코스를 완성하고 목표량을 꾸준히 채워보세요<br><br><button class="button-68"   onclick="location.href='exerciselist.do'">workout</button>
             </div>
             
             <div class="flexbox-item flexbox-item3-2"> 
@@ -179,7 +195,7 @@ th{
             <div class="flexbox-item flexbox-item5-1"> 
             <table class="notice_table">
             <thead>
-            <h3 style="text-align: left;">notice</h3>
+            <h3 style="text-align: left;">notice</h3>s
             <tr>
             <th>No</th>
             <th>TITLE</th> 
@@ -187,11 +203,11 @@ th{
             </thead>
             <tbody>
             <tr>
-            <td>1</th>
+            <td>1</td>
             <td>새로운 레시피가 업데이트 되었습니다.</td> 
             </tr>
             <tr>
-            <td>2</th> 
+            <td>2</td> 
             <td>대시보드에서 운동 날짜 기록 에러를 수정하였습니다.</td> 
             </tr> 
             </tbody>
