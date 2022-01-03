@@ -66,10 +66,7 @@ function click_adds(){
 				nowIndicator: true, // 현재 시간 마크
 				dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 				locale: 'ko', // 한국어 설정
-				events : function(info, successCallback, failureCallback){
-					
-				}
-				
+
 				eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
 				console.log(obj);
 			},
