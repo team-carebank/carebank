@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath}/js/comment.js"></script>
 <script>
 	$(document).on("click", "#comment-button", function(e) {
 		var comment = document.getElementById("comment-text").value.trim();
@@ -26,6 +26,22 @@
 			alert("댓글 내용을 입력하세요.");
 			return false;
 		}
+		
+		$.ajax({
+			url: "mealcomm.do",
+			type: "post",
+			data: JSON.stringify({info_id:${meal.meal_id} , comment: comment}),
+			contentType: "application/json",
+			success: function(res){
+				if(res){
+					alert("댓글이 작성되었습니다.");
+					window.location.reload();
+				};
+			}, 
+			error: function(){
+				alert("통신 실패");
+			}
+		});
 	});
 	$(document).on("click", "#comment-text", function(e) {
 		/*
@@ -37,6 +53,9 @@
 		}*/
 		$("#comment-text").attr("readonly", false);
 	});
+	
+	function clickUpdate(comm_no){
+	}
 </script>
 </head>
 <%@ include file="../../header.jsp"%>
@@ -95,20 +114,23 @@
 				<input type="button" value="작성" id="comment-button">
 			</div>
 			<div class="comment-list">
-				<div class="comment-item" id="">
-					<div>
-						<div class="comment-item-info">
-							<span>작성자</span><span>2021.01.03</span>
+				<c:forEach var="comm" items="${comment }">
+					<div class="comment-item" id="${comm.comm_no }">
+						<div class="comment-item-main">
+							<div class="comment-item-info">
+								<span>${comm.user_name }</span><span><fmt:formatDate
+										value="${comm.regdate }" pattern="yyyy-MM-dd" /></span>
+							</div>
+							<div class="comment-item-content">
+								<span>${comm.content }</span>
+							</div>
 						</div>
-						<div class="comment-item-content">
-							<span>작성내용...작성내용...작성내용...작성내용...</span>
+						<div class="comment-item-manage">
+							<a href="javascript: clickUpdate(${comm.comm_no })">수정</a><a
+								href="javascript: void(0);">삭제</a>
 						</div>
 					</div>
-					<div class="comment-item-manage">
-						<a href="javascript: void(0);">수정</a><a
-							href="javascript: void(0);">삭제</a>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>

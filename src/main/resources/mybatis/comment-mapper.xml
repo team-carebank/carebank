@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+	<select id="selectMealComment" parameterType="int"
+		resultType="commentDto">
+		SELECT COMM_NO, USER_NO,
+		USER_NAME, CONTENT, REGDATE FROM
+		MEAL_COMMENT JOIN CARE_USER
+		USING(USER_NO) WHERE MEAL_ID=${meal_id} ORDER BY COMM_NO DESC
+	</select>
+	<insert id="writeMealComment" parameterType="commentDto">
+		INSERT INTO
+		MEAL_COMMENT
+		VALUES(MEAL_COMM_SEQ.NEXTVAL,#{info_id},#{user_no},#{content},DEFAULT)
+	</insert>
+</mapper>
