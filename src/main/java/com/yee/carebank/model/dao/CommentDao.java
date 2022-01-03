@@ -15,35 +15,103 @@ public class CommentDao {
 	private SqlSessionTemplate sqlSession;
 	private final String NAMESPACE = "comment.";
 
-	public int writeMealComment(CommentDto comment) {
-		int res = 0;
+	/*
+	 * MEAL
+	 */
 
-		try {
-			res = sqlSession.insert(NAMESPACE + "writeMealComment", comment);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return res;
-	}
-
-	public int updateMealComment(CommentDto comment) {
-		int res = 0;
-
-		try {
-			res = sqlSession.update(NAMESPACE + "updateMealComment", comment);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return res;
-	}
-
-	public List<CommentDto> selectMealComment(int meal_id) {
+	public List<CommentDto> selectListM(int meal_id) {
 		List<CommentDto> res = new ArrayList<CommentDto>();
 
 		try {
-			res = sqlSession.selectList(NAMESPACE + "selectMealComment", meal_id);
+			res = sqlSession.selectList(NAMESPACE + "selectListM", meal_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public int writeM(CommentDto comment) {
+		int res = 0;
+
+		try {
+			res = sqlSession.insert(NAMESPACE + "writeM", comment);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public int updateM(CommentDto comment) {
+		int res = 0;
+
+		try {
+			res = sqlSession.update(NAMESPACE + "updateM", comment);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public int deleteM(int comm_no) {
+		int res = 0;
+
+		try {
+			res = sqlSession.delete(NAMESPACE + "deleteM", comm_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	/*
+	 * SUPPLEMENT
+	 */
+
+	public List<CommentDto> selectListS(int supple_id) {
+		List<CommentDto> res = new ArrayList<CommentDto>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectListS", supple_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public int writeS(CommentDto comment) {
+		int res = 0;
+
+		try {
+			res = sqlSession.insert(NAMESPACE + "writeS", comment);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public int updateS(CommentDto comment) {
+		int res = 0;
+
+		try {
+			res = sqlSession.update(NAMESPACE + "updateS", comment);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public int deleteS(int comm_no) {
+		int res = 0;
+
+		try {
+			res = sqlSession.delete(NAMESPACE + "deleteS", comm_no);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

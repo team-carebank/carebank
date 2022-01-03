@@ -118,4 +118,18 @@ public class MealController {
 			return false;
 		}
 	}
+
+	@RequestMapping("/mcommdelete.do")
+	@ResponseBody
+	public boolean delete(HttpServletRequest request, @RequestBody int comm_no) {
+		// MemberDto user = request.getSession().getAttribute("loginUser");
+
+		int res = cBiz.delete(comm_no, 1);
+
+		if (res > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

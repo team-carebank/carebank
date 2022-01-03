@@ -27,21 +27,28 @@
 			return false;
 		}
 		
-		$.ajax({
-			url: "mealcomm.do",
-			type: "post",
-			data: JSON.stringify({info_id:${meal.meal_id} , comment: comment}),
-			contentType: "application/json",
-			success: function(res){
-				if(res){
-					alert("댓글이 작성되었습니다.");
-					window.location.reload();
-				};
-			}, 
-			error: function(){
-				alert("통신 실패");
-			}
-		});
+		var confirmWrite = confirm("댓글을 작성하시겠습니까?");
+		
+		if(confirmWrite){
+			$.ajax({
+				url: "mealcomm.do",
+				type: "post",
+				data: JSON.stringify({info_id:${meal.meal_id} , comment: comment}),
+				contentType: "application/json",
+				success: function(res){
+					if(res){
+						alert("댓글이 작성되었습니다.");
+						window.location.reload();
+					};
+				}, 
+				error: function(){
+					alert("통신 실패");
+				}
+			});	
+		} else {
+			document.getElementById("comment-text").focus();
+			return false;
+		}
 	});
 	
 	$(document).on("click", "#comment-text", function(e) {
@@ -54,7 +61,7 @@
 		}*/
 		$("#comment-text").attr("readonly", false);
 	});
-	
+
 	$(document).on("click", ".comment-item-modify", function(e){
 		var comm_no = e.currentTarget.id;
 		cancle();
@@ -65,6 +72,30 @@
 		text.hide();
 		var textarea = "<div class='comment-write'><label for='comment-modify-text'></label><textarea name='' id='comment-modify-text'>"+text.text()+"</textarea><div><button onclick='cancle();'>취소</button><button onclick='update("+comm_no+")'>수정</button></div></div>";
 		content.append(textarea);
+	});
+	
+	$(document).on("click", ".comment-item-delete", function(e){
+		var comm_no = e.currentTarget.id;
+		var confirmDelete = confirm("댓글을 삭제하시겠습니까?");
+		if(confirmDelete){
+			$.ajax({
+				url: "mcommdelete.do",
+				type: "post",
+				data: JSON.stringify(comm_no),
+				contentType: "application/json",
+				success: function(res){
+					if(res){
+						alert("댓글이 삭제되었습니다.");
+						window.location.reload();
+					};
+				}, 
+				error: function(){
+					alert("통신 실패");
+				}
+			});
+		} else {
+			return false;
+		}
 	});
 	
 	function cancle(){
@@ -162,7 +193,7 @@
 						</div>
 						<div class="comment-item-manage">
 							<span class="comment-item-modify" id="${comm.comm_no }">수정</span><span
-								class="comment-item-delete">삭제</span>
+								class="comment-item-delete" id="${comm.comm_no }">삭제</span>
 						</div>
 					</div>
 				</c:forEach>

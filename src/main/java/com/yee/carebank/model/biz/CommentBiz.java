@@ -17,7 +17,9 @@ public class CommentBiz {
 
 		switch (type) {
 		case 1:
-			return dao.selectMealComment(info_id);
+			return dao.selectListM(info_id);
+		case 3:
+			return dao.selectListS(info_id);
 		}
 
 		return null;
@@ -26,7 +28,9 @@ public class CommentBiz {
 	public int write(CommentDto dto, int type) {
 		switch (type) {
 		case 1:
-			return dao.writeMealComment(dto);
+			return dao.writeM(dto);
+		case 3:
+			return dao.writeS(dto);
 		}
 		return 0;
 	}
@@ -34,9 +38,21 @@ public class CommentBiz {
 	public int update(CommentDto dto, int type) {
 		switch (type) {
 		case 1:
-			return dao.updateMealComment(dto);
+			return dao.updateM(dto);
+		case 3:
+			return dao.updateS(dto);
 		}
 
+		return 0;
+	}
+
+	public int delete(int comm_no, int type) {
+		switch (type) {
+		case 1:
+			return dao.deleteM(comm_no);
+		case 3:
+			return dao.deleteS(comm_no);
+		}
 		return 0;
 	}
 }
