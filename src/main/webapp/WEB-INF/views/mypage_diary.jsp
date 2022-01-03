@@ -37,6 +37,12 @@ function click_add(){
 	var option = "width=600, height=600, left=100, top=50, location=no";
 	window.open(url,name,option)
 };
+function click_adds(){
+	var url = "moodPopup.do";
+	var name = "moodPopup";
+	var option = "width=400, height=400, left=100, top=50, location=no";
+	window.open(url,name,option)
+};
 	(function(){
 		$(function(){
 			// calendar element 취득
@@ -60,6 +66,10 @@ function click_add(){
 				nowIndicator: true, // 현재 시간 마크
 				dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 				locale: 'ko', // 한국어 설정
+				events : function(info, successCallback, failureCallback){
+					
+				}
+				
 				eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
 				console.log(obj);
 			},
@@ -81,6 +91,7 @@ function click_add(){
 					}
 						calendar.unselect()}
 					});
+			
 					// 캘린더 랜더링
 						calendar.render();
 					});
@@ -94,6 +105,7 @@ function click_add(){
 	<div id='calendar-container'>
 		<div id='calendar'></div>
 		<button class="add-button" type="button" onclick="click_add();">병원 기록</button>
+		<button class="adds-button" type="button" onclick="click_adds();">기분 상태</button>
 	</div>
 </body>
 </html>

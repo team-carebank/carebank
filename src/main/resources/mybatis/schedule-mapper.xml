@@ -15,10 +15,12 @@
   
   	<select id="selectList" resultMap="scheduleMap">
   		SELECT * FROM MY_VISIT
+  		ORDER BY REGDATE DESC
   	</select>
   	
   	<insert id="insert" parameterType="ScheduleDto">
-  		INSERT INTO MY_VISIT VALUES(#{user_no}, #{hospital_name}, #{regdate}, #{resdate}, #{memo})
+  		INSERT INTO MY_VISIT 
+  		VALUES(#{user_no}, #{hospital_name}, #{regdate}, #{resdate}, #{memo})
   	</insert>
   	
   	
