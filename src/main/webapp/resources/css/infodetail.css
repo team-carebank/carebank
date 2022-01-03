@@ -12,6 +12,7 @@
 
 .body-content, .comment-area {
 	width: 80%;
+	max-width: 1600px;
 }
 
 .body-content a, .comment-area a, .menu-area a {
@@ -51,7 +52,6 @@
 
 .content-image img {
 	width: 100%;
-	max-width: 600px;
 }
 
 .content-item-description {
@@ -75,57 +75,70 @@
 	color: yellowgreen;
 	font-weight: bold;
 }
-
+/* 댓글 영역 */
 .comment-area * {
-	margin-block: 10px;
-	display: inline-block;
+	margin-block: 20px;
 	vertical-align: middle;
-	width: 100%;
 }
 
 /* 댓글 작성 */
 .comment-write {
-	width: 100%;
-}
-
-.comment-write * {
-	margin-inline: 5px;
-	margin-inline-start: 0;
-}
-
-.comment-write form {
 	display: grid;
 	width: 100%;
+	border: 1px solid gainsboro;
 }
 
 .comment-write textarea {
+	width: 98%;
 	height: 50px;
 	border: none;
 	resize: none;
 	font-size: medium;
+	padding: 5px;
+	justify-self: center;
 }
 
-.comment-write input[type="submit"] {
+.comment-write div {
+	margin-block: 0;
+	border-top: 1px solid gainsboro;
+}
+
+.comment-write input[type="button"] {
 	width: 100px;
 	height: 50px;
 	border: 0;
-	border-radius: 1mm;
-	transition: 0.5s;
 	font-size: medium;
 	justify-self: end;
+	margin-block: 0;
 }
 
-.comment-write input[type="submit"]:hover {
+.comment-write input[type="button"]:hover {
 	cursor: pointer;
-	background-color: yellowgreen;
-	color: white;
 }
 
 /* 댓글 목록 */
-.comment-list {
-	display: block;
-}
-
 .comment-list * {
 	margin-block: 5px;
+}
+
+/* 댓글 */
+.comment-item {
+	display: grid;
+}
+
+.comment-item-info span:first-child {
+	font-weight: bold;
+}
+
+.comment-item-info span:last-child {
+	font-size: small;
+}
+
+.comment-item-manage {
+	justify-self: end;
+}
+
+.comment-item div * {
+	margin-inline: 20px;
+	margin-inline-start: 0;
 }

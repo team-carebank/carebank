@@ -17,17 +17,26 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/js/comment.js"></script>
 <script>
-	function whenSubmit() {
-		var comment = document.getElementById("comment_content").value.trim();
+	$(document).on("click", "#comment-button", function(e) {
+		var comment = document.getElementById("comment-text").value.trim();
 
 		if (comment == "" || comment == null) {
 			alert("댓글 내용을 입력하세요.");
 			return false;
 		}
-
-		return true;
-	}
+	});
+	$(document).on("click", "#comment-text", function(e) {
+		/*
+		if ("${sessionScope.loginUser}" == null
+				|| "${sessionScope.loginUser}" == "") {
+			alert("로그인 후에 사용 가능합니다.");
+		} else {
+			("#comment-text").attr("readonly", false);
+		}*/
+		$("#comment-text").attr("readonly", false);
+	});
 </script>
 </head>
 <%@ include file="../../header.jsp"%>
@@ -77,18 +86,29 @@
 				</div>
 			</div>
 		</div>
-		<hr>
 		<div class="comment-area">
 			<h2 class="content-desc">댓글</h2>
 			<div class="comment-write">
-				<form action="" method="post" onsubmit="return whenSubmit();">
-					<input type="hidden" name="info_id" value="${meal.meal_id }">
-					<textarea name="" id="comment_content" placeholder="내용을 입력하세요."></textarea>
-					<input type="submit" value="작성">
-				</form>
+				<textarea name="" id="comment-text" placeholder="내용을 입력하세요."
+					readonly="readonly"></textarea>
+				<div></div>
+				<input type="button" value="작성" id="comment-button">
 			</div>
 			<div class="comment-list">
-				<div class="comment-item"></div>
+				<div class="comment-item" id="">
+					<div>
+						<div class="comment-item-info">
+							<span>작성자</span><span>2021.01.03</span>
+						</div>
+						<div class="comment-item-content">
+							<span>작성내용...작성내용...작성내용...작성내용...</span>
+						</div>
+					</div>
+					<div class="comment-item-manage">
+						<a href="javascript: void(0);">수정</a><a
+							href="javascript: void(0);">삭제</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
