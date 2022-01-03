@@ -197,7 +197,7 @@ body{
   <div class="textbox">
         <h2 style="font-size: 20px;">${dto.exer_notice }
         <br><br>
-        <div id="hello">운동 횟수:</div>
+        <div id="hello">운동 횟수: </div>
         </h2>
     </div>
 
@@ -210,9 +210,10 @@ body{
 	        </div>
 	        
 	        <div class="video">
-	            <iframe width="420" height="315" id="iframe"
+	            <!-- <iframe width="420" height="315" id="iframe"
 				src="https://www.youtube.com/embed/${dto.exer_video_url }">
-				</iframe>
+				</iframe> -->
+				<div>${dto.exer_video_url }</div>
 	        </div>
 	        <div id="circletimer"></div>
     </div>
@@ -262,7 +263,7 @@ body{
             const canvas = document.getElementById("canvas");
             canvas.width = size; canvas.height = size;
             ctx = canvas.getContext("2d");
-            labelContainer = document.getElementById("label-container");
+            labelContainer = document.getElementById("hello");
             for (let i = 0; i < maxPredictions; i++) { // and class labels
                 labelContainer.appendChild(document.createElement("div"));
             }
@@ -325,9 +326,9 @@ body{
  <script type="text/JavaScript">
         	 
 	  var cnt0 = 0;
-      var speed=1000;
-      var kcal=120;
-
+      var speed=(60/${dto.exer_kcal })*1000;
+      var kcal=${dto.exer_kcal };
+       
 		  //counterFn();
 
 		  function counterFn() {

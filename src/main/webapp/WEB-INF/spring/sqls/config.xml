@@ -10,6 +10,7 @@
   		형식으로 추가해주면됌 -->
   		<typeAlias type = "com.yee.carebank.model.dto.ExerciseDto" alias = "ExerciseDto"/>
   		<typeAlias type = "com.yee.carebank.model.dto.MeditationDto" alias = "MeditationDto"/>
+  			<typeAlias type = "com.yee.carebank.model.dto.MyExerciseDto" alias = "MyExerciseDto"/>
   	</typeAliases>
   	
   	<mappers>
@@ -17,6 +18,7 @@
   		형식으로 매퍼 위치 추가 작성 -->
   		<mapper resource = "/mybatis/exercise-mapper.xml"/>
   		<mapper resource = "/mybatis/meditation-mapper.xml"/>
+  		<mapper resource = "/mybatis/myexercise-mapper.xml"/>
   	</mappers>
   
   </configuration>
