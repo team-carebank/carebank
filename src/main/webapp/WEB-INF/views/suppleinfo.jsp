@@ -72,6 +72,7 @@ $(document).on("click", ".comment-item-modify", function(e){
 	text.hide();
 	var textarea = "<div class='comment-write'><label for='comment-modify-text'></label><textarea name='' id='comment-modify-text'>"+text.text()+"</textarea><div><button onclick='cancle();'>취소</button><button onclick='update("+comm_no+")'>수정</button></div></div>";
 	content.append(textarea);
+	document.getElementById("comment-modify-text").focus();
 });
 
 $(document).on("click", ".comment-item-delete", function(e){
@@ -106,21 +107,28 @@ function cancle(){
 
 function update(comm_no){
 	var comment_text = document.getElementById("comment-modify-text").value.trim();
-	$.ajax({
-		url: "scommupdate.do",
-		type: "post",
-		data: JSON.stringify({comm_no: comm_no, comment: comment_text}),
-		contentType: "application/json",
-		success: function(res){
-			if(res){
-				alert("댓글이 수정되었습니다.");
-				window.location.reload();
-			};
-		}, 
-		error: function(){
-			alert("통신 실패");
-		}
-	});
+	var confirmUpdate = confirm("댓글을 수정하시겠습니까?");
+	if(confirmUpdate){
+		$.ajax({
+			url: "scommupdate.do",
+			type: "post",
+			data: JSON.stringify({comm_no: comm_no, comment: comment_text}),
+			contentType: "application/json",
+			success: function(res){
+				if(res){
+					alert("댓글이 수정되었습니다.");
+					window.location.reload();
+				};
+			}, 
+			error: function(){
+				alert("통신 실패");
+			}
+		});		
+	} else {
+		document.getElementById("comment-modify-text").focus();
+		return false;
+	}
+	
 }
 </script>
 <style>
