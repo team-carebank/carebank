@@ -27,6 +27,18 @@ public class CommentDao {
 		return res;
 	}
 
+	public int updateMealComment(CommentDto comment) {
+		int res = 0;
+
+		try {
+			res = sqlSession.update(NAMESPACE + "updateMealComment", comment);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
 	public List<CommentDto> selectMealComment(int meal_id) {
 		List<CommentDto> res = new ArrayList<CommentDto>();
 

@@ -30,4 +30,13 @@ public class CommentBiz {
 		}
 		return 0;
 	}
+
+	public int update(CommentDto dto, int type) {
+		switch (type) {
+		case 1:
+			return dao.updateMealComment(dto);
+		}
+
+		return 0;
+	}
 }

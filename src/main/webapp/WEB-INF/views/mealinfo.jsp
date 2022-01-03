@@ -43,6 +43,7 @@
 			}
 		});
 	});
+	
 	$(document).on("click", "#comment-text", function(e) {
 		/*
 		if ("${sessionScope.loginUser}" == null
@@ -54,7 +55,41 @@
 		$("#comment-text").attr("readonly", false);
 	});
 	
-	function clickUpdate(comm_no){
+	$(document).on("click", ".comment-item-modify", function(e){
+		var comm_no = e.currentTarget.id;
+		cancle();
+		var comment = $(".comment-item#"+comm_no);
+		var content = comment.children(".comment-item-main").children(".comment-item-content");
+		var text = content.children("span");
+		comment.children(".comment-item-manage").hide();
+		text.hide();
+		var textarea = "<div class='comment-write'><label for='comment-modify-text'></label><textarea name='' id='comment-modify-text'>"+text.text()+"</textarea><div><button onclick='cancle();'>취소</button><button onclick='update("+comm_no+")'>수정</button></div></div>";
+		content.append(textarea);
+	});
+	
+	function cancle(){
+		$(".comment-item-content").children(".comment-write").remove();
+		$(".comment-item-content").children("span").show();
+		$(".comment-item-manage").show();
+	}
+	
+	function update(comm_no){
+		var comment_text = document.getElementById("comment-modify-text").value.trim();
+		$.ajax({
+			url: "mcommupdate.do",
+			type: "post",
+			data: JSON.stringify({comm_no: comm_no, comment: comment_text}),
+			contentType: "application/json",
+			success: function(res){
+				if(res){
+					alert("댓글이 수정되었습니다.");
+					window.location.reload();
+				};
+			}, 
+			error: function(){
+				alert("통신 실패");
+			}
+		});
 	}
 </script>
 </head>
@@ -126,8 +161,8 @@
 							</div>
 						</div>
 						<div class="comment-item-manage">
-							<a href="javascript: clickUpdate(${comm.comm_no })">수정</a><a
-								href="javascript: void(0);">삭제</a>
+							<span class="comment-item-modify" id="${comm.comm_no }">수정</span><span
+								class="comment-item-delete">삭제</span>
 						</div>
 					</div>
 				</c:forEach>

@@ -88,6 +88,10 @@
 	border: 1px solid gainsboro;
 }
 
+.comment-write * {
+	margin-inline: 0 !important;
+}
+
 .comment-write textarea {
 	width: 98%;
 	height: 50px;
@@ -99,8 +103,21 @@
 }
 
 .comment-write div {
-	margin-block: 0;
 	border-top: 1px solid gainsboro;
+	margin-block: 0;
+}
+
+.comment-write div button {
+	float: right;
+	padding: 10px 20px;
+	margin-block: 0;
+	border: 0;
+}
+
+.comment-write div button:hover, .comment-write input[type="button"]:hover
+	{
+	cursor: pointer;
+	background-color: gainsboro;
 }
 
 .comment-write input[type="button"] {
@@ -112,17 +129,13 @@
 	margin-block: 0;
 }
 
-.comment-write input[type="button"]:hover {
-	cursor: pointer;
-}
-
 /* 댓글 목록 */
 .comment-list * {
 	margin-block: 5px;
 }
 
 /* 댓글 */
-.comment-item {
+.comment-item, .comment-item-content {
 	display: grid;
 }
 
@@ -141,4 +154,8 @@
 .comment-item div * {
 	margin-inline: 20px;
 	margin-inline-start: 0;
+}
+
+.comment-item-modify:hover, .comment-item-delete:hover {
+	cursor: pointer;
 }

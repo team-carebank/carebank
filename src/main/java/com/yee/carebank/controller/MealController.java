@@ -26,13 +26,10 @@ import com.yee.carebank.model.dto.ShoppingDto;
 import com.yee.carebank.model.dto.SuppleDto;
 
 @Controller
-public class InformationController {
+public class MealController {
 
 	@Autowired
 	MealBiz biz;
-
-	@Autowired
-	SuppleBiz sBiz;
 
 	@Autowired
 	CommentBiz cBiz;
@@ -81,7 +78,7 @@ public class InformationController {
 
 	@RequestMapping("/mealcomm.do")
 	@ResponseBody
-	public boolean writeComment(HttpServletRequest request, @RequestBody String data) {
+	public boolean write(HttpServletRequest request, @RequestBody String data) {
 		// MemberDto user = request.getSession().getAttribute("loginUser");
 		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
 		int info_id = jo.get("info_id").getAsInt();
@@ -101,33 +98,24 @@ public class InformationController {
 		}
 	}
 
-	@RequestMapping("/supplemain.do")
-	public String sMain(Model model) {
-		model.addAttribute("category", sBiz.selectCatList());
-
-		return "supplelist";
-	}
-
-	@RequestMapping("/supplelist.do")
+	@RequestMapping("/mcommupdate.do")
 	@ResponseBody
-	public Map<String, Object> selectSList(@RequestBody int subcat_id) {
-		Map<String, Object> res = new HashMap<String, Object>();
+	public boolean modify(HttpServletRequest request, @RequestBody String data) {
+		// MemberDto user = request.getSession().getAttribute("loginUser");
+		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
+		int comm_no = jo.get("comm_no").getAsInt();
+		String comment = jo.get("comment").getAsString();
 
-		res.put("supple", sBiz.selectList(subcat_id));
+		CommentDto dto = new CommentDto();
+		dto.setComm_no(comm_no);
+		dto.setContent(comment);
 
-		return res;
-	}
+		int res = cBiz.update(dto, 1);
 
-	@RequestMapping("/suppleinfo.do")
-	public String selectSupple(Model model, int id) {
-		SuppleDto supple = sBiz.selectOne(id);
-		List<String> description = sBiz.selectInfo(id);
-		List<ShoppingDto> shopping = sBiz.getShopping(supple.getSupple_name());
-
-		model.addAttribute("supple", supple);
-		model.addAttribute("description", description);
-		model.addAttribute("shopping", shopping);
-
-		return "suppleinfo";
+		if (res > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
