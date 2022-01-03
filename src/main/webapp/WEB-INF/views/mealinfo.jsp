@@ -32,7 +32,7 @@
 </head>
 <%@ include file="../../header.jsp"%>
 <body>
-	<div class="main-content">
+	<div class="container">
 		<div class="body-content">
 			<div class="content-left">
 				<h1>${meal.meal_name }</h1>
@@ -49,7 +49,7 @@
 						<b>메인 푸드</b>
 					</p>
 					<c:forEach var="food" items="${ingredient }">
-						<div class="food">
+						<div class="content-food-list">
 							<span><b>${food.food }</b></span>
 							<p class="content-item-description">${fn:trim(food.description)}</p>
 							<span>탄수화물 ${food.carbo}g 단백질 ${food.protein } 지방
@@ -82,15 +82,13 @@
 			<h2 class="content-desc">댓글</h2>
 			<div class="comment-write">
 				<form action="" method="post" onsubmit="return whenSubmit();">
-					<textarea name="" id="comment_content" cols="30" rows="10"
-						placeholder="내용을 입력하세요."></textarea>
+					<input type="hidden" name="info_id" value="${meal.meal_id }">
+					<textarea name="" id="comment_content" placeholder="내용을 입력하세요."></textarea>
 					<input type="submit" value="작성">
 				</form>
 			</div>
 			<div class="comment-list">
-				<div class="comment-item">
-					<div class="comment-item-info"></div>
-				</div>
+				<div class="comment-item"></div>
 			</div>
 		</div>
 	</div>

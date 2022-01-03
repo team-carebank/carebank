@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.main-content {
+.container {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr;
@@ -29,7 +29,7 @@
 .body-content {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);;
-	grid-gap: 20px;
+	grid-gap: 100px;
 }
 
 .content-right {
@@ -51,10 +51,19 @@
 
 .content-image img {
 	width: 100%;
+	max-width: 600px;
 }
 
 .content-item-description {
 	font-size: medium !important;
+}
+
+.content-food-list {
+	margin-block: 0;
+}
+
+.content-food-list b {
+	font-size: large;
 }
 
 .menu-area a {
@@ -74,6 +83,7 @@
 	width: 100%;
 }
 
+/* 댓글 작성 */
 .comment-write {
 	width: 100%;
 }
@@ -83,10 +93,16 @@
 	margin-inline-start: 0;
 }
 
+.comment-write form {
+	display: grid;
+	width: 100%;
+}
+
 .comment-write textarea {
 	height: 50px;
 	border: none;
 	resize: none;
+	font-size: medium;
 }
 
 .comment-write input[type="submit"] {
@@ -95,6 +111,8 @@
 	border: 0;
 	border-radius: 1mm;
 	transition: 0.5s;
+	font-size: medium;
+	justify-self: end;
 }
 
 .comment-write input[type="submit"]:hover {
@@ -103,18 +121,11 @@
 	color: white;
 }
 
+/* 댓글 목록 */
 .comment-list {
 	display: block;
 }
 
 .comment-list * {
 	margin-block: 5px;
-}
-
-.food {
-	margin-block: 0;
-}
-
-.food b {
-	font-size: large;
 }

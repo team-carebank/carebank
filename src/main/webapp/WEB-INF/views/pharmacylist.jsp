@@ -21,7 +21,7 @@
 </head>
 <%@ include file="../../header.jsp"%>
 <body>
-	<div class="main-content">
+	<div class="container">
 		<div class="body-content">
 			<div class="content-top">
 				<p class="content-desc">

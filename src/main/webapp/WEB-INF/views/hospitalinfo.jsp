@@ -23,7 +23,7 @@
 </head>
 <%@ include file="../../header.jsp"%>
 <body>
-	<div class="main-content">
+	<div class="container">
 		<div class="body-content">
 			<div class="content-left">
 				<p class="content-desc">병원 정보를 안내할게요!</p>

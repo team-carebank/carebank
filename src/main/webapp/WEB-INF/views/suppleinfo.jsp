@@ -60,7 +60,7 @@
 </head>
 <%@ include file="../../header.jsp"%>
 <body>
-	<div class="main-content">
+	<div class="container">
 		<div class="body-content">
 			<div class="content-left">
 				<h1>${supple.supple_name }</h1>
