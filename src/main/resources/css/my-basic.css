@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+
+.main-container{
+	width:100%;
+	height:calc(100% - var(--header-of-height));
+	background:#fff;
+	position:relative;
+}
+
+.left-menu-container{
+	width:var(--width-of-left-menu);
+	height:100%;
+	background:#fff;
+	padding-left:12px;
+	box-sizing:border-box;
+}
+
+.real-container{
+	width:calc(100% - var(--width-of-left-menu));
+	height:100%;
+	background:#fff;
+	position:absolute;
+	top:0;
+	right:0;
+
+}
+
+.left-menu-container .info-div{
+	display:flex;
+	flex-direction: column;	
+	padding-top:30px;
+}
+
+.left-menu-container .info-div .email{
+	color:#222;
+	font-weight:700;
+	font-size:16px;
+	margin-bottom:6px;
+}
+.info-div .address, .info-div .intro{
+	color:#999;
+	font-weight:500;
+	font-size:14px;	
+}
+
+.left-menu-container .menu-div{
+	padding-top:50px;
+	
+	
+}
+
+.menu-div nav.nav-btn{
+	color:#222;
+	font-weight:700;
+	background:#fff;
+	height:38px;
+	display:flex;
+	align-items:center;
+	padding-left:16px;
+	border-radius:8px;
+	margin-bottom:10px;
+	cursor:pointer;
+	
+}
+
+nav.nav-btn:hover{
+	color:var(--color-main);
+}
+
+nav.nav-btn.active{
+	background:var(--color-main);
+	color:#fff;
+	
+}
+
+.menu-div nav.nav-btn i{
+}
+
+.menu-div nav.nav-btn span{
+	
+}

@@ -2,8 +2,9 @@ package com.yee.carebank.model.dto;
 
 import java.util.Date;
 
-public class BoardDTO {
+public class NoticeVO {
 	private int post_no;
+	//private ___ user_no; 추가해야 함
 	private String post_title;
 	private String post_content;
    //	 * 게시판 파일 넣는 문장 private _______ Post_fifle;	 */
