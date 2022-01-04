@@ -1,0 +1,20 @@
+#clinicName {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+#map div {
+	display: block;
+	margin-block: 0;
+}
+
+#map * {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#map a {
+	display: inline-flex !important;
+	margin-inline: 10px !important;
+}

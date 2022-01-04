@@ -1,8 +1,11 @@
 package com.yee.carebank.model.dao;
 
+
 import java.util.List;
 
 import com.yee.carebank.model.dto.BoardVO;
+import com.yee.carebank.model.dto.BoardDTO;
+
 
 public class BoardDAO {
 //	void create(BoardDTO BoardVo) throws Exception {
@@ -21,6 +24,7 @@ public class BoardDAO {
 //	List<BoardVO> listAll() throws Exception {
 //		return null;
 //	}
+
 
 	 // 입력
     public void create(BoardVO boardVO) throws Exception {
@@ -43,4 +47,5 @@ public class BoardDAO {
     public List<BoardVO> list() throws Exception {
 		return null;
 	}
+
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace = "user">
+  	<resultMap type = "userDto" id = "userMap">
+  		<result property = "user_no" column = "USER_NO"/>
+  		<result property = "user_name" column = "USER_NAME"/>
+  		<result property = "user_id" column = "USER_ID"/>
+  		<result property = "user_pw" column = "USER_PW"/>
+  		<result property = "birth" column = "BIRTH"/>
+  		<result property = "phone" column = "PHONE"/>
+  		<result property = "email" column = "EMAIL"/>
+  		<result property = "enabled_yn" column = "ENABLED_YN"/>
+  		<result property = "user_type" column = "USER_TYPE"/>
+  	</resultMap>
+  
+  	<!-- 로그인처리 -->
+  	<select id = "login" parameterType = "userDto" resultType = "userDto">
+  		SELECT * FROM CARE_USER
+  		WHERE USER_ID = #{user_id} AND USER_PW = #{user_pw}
+  	</select>
+  
+  
+  
+  
+  
+  
+  </mapper>

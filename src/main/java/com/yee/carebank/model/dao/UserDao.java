@@ -4,22 +4,21 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yee.carebank.model.dto.MoodDto;
+import com.yee.carebank.model.dto.UserDto;
 
 @Repository
-public class MoodDaoImpl implements MoodDao{
 
+public class UserDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	@Override
-	public int insert(MoodDto dto) {
-		int res = 0;
-		
+	String NAMESPACE = "user.";
+	
+	public UserDto login(UserDto userdto) {
+		UserDto res = null;
 		try {
-			res = sqlSession.insert(NAMESPACE+"insert",dto);
+			res = sqlSession.selectOne(NAMESPACE + "login", userdto);
 		} catch (Exception e) {
-			System.out.println("[error] : insert");
 			e.printStackTrace();
 		}
 		return res;
