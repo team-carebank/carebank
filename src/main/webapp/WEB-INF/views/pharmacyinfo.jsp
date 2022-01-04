@@ -12,6 +12,8 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/header.css" />
 <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/infodetail.css" />
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/hosdetail.css" />
 <style>
 </style>
@@ -21,28 +23,29 @@
 </head>
 <%@ include file="../../header.jsp"%>
 <body>
-	<div class="body-content">
-		<div class="content-left">
-			<p class="content-desc">약국 정보를 안내할게요!</p>
-			<hr>
-			<div>
-				<span id="clinicName">${dto.yadmNm }</span> <span id="clinicAddress">${dto.addr }</span>
-				<c:if test="${dto.telno ne null }">
-					<span id="clinicTEL">${dto.telno }</span>
-				</c:if>
-				<c:if test="${dto.hospUrl ne null }">
-					<span><a href="${dto.hospUrl }" target="_blank"
-						id="clinicURL">공식 홈페이지</a></span>
-				</c:if>
+	<div class="container">
+		<div class="body-content">
+			<div class="content-left">
+				<p class="content-desc">약국 정보를 안내할게요!</p>
+				<hr>
+				<div>
+					<span id="clinicName">${dto.yadmNm }</span> <span
+						id="clinicAddress">${dto.addr }</span>
+					<c:if test="${dto.telno ne null }">
+						<span id="clinicTEL">${dto.telno }</span>
+					</c:if>
+					<c:if test="${dto.hospUrl ne null }">
+						<span><a href="${dto.hospUrl }" target="_blank"
+							id="clinicURL">공식 홈페이지</a></span>
+					</c:if>
+				</div>
+				<hr>
+				<span class="menu-area"><a href="javascript: history.back();">목록으로 돌아가기</a></span>
+			</div>
+			<div class="content-right">
+				<div id="map" style="width: 800px; height: 600px;"></div>
 			</div>
 		</div>
-		<hr>
-		<div class="content-right">
-			<div id="map" style="width: 800px; height: 600px;"></div>
-		</div>
-		<hr>
-		<span class="menu-area"><a href="javascript: history.back();">목록으로
-				돌아가기</a></span>
 	</div>
 </body>
 <script type="text/javascript"

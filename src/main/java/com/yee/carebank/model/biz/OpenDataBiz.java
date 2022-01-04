@@ -19,8 +19,16 @@ public class OpenDataBiz {
 	@Autowired
 	OpenDataAPI api;
 
+	public int getTotalCount(String sgguCd) {
+		return OpenDataAPI.TOTAL_COUNT;
+	}
+
 	public JSONArray getHospitalList(String sgguCd) throws MalformedURLException, IOException {
 		return api.getHospitalList(sgguCd);
+	}
+
+	public JSONArray getHospitalList(String sgguCd, String pageno) throws MalformedURLException, IOException {
+		return api.getHospitalList(sgguCd, pageno);
 	}
 
 	public HospitalDto getHospitalInfo(String yadmNm, String sgguCd) throws MalformedURLException, IOException {
@@ -55,6 +63,10 @@ public class OpenDataBiz {
 
 	public JSONArray getPharmacyList(String sgguCd) throws MalformedURLException, IOException {
 		return api.getPharmacyList(sgguCd);
+	}
+
+	public JSONArray getPharmacyList(String sgguCd, String pageno) throws MalformedURLException, IOException {
+		return api.getPharmacyList(sgguCd, pageno);
 	}
 
 	public HospitalDto getPharmacyInfo(String yadmNm, String sgguCd) throws MalformedURLException, IOException {

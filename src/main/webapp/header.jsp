@@ -31,16 +31,16 @@
 	<div class="header">
 		<div class="header-logo">
 			<h1>
-				<a href="#">CareBank</a>
+				<a href="${pageContext.request.contextPath }/indexForTest.jsp">CareBank</a>
 			</h1>
 		</div>
 		<div class="header-nav">
 			<ul class="nav-list">
 				<li class="nav-component"><a>이용하기</a>
 					<ul class="nav-sub">
-						<li><a href="#">식단</a></li>
+						<li><a href="mealmain.do">식단</a></li>
 						<li><a href="#">운동</a></li>
-						<li><a href="#">영양제</a></li>
+						<li><a href="supplemain.do">영양제</a></li>
 						<li><a href="#">명상</a></li>
 						<li><a href="hospitalmain.do">병원</a></li>
 						<li><a href="pharmacymain.do">약국</a></li>
