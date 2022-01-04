@@ -160,16 +160,6 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
-		 <!-- HEAD -->
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<dependency>
-    		<groupId>com.fasterxml.jackson.core</groupId>
-    		<artifactId>jackson-databind</artifactId>
-    		<version>2.13.0</version>		
-		</dependency>
-
-		
 
 		<!-- 4. spring-orm:: object-relational-mapping:: 버전 상관없이 가져온 후 버전을 지운다 
 			(다른 스프링이랑 버전맞춘다:: ${org.springframework-version}) -->
@@ -211,7 +201,6 @@
 			<artifactId>commons-io</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<plugins>

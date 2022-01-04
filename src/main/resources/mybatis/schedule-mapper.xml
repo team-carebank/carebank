@@ -3,25 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace = "visit">
+  <mapper namespace = "myvisit">
   
-  	<resultMap type="scheduleDto" id="scheduleMap">
-  		<result property="user_no" column="USER_NO" />
-  		<result property="hospital_name" column="HOSPITAL_NAME" />
-  		<result property="regdate" column="REGDATE" />
-  		<result property="resdate" column="RESDATE" />
-  		<result property="memo" column="MEMO" />
+  	<resultMap type = "scheduleDto" id="scheduleMap">
+  		<result property ="user_no" column="USER_NO" />
+  		<result property ="hospital_name" column="HOSPITAL_NAME" />
+  		<result property ="regdate" column="REGDATE" />
+  		<result property ="resdate" column="RESDATE" />
+  		<result property ="memo" column="MEMO" />
   	</resultMap>
   
-  	<select id="selectList" resultMap="scheduleMap">
+  	<select id="selectlist" resultMap="scheduleMap">
   		SELECT * FROM MY_VISIT
-  		ORDER BY REGDATE DESC
   	</select>
   	
   	<insert id="insert" parameterType="ScheduleDto">
-  		INSERT INTO MY_VISIT 
-  		VALUES(#{user_no}, #{hospital_name}, #{regdate}, #{resdate}, #{memo})
+  		INSERT INTO MY_VISIT
+  		VALUES(#{user_no}, #{hospital_name}, SYSDATE, #{resdate}, #{memo})
   	</insert>
-  	
-  	
   </mapper>

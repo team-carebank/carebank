@@ -8,20 +8,19 @@ public class ScheduleDto {
 	private String hospital_name;
 	private Date regdate;
 	private Date resdate;
-	private String memo;
+	private String meno;
 	
 	public ScheduleDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public ScheduleDto(int user_no, String hospital_name, Date regdate, Date resdate, String memo) {
+	public ScheduleDto(int user_no, String hospital_name, Date regdate, Date resdate, String meno) {
 		super();
 		this.user_no = user_no;
 		this.hospital_name = hospital_name;
 		this.regdate = regdate;
 		this.resdate = resdate;
-		this.memo = memo;
+		this.meno = meno;
 	}
 
 	public int getUser_no() {
@@ -56,15 +55,15 @@ public class ScheduleDto {
 		this.resdate = resdate;
 	}
 
-	public String getMemo() {
-		return memo;
+	public String getMeno() {
+		return meno;
 	}
 
-	public void setMemo(String memo) {
-		this.memo = memo;
+	public void setMeno(String meno) {
+		this.meno = meno;
 	}
+
 	
-
 	
 	
 	

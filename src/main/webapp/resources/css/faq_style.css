@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+
+body{
+    font-family: 'S-CoreDream-3Light';
+}
+.faq-heading{
+    border-bottom: #777;
+    padding: 20px 60px;
+}
+.search-container{
+    display: flex;
+    
+}
+.search{
+    width: 100px;
+    height: 50px;
+    text-align: center;
+}
+.search_btn{
+    margin-left: auto;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    
+}
+.faq-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.search{
+    width:10%;
+    height:50px;
+    padding:2px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.hr-line{
+  width: 60%;
+  margin: auto;
+  
+}
+
+.faq-title {
+    /* background-color: #eee; */
+    color: #444;
+    cursor: pointer;
+    padding: 20px 10px;
+    width: 60%;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin: auto;
+    font-size: 13pt;
+}
+.faq-body{
+    margin: auto;
+    /* text-align: center; */
+   width: 50%; 
+   padding: auto;
+   
+   
+}
+
+.active,
+.faq-title:hover {
+    background-color: #287743;
+    color: white;
+}
+
+.faq-body {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+.faq-title:after {
+    content: '\02795'; /* 플러스 (+) 유니코드*/
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+.active:after {
+    content: "\2796"; /* 마이너스 (-) 유니코드*/
+}
