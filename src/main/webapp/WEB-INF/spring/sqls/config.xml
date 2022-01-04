@@ -2,23 +2,39 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  <!--config 태그 추가 -->
-  
-  <configuration>
-  	<typeAliases>
-  	<!-- <typeAlias type = "com.yee.carebank.model.dto.BoardDto" alias = "boardDto"/>
-  		형식으로 추가해주면됌 -->
-  		<typeAlias type = "com.yee.carebank.model.dto.ExerciseDto" alias = "ExerciseDto"/>
-  		<typeAlias type = "com.yee.carebank.model.dto.MeditationDto" alias = "MeditationDto"/>
-  			<typeAlias type = "com.yee.carebank.model.dto.MyExerciseDto" alias = "MyExerciseDto"/>
-  	</typeAliases>
-  	
-  	<mappers>
-  	<!-- <mapper resource = "/mybatis/board-mapper.xml"/>
-  		형식으로 매퍼 위치 추가 작성 -->
-  		<mapper resource = "/mybatis/exercise-mapper.xml"/>
-  		<mapper resource = "/mybatis/meditation-mapper.xml"/>
-  		<mapper resource = "/mybatis/myexercise-mapper.xml"/>
-  	</mappers>
-  
-  </configuration>
+
+<!--config 태그 추가 -->
+
+<configuration>
+	<typeAliases>
+		<!-- <typeAlias type = "com.yee.carebank.model.dto.BoardDto" alias = "boardDto"/> 
+			형식으로 추가해주면됌 -->
+		<typeAlias type="com.yee.carebank.model.dto.MealDto"
+			alias="mealDto" />
+		<typeAlias type="com.yee.carebank.model.dto.FoodDto"
+			alias="foodDto" />
+		<typeAlias type="com.yee.carebank.model.dto.SuppleDto"
+			alias="suppleDto" />
+		<typeAlias type="com.yee.carebank.model.dto.CommentDto"
+			alias="commentDto" />
+    <typeAlias type = "com.yee.carebank.model.dto.FaqDto" alias = "faqDto"/>
+  	<typeAlias type = "com.yee.carebank.model.dto.UserDto" alias = "userDto"/>
+    <typeAlias type = "com.yee.carebank.model.dto.ExerciseDto" alias = "ExerciseDto"/>
+  	<typeAlias type = "com.yee.carebank.model.dto.MeditationDto" alias = "MeditationDto"/>
+  	<typeAlias type = "com.yee.carebank.model.dto.MyExerciseDto" alias = "MyExerciseDto"/>
+	</typeAliases>
+
+	<mappers>
+		<!-- <mapper resource = "/mybatis/board-mapper.xml"/> 형식으로 매퍼 위치 추가 작성 -->
+		<mapper resource="/mybatis/meal-mapper.xml" />
+		<mapper resource="/mybatis/supple-mapper.xml" />
+		<mapper resource="/mybatis/comment-mapper.xml" />		
+    <mapper resource = "/mybatis/faq-mapper.xml"/>
+		<mapper resource = "/mybatis/user-mapper.xml"/>
+    <mapper resource = "/mybatis/exercise-mapper.xml"/>
+  	<mapper resource = "/mybatis/meditation-mapper.xml"/>
+  	<mapper resource = "/mybatis/myexercise-mapper.xml"/>
+	</mappers>
+
+</configuration>
+

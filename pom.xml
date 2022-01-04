@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yee</groupId>
@@ -7,8 +8,8 @@
 	<name>CareBank</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
-	
-		<!-- repository 추가(ojdb를 위해 추가해줌) -->
+
+	<!-- repository 추가(ojdb를 위해 추가해줌) -->
 	<repositories>
 		<repository>
 			<id>datanucleus</id>
@@ -16,8 +17,8 @@
 		</repository>
 	</repositories>
 	<properties>
-		<java-version>1.6</java-version>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+		<java-version>11</java-version>
+		<org.springframework-version>5.2.12.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -32,7 +33,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				 </exclusion>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -40,14 +41,14 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
-		</dependency>	
-		
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -97,7 +98,7 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-				
+
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -116,97 +117,127 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>  
-		
-		
-		
+		</dependency>
+
+
+
 		<!-- 추가 -->
-	
-		<!-- 1: ojdbc6: 상단에 repository 추가해주기  -->
+
+		<!-- 1: ojdbc6: 상단에 repository 추가해주기 -->
 		<!-- https://mvnrepository.com/artifact/oracle/ojdbc6 -->
 		<dependency>
-		    <groupId>oracle</groupId>
-		    <artifactId>ojdbc6</artifactId>
-		    <version>11.2.0.3</version>
+			<groupId>oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
 		</dependency>
-		
+
 		<!-- 2.mybatis -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>3.5.6</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.6</version>
 		</dependency>
 		<!-- mybatis-spring:: mybatis 랑 버전 안맞춰도 괜찮음 -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis-spring</artifactId>
-		    <version>2.0.6</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.6</version>
 		</dependency>
-		
+
 		<!-- 3. commons-dbcp -->
 		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
-		    <groupId>commons-dbcp</groupId>
-		    <artifactId>commons-dbcp</artifactId>
-		    <version>1.4</version>
-		</dependency>
-		
-		<!-- 4. spring-orm:: object-relational-mapping::
-		 버전 상관없이 가져온 후 버전을 지운다 (다른 스프링이랑 버전맞춘다:: ${org.springframework-version}) -->
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-orm</artifactId>
-		    <version>${org.springframework-version}</version>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
 		</dependency>
 
-		
+		<!-- 4. spring-orm:: object-relational-mapping:: 버전 상관없이 가져온 후 버전을 지운다 
+			(다른 스프링이랑 버전맞춘다:: ${org.springframework-version}) -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- openData api -->
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
+		</dependency>
 	</dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <additionalProjectnatures>
-                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-                    </additionalProjectnatures>
-                    <additionalBuildcommands>
-                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-                    </additionalBuildcommands>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <compilerArgument>-Xlint:all</compilerArgument>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <mainClass>org.test.int1.Main</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<additionalProjectnatures>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+					</additionalProjectnatures>
+					<additionalBuildcommands>
+						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+					</additionalBuildcommands>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>org.test.int1.Main</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
