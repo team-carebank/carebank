@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,11 +121,11 @@ body{
         </div>
     </div>
 
-    <div class="carousel">
+    <!-- <div class="carousel">
     
-	        <div class="carousel-item" onclick="location.href='exercise_detail.do'">
+	         <div class="carousel-item" onclick="location.href='exerdetail.do'">
 	             <img src="resources/img/1.jpg">
-	            <h3>코어근육 강화하기</h3>
+	            <h3>${dto.exer_title}</h3>
 	        </div>
 	        
 	        <div class="carousel-item">
@@ -147,11 +149,35 @@ body{
 	        </div>
 
     </div>
-
+ -->
+ <div class="carousel">
+ 	<c:choose>
+    		<c:when test="${empty list }">
+    			<h1>no list</h1>
+    		</c:when>
+    	<c:otherwise>
+    		<c:forEach items="${list }" var="dto">
+    		
+    		<div class="carousel-item">
+    		
+    		<img src="${dto.exer_thum }" onclick="location.href='exerdetail.do?exer_id=${dto.exer_id}'">
+    			<h3>${dto.exer_title}</h3>
+    		</div>
+    		
+    		</c:forEach>
+    	
+    	
+    	</c:otherwise>
+    	
+    	</c:choose>
+ </div>
+ 
+ 
+ 
     <div class="skipbutton">
         <div class="textbox2">
             <p>음..오늘은 마음을 챙겨볼게요</p> 
-            <button class="button-68"  onclick="location.href='meditation.do'">meditation</button>
+            <button class="button-68"  onclick="location.href='newmeditation.do'">meditation</button>
         </div>
     </div>
 

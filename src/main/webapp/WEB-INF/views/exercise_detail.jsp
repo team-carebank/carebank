@@ -4,13 +4,11 @@
 <html lang="en">
 <head>
 <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  
-  
-  <link href='https://fonts.googleapis.com/css?family=Overlock' rel='stylesheet' type='text/css'>
-  <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
-  
-<title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Overlock' rel='stylesheet' type='text/css'>
+<script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+ 
+<title>ExerciseDetail</title>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
 *{
@@ -39,12 +37,27 @@ body{
 .webcam{
   width:300px; 
   height:400px;
-  margin-top:30px;
-  overflow: hidden;
+  margin-top:30px; 
+  overflow:hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+#canvas{
+	width:400px;
+	height:450px;
+	margin-top:30px;
+	display:flex;
+}
+
+#startbutton{
+	
+	position:absolute;
+	margin-left:40px;
+	
+}
+
 .video{
   width:300px; 
   height:400px;
@@ -53,6 +66,11 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#iframe{
+	width:100vw;
+	height:100vh;
 }
 .checkbox{
   width:250px;
@@ -159,6 +177,15 @@ body{
 .button-68:hover {
   box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
 }
+
+#startbutton{
+	
+	position:absolute;
+	margin-left:10px;
+    margin-top:400px;
+	
+}
+
 </style>
 
  
@@ -167,16 +194,26 @@ body{
 
 <body>
    
-    <div class="textbox">
-        <h2 style="font-size: 20px;">(동작notice)허리를 굽히지 마세요!</h2>
+  <div class="textbox">
+        <h2 style="font-size: 20px;">${dto.exer_notice }
+        <br><br>
+        <div id="hello">운동 횟수: </div>
+        </h2>
     </div>
 
     <div id="workoutcontainer">
+    
 	        <div class="webcam">
-	            <img src="resources/img/webcam.png">
+			    <button type="button" id="startbutton" class="button-68" onclick="init(); counterFn();">Start!</button>
+			    <div><canvas id="canvas"></canvas></div>
+			    <div id="label-container"></div>
 	        </div>
+	        
 	        <div class="video">
-	            <img src="resources/img/doing.png">
+	            <!-- <iframe width="420" height="315" id="iframe"
+				src="https://www.youtube.com/embed/${dto.exer_video_url }">
+				</iframe> -->
+				<div>${dto.exer_video_url }</div>
 	        </div>
 	        <div id="circletimer"></div>
     </div>
@@ -192,64 +229,107 @@ body{
       <h3>벌써</h3><br><h1 class="number"> </h1><br><h3>kcal나 불태웠어요</h3>
     </div>
 
-    <div id="ViewTimer">
+    <!--  <div id="ViewTimer">
     	<div id="time_left"> 
-        <h1 style="position: absolute; left:590px; font-family: 'Noto Sans KR', sans-serif;"/></div>
-    </div>
+        <h1 style="position: absolute; left:590px; font-family: 'Noto Sans KR', sans-serif;"></h1>
+        </div>
+        <div id="hello">오늘의 운동 횟수:</div>
+    </div>-->
+     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+    <script type="text/javascript"> 
+        const URL = "${dto.exer_tm_url}";
+        let model, webcam, ctx, labelContainer, maxPredictions,cc;
+
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
     
+            // load the model and metadata
+            // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+            // Note: the pose library adds a tmPose object to your window (window.tmPose)
+            model = await tmPose.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
     
-     <script>
-        let size=90;
-        let len=5;
-        const colors=['#fff','#fff','#fff','#00f3f1','#fff']
-
-        let speed=40; //원이 채워지는 속도 조절 
-
-        function setup(){
-            canvas=createCanvas(windowWidth , 400);
-            canvas.parent('circletimer'); 
-        }
-
-        function draw(){
-            background(255,8)
-            noStroke()
-            translate(width/2,height)
-
-            for(let i=0; i<len; i++){
-                push()
-                rotate(i/2 + frameCount/speed)
-                fill(colors[i])
-                ellipse(size+size*i,0,size/1.5)
-                pop()
+            // Convenience function to setup a webcam
+            const size = 200;
+            const flip = true; // whether to flip the webcam
+            webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
+            await webcam.setup(); // request access to the webcam
+            await webcam.play();
+            window.requestAnimationFrame(loop);
+    
+            // append/get elements to the DOM
+            const canvas = document.getElementById("canvas");
+            canvas.width = size; canvas.height = size;
+            ctx = canvas.getContext("2d");
+            labelContainer = document.getElementById("hello");
+            for (let i = 0; i < maxPredictions; i++) { // and class labels
+                labelContainer.appendChild(document.createElement("div"));
             }
         }
-</script>
+    
+        async function loop(timestamp) {
+            webcam.update(); // update the webcam frame
+            await predict();
+            window.requestAnimationFrame(loop);
+        }
+    
+        //count 추가 
+       var status = "stretch"; //기본상태는 편걸로 한다.
+        var count = 0 ;
+        //반복되는 함수 predict에 본격적인 count 로직 작성 ㄱ 
 
+        async function predict() { 
+            const { pose, posenetOutput } = await model.estimatePose(webcam.canvas); 
+            const prediction = await model.predict(posenetOutput);
+    
+            //count를 위해 추가되는 로직 
+            if(prediction[1].probability.toFixed(2) > 0.90){
+                 // bound에서 stretch할때 count 해주기 
+                 if(status == "bound"){
+                     cc=count++;
+                     //count할때 sound 삽입
+                     var audio = new Audio('http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a');
+                audio.play();
+                 }
+                status="stretch"
+            }else if(prediction[0].probability.toFixed(2)> 0.90){
+                status="bound"
+            } 
+            
+
+            for (let i = 0; i < maxPredictions; i++) {
+                const classPrediction =
+                  cc;
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+            }
      
-<script>
-    var SetTime = 200;      // 최초 설정 시간(기본 : 초)
-    function msg_time() {   // 1초씩 카운트      
-        m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초"; // 남은 시간 계산         
-        var msg = m ;  
-        console.log(time_left);
-        document.all.time_left.innerHTML = msg;       // div 영역에 보여줌                  
-        SetTime--;                  // 1초씩 감소
-        if (SetTime < 0) {          // 시간이 종료 되었으면..        
-            clearInterval(tid);     // 타이머 해제
-            alert("종료");
-
-        }       
-    }
-    window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
-</script>
-
+            drawPose(pose);
+        }
+    
+        function drawPose(pose) {
+            if (webcam.canvas) {
+                ctx.drawImage(webcam.canvas, 0, 0); 
+                if (pose) {
+                    const minPartConfidence = 0.5;
+                    tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+                    tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+                }
+            }
+        }
+    </script>
+    
+ 
+     
+ 
  <script type="text/JavaScript">
-        		$(function() {
-		  var cnt0 = 0;
-      var speed=1000;
-      var kcal=120;
-
-		  counterFn();
+        	 
+	  var cnt0 = 0;
+      var speed=(60/${dto.exer_kcal })*1000;
+      var kcal=${dto.exer_kcal };
+       
+		  //counterFn();
 
 		  function counterFn() {
 
@@ -268,8 +348,6 @@ body{
 		      }
 		    }
 		  }
-		});
-
     </script>
      
   <script>

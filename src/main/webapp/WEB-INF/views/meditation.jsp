@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,29 +119,67 @@ body{
         </div>
     </div>
 
-    <div class="carousel">
-        <div class="carousel-item" onclick="location.href='meditation_detail.do'">
-            <img src="resources/img/1명상.jpg">
-            <h3>마음을 비우는 15분</h3>
-        </div>
-        <div class="carousel-item">
-            <img src="resources/img/2숙면.jpg">
-            <h3>깊은 잠을 위한</h3>
-        </div>
-        <div class="carousel-item">
-            <img src="resources/img/3스트레스.jpg">
-            <h3>스트레스 해소엔</h3>
-        </div>
-        <div class="carousel-item">
-            <img src="resources/img/4세로토닌.jpg">
-            <h3>세로토닌 증진</h3>
-        </div> 
+    <!-- <div class="carousel">
+		        
+		        <div class="carousel-item" onclick="location.href='meditation_detail.do'">
+		            <img src="resources/img/1명상.jpg">
+		            <h3>마음을 비우는 15분</h3>
+		        </div>
+		        
+		        <div class="carousel-item">
+		            <img src="resources/img/2숙면.jpg">
+		            <h3>깊은 잠을 위한</h3>
+		        </div>
+		        
+		        <div class="carousel-item">
+		            <img src="resources/img/3스트레스.jpg">
+		            <h3>스트레스 해소엔</h3>
+		        </div>
+		        
+		        <div class="carousel-item">
+		            <img src="resources/img/4세로토닌.jpg">
+		            <h3>세로토닌 증진</h3>
+		        </div>
+         
     </div>
+     -->
+     
+     <!--  <td><a href="detail.do?meditate_id=${dto.meditate_id }">${dto.med_title }</a></td> -->
+     
+    <div class="carousel">
+    
+    	<c:choose>
+    		<c:when test="${empty list }">
+    			<h1>no list</h1>
+    		</c:when>
+    	<c:otherwise>
+    		<c:forEach items="${list }" var="dto">
+    		
+    		<div class="carousel-item">
+    			<img src="${dto.med_thum }" onclick="location.href='med_detail.do?meditate_id=${dto.meditate_id}'">
+    			<h3>${dto.med_title}</h3>
+    		</div>
+    		
+    		</c:forEach>
+    	
+    	
+    	</c:otherwise>
+    	
+    	</c:choose>
+    	
+    
+    </div>
+    
+     
+    
+    
+    
+    
 
     <div class="skipbutton">
         <div class="textbox2">
             <p>음..오늘은 달려볼게요</p> 
-            <button class="button-68"  onclick="location.href='exercise.do'">workout</button>
+            <button class="button-68"  onclick="location.href='exerciselist.do'">workout</button>
         </div>
     </div>
 
