@@ -31,10 +31,8 @@ $(function(){
 		
 	});
 	$("#startDate").datepicker();
-	$("#endDate").datepicker();
 	
 	$("#startDate").datepicker('setDate','today');
-	$("#endDate").datepicker('setDate','today');
 });
 $.fn.serializeObject = function(){
 	var o = {};
@@ -55,18 +53,15 @@ $.fn.serializeObject = function(){
 	return o;
 };
 	function click_ok(){
-		var scheduleData = JSON.stringify($("form#scheduleData").serializeObject());
+		var moodData = JSON.stringify($("form#moodData").serializeObject());
 		
 		$.ajax({
-			data : scheduleData,
-			url : "addschedule.do",
+			data : moodData,
+			url : "moodschedule.do",
 			type : "post",
 			dataType : "json",
 			accept : "application/json",
 			contentType : "application/json; charset=UTF-8",
-			data : {
-				"title" : 
-			}
 			success : function(data){
 				opener.parent.location.reload();
 				window.close();
@@ -78,31 +73,30 @@ $.fn.serializeObject = function(){
 <body>
 	<div class="group" id="popupGroup">
 		<div class = "group-head">
-			<h1 class = "zTree-h1">병원 기록</h1>
+			<h1 class = "zTree-h1">기분 상태</h1>
 		</div>
 		<div class = "group-body">
-			<form id = "scheduleData">
+			<form id = "moodData">
 				<div class="top">
-					<input class="subject" id="subject" type="text" name="hospital_name" placeholder="병원명을 입력해주세요.">
 					<input type="hidden" id="userno" name="user_no">
+				</div>
+				<div class="domain">
+					<h3 class="zTree-h3">기분상태 </h3>
+				</div>
+				<div class="domain">
+					<select name="mood">
+						<option value="fun">기쁨</option>
+						<option value="angry">화남</option>
+						<option value="sad">슬픔</option>
+						<option value="pleasure">즐거움</option>
+						<option value="normal">보통</option>
+					</select>
 				</div>
 				<div class="domain">
 					<h3 class="zTree-h3">오늘날짜 </h3>
 				</div>
 				<div class="domain">
 					<input class="date" id="startDate" type="text" name="regdate">
-				</div>
-				<div class="domain">
-					<h3 class = "z-Tree-h3">예약일 </h3>
-				</div>
-				<div class="domain">
-					<input class="date" id="endDate" type="text" name="resdate">
-				</div>
-				<div class="domain">
-					<h3 class="zTree-h3">메모 </h3>
-				</div>
-				<div class="domain">
-					<textarea rows="10" cols="70" class="memo" id="memo" name="memo" style="resize:none;"></textarea>
 				</div>
 			</form>
 				<button class="ok-button" type="button" onclick="click_ok();">확인</button>
