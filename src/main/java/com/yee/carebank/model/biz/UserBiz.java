@@ -12,7 +12,15 @@ public class UserBiz {
 	@Autowired
 	private UserDao userdao;
 	
+	
+	//로그인 처리
 	public UserDto login(UserDto userdto) {
 		return userdao.login(userdto);
 	}
+	
+	//회원가입
+	public int regis(UserDto userdto) {
+		return userdao.regis(userdto);
+	}
+	
 }

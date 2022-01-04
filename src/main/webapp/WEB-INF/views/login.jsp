@@ -12,62 +12,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script type = "text/javascript">
-$(function()
-		{
-			$("#loginChk").hide(); 
-		});
-		
-		$(function login()
-		{
-			var user_id = $("#user_id").val().trim();
-			var user_pw = $("#user_pw").val().trim();
-			var loginInfo = 
-			{
-				"user_id":user_id,
-				"user_pw":user_pw
-			}
-			if user_id == null || user_pw == null{
-				alert{
-					"아이디 혹은 비밀번호를 입력해주세요"
-				}
-			}
-			else{
-				$.ajax({
-					type: "post",
-					url: "login.do",
-					data: JSON.stringify(loginInfo),
-					contentType: "application/json",
-					dataType: "json",
-					success: function(msg){
-						if(msg.check == true){
-							location.href = "loginform.do";
-						}
-						else{
-							$("#loginChk").show();
-						}
-					},
-					error: function(){
-						alert("통신 실패")
-					}
-				});
-			}
-		)};
-	        
-
-
-
-
-
-</script>
-
-
-
-
-
-
-
-
 </head>
 <style>
 @font-face {
@@ -211,15 +155,15 @@ img{
               <form action = "login.do" method = "post">
                  <div class="form-group">
                     <label>User ID</label>
-                    <input type="text" class="form-control id" name = "user_id" placeholder="User ID">
+                    <input type="text" class="form-control id" name = "user_id" id = "user_id" placeholder="User ID">
                  </div>
                  <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" name = "user_pw" placeholder="Password">
+                    <input type="password" class="form-control" name = "user_pw" id = "user_pw" placeholder="Password">
                  </div>
                  <div class = "btns">
-                    <button type="button" class="btn btn-success" id = "login_btn" onclick = "login();">로그인</button>
-                    <button type="button" class="btn btn-secondary" onclick = "">회원가입</button>
+                    <button type="button" class="btn btn-success" id = "login_btn" onclick = "login(); return false;">로그인</button>
+                    <button type="button" class="btn btn-secondary" id = "regis_btn" onclick = "location.href = 'regisform.do'">회원가입</button>
                </div>
             </form>
           </div>  <hr>
@@ -259,7 +203,49 @@ img{
         setInterval(typing, 200); 
         
 	}
+
+	$(function(){
+		$("#loginChk").hide(); 
+	});
 	
+	
+	function login(){
+		var user_id = $("#user_id").val().trim();
+		var user_pw = $("#user_pw").val().trim();
+		console.log(user_id + user_pw);
+		
+		var loginInfo = {
+				"user_id":user_id,
+				"user_pw":user_pw
+		};
+		
+		if(user_id == null || user_id == "" || user_pw == null || user_pw == "") {
+			alert("아이디 또는 비밀번호를 입력해주세요.");
+		}
+		else{
+			$.ajax({
+				type: "post",
+				url:	 "login.do",
+				data: JSON.stringify(loginInfo),
+				contentType: "application/json",
+				dataType: "json",
+				success: 
+					function(msg){
+						if(msg.check == true){
+							location.href = "faqlist.do";
+						}
+						else{
+							$("#loginChk").show(); 
+						}
+					},
+				error: function(){
+					alert("에러: 통신실패");
+				}
+			});
+		}
+	}
+	
+	 
 </script>
 </body>
 </html>

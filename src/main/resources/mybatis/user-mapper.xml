@@ -19,9 +19,14 @@
   	<!-- 로그인처리 -->
   	<select id = "login" parameterType = "userDto" resultType = "userDto">
   		SELECT * FROM CARE_USER
-  		WHERE USER_ID = #{user_id} AND USER_PW = #{user_pw}
+  		WHERE USER_ID = #{user_id}
   	</select>
   
+  	<insert id="register">
+  		INSERT INTO CARE_USER
+  		VALUES(
+  		USER_NOSEQ.NEXTVAL,#{user_name}, #{user_id}, #{user_pw}, #{birth}, #{phone}, #{email}, DEFAULT, DEFAULT)
+  	</insert>
   
   
   
