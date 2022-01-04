@@ -6,7 +6,7 @@ import com.yee.carebank.model.dto.ScheduleDto;
 
 public interface ScheduleDao {
 
-	String NAMESPACE = "visit.";
+	String NAMESPACE = "myvisit.";
 	
 	public List<ScheduleDto> selectList();
 	public int insert(ScheduleDto dto);

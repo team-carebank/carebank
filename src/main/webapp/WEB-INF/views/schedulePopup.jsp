@@ -55,18 +55,14 @@ $.fn.serializeObject = function(){
 	return o;
 };
 	function click_ok(){
-		var scheduleData = JSON.stringify($("form#scheduleData").serializeObject());
+		var scheduleData = JSON.stringify($('form#scheduleData').serializeObject());
 		
 		$.ajax({
 			data : scheduleData,
 			url : "addschedule.do",
 			type : "post",
 			dataType : "json",
-			accept : "application/json",
 			contentType : "application/json; charset=UTF-8",
-			data : {
-				"title" : 
-			}
 			success : function(data){
 				opener.parent.location.reload();
 				window.close();
@@ -90,19 +86,19 @@ $.fn.serializeObject = function(){
 					<h3 class="zTree-h3">오늘날짜 </h3>
 				</div>
 				<div class="domain">
-					<input class="date" id="startDate" type="text" name="regdate">
+					<input class="date" id="startDate" type="text" name="regdate" id="startDate">
 				</div>
 				<div class="domain">
 					<h3 class = "z-Tree-h3">예약일 </h3>
 				</div>
 				<div class="domain">
-					<input class="date" id="endDate" type="text" name="resdate">
+					<input class="date" id="endDate" type="text" name="resdate " id="endDate">
 				</div>
 				<div class="domain">
 					<h3 class="zTree-h3">메모 </h3>
 				</div>
 				<div class="domain">
-					<textarea rows="10" cols="70" class="memo" id="memo" name="memo" style="resize:none;"></textarea>
+					<textarea rows="10" cols="70" class="memo" id="memo" name="memo" style="resize:none";></textarea>
 				</div>
 			</form>
 				<button class="ok-button" type="button" onclick="click_ok();">확인</button>

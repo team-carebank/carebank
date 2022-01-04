@@ -17,13 +17,11 @@
 			alias="suppleDto" />
 		<typeAlias type="com.yee.carebank.model.dto.CommentDto"
 			alias="commentDto" />
-    	<typeAlias type = "com.yee.carebank.model.dto.FaqDto" alias = "faqDto"/>
-  		<typeAlias type = "com.yee.carebank.model.dto.UserDto" alias = "userDto"/>
-    	<typeAlias type = "com.yee.carebank.model.dto.ExerciseDto" alias = "ExerciseDto"/>
-  		<typeAlias type = "com.yee.carebank.model.dto.MeditationDto" alias = "MeditationDto"/>
-  		<typeAlias type = "com.yee.carebank.model.dto.MyExerciseDto" alias = "MyExerciseDto"/>
-		<typeAlias type = "com.yee.carebank.model.dto.ScheduleDto" alias="scheduleDto"/>
-		<typeAlias type = "com.yee.carebank.model.dto.MoodDto" alias = "moodDto"/>
+    <typeAlias type = "com.yee.carebank.model.dto.FaqDto" alias = "faqDto"/>
+  	<typeAlias type = "com.yee.carebank.model.dto.UserDto" alias = "userDto"/>
+    <typeAlias type = "com.yee.carebank.model.dto.ExerciseDto" alias = "ExerciseDto"/>
+  	<typeAlias type = "com.yee.carebank.model.dto.MeditationDto" alias = "MeditationDto"/>
+  	<typeAlias type = "com.yee.carebank.model.dto.MyExerciseDto" alias = "MyExerciseDto"/>
 	</typeAliases>
 
 	<mappers>
@@ -31,13 +29,11 @@
 		<mapper resource="/mybatis/meal-mapper.xml" />
 		<mapper resource="/mybatis/supple-mapper.xml" />
 		<mapper resource="/mybatis/comment-mapper.xml" />		
-    	<mapper resource = "/mybatis/faq-mapper.xml"/>
+    <mapper resource = "/mybatis/faq-mapper.xml"/>
 		<mapper resource = "/mybatis/user-mapper.xml"/>
-    	<mapper resource = "/mybatis/exercise-mapper.xml"/>
-  		<mapper resource = "/mybatis/meditation-mapper.xml"/>
-  		<mapper resource = "/mybatis/myexercise-mapper.xml"/>
-	    <mapper resource = "/mybatis/schedule-mapper.xml"/>
-  		<mapper resource = "/mybatis/mood-mapper.xml"/>
+    <mapper resource = "/mybatis/exercise-mapper.xml"/>
+  	<mapper resource = "/mybatis/meditation-mapper.xml"/>
+  	<mapper resource = "/mybatis/myexercise-mapper.xml"/>
 	</mappers>
 
 </configuration>
