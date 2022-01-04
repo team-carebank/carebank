@@ -2,7 +2,6 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-
 <!--config 태그 추가 -->
 
 <configuration>
@@ -17,17 +16,13 @@
 			alias="suppleDto" />
 		<typeAlias type="com.yee.carebank.model.dto.CommentDto"
 			alias="commentDto" />
-    <typeAlias type = "com.yee.carebank.model.dto.FaqDto" alias = "faqDto"/>
-  	<typeAlias type = "com.yee.carebank.model.dto.UserDto" alias = "userDto"/>
 	</typeAliases>
 
 	<mappers>
 		<!-- <mapper resource = "/mybatis/board-mapper.xml"/> 형식으로 매퍼 위치 추가 작성 -->
 		<mapper resource="/mybatis/meal-mapper.xml" />
 		<mapper resource="/mybatis/supple-mapper.xml" />
-		<mapper resource="/mybatis/comment-mapper.xml" />		
-    <mapper resource = "/mybatis/faq-mapper.xml"/>
-		<mapper resource = "/mybatis/user-mapper.xml"/>
+		<mapper resource="/mybatis/comment-mapper.xml" />
 	</mappers>
 
 </configuration>
