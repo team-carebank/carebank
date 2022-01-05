@@ -23,11 +23,39 @@
 	<select id="selectIngredient" resultType="foodDto"
 		parameterType="int">
 		SELECT FOOD, DESCRIPTION, CARBO, PROTEIN, FAT, CALORIES
-		FROM (MEAL JOIN INGREDIENT i USING(MEAL_ID, SUBCAT_ID)) JOIN NUTRIENT n USING(FOOD)
+		FROM (MEAL JOIN INGREDIENT i USING(MEAL_ID, SUBCAT_ID)) JOIN NUTRIENT
+		n USING(FOOD)
 		WHERE MEAL_ID = ${meal_id}
 	</select>
 	<select id="selectCatList" resultType="Integer">
 		SELECT DISTINCT SUBCAT_ID
 		FROM MEAL ORDER BY SUBCAT_ID
+	</select>
+	<select id="selectRandom" resultType="mealDto"
+		parameterType="int">
+		SELECT MEAL_PREFER.* FROM (SELECT MEAL_ID, MEAL_NAME,
+		SRC FROM MEAL
+		JOIN PREFERENCES p USING(SUBCAT_ID) WHERE USER_NO = ${user_no}
+		ORDER BY
+		dbms_random.value) MEAL_PREFER 
+		<![CDATA[WHERE ROWNUM <= 5]]>
+	</select>
+	<select id="selectByComment" resultType="mealDto">
+		SELECT MEAL_CNT_TB.*
+		FROM (
+		SELECT MEAL_ID, MEAL_NAME,SRC
+		FROM MEAL LEFT
+		OUTER JOIN (
+		SELECT MEAL_ID, COUNT(MEAL_ID) AS MEAL_CNT
+		FROM
+		MEAL_COMMENT
+		WHERE REGDATE >=
+		TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		GROUP BY
+		MEAL_ID
+		) USING(MEAL_ID) ORDER BY MEAL_CNT DESC NULLS LAST
+		)
+		MEAL_CNT_TB
+		<![CDATA[ WHERE ROWNUM <= 5]]>
 	</select>
 </mapper>

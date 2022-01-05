@@ -61,17 +61,9 @@ public class MealController {
 		List<FoodDto> ingredient = biz.selectIngredient(id);
 		List<CommentDto> comment = cBiz.selectList(id, 1);
 
-		boolean flag = false;
-
 		model.addAttribute("meal", meal);
 		model.addAttribute("ingredient", ingredient);
 		model.addAttribute("comment", comment);
-
-		if (ingredient.size() > 1) {
-			flag = true;
-		}
-
-		model.addAttribute("flag", flag);
 
 		return "mealinfo";
 	}
@@ -132,9 +124,16 @@ public class MealController {
 			return false;
 		}
 	}
-	
+
 	@RequestMapping("prefer/meallist.do")
 	public String preferMeal(Model model) {
+		// <!--- 로그인 기능 연결 시 수정 --->
+		int user_no = 1001;
+		int subcat_id = 1;
+		// <!--- 끝 --->
+		model.addAttribute("random", biz.selectRandom(user_no));
+		model.addAttribute("comment", biz.selectByComment());
+		model.addAttribute("meal", biz.selectMeal(subcat_id));
 		return "mealprefer";
 	}
 }

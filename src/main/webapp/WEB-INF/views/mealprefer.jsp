@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +8,33 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/header.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/infodetail.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/info.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/prefer.css">
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/meal.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/header.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/infodetail.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/info.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/prefer.css">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(document).on("click", "figure", function(e) {
+		var id = e.currentTarget.id;
+		var link = "${pageContext.request.contextPath}/mealinfo.do?id=" + id;
+		window.location.href = link;
+	});
+	$(function() {
+		$(".content-gallery__img").css("height",
+				$(".content-gallery__img").css("width"));
+	});
+</script>
+<style>
+.content-gallery figure {
+	margin-block: 0;
+	margin-inline: 0 !important;
+}
+</style>
 </head>
 <%@ include file="../../header.jsp"%>
 <body>
@@ -26,36 +49,22 @@
 						class="content-item-desc">관심사로 선택한 주제에 따라 식단을 추천해드려요!</span>
 				</div>
 				<div class="content-gallery">
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
+					<c:forEach var="item" items="${random }">
+						<figure id="${item.meal_id }">
+							<c:choose>
+								<c:when test="${item.src ne null }">
+									<img src="${item.src }" alt="${item.meal_name }"
+										class="content-gallery__img">
+								</c:when>
+								<c:otherwise>
+									<img alt="${item.meal_name }"
+										src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+										class="content-gallery__img">
+								</c:otherwise>
+							</c:choose>
+							<span class="content-gallery__caption">${item.meal_name }</span>
+						</figure>
+					</c:forEach>
 				</div>
 			</div>
 			<div class="prefer-content-item">
@@ -65,36 +74,22 @@
 						식단을 모아봤어요.</span>
 				</div>
 				<div class="content-gallery">
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
+					<c:forEach var="item" items="${comment }">
+						<figure id="${item.meal_id }">
+							<c:choose>
+								<c:when test="${item.src ne null }">
+									<img src="${item.src }" alt="${item.meal_name }"
+										class="content-gallery__img">
+								</c:when>
+								<c:otherwise>
+									<img alt="${item.meal_name }"
+										src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+										class="content-gallery__img">
+								</c:otherwise>
+							</c:choose>
+							<span class="content-gallery__caption">${item.meal_name }</span>
+						</figure>
+					</c:forEach>
 				</div>
 			</div>
 			<div class="prefer-content-item">
@@ -110,36 +105,22 @@
 						class="category-list-item" id="1">#체중 감량</span>
 				</div>
 				<div class="content-gallery">
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
-					<figure onclick="clickFigure();">
-						<img
-							src="https://th.bing.com/th/id/OIP.OF59vsDmwxPP1tw7b_8clQHaE8?pid=ImgDet&rs=1"
-							class="content-gallery__img" alt="image 1">
-						<p class="content-gallery__caption">이미지1</p>
-					</figure>
+					<c:forEach var="item" items="${meal }">
+						<figure id="${item.meal_id }">
+							<c:choose>
+								<c:when test="${item.src ne null }">
+									<img src="${item.src }" alt="${item.meal_name }"
+										class="content-gallery__img">
+								</c:when>
+								<c:otherwise>
+									<img alt="${item.meal_name }"
+										src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+										class="content-gallery__img">
+								</c:otherwise>
+							</c:choose>
+							<span class="content-gallery__caption">${item.meal_name }</span>
+						</figure>
+					</c:forEach>
 				</div>
 			</div>
 

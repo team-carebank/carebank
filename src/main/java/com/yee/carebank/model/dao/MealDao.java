@@ -1,8 +1,11 @@
 package com.yee.carebank.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -82,6 +85,30 @@ public class MealDao {
 
 		try {
 			res = sqlSession.selectList(NAMESPACE + "selectCatList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public List<FoodDto> selectRandom(int user_no) {
+		List<FoodDto> res = new ArrayList<FoodDto>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectRandom", user_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public List<FoodDto> selectByComment() {
+		List<FoodDto> res = new ArrayList<FoodDto>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectByComment");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

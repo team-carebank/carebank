@@ -39,4 +39,11 @@ public class MealBiz {
 		return dao.selectCatList();
 	}
 
+	public List<FoodDto> selectRandom(int user_no) {
+		return dao.selectRandom(user_no);
+	}
+
+	public List<FoodDto> selectByComment() {
+		return dao.selectByComment();
+	}
 }
