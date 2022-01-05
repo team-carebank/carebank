@@ -23,4 +23,7 @@ public class UserBiz {
 		return userdao.regis(userdto);
 	}
 	
+	public int idchk(String user_id) {
+		return userdao.idchk(user_id);
+	}
 }

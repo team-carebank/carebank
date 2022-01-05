@@ -21,7 +21,6 @@ public class FaqDao {
 	
 	public List<FaqDto> selectList(){
 		List<FaqDto> list = new ArrayList<FaqDto>();
-		//list안에 쿼리문 실행후 결과받기: mybatis를 통해 쿼리문 실행
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE+"selectList");
@@ -29,19 +28,33 @@ public class FaqDao {
 			System.out.println("[error]:select list");
 			e.printStackTrace();
 		} 
-
 		return list; 
-		
+
 	}
-	public FaqDto selectOne(int faqno){
+	/*public FaqDto selectOne(int faqno){
 		return null;
 		
-	}
+	}*/
 	public int insert(FaqDto faqdto) {
-		return 0;
+		int res = 0;
+		try {
+			res = sqlSession.insert(NAMESPACE + "insertList", faqdto);
+		} catch (Exception e) {
+			System.out.println("[error] : insert");
+			e.printStackTrace();
+		}
+		return res;
+	
 	}
 	public int update(FaqDto faqdto) {
-		return 0;
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE + "updateList", faqdto);
+		} catch (Exception e) {
+			System.out.println("[error] : update");
+			e.printStackTrace();
+		}
+		return res;
 	}
 	public int delete(int faqno) {
 		return 0;

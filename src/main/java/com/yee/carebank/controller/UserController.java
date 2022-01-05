@@ -84,6 +84,24 @@ public class UserController {
 
 	}
 	
+	//회원가입 - 아이디중복체크
+	@RequestMapping(value = "/idchk.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String idchk(String user_id) {
+		
+		logger.info("ID CHECK");
+		
+		int res = userbiz.idchk(user_id);
+		
+		if(res != 0) {
+			return "fail"; // 중복아이디 존재
+		}
+		else {
+			return "success"; 
+		}
+	}
+	
+	
 	
 	
 	

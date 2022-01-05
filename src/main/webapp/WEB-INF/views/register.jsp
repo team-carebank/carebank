@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
 <style>
   @font-face {
      font-family: 'S-CoreDream-3Light';
@@ -35,6 +36,14 @@
   margin-bottom:0px;
 }
 
+/* 중복아이디 체크 */
+.id_chk{
+
+	display : none;
+	font-size: 9pt;
+	
+}
+
 
 </style>
 </head>
@@ -52,7 +61,9 @@
                       <p class="text-center h1 fw-bold mx-1 mx-md-4 mt-4">회원가입</p>
                       <p class="text-center h6 fw-bold mb-1 mx-1 mx-md-4 mt-4">기본정보</p>
       
-                      <form class="mx-1 mx-md-4" action = "regis.do" method = "post" autocomplete = "off">
+
+                      <form class="mx-1 mx-md-4" action = "regis.do" method = "post" autocomplete = "off" onsubmit="return validate();">
+
       
                         <div class="d-flex flex-row align-items-center">
                           <div class="form-outline flex-fill mb-0">
@@ -68,13 +79,18 @@
                             <input type="text" id="user_id" class="form-control" name = "user_id" required = "true"/>
                             <div class = row>
                               <div class = "col-md-6">
-                              	<span class = "idchk"></span>
-                            </div>
-                              
+
+                           		<span class = "id_chk"></span><br>
+                 			</div>
+
                             <div class="d-flex flex-row align-items-center">
                               <div class="form-outline flex-fill mb-0">
                                 <label class="form-label" for="user_pw">비밀번호</label>
-                                <input type="password" id="user_pw" class="form-control" name = "user_pw" required = "true" placeholder="8-12자리 영문, 숫자 조합 "/>
+
+                                <input type="password" id="user_pw" class="form-control" name = "user_pw" 
+                                required = "true" placeholder="8-12자리 영문, 숫자 조합" 
+                                onKeyPress = "pw_chk()" />
+                                
                               </div>
                             </div>
           
@@ -193,7 +209,7 @@
                       </div>
                       </div>
                       	
-                      	<input type = "submit" values = "가입">
+                      	<input type = "submit" value = "가입">
                       </form>
                       
                   </div>
@@ -203,15 +219,60 @@
           </div>
         </div>
       </section>
-<script type = "text/javascript">
-	$('#user_id').on("propertychange change keyup paste input", function(){
 
-	console.log("keyup 테스트");	
-
-});// function 종료
-
-
-
+ 
+ <script type="text/javascript">
+ 
+ 	//아이디 중복체크
+	$('#user_id').on("propertychange change keyup paste input",function(){
+		var user_id = $('#user_id').val();
+		var idchk = {"user_id" : user_id}
+		
+		$.ajax({
+			type: "post",
+			url: "idchk.do",
+			data: idchk,
+			success: 
+				function(res){
+					var msg = document.getElementsByClassName("id_chk")[0];
+				if(res != 'fail'){
+					
+					msg.innerHTML = "사용가능한 아이디입니다."
+					$('.id_chk').css({
+						'display' : 'inline-block',
+						'color' : 'green'
+					});
+				}
+				else{
+					msg.innerHTML = "이미 사용중인 아이디입니다."
+					$('.id_chk').css({
+						'display':'inline-block',
+						'color': 'red'
+					});
+				}
+			}
+		});
+	});
+ 	
+ 	//비밀번호 유효성검사
+ 	function pw_chk(){
+ 		var pw = $("#user_pw");
+ 		var num = pw.val().search(/[0-9]/g);
+ 		var eng = pw.val().search(/[a-z]/ig);
+ 		
+ 		if((window.event.key == "Enter") || (window.event.key == "Tab")){
+ 			if((pw.val().length < 8 || pw.val().length > 12) || (num < 0 || eng < 0)){
+ 				alert("8-12자리 이내의 영문, 숫자 조합으로 입력해주세요.");
+ 				setTimeout(function(){
+	 				pw.focus();
+ 				});
+ 				return false;
+ 				
+ 			}
+ 			
+ 		}
+ 	};
+ 
 </script>
 </body>
 </html>

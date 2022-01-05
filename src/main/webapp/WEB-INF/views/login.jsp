@@ -155,7 +155,7 @@ img{
               <form action = "login.do" method = "post" autocomplete = "off">
                  <div class="form-group">
                     <label>User ID</label>
-                    <input type="text" class="form-control id" name = "user_id" id = "user_id" placeholder="User ID">
+                    <input type="text" class="form-control id" name = "user_id" id = "user_id" placeholder="User ID" autocomplete = "off">
                  </div>
                  <div class="form-group">
                     <label>Password</label>

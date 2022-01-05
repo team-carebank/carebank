@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yee.carebank.model.biz.FaqBiz;
+import com.yee.carebank.model.dto.FaqDto;
 
 
 
@@ -19,12 +21,48 @@ public class FaqController {
 	private FaqBiz faqbiz;
 	
 
+	//조회
 	@RequestMapping("/faqlist.do")
 	public String list(Model model) {
-		logger.info("SELECT FAQ LIST");
+		logger.info("FAQ LIST");
 		
 		model.addAttribute("list", faqbiz.selectList());
 		return "faq";
 	}
 
+	
+	//글 작성 form
+	@RequestMapping("/faqform.do")
+	public String faqform() {
+		logger.info("FAQ INSERT FORM");
+		return "faqinsert";
+	}
+	
+	//글 작성
+	@RequestMapping("/faqinsert.do")
+	public String faqinsert(FaqDto faqdto) {
+		logger.info("FAQ INSERT");
+		return null;
+	}
+	
+	//글 수정 form
+	@RequestMapping("/faqupdateform.do")
+	public String faqupdateform(Model model, int faqno) {
+		logger.info("FAQ UPDATE FORM");
+		return "faqupdate";
+	}
+	
+	//글 수정
+	@RequestMapping("faqupdate.do")
+	public String faqupdate(FaqDto faqdto) {
+		logger.info("FAQ UPDATE");
+		return null;
+	}
+	
+	//글 삭제 
+	@RequestMapping("faqdelete.do")
+	public String faqdelete(int faqno) {
+		return null;
+	}	
+	
 }

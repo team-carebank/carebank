@@ -22,11 +22,17 @@
   		WHERE USER_ID = #{user_id}
   	</select>
   
+  	<!-- 회원가입 -->
   	<insert id="register">
   		INSERT INTO CARE_USER
   		VALUES(
   		USER_NOSEQ.NEXTVAL,#{user_name}, #{user_id}, #{user_pw}, #{birth}, #{phone}, #{email}, DEFAULT, DEFAULT)
   	</insert>
+  	
+  	<!-- 아이디 중복 확인 -->
+  	<select id = "idchk" resultType = "int">
+  		SELECT COUNT(*) FROM CARE_USER WHERE USER_ID = #{user_id}
+  	</select>
   
   
   

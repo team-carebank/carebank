@@ -39,5 +39,17 @@ public class UserDao {
 		return res;
 	}
 	
+	//아이디 중복확인
+	public int idchk(String user_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "idchk", user_id);
+		} catch (Exception e) {
+			System.out.println("[error] : idchk");
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 }
