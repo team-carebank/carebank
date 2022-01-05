@@ -132,4 +132,9 @@ public class MealController {
 			return false;
 		}
 	}
+	
+	@RequestMapping("prefer/meallist.do")
+	public String preferMeal(Model model) {
+		return "mealprefer";
+	}
 }

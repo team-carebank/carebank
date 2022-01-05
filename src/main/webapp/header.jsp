@@ -47,7 +47,7 @@
 					</ul></li>
 				<li class="nav-component"><a>추천받기</a>
 					<ul class="nav-sub">
-						<li><a href="#">식단</a></li>
+						<li><a href="prefer/meallist.do">식단</a></li>
 						<li><a href="#">운동</a></li>
 						<li><a href="#">영양제</a></li>
 						<li><a href="#">명상</a></li>
