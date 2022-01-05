@@ -1,4 +1,16 @@
 const NO_IMAGE = "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg";
+$(document).on("click", "figure", function(e) {
+	var id = e.currentTarget.id;
+	var link = "/carebank/suppleinfo.do?id=" + id;
+	window.location.href = link;
+});
+
+function setImgHeight() {
+	$(".content-gallery__img").css("height",
+		$(".content-gallery__img").css("width"));
+
+}
+
 
 $(function() {
 	$(".category-list").slideDown("slow");
@@ -15,12 +27,13 @@ $(function() {
 	$(".sub-category-list li").click(function() {
 		var subCategory = $(this).text();
 		$(".sub-category-name").html(subCategory);
-		$(".content-main").show("slow");
+		$(".content-main").slideDown("slow");
 	})
 });
 
 function clickMenu(subcat_id) {
 	$(".content-gallery").empty();
+	$(".content-gallery#default").hide();
 	select(subcat_id);
 }
 
@@ -33,15 +46,16 @@ function select(subcat_id) {
 		success: function(res) {
 			var supple = res.supple;
 
-			console.log(supple);
-
 			for (var i = 0; i < supple.length; i++) {
 				createGallery(supple[i]);
 			}
+			setImgHeight();
 		},
 		error: function() {
 			alert("통신 실패");
 		}
+	}).done(function() {
+		$(".content-gallery#default").slideDown("slow");
 	});
 }
 
@@ -60,7 +74,7 @@ function createGallery(element) {
 }
 
 function createFigure(name, src, id) {
-	var figure = '<figure onclick="clickFigure(' + id + ');">';
+	var figure = '<figure id="' + id + '">';
 	figure += '<img src="' + src + '" class ="content-gallery__img" alt="' + name + '">';
 	figure += '<span class="content-gallery__caption">' + name + '</span>';
 	figure += '</figure>';

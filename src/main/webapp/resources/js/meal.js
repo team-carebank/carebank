@@ -1,4 +1,15 @@
 const NO_IMAGE = "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg";
+$(document).on("click", "figure", function(e) {
+	var id = e.currentTarget.id;
+	var link = "/carebank/mealinfo.do?id=" + id;
+	window.location.href = link;
+});
+
+function setImgHeight() {
+	$(".content-gallery__img").css("height",
+		$(".content-gallery__img").css("width"));
+
+}
 
 $(function() {
 	$(".category-list").slideDown("slow");
@@ -15,12 +26,13 @@ $(function() {
 	$(".sub-category-list li").click(function() {
 		var subCategory = $(this).text();
 		$(".sub-category-name").html(subCategory);
-		$(".content-main").show("slow");
+		$(".content-main").slideDown("slow");
 	})
 });
 
 function clickMenu(subcat_id) {
-	$(".content-gallery").empty();
+	$(".content-gallery#default").empty();
+	$(".content-gallery#default").hide();
 	selectMeal(subcat_id);
 }
 
@@ -38,10 +50,13 @@ function selectMeal(subcat_id) {
 			for (var i = 0; i < meal.length; i++) {
 				createGallery(meal[i]);
 			}
+			setImgHeight();
 		},
 		error: function() {
 			alert("통신 실패");
 		}
+	}).done(function() {
+		$(".content-gallery#default").slideDown("slow");
 	});
 }
 
@@ -60,7 +75,7 @@ function createGallery(element) {
 }
 
 function createFigure(name, src, meal_id) {
-	var figure = '<figure onclick="clickFigure(' + meal_id + ');">';
+	var figure = '<figure id="' + meal_id + ');">';
 	figure += '<img src="' + src + '" class ="content-gallery__img" alt="' + name + '">';
 	figure += '<span class="content-gallery__caption">' + name + '</span>';
 	figure += '</figure>';

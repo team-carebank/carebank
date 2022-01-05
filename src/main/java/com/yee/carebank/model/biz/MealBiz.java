@@ -46,4 +46,8 @@ public class MealBiz {
 	public List<FoodDto> selectByComment() {
 		return dao.selectByComment();
 	}
+
+	public List<Integer> selectPreferCat(int user_no) {
+		return dao.selectPreferCat(user_no);
+	}
 }

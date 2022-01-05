@@ -58,4 +58,10 @@
 		MEAL_CNT_TB
 		<![CDATA[ WHERE ROWNUM <= 5]]>
 	</select>
+	<select id="selectPreferCat" resultType="int"
+		parameterType="int">
+		SELECT SUBCAT_ID FROM PREFERENCES p
+		WHERE USER_NO
+		=${user_no}
+	</select>
 </mapper>

@@ -115,4 +115,16 @@ public class MealDao {
 
 		return res;
 	}
+
+	public List<Integer> selectPreferCat(int user_no) {
+		List<Integer> res = new ArrayList<Integer>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectPreferCat", user_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 }

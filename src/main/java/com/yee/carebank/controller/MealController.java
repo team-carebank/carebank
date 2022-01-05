@@ -129,11 +129,26 @@ public class MealController {
 	public String preferMeal(Model model) {
 		// <!--- 로그인 기능 연결 시 수정 --->
 		int user_no = 1001;
-		int subcat_id = 1;
 		// <!--- 끝 --->
+		List<Integer> prefer = biz.selectPreferCat(user_no);
+		model.addAttribute("prefer", prefer);
+		model.addAttribute("meal", biz.selectMeal(prefer.get(0)));
 		model.addAttribute("random", biz.selectRandom(user_no));
 		model.addAttribute("comment", biz.selectByComment());
-		model.addAttribute("meal", biz.selectMeal(subcat_id));
+
 		return "mealprefer";
 	}
+
+	@RequestMapping("prefer/mealreq.do")
+	@ResponseBody
+	public Map<String, Object> requestMeal(@RequestBody int subcat_id) {
+		Map<String, Object> res = new HashMap<String, Object>();
+
+		List<MealDto> meal = biz.selectMeal(subcat_id);
+
+		res.put("meal", meal);
+
+		return res;
+	}
+
 }

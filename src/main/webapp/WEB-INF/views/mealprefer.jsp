@@ -18,16 +18,47 @@
 	href="${pageContext.request.contextPath }/resources/css/prefer.css">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/meal.js"></script>
 <script type="text/javascript">
-	$(document).on("click", "figure", function(e) {
-		var id = e.currentTarget.id;
-		var link = "${pageContext.request.contextPath}/mealinfo.do?id=" + id;
-		window.location.href = link;
-	});
 	$(function() {
-		$(".content-gallery__img").css("height",
-				$(".content-gallery__img").css("width"));
-	});
+		setImgHeight();
+		$(".category-list-item").eq(0).css("font-weight", "bold");
+	})
+	$(document).on(
+			"click",
+			".category-list-item",
+			function(e) {
+				var id = e.currentTarget.id;
+				$(".content-gallery#default").empty();
+				$(".content-gallery#default").hide();
+
+				$.ajax({
+					type : "post",
+					url : "mealreq.do",
+					data : JSON.stringify(id),
+					contentType : "application/json",
+					success : function(res) {
+						var meal = res.meal;
+
+						for (var i = 0; i < meal.length; i++) {
+							createGallery(meal[i]);
+						}
+						setImgHeight();
+					},
+					error : function() {
+						alert("통신 실패");
+					}
+				}).done(
+						function() {
+							$(".content-gallery#default").slideDown("slow");
+							$(".category-list-item").not(
+									".category-list-item[id='" + id + "']")
+									.css("font-weight", "normal");
+							$(".category-list-item[id='" + id + "']").css(
+									"font-weight", "bold");
+						});
+			});
 </script>
 <style>
 .content-gallery figure {
@@ -46,7 +77,7 @@
 			<div class="prefer-content-item">
 				<div class="content-title">
 					<span class="content-desc">오늘은 이 음식 어때요?</span> <span
-						class="content-item-desc">관심사로 선택한 주제에 따라 식단을 추천해드려요!</span>
+						class="content-item-desc">관심사로 선택한 주제에 따라 랜덤으로 식단을 추천해드려요!</span>
 				</div>
 				<div class="content-gallery">
 					<c:forEach var="item" items="${random }">
@@ -70,8 +101,8 @@
 			<div class="prefer-content-item">
 				<div class="content-title">
 					<span class="content-desc">현재 HOT한 식단들!</span> <span
-						class="content-item-desc">현재 날짜를 기준으로 일주일간 댓글이 많이 달린 상위 5가지
-						식단을 모아봤어요.</span>
+						class="content-item-desc">현재 날짜를 기준으로 일주일간 댓글이 많이 달린 식단을
+						모아봤어요.</span>
 				</div>
 				<div class="content-gallery">
 					<c:forEach var="item" items="${comment }">
@@ -98,13 +129,78 @@
 						class="content-item-desc">관심사로 선택한 주제별로 식단 정보를 확인하세요.</span>
 				</div>
 				<div class="category-list">
-					<span class="category-list-item" id="1">#소화 불량</span><span
-						class="category-list-item" id="1">#면역력 강화</span><span
-						class="category-list-item" id="1">#남성 건강</span><span
-						class="category-list-item" id="1">#불면증</span><span
-						class="category-list-item" id="1">#체중 감량</span>
+					<c:forEach var="cat" items="${prefer }">
+						<c:choose>
+							<c:when test="${cat eq 1 }">
+								<span class="category-list-item" id=${cat }>#편두통</span>
+							</c:when>
+							<c:when test="${cat eq 2 }">
+								<span class="category-list-item" id=${cat }>#변비</span>
+							</c:when>
+							<c:when test="${cat eq 3 }">
+								<span class="category-list-item" id=${cat }>#여드름 #두피염
+									#아토피</span>
+							</c:when>
+							<c:when test="${cat eq 4 }">
+								<span class="category-list-item" id=${cat }>#빈혈 #어지럼증
+									#저혈압</span>
+							</c:when>
+							<c:when test="${cat eq 5 }">
+								<span class="category-list-item" id=${cat }>#비염</span>
+							</c:when>
+							<c:when test="${cat eq 6 }">
+								<span class="category-list-item" id=${cat }>#소화불량</span>
+							</c:when>
+							<c:when test="${cat eq 7 }">
+								<span class="category-list-item" id=${cat }>#심장_뻐근함 #혈액순환</span>
+							</c:when>
+							<c:when test="${cat eq 8 }">
+								<span class="category-list-item" id=${cat }>#디스크 #허리통증
+									#관절</span>
+							</c:when>
+							<c:when test="${cat eq 9 }">
+								<span class="category-list-item" id=${cat }>#고지혈증 #고혈압</span>
+							</c:when>
+							<c:when test="${cat eq 10 }">
+								<span class="category-list-item" id=${cat }>#노화예방</span>
+							</c:when>
+							<c:when test="${cat eq 11 }">
+								<span class="category-list-item" id=${cat }>#면역력_강화</span>
+							</c:when>
+							<c:when test="${cat eq 12 }">
+								<span class="category-list-item" id=${cat }>#여성건강</span>
+							</c:when>
+							<c:when test="${cat eq 13 }">
+								<span class="category-list-item" id=${cat }>#남성건강</span>
+							</c:when>
+							<c:when test="${cat eq 14 }">
+								<span class="category-list-item" id=${cat }>#눈_건강</span>
+							</c:when>
+							<c:when test="${cat eq 15 }">
+								<span class="category-list-item" id=${cat }>#흡연</span>
+							</c:when>
+							<c:when test="${cat eq 16 }">
+								<span class="category-list-item" id=${cat }>#스트레스_완화</span>
+							</c:when>
+							<c:when test="${cat eq 17 }">
+								<span class="category-list-item" id=${cat }>#세로토닌_증진</span>
+							</c:when>
+							<c:when test="${cat eq 18 }">
+								<span class="category-list-item" id=${cat }>#불면증</span>
+							</c:when>
+							<c:when test="${cat eq 20 }">
+								<span class="category-list-item" id=${cat }>#균형잡힌_식단</span>
+							</c:when>
+							<c:when test="${cat eq 21 }">
+								<span class="category-list-item" id=${cat }>#체중감량</span>
+							</c:when>
+							<c:when test="${cat eq 22 }">
+								<span class="category-list-item" id=${cat }>#체중증량</span>
+							</c:when>
+						</c:choose>
+					</c:forEach>
 				</div>
-				<div class="content-gallery">
+				<div class="content-gallery" id="default">
 					<c:forEach var="item" items="${meal }">
 						<figure id="${item.meal_id }">
 							<c:choose>
