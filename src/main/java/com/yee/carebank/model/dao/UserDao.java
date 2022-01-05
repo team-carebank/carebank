@@ -16,13 +16,13 @@ public class UserDao {
 	
 	//로그인 처리
 	public UserDto login(UserDto userdto) {
-		UserDto res = null;
+		UserDto login_info = null;
 		try {
-			res = sqlSession.selectOne(NAMESPACE + "login", userdto);
+			login_info = sqlSession.selectOne(NAMESPACE + "login", userdto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return res;
+		return login_info;
 	}
 
 	

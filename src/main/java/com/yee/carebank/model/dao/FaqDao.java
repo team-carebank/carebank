@@ -30,8 +30,7 @@ public class FaqDao {
 			e.printStackTrace();
 		} 
 
-	
-		return list; //mapper로 넘어가자
+		return list; 
 		
 	}
 	public FaqDto selectOne(int faqno){

@@ -42,13 +42,13 @@ public class UserController {
 	public Map<String, Boolean> login(HttpSession session, @RequestBody UserDto userdto) {
 		logger.info("LOGIN");
 		
-		UserDto res = userbiz.login(userdto);
+		UserDto login_info = userbiz.login(userdto);
 		
 		boolean check = false;
-		if(res != null) {
-			if(passwordEncoder.matches(userdto.getUser_pw(), res.getUser_pw())) {
+		if(login_info != null) {
+			if(passwordEncoder.matches(userdto.getUser_pw(), login_info.getUser_pw())) {
 				
-				session.setAttribute("login", res);
+				session.setAttribute("login", login_info);
 				check = true; 
 			}
 		}
