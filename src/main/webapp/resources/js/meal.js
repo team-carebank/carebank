@@ -75,7 +75,7 @@ function createGallery(element) {
 }
 
 function createFigure(name, src, meal_id) {
-	var figure = '<figure id="' + meal_id + ');">';
+	var figure = '<figure id="' + meal_id + '">';
 	figure += '<img src="' + src + '" class ="content-gallery__img" alt="' + name + '">';
 	figure += '<span class="content-gallery__caption">' + name + '</span>';
 	figure += '</figure>';
