@@ -40,16 +40,21 @@
 					<ul class="nav-sub">
 						<li><a href="${pageContext.request.contextPath}/mealmain.do">식단</a></li>
 						<li><a href="#">운동</a></li>
-						<li><a href="${pageContext.request.contextPath}/supplemain.do">영양제</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/supplemain.do">영양제</a></li>
 						<li><a href="#">명상</a></li>
-						<li><a href="${pageContext.request.contextPath}/hospitalmain.do">병원</a></li>
-						<li><a href="${pageContext.request.contextPath}/pharmacymain.do">약국</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/hospitalmain.do">병원</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/pharmacymain.do">약국</a></li>
 					</ul></li>
 				<li class="nav-component"><a>추천받기</a>
 					<ul class="nav-sub">
-						<li><a href="${pageContext.request.contextPath}/prefer/meallist.do">식단</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/prefer/meallist.do">식단</a></li>
 						<li><a href="#">운동</a></li>
-						<li><a href="#">영양제</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/prefer/supplelist.do">영양제</a></li>
 						<li><a href="#">명상</a></li>
 					</ul></li>
 				<li class="nav-component"><a>커뮤니티</a></li>

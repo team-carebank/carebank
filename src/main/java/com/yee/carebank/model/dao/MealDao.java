@@ -92,8 +92,8 @@ public class MealDao {
 		return res;
 	}
 
-	public List<FoodDto> selectRandom(int user_no) {
-		List<FoodDto> res = new ArrayList<FoodDto>();
+	public List<MealDto> selectRandom(int user_no) {
+		List<MealDto> res = new ArrayList<MealDto>();
 
 		try {
 			res = sqlSession.selectList(NAMESPACE + "selectRandom", user_no);
@@ -104,8 +104,8 @@ public class MealDao {
 		return res;
 	}
 
-	public List<FoodDto> selectByComment() {
-		List<FoodDto> res = new ArrayList<FoodDto>();
+	public List<MealDto> selectByComment() {
+		List<MealDto> res = new ArrayList<MealDto>();
 
 		try {
 			res = sqlSession.selectList(NAMESPACE + "selectByComment");

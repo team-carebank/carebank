@@ -60,7 +60,7 @@ public class SuppleController {
 
 		return "suppleinfo";
 	}
-	
+
 	@RequestMapping("/supplecomm.do")
 	@ResponseBody
 	public boolean write(HttpServletRequest request, @RequestBody String data) {
@@ -116,6 +116,32 @@ public class SuppleController {
 		} else {
 			return false;
 		}
+	}
+
+	@RequestMapping("prefer/supplelist.do")
+	public String prefer(Model model) {
+		// <!--- 로그인 기능 연결 시 수정 --->
+		int user_no = 1001;
+		// <!--- 끝 --->
+		List<Integer> prefer = sBiz.selectPreferCat(user_no);
+		model.addAttribute("prefer", prefer);
+		model.addAttribute("supple", sBiz.selectList(prefer.get(0)));
+		model.addAttribute("random", sBiz.selectRandom(user_no));
+		model.addAttribute("comment", sBiz.selectByComment());
+
+		return "suppleprefer";
+	}
+
+	@RequestMapping("prefer/supplereq.do")
+	@ResponseBody
+	public Map<String, Object> request(@RequestBody int subcat_id) {
+		Map<String, Object> res = new HashMap<String, Object>();
+
+		List<SuppleDto> supple = sBiz.selectList(subcat_id);
+
+		res.put("supple", supple);
+
+		return res;
 	}
 
 }
