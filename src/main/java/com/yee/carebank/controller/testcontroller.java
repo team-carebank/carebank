@@ -32,7 +32,7 @@ public class testcontroller {
 	@RequestMapping("/diary.do")
 	public String diary(Model model) {
 		logger.info("mypage_diary");
-		model.addAttribute("dto", biz.selectList());
+	//	model.addAttribute("dto", biz.selectList());
 		return "mypage_diary";
 	}
 	
@@ -64,12 +64,11 @@ public class testcontroller {
 	public Map<Object, Object> insert(@RequestBody MoodDto dto) {
 		logger.info("MOOD INSERT");
 		Map<Object, Object>map = new HashMap<Object, Object>();
+		dto.setUser_no(1008);
+		int res = bizz.insert(dto);
 		
-		bizz.insert(dto);
+		map.put("res", res);
 		
 		return map;
-	}
-	
-	
-	
+	}	
 }

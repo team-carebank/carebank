@@ -16,6 +16,8 @@
 <!-- fullcalendar 언어 CDN -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
+
+
 <title>마이페이지 다이어리</title>
 <style type="text/css">
 html, body {
@@ -49,6 +51,7 @@ function click_adds(){
 			var calendarEl = $('#calendar')[0];
 			// full-calendar 생성하기
 			var calendar = new FullCalendar.Calendar(calendarEl, {
+				//plugins : ['interaction','dayGrid'],
 				height: '600px', // calendar 높이 설정
 				expandRows: true, // 화면에 맞게 높이 재설정
 				slotMinTime: '08:00', // Day 캘린더에서 시작 시간
@@ -66,7 +69,7 @@ function click_adds(){
 				nowIndicator: true, // 현재 시간 마크
 				dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 				locale: 'ko', // 한국어 설정
-
+				
 				eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
 				console.log(obj);
 			},
@@ -86,9 +89,16 @@ function click_adds(){
 							allDay: arg.allDay
 						})
 					}
-						calendar.unselect()}
+						calendar.unselect()
+					}
+	
+		/*  	events : [
+				{
+					title : 'all day event',
+					start : '2022-01-01'
+				}
+			]  */
 					});
-			
 					// 캘린더 랜더링
 						calendar.render();
 					});
