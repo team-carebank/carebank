@@ -56,8 +56,17 @@ public class FaqDao {
 		}
 		return res;
 	}
+	
 	public int delete(int faqno) {
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE + "deleteList",faqno);
+		} catch (Exception e) {
+			System.out.println("[error] : update");
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 }
