@@ -50,4 +50,8 @@ public class MealBiz {
 	public List<Integer> selectPreferCat(int user_no) {
 		return dao.selectPreferCat(user_no);
 	}
+
+	public FoodDto selectNutrient(String food) {
+		return dao.selectNutrient(food);
+	}
 }

@@ -127,4 +127,16 @@ public class MealDao {
 
 		return res;
 	}
+
+	public FoodDto selectNutrient(String food) {
+		FoodDto res = new FoodDto();
+
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "selectNutrient", food);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 }

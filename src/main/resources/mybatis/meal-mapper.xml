@@ -64,4 +64,9 @@
 		WHERE USER_NO
 		=${user_no}
 	</select>
+	<select id="selectNutrient" parameterType="String" resultType="foodDto">
+		SELECT *
+		FROM NUTRIENT
+		WHERE FOOD = '${food}'
+	</select>
 </mapper>
