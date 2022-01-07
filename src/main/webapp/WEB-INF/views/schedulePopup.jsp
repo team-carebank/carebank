@@ -90,6 +90,7 @@ $.fn.serializeObject = function(){
 			<form id = "scheduleData">
 				<div class="top">
 					<input class="subject" id="subject" type="text" name="hospital_name" placeholder="병원명을 입력해주세요.">
+					<input type="hidden" id="hospital_no" name="hospital_no">
 					<input type="hidden" id="userno" name="user_no">
 				</div>
 				<div class="domain">

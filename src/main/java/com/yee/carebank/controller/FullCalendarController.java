@@ -19,20 +19,26 @@ import com.yee.carebank.model.dto.MoodDto;
 import com.yee.carebank.model.dto.ScheduleDto;
 
 @Controller
-public class testcontroller {
+public class FullCalendarController {
 
 	@Autowired
-	private ScheduleBiz biz;
-	private MoodBiz bizz;
+	private ScheduleBiz sBiz;
+	
+	@Autowired
+	private MoodBiz mBiz;
 	
 	
-	private Logger logger = LoggerFactory.getLogger(testcontroller.class);
+	private Logger logger = LoggerFactory.getLogger(FullCalendarController.class);
 	
 	
 	@RequestMapping("/diary.do")
 	public String diary(Model model) {
 		logger.info("mypage_diary");
-	//	model.addAttribute("dto", biz.selectList());
+		
+		// 로그인 연결 시 수정
+		int user_no = 1014;
+		
+		model.addAttribute("dto", sBiz.selectList(user_no));
 		return "mypage_diary";
 	}
 	
@@ -48,13 +54,37 @@ public class testcontroller {
 		return "moodPopup";
 	}
 	
+	@RequestMapping("/schedule.do")
+	public String update(Model model, int hospital_no) {
+		logger.info("schedule");
+		
+		System.out.println(hospital_no);
+		model.addAttribute("dto",sBiz.selectOne(hospital_no));
+		return "updatePopup";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/scheduleupdate.do", method=RequestMethod.POST)
+	public String updateSchedule(@RequestBody ScheduleDto dto) {
+		logger.info("update schedule");
+		
+		int res = sBiz.update(dto);
+
+		  String st = Integer.toString(res);
+		  
+		  return st;
+		 
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/addschedule.do", method=RequestMethod.POST) 
 	public Map<Object, Object> insert(@RequestBody ScheduleDto dto) {
 		logger.info("insert");
 		Map<Object, Object>map = new HashMap<Object, Object>();
-		 
-		biz.insert(dto);
+		
+		dto.setUser_no(1014);
+		
+		sBiz.insert(dto);
 		
 		return map;
 	}
@@ -64,8 +94,9 @@ public class testcontroller {
 	public Map<Object, Object> insert(@RequestBody MoodDto dto) {
 		logger.info("MOOD INSERT");
 		Map<Object, Object>map = new HashMap<Object, Object>();
+		
 		dto.setUser_no(1008);
-		int res = bizz.insert(dto);
+		int res = mBiz.insert(dto);
 		
 		map.put("res", res);
 		
