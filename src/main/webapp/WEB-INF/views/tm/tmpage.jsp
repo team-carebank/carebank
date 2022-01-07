@@ -169,7 +169,7 @@ body {
 			</div>
 		</div>
 		<div id="label-container">
-			<span id="predict-data"></span>
+			<span id="label-predict-result"></span>
 		</div>
 	</div>
 	<script
@@ -204,8 +204,8 @@ body {
 			$('.file-upload-content').hide();
 			$('.image-upload-wrap').show();
 			
+			$("#label-container").children("#info-container").empty();
 			$("#start-predict").hide();
-			$("#label-container").children().empty();
 		}
 		$('.image-upload-wrap').bind('dragover', function() {
 			$('.image-upload-wrap').addClass('image-dropping');
@@ -263,7 +263,7 @@ body {
 	        	}
 			}
 	        
-	        document.getElementById("predict-data").innerHTML = fitName;
+	        document.getElementById("label-predict-result").innerHTML = fitName;
 			$("#start-predict").hide();
 	        getInfo(fitName.trim());
 		}
@@ -275,8 +275,9 @@ body {
 				data: JSON.stringify({food: className}),
 				contentType: "application/json",
 				success: function(res){
-					alert("영양소 정보를 불러오는데 성공하였습니다.");
+					$("#label-container").children("#info-container").empty();
 					setInfo(res.res);
+					alert("영양소 정보를 불러오는데 성공하였습니다.");
 				},
 				error: function(){
 					alert("통신 실패");
@@ -289,11 +290,17 @@ body {
 			let carbo = res.carbo;
 			let fat = res.fat;
 			let protein = res. protein;
+			
+			let info_container = "<div id='info-container'>";
 
-			$("#label-container").append("<br><span>칼로리: " + calories + "kcal</span>");
-			$("#label-container").append("<span>탄수화물: " + carbo + "g</span>");
-			$("#label-container").append("<span>단백질: " + protein + "g</span>");
-			$("#label-container").append("<span>지방: " + fat + "g</span>");
+			info_container += "<span>칼로리: " + calories + "kcal</span>"
+			+ "<br/><span>탄수화물: " + carbo + "g</span>"
+			+ "<br/><span>단백질: " + protein + "g</span>"
+			+ "<br/><span>지방: " + fat + "g</span>"
+			+ "</div>"
+			
+			$(labelContainer).append(info_container);
+			
 		}
 	</script>
 	<script type="text/javascript">
