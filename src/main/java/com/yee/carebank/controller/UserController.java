@@ -75,6 +75,7 @@ public class UserController {
 		logger.info("REGIS FORM");
 		return "register";
 	}
+	// new code test
 	
 	//회원가입
 	@RequestMapping(value = "/regis.do", method = RequestMethod.POST)
