@@ -61,6 +61,10 @@ public class UserController {
 	}
 	
 	//로그아웃
+	
+	// another code test 
+	// another code test 
+	// another code test 
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
 		
