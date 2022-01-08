@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+	<!-- MEAL -->
+	<select id="selectListM" parameterType="int"
+		resultType="commentDto">
+		SELECT
+		COMM_NO, USER_NO, USER_NAME, CONTENT, REGDATE
+		FROM MEAL_COMMENT JOIN CARE_USER USING(USER_NO)
+		WHERE MEAL_ID=${meal_id}
+		ORDER BY COMM_NO DESC
+	</select>
+	<select id="selectM" parameterType="int" resultType="commentDto">
+		SELECT
+		COMM_NO, USER_NO, USER_NAME, CONTENT, REGDATE
+		FROM MEAL_COMMENT JOIN
+		CARE_USER USING(USER_NO)
+		WHERE COMM_NO = ${comm_no}
+	</select>
+	<insert id="writeM" parameterType="commentDto">
+		INSERT INTO
+		MEAL_COMMENT
+		VALUES(MEAL_COMM_SEQ.NEXTVAL,#{info_id},#{user_no},#{content},DEFAULT)
+	</insert>
+	<insert id="updateM" parameterType="commentDto">
+		UPDATE MEAL_COMMENT
+		SET
+		CONTENT=#{content} WHERE COMM_NO=#{comm_no}
+	</insert>
+	<delete id="deleteM" parameterType="int">
+		DELETE FROM MEAL_COMMENT
+		WHERE COMM_NO=${comm_no}
+	</delete>
+
+	<!-- SUPPLEMENT -->
+	<select id="selectListS" parameterType="int"
+		resultType="commentDto">
+		SELECT
+		COMM_NO, USER_NO, USER_NAME, CONTENT, REGDATE
+		FROM SUPPLE_COMMENT JOIN CARE_USER USING(USER_NO)
+		WHERE SUPPLE_ID=${supple_id}
+		ORDER BY COMM_NO DESC
+	</select>
+	<select id="selectS" parameterType="int" resultType="commentDto">
+		SELECT
+		COMM_NO, USER_NO, USER_NAME, CONTENT, REGDATE
+		FROM SUPPLE_COMEMENT JOIN
+		CARE_USER USING(USER_NO)
+		WHERE COMM_NO = ${comm_no}
+	</select>
+	<insert id="writeS" parameterType="commentDto">
+		INSERT INTO SUPPLE_COMMENT
+		VALUES(SUPPLE_COMM_SEQ.NEXTVAL,#{info_id},#{user_no},#{content},DEFAULT)
+	</insert>
+	<insert id="updateS" parameterType="commentDto">
+		UPDATE SUPPLE_COMMENT
+		SET
+		CONTENT=#{content} WHERE COMM_NO=#{comm_no}
+	</insert>
+	<delete id="deleteS" parameterType="int">
+		DELETE FROM SUPPLE_COMMENT
+		WHERE COMM_NO=${comm_no}
+	</delete>
+</mapper>
