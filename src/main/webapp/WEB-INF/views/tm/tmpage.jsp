@@ -181,6 +181,8 @@ body {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
 				$("#start-predict").hide();
+				$("#label-container").children("#info-container").empty();
+				$("#label-predict-result").empty();
 
 				reader.onload = function(e) {
 					$('.image-upload-wrap').hide();
@@ -204,6 +206,7 @@ body {
 			$('.file-upload-content').hide();
 			$('.image-upload-wrap').show();
 			
+			$("#label-predict-result").empty();
 			$("#label-container").children("#info-container").empty();
 			$("#start-predict").hide();
 		}
@@ -220,7 +223,7 @@ body {
 		// https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
 		// the link to your model provided by Teachable Machine export panel
-		const URL = 'https://teachablemachine.withgoogle.com/models/ylIMQTgiV/';
+		const URL = 'https://teachablemachine.withgoogle.com/models/gRKXU7fwD/';
 
 		let model, labelContainer, maxPredictions;
 
