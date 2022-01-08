@@ -49,7 +49,7 @@ body{
 } 
 
 .icons-first{
-opacity:40%;}
+opacity:70%;}
 .detail{
  z-index: 1;
 }
@@ -74,7 +74,7 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     background: #ffffff; 
     border-radius: 1.3px; 
-    opacity:50%;
+    opacity:60%;
     /* border: 0.2px solid #010101;  */
   }
     
@@ -88,7 +88,7 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
          cursor: pointer; 
          /* border: 1px solid #000000;  */
          height: 15px; 
-         width: 4px; 
+         width: 10px; 
          opacity:100%;
          margin-top: -14px; 
          box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; 
@@ -100,7 +100,7 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
   /* background: radial-gradient( rgba(167, 138, 185, 0.8) 20%, rgba(255, 255, 255, 1) 92%); */
   background: transparent;
   border-radius: 50%;
-  top:-30px;
+  top:-33px;
   position: relative; 
   box-shadow: 0px 0px 25px 3px rgba(7, 61, 3, 0.8);
 }
@@ -143,7 +143,7 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
   animation-timing-function: steps;
   opacity: 1;
   border-radius: 50%;
-  border: 5px solid rgba(255, 255, 255, .75);
+  border: 2px solid rgba(255, 255, 255, .75);
   top: -30%;
   left: -30%;
   background: rgba(198, 16, 0, 0);
@@ -153,12 +153,12 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
   0% {
     -webkit-transform: scale(0.6);
     transform: scale(0.6);
-    opacity: 1;
+    opacity: 2;
     box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75), 0px 0px 25px 10px rgba(255, 255, 255, 0.75);
   }
   100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
+    -webkit-transform: scale(3);
+    transform: scale(3);
     opacity: 0;
     box-shadow: none;
 
@@ -247,7 +247,7 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
             <button class="play-btn"  onclick="playYoutube();"></button>
             <input type="image" name="button" src="resources/img/med_pause.png"  style="width: 5%;"onclick="pauseYoutube();">
             <input type="image" name="button" src="resources/img/med_next.png" style="width: 5%;"onclick="nextYoutube();">
-            <input type="image" name="button" src="resources/img/med_sleep.png" style="width: 4%;"onclick=" ();">
+            <!-- <input type="image" name="button" src="resources/img/med_sleep.png" style="width: 4%;"onclick=" ();">-->
             </div>
             <div class="icons-second">
             <input type="range" value="50" min="0" max="100" onChange="soundControl(this.value);"/>
@@ -371,3 +371,5 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
     </script>
 </body>
 </html>
+
+

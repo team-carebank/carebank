@@ -19,9 +19,12 @@
                display:inline;
                position:absolute;
                top:40vh;
+               
                left:20vw; 
                width:30vw;
                height:20vh;
+               
+               
                font-size:1.1vw;
                           /* z-index: 1; */
            font-family: 'Noto Sans KR', sans-serif; 
@@ -103,6 +106,7 @@ body {
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js'></script>
 
   
+  
 
     <script type="text/javascript">
         var nodes = new vis.DataSet([
@@ -128,20 +132,21 @@ var data = {
  
 var options = {
   nodes: {
-      borderWidth:60,
+      borderWidth:0,
       shape:"circle",
       font:{color:'#fff'},
-      border:'#fff', 
-      color:'#287743'
+      border:'#90ba00', 
+      //color:'#287743'
+      color:{background:'#287743', highlight:{background:'#90ba00', border: '#b9a600', borderWidth:0}}
     },
-    //color:{background:'#59a600', highlight:{background:'#59a600', border: '#b9a600', borderWidth:100}}
+    //color:{background:'#287743', highlight:{background:'#59a600', border: '#b9a600', borderWidth:100}}
     //color:'#fc2b00'
   physics: {
     stabilization: false,
-    minVelocity: 0,//뭉쳐있는정도 
+    minVelocity: 0,//뭉쳐있는정도 	
     solver: "repulsion",
-    repulsion: {
-      nodeDistance: 90
+    repulsion: {	
+      nodeDistance: 70
     }
   }
 };
@@ -157,11 +162,12 @@ network.on("click", function(e) {
 });
     </script>
 
+
     <div id="int">
         <h1>Carebank</h1><br>
         <p style="color:rgb(3, 27, 2)">케어뱅크는 개인화된 헬스 케어 서비스를 제공하는 플랫폼입니다.<br> 
         케어뱅크와 식단, 운동, 영양소의 밸런스를 손쉽게 유지해 보세요.<br><br>
-        이 모든 서비스를 무료로 <br><br><button class="button-68"  onclick="location.href='main.do'">시작하기</button></p>
+        <br><br><button class="button-68"  onclick="location.href='main.do'">시작하기</button></p>
     </div>
  
 </body>

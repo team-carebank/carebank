@@ -15,8 +15,8 @@ body{
   font-family: 'Noto Sans KR', sans-serif;
 }
 .textcontainer{
-  margin-top:100px;
-  height: 15vh;
+  margin-top:20px;
+  height: 4vh;
   display:flex;
   justify-content:center; 
   align-items: stretch; 
@@ -25,7 +25,7 @@ body{
   min-height:20px; 
 }
 .skipbutton{
-  top:800px;
+  top:100px;
   right:20px;
   height:100px;
   display:flex;
@@ -47,10 +47,10 @@ body{
 .carousel
 {
   transform: translateY(-150px);
-  height:1000px; 
+  height:800px; 
   perspective: 800px; 
   position: absolute;
-  top:20px;
+  top:0px;
 }
 .carousel .carousel-item{
   width:300px; 
@@ -115,7 +115,7 @@ body{
 <body>
     <div class="textcontainer">
         <div class="textbox">
-            <h2 style="font-size: 30px; color:rgb(190, 190, 190)">홍길동님, 오늘만은 깊은 잠을</h2>
+            <h2 style="font-size: 20px; color:rgb(190, 190, 190)">오늘만은 깊은 잠을..</h2>
         </div>
     </div>
 
@@ -156,8 +156,8 @@ body{
     		<c:forEach items="${list }" var="dto">
     		
     		<div class="carousel-item">
-    			<img src="${dto.med_thum }" onclick="location.href='med_detail.do?meditate_id=${dto.meditate_id}'">
-    			<h3>${dto.med_title}</h3>
+    			<img src="${dto.med_thum }" >
+    			<h3 style="cursor: pointer;"  onclick="location.href='med_detail.do?meditate_id=${dto.meditate_id}'">${dto.med_title}</h3>
     		</div>
     		
     		</c:forEach>
@@ -178,7 +178,7 @@ body{
 
     <div class="skipbutton">
         <div class="textbox2">
-            <p>음..오늘은 달려볼게요</p> 
+            <p>오늘은 달려볼게요</p> 
             <button class="button-68"  onclick="location.href='exerciselist.do'">workout</button>
         </div>
     </div>
@@ -194,3 +194,6 @@ body{
  
 </body>
 </html>
+
+
+

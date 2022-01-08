@@ -1,6 +1,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +17,6 @@
   margin-left: 2vw;
   margin-right: 2vw;
   box-sizing: border-box; 
-  background-color: rgb(221, 217, 208);
   font-family: 'Noto Sans KR', sans-serif;
 }
 .flexbox-container1 , .flexbox-container2 , .flexbox-container3, .flexbox-container4, .flexbox-container5{
@@ -143,7 +146,7 @@ th{
             <br><br><br><h3 class="sa sa-right">식단 관리를 시작해보세요</h3>
             <p class="sa sa-right">균형잡힌 식단에 어려움을 겪으시나요?<br>
             carebank에서 건강고민과 관심사를 체크한 후<br>
-            나에게 딱 맞는 식단을 추천받아 식단을 꾸려보세요.<br><br><button class="button-68" role="button">recipe</button>
+            나에게 딱 맞는 식단을 추천받아 식단을 꾸려보세요.<br><br><button class="button-68" onclick="location.href='myexerciselist.do'">recipe</button>
         	</p>
           	</div>
           	
@@ -191,16 +194,38 @@ th{
       </div>
 
 
-      <div class="flexbox-container5">
+      <div class="flexbox-container5"> <!-- notice controller 완성되어있지 않아 임의로 list,dto,mapping.do로 넣음  -->
             <div class="flexbox-item flexbox-item5-1"> 
+            <h3 style="text-align: left;">notice</h3>
             <table class="notice_table">
             <thead>
-            <h3 style="text-align: left;">notice</h3>s
             <tr>
             <th>No</th>
             <th>TITLE</th> 
             </tr>
             </thead>
+            
+            <c:choose>
+            	<c:when test="${empty list }">
+            	<tr>
+            	<td colspan="2" align="center">작성된 글이 없습니다.</td>
+            	</tr>
+            	</c:when>
+            	
+            <c:otherwise>
+            	<c:forEach items="${list }" var="dto">
+            	
+            	<tr>
+            		<td>${dto.notice_no }</td>
+            		<td><a href="mapping.do?notice_no=${dto.notice_no}">${dto.notice_title }</a></td> 
+            	</tr>
+            	</c:forEach>
+            
+            </c:otherwise>	
+            
+            </c:choose>
+            
+            <!-- 삭제될table값 -->
             <tbody>
             <tr>
             <td>1</td>
@@ -211,6 +236,8 @@ th{
             <td>대시보드에서 운동 날짜 기록 에러를 수정하였습니다.</td> 
             </tr> 
             </tbody>
+            
+            
             </table>
             </div>
       </div>
@@ -231,3 +258,4 @@ th{
       </script>
 </body>
 </html> 
+

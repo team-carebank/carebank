@@ -14,6 +14,7 @@ public class ExerciseController {
 
 	private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 	
+	
 	@Autowired
 	private ExerciseBiz biz;
 	
@@ -34,7 +35,6 @@ public class ExerciseController {
 		model.addAttribute("dto", biz.selectOne(exer_id)); 
 		return "exercise_detail";
 	}
-	
-	
-	
+	 
 }
+
