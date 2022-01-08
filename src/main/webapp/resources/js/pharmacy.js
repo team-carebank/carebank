@@ -97,12 +97,12 @@ function getPharmacyByPage(sgguName, pageno) {
 					contentType: "application/json",
 					success: function(map) {
 						if (map != null) {
-							var res = map.res.myArrayList;
+							var res = map.res;
 							$.each(res, function(key, model) {
-								var yadmNm = model.map.yadmNm;
-								var addr = model.map.addr;
-								var hospUrl = model.map.hospUrl;
-								var telno = model.map.telno;
+								var yadmNm = model.yadmNm;
+								var addr = model.addr;
+								var hospUrl = model.hospUrl;
+								var telno = model.telno;
 
 								var clinicInfo = "<div class='clinic-info'><div>"
 									+ "<span style='font-size: large; font-weight: bold;'>"
