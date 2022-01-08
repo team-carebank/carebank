@@ -92,7 +92,7 @@ $.fn.serializeObject = function(){
 			contentType : "application/json; charset=UTF-8",
 			
 			success : function(data){
-				console.log(obj);
+				console.log(data);
 				alert("삭제 성공!");
 				return "redirect:diary.do";
 			}
