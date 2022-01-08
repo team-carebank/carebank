@@ -49,6 +49,7 @@ public class UserController {
 			if(passwordEncoder.matches(userdto.getUser_pw(), login_info.getUser_pw())) {
 				
 				session.setAttribute("login", login_info);
+				session.setMaxInactiveInterval(60*60); //세션 유지시간
 				check = true; 
 			}
 		}
@@ -58,6 +59,15 @@ public class UserController {
 		 //test//
 		return map;
 	}
+	
+	//로그아웃
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		return "redirect:loginform.do";
+	}
+	
 	
 	//회원가입 페이지 이동
 	@RequestMapping("/regisform.do")
@@ -100,17 +110,5 @@ public class UserController {
 			return "success"; 
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
