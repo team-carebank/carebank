@@ -61,7 +61,7 @@
 				<li class="nav-component"><a>고객센터</a>
 					<ul class="nav-sub">
 						<li><a href="#">공지사항</a></li>
-						<li><a href="${pageContext.request.contextPath}/faqlist.do"">FAQ</a></li>
+						<li><a href="${pageContext.request.contextPath}/faqlist.do">FAQ</a></li>
 						<li><a href="#">QNA</a></li>
 					</ul></li>
 			</ul>
@@ -72,7 +72,7 @@
 					<ul class="nav-sub">
 						<li><a href="#">다이어리</a></li>
 					</ul></li>
-				<li class="nav-component"><a href="#">로그아웃</a></li>
+				<li class="nav-component"><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
 			</ul>
 		</div>
 	</div>
