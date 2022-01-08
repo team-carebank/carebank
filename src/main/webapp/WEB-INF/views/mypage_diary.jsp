@@ -27,9 +27,11 @@
 <title>마이페이지 다이어리</title>
 <style type="text/css">
 html, body {
-	overflow: hidden;
 	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
 	font-size: 14px;
+}
+html::-webkit-scrollbar {
+    width: 0px;
 }
 /* 캘린더 위의 해더 스타일(날짜가 있는 부분) */
 .fc-header-toolbar {
@@ -127,14 +129,20 @@ function click_adds(){
 	
 </script>
 </head>
-<body style="padding: 30px;">
+<body>
+
+<header>
+<%@include file = "../../header.jsp" %>
+</header>
 	<!-- calendar 태그 -->
+	<div  style="padding: 30px;">
 	<div id='calendar-container'>
 		<div id='calendar'></div>
 		<button class="add-button" type="button" onclick="click_add();">병원
 			기록</button>
 		<button class="adds-button" type="button" onclick="click_adds();">기분
 			상태</button>
+	</div>
 	</div>
 </body>
 </html>

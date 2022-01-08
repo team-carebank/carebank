@@ -135,7 +135,7 @@ span:hover~.cursor a{
         <br>
         <p style="color:rgb(3, 27, 2)">케어뱅크는 개인화된 헬스 케어 서비스를 제공하는 플랫폼입니다.<br> 
         케어뱅크와 식단, 운동, 영양소의 밸런스를 손쉽게 유지해 보세요.<br><br>       
-        이 모든 서비스를 무료로 <br><br><button class="button-68" role="button">시작하기</button></p>
+        이 모든 서비스를 무료로 <br><br><button class="button-68" role="button" onclick = "window.location.href = '${pageContext.request.contextPath}/main.do'">시작하기</button></p>
       </div>
       
       

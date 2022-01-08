@@ -138,7 +138,9 @@ th{
 
 
 <body>
-
+<header>
+<%@include file = "../../header.jsp" %>
+</header>
 
       <div class="flexbox-container1">
       
@@ -146,7 +148,7 @@ th{
             <br><br><br><h3 class="sa sa-right">식단 관리를 시작해보세요</h3>
             <p class="sa sa-right">균형잡힌 식단에 어려움을 겪으시나요?<br>
             carebank에서 건강고민과 관심사를 체크한 후<br>
-            나에게 딱 맞는 식단을 추천받아 식단을 꾸려보세요.<br><br><button class="button-68" onclick="location.href='myexerciselist.do'">recipe</button>
+            나에게 딱 맞는 식단을 추천받아 식단을 꾸려보세요.<br><br><button class="button-68" onclick="location.href='${pageContext.request.contextPath }/prefer/meallist.do'">recipe</button>
         	</p>
           	</div>
           	
@@ -163,7 +165,7 @@ th{
             <div class="flexbox-item flexbox-item2-1">
             <br><br><br><h3 class="sa sa-left">필요한 영양소를 보충하세요</h3>
             <p class="sa sa-left">내 몸에 어떤 영양소가 필요한지 알아보는것이 번거로웠다면 <br>
-              케이뱅크에게 맡겨주세요<br><br><button class="button-68" role="button">nutrient</button>
+              케이뱅크에게 맡겨주세요<br><br><button class="button-68" role="button" onclick = "location.href = '${pageContext.request.contextPath }/prefer/supplelist.do'">nutrient</button>
             </div>
       </div>
 
