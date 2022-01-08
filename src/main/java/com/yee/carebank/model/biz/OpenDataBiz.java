@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.yee.carebank.api.OpenDataAPI;
 import com.yee.carebank.model.dto.HospitalDto;
 
@@ -23,35 +25,31 @@ public class OpenDataBiz {
 		return OpenDataAPI.TOTAL_COUNT;
 	}
 
-	public JSONArray getHospitalList(String sgguCd) throws MalformedURLException, IOException {
-		return api.getHospitalList(sgguCd);
-	}
-
-	public JSONArray getHospitalList(String sgguCd, String pageno) throws MalformedURLException, IOException {
+	public JsonArray getHospitalList(String sgguCd, String pageno) throws MalformedURLException, IOException {
 		return api.getHospitalList(sgguCd, pageno);
 	}
 
 	public HospitalDto getHospitalInfo(String yadmNm, String sgguCd) throws MalformedURLException, IOException {
-		JSONObject res = api.getHospitalInfo(yadmNm, sgguCd);
+		JsonObject res = api.getHospitalInfo(yadmNm, sgguCd);
 		HospitalDto dto = new HospitalDto();
 
-		dto.setYadmNm(res.getString("yadmNm"));
-		dto.setAddr(res.getString("addr"));
+		dto.setYadmNm(res.get("yadmNm").getAsString());
+		dto.setAddr(res.get("addr").getAsString());
 		try {
-			dto.setTelno(res.getString("telno"));
+			dto.setTelno(res.get("telno").getAsString());
 		} catch (Exception e) {
 			dto.setTelno(null);
 		}
 		try {
-			String url = URLEncoder.encode(res.getString("hospUrl"), "UTF-8");
+			String url = URLEncoder.encode(res.get("hospUrl").getAsString(), "UTF-8");
 			dto.setHospUrl(URLDecoder.decode(url));
 		} catch (Exception e) {
 			dto.setHospUrl(null);
 		}
 
 		try {
-			dto.setxPos(res.getDouble("XPos"));
-			dto.setyPos(res.getDouble("YPos"));
+			dto.setxPos(res.get("XPos").getAsDouble());
+			dto.setyPos(res.get("YPos").getAsDouble());
 		} catch (Exception e) {
 			dto.setxPos(null);
 			dto.setyPos(null);
@@ -61,41 +59,36 @@ public class OpenDataBiz {
 
 	}
 
-	public JSONArray getPharmacyList(String sgguCd) throws MalformedURLException, IOException {
-		return api.getPharmacyList(sgguCd);
-	}
-
-	public JSONArray getPharmacyList(String sgguCd, String pageno) throws MalformedURLException, IOException {
+	public JsonArray getPharmacyList(String sgguCd, String pageno) throws MalformedURLException, IOException {
 		return api.getPharmacyList(sgguCd, pageno);
 	}
 
 	public HospitalDto getPharmacyInfo(String yadmNm, String sgguCd) throws MalformedURLException, IOException {
-		JSONObject res = api.getPharmacyInfo(yadmNm, sgguCd);
+		JsonObject res = api.getPharmacyInfo(yadmNm, sgguCd);
 		HospitalDto dto = new HospitalDto();
 
-		dto.setYadmNm(res.getString("yadmNm"));
-		dto.setAddr(res.getString("addr"));
+		dto.setYadmNm(res.get("yadmNm").getAsString());
+		dto.setAddr(res.get("addr").getAsString());
 		try {
-			dto.setTelno(res.getString("telno"));
+			dto.setTelno(res.get("telno").getAsString());
 		} catch (Exception e) {
 			dto.setTelno(null);
 		}
 		try {
-			String url = URLEncoder.encode(res.getString("hospUrl"), "UTF-8");
+			String url = URLEncoder.encode(res.get("hospUrl").getAsString(), "UTF-8");
 			dto.setHospUrl(URLDecoder.decode(url));
 		} catch (Exception e) {
 			dto.setHospUrl(null);
 		}
 
 		try {
-			dto.setxPos(res.getDouble("XPos"));
-			dto.setyPos(res.getDouble("YPos"));
+			dto.setxPos(res.get("XPos").getAsDouble());
+			dto.setyPos(res.get("YPos").getAsDouble());
 		} catch (Exception e) {
 			dto.setxPos(null);
 			dto.setyPos(null);
 		}
 
 		return dto;
-
 	}
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.yee.carebank.model.biz.OpenDataBiz;
@@ -39,20 +40,18 @@ public class OpenDataController {
 
 	@RequestMapping("/hospitalpage.do")
 	@ResponseBody
-	public Map<String, JSONArray> listHospitalByPage(@RequestBody String data)
+	public Map<String, JsonArray> getHospitalList(@RequestBody JsonObject data)
 			throws MalformedURLException, IOException {
-		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
+		JsonArray res = biz.getHospitalList(data.get("sgguCd").getAsString(), data.get("pageno").getAsString());
 
-		JSONArray res = biz.getHospitalList(jo.get("sgguCd").getAsString(), jo.get("pageno").getAsString());
-
-		Map<String, JSONArray> map = new HashMap<String, JSONArray>();
+		Map<String, JsonArray> map = new HashMap<String, JsonArray>();
 		map.put("res", res);
 
 		return map;
 	}
 
 	@RequestMapping("/hospitalinfo.do")
-	public String informHospital(Model model, String yadmNm, String sgguCd) throws MalformedURLException, IOException {
+	public String getHospital(Model model, String yadmNm, String sgguCd) throws MalformedURLException, IOException {
 		HospitalDto dto = biz.getHospitalInfo(yadmNm, sgguCd);
 
 		model.addAttribute("dto", dto);
@@ -68,19 +67,18 @@ public class OpenDataController {
 
 	@RequestMapping("/pharmacypage.do")
 	@ResponseBody
-	public Map<String, JSONArray> listPharmacy(@RequestBody String data) throws MalformedURLException, IOException {
-		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
+	public Map<String, JsonArray> getPharmacyList(@RequestBody JsonObject data)
+			throws MalformedURLException, IOException {
+		JsonArray res = biz.getPharmacyList(data.get("sgguCd").getAsString(), data.get("pageno").getAsString());
 
-		JSONArray res = biz.getPharmacyList(jo.get("sgguCd").getAsString(), jo.get("pageno").getAsString());
-
-		Map<String, JSONArray> map = new HashMap<String, JSONArray>();
+		Map<String, JsonArray> map = new HashMap<String, JsonArray>();
 		map.put("res", res);
 
 		return map;
 	}
 
 	@RequestMapping("/pharmacyinfo.do")
-	public String informPharmacy(Model model, String yadmNm, String sgguCd) throws MalformedURLException, IOException {
+	public String getPharmacy(Model model, String yadmNm, String sgguCd) throws MalformedURLException, IOException {
 		HospitalDto dto = biz.getPharmacyInfo(yadmNm, sgguCd);
 
 		model.addAttribute("dto", dto);
