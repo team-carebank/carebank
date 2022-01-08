@@ -152,10 +152,10 @@ img{
         <div class="col-md-6 col-sm-12 login">
            <div class="login-form">
             			<p id = "loginChk">아이디 혹은 비밀번호를 확인해주세요</p>
-              <form action = "login.do" method = "post">
+              <form action = "login.do" method = "post" autocomplete = "off">
                  <div class="form-group">
                     <label>User ID</label>
-                    <input type="text" class="form-control id" name = "user_id" id = "user_id" placeholder="User ID">
+                    <input type="text" class="form-control id" name = "user_id" id = "user_id" placeholder="User ID" autocomplete = "off">
                  </div>
                  <div class="form-group">
                     <label>Password</label>

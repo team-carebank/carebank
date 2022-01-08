@@ -42,13 +42,14 @@ public class UserController {
 	public Map<String, Boolean> login(HttpSession session, @RequestBody UserDto userdto) {
 		logger.info("LOGIN");
 		
-		UserDto res = userbiz.login(userdto);
+		UserDto login_info = userbiz.login(userdto);
 		
 		boolean check = false;
-		if(res != null) {
-			if(passwordEncoder.matches(userdto.getUser_pw(), res.getUser_pw())) {
+		if(login_info != null) {
+			if(passwordEncoder.matches(userdto.getUser_pw(), login_info.getUser_pw())) {
 				
-				session.setAttribute("login", res);
+				session.setAttribute("login", login_info);
+				session.setMaxInactiveInterval(60*60); //세션 유지시간
 				check = true; 
 			}
 		}
@@ -58,6 +59,15 @@ public class UserController {
 		 //test//
 		return map;
 	}
+	
+	//로그아웃
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		return "redirect:loginform.do";
+	}
+	
 	
 	//회원가입 페이지 이동
 	@RequestMapping("/regisform.do")
@@ -84,15 +94,21 @@ public class UserController {
 
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//회원가입 - 아이디중복체크
+	@RequestMapping(value = "/idchk.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String idchk(String user_id) {
+		
+		logger.info("ID CHECK");
+		
+		int res = userbiz.idchk(user_id);
+		
+		if(res != 0) {
+			return "fail"; // 중복아이디 존재
+		}
+		else {
+			return "success"; 
+		}
+	}
+
 }

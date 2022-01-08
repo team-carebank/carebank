@@ -17,6 +17,29 @@
 		ORDER BY FAQNO DESC
 	</select>
 	
+	<insert id="insertList" parameterType = "faqDto">
+		INSERT INTO FAQ
+		VALUES(FAQNO.NEXTVAL, #{faqtitle}, #{faqcontent})
+	</insert>
+	
+	<update id = "updateList" parameterType = "faqDto">
+		UPDATE FAQ
+		SET FAQTITLE = #{faqtitle}, FAQCONTENT = #{faqcontent}
+		WHERE FAQNO = #{faqno}
+	</update>
+	
+	<delete id = "deleteList" parameterType = "int">
+		DELETE FROM FAQ
+		WHERE FAQNO = #{faqno}
+	</delete>
+	
+	<!-- 검색 -->
+	<select id = "search">
+		SELECT FAQTITLE, FAQCONTENT WHERE 
+	
+	</select>
+	
+	
 	
 	
 	

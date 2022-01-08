@@ -14,10 +14,25 @@ import com.yee.carebank.model.dto.FaqDto;
 public class FaqBiz {
 	
 	@Autowired
-	private FaqDao dao; 
+	private FaqDao faqdao; 
 	
+	//조회
 	public List<FaqDto> selectList() {
-		return dao.selectList(); //리턴값을 받아 바로 controller로 보내준다 
+		return faqdao.selectList();
 	}
 
+	//작성
+	public int insert(FaqDto faqdto) {
+		return faqdao.insert(faqdto);
+	}
+	
+	//수정
+	public int update(FaqDto faqdto) {
+		return faqdao.update(faqdto);
+	}
+	
+	//삭제
+	public int delete(int faqno) {
+		return faqdao.delete(faqno);
+	}
 }

@@ -16,13 +16,13 @@ public class UserDao {
 	
 	//로그인 처리
 	public UserDto login(UserDto userdto) {
-		UserDto res = null;
+		UserDto login_info = null;
 		try {
-			res = sqlSession.selectOne(NAMESPACE + "login", userdto);
+			login_info = sqlSession.selectOne(NAMESPACE + "login", userdto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return res;
+		return login_info;
 	}
 
 	
@@ -39,5 +39,17 @@ public class UserDao {
 		return res;
 	}
 	
+	//아이디 중복확인
+	public int idchk(String user_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "idchk", user_id);
+		} catch (Exception e) {
+			System.out.println("[error] : idchk");
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 }

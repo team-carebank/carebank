@@ -6,7 +6,7 @@
  }
 
 
-body{
+body{	
     font-family: 'S-CoreDream-3Light';
 }
 .faq-heading{
@@ -21,6 +21,7 @@ body{
     width: 100px;
     height: 50px;
     text-align: center;
+   
 }
 .search_btn{
     margin-left: auto;
@@ -64,8 +65,21 @@ body{
     /* text-align: center; */
    width: 50%; 
    padding: auto;
-   
-   
+}
+
+.insert-area{
+    justify-content: center;
+}
+.new-faq-title{
+    width:60%;
+    padding: 10px 10px;
+    display:flex;
+    margin:none;
+}
+.new-faq-content{
+    width:60%;
+    padding: 10px 10px;
+    display:flex
 }
 
 .active,
@@ -90,3 +104,4 @@ body{
 .active:after {
     content: "\2796"; /* 마이너스 (-) 유니코드*/
 }
+
