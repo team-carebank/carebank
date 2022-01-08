@@ -50,4 +50,16 @@ public class SuppleBiz {
 		return list;
 
 	}
+
+	public List<SuppleDto> selectRandom(int user_no) {
+		return dao.selectRandom(user_no);
+	}
+
+	public List<SuppleDto> selectByComment() {
+		return dao.selectByComment();
+	}
+
+	public List<Integer> selectPreferCat(int user_no) {
+		return dao.selectPreferCat(user_no);
+	}
 }

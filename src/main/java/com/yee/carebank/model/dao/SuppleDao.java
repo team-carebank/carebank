@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yee.carebank.model.dto.SuppleDto;
+import com.yee.carebank.model.dto.SuppleDto;
 
 @Repository
 public class SuppleDao {
@@ -63,4 +64,41 @@ public class SuppleDao {
 
 		return res;
 	}
+
+	public List<SuppleDto> selectRandom(int user_no) {
+		List<SuppleDto> res = new ArrayList<SuppleDto>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectRandom", user_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public List<SuppleDto> selectByComment() {
+		List<SuppleDto> res = new ArrayList<SuppleDto>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectByComment");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public List<Integer> selectPreferCat(int user_no) {
+		List<Integer> res = new ArrayList<Integer>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectPreferCat", user_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
 }

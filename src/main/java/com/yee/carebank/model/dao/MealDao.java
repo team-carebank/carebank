@@ -1,8 +1,11 @@
 package com.yee.carebank.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -82,6 +85,54 @@ public class MealDao {
 
 		try {
 			res = sqlSession.selectList(NAMESPACE + "selectCatList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public List<MealDto> selectRandom(int user_no) {
+		List<MealDto> res = new ArrayList<MealDto>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectRandom", user_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public List<MealDto> selectByComment() {
+		List<MealDto> res = new ArrayList<MealDto>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectByComment");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public List<Integer> selectPreferCat(int user_no) {
+		List<Integer> res = new ArrayList<Integer>();
+
+		try {
+			res = sqlSession.selectList(NAMESPACE + "selectPreferCat", user_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public FoodDto selectNutrient(String food) {
+		FoodDto res = new FoodDto();
+
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "selectNutrient", food);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -11,5 +11,8 @@
 	<a href="pharmacymain.do">약국</a>
 	<a href="mealmain.do">식단</a>
 	<a href="supplemain.do">영양제</a>
+	<a href="prefer/meallist.do">식단추천</a>
+	<a href="prefer/supplelist.do">영양제추천</a>
+	<a href="tm.do">Teachable Machine API</a>
 </body>
 </html>

@@ -27,6 +27,11 @@
     text-decoration: none;
 }
 
+.header h1{
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
 .header ul, li {
     list-style-type: none;
     padding: 0;

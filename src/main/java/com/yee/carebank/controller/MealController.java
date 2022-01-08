@@ -61,17 +61,9 @@ public class MealController {
 		List<FoodDto> ingredient = biz.selectIngredient(id);
 		List<CommentDto> comment = cBiz.selectList(id, 1);
 
-		boolean flag = false;
-
 		model.addAttribute("meal", meal);
 		model.addAttribute("ingredient", ingredient);
 		model.addAttribute("comment", comment);
-
-		if (ingredient.size() > 1) {
-			flag = true;
-		}
-
-		model.addAttribute("flag", flag);
 
 		return "mealinfo";
 	}
@@ -132,4 +124,31 @@ public class MealController {
 			return false;
 		}
 	}
+
+	@RequestMapping("prefer/meallist.do")
+	public String preferMeal(Model model) {
+		// <!--- 로그인 기능 연결 시 수정 --->
+		int user_no = 1001;
+		// <!--- 끝 --->
+		List<Integer> prefer = biz.selectPreferCat(user_no);
+		model.addAttribute("prefer", prefer);
+		model.addAttribute("meal", biz.selectMeal(prefer.get(0)));
+		model.addAttribute("random", biz.selectRandom(user_no));
+		model.addAttribute("comment", biz.selectByComment());
+
+		return "mealprefer";
+	}
+
+	@RequestMapping("prefer/mealreq.do")
+	@ResponseBody
+	public Map<String, Object> requestMeal(@RequestBody int subcat_id) {
+		Map<String, Object> res = new HashMap<String, Object>();
+
+		List<MealDto> meal = biz.selectMeal(subcat_id);
+
+		res.put("meal", meal);
+
+		return res;
+	}
+
 }
