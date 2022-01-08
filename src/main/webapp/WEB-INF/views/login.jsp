@@ -232,7 +232,7 @@ img{
 				success: 
 					function(msg){
 						if(msg.check == true){
-							location.href = "faqlist.do";
+							location.href = "main.do";
 						}
 						else{
 							$("#loginChk").show(); 

@@ -52,10 +52,10 @@
 					<ul class="nav-sub">
 						<li><a
 							href="${pageContext.request.contextPath}/prefer/meallist.do">식단</a></li>
-						<li><a href="#">운동</a></li>
+						<li><a href="${pageContext.request.contextPath}/exerciselist.do">운동</a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/prefer/supplelist.do">영양제</a></li>
-						<li><a href="#">명상</a></li>
+						<li><a href="${pageContext.request.contextPath}/newmeditation.do">명상</a></li>
 					</ul></li>
 				<li class="nav-component"><a>커뮤니티</a></li>
 				<li class="nav-component"><a>고객센터</a>
@@ -70,7 +70,7 @@
 			<ul class="user-login">
 				<li class="nav-component"><a href="#">마이페이지</a>
 					<ul class="nav-sub">
-						<li><a href="#">다이어리</a></li>
+						<li><a href="${pageContext.request.contextPath}/diary.do">다이어리</a></li>
 					</ul></li>
 				<li class="nav-component"><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
 			</ul>
