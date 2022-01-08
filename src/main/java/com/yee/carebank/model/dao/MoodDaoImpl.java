@@ -7,17 +7,17 @@ import org.springframework.stereotype.Repository;
 import com.yee.carebank.model.dto.MoodDto;
 
 @Repository
-public class MoodDaoImpl implements MoodDao{
+public class MoodDaoImpl implements MoodDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	@Override
 	public int insert(MoodDto dto) {
 		int res = 0;
-		
+
 		try {
-			res = sqlSession.insert(NAMESPACE+"insert",dto);
+			res = sqlSession.insert(NAMESPACE + "write", dto);
 		} catch (Exception e) {
 			System.out.println("[error] : insert");
 			e.printStackTrace();

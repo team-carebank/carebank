@@ -6,6 +6,7 @@
   <mapper namespace = "visit">
   
   	<resultMap type="scheduleDto" id="scheduleMap">
+  		<result property="hospital_no" column="HOSPITAL_NO" />
   		<result property="user_no" column="USER_NO" />
   		<result property="hospital_name" column="HOSPITAL_NAME" />
   		<result property="regdate" column="REGDATE" />
@@ -13,15 +14,26 @@
   		<result property="memo" column="MEMO" />
   	</resultMap>
   
-  	<select id="selectList" resultMap="scheduleMap">
+  	<select id="selectList" resultMap="scheduleMap" parameterType="int">
   		SELECT * FROM MY_VISIT
+  		WHERE USER_NO = ${user_no}
   		ORDER BY REGDATE DESC
   	</select>
   	
-  	<insert id="insert" parameterType="ScheduleDto">
+  	<insert id="insert" parameterType="scheduleDto">
   		INSERT INTO MY_VISIT 
-  		VALUES(#{user_no}, #{hospital_name}, #{regdate}, #{resdate}, #{memo})
+  		VALUES(hospitalnoseq.nextval, #{user_no}, #{hospital_name}, #{regdate}, #{resdate}, #{memo})
   	</insert>
   	
+  	<update id="update" parameterType="scheduleDto">
+  		UPDATE MY_VISIT
+  		SET HOSPITAL_NAME = #{hospital_name}, RESDATE = #{resdate}, MEMO = #{memo}
+  		WHERE HOSPITAL_NO = ${hospital_no} 
+  	</update>  	
+  	
+  	<select id="selectOne" parameterType="int" resultMap="scheduleMap">
+  		SELECT * FROM MY_VISIT
+  		WHERE HOSPITAL_NO = ${hospital_no}
+  	</select>
   	
   </mapper>

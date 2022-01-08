@@ -13,10 +13,13 @@
 <!-- detepicker -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" /> -->
+ 
 <script type="text/javascript">
-$(function(){
+$(function() {
 	$.datepicker.setDefaults({
 		dateFormat : 'yy-mm-dd',	//input display formay 변경
 		showOtherMonths : true,		//빈 공간에 현재월의 앞뒤월의 날짜를 표기
@@ -34,8 +37,13 @@ $(function(){
 	$("#endDate").datepicker();
 	
 	$("#startDate").datepicker('setDate','today');
-	$("#endDate").datepicker('setDate','today');
+	$("#endDate").datepicker('setDate','today');   
+
+	/* $("#startDate, #endDate").datetimepicker({
+	    format: 'YYYY-MM-DD HH:mm'
+	}); */
 });
+
 $.fn.serializeObject = function(){
 	var o = {};
 	var a = this.serializeArray();
@@ -64,9 +72,7 @@ $.fn.serializeObject = function(){
 			dataType : "json",
 			accept : "application/json",
 			contentType : "application/json; charset=UTF-8",
-			data : {
-				"title" : 
-			}
+			
 			success : function(data){
 				opener.parent.location.reload();
 				window.close();
@@ -84,6 +90,7 @@ $.fn.serializeObject = function(){
 			<form id = "scheduleData">
 				<div class="top">
 					<input class="subject" id="subject" type="text" name="hospital_name" placeholder="병원명을 입력해주세요.">
+					<input type="hidden" id="hospital_no" name="hospital_no">
 					<input type="hidden" id="userno" name="user_no">
 				</div>
 				<div class="domain">

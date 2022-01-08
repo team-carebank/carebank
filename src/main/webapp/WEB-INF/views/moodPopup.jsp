@@ -55,6 +55,8 @@ $.fn.serializeObject = function(){
 	function click_ok(){
 		var moodData = JSON.stringify($("form#moodData").serializeObject());
 		
+		console.log(moodData);
+		
 		$.ajax({
 			data : moodData,
 			url : "moodschedule.do",
@@ -78,7 +80,7 @@ $.fn.serializeObject = function(){
 		<div class = "group-body">
 			<form id = "moodData">
 				<div class="top">
-					<input type="hidden" id="userno" name="user_no">
+					<input type="hidden" id="userno" name="user_no" value="1008">
 				</div>
 				<div class="domain">
 					<h3 class="zTree-h3">기분상태 </h3>
