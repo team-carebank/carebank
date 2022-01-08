@@ -12,7 +12,7 @@ import com.yee.carebank.model.biz.MeditationBiz;
 @Controller
 public class MeditationController {
 
-	private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
+	private static Logger logger=LoggerFactory.getLogger(MeditationController.class);
 	
 @Autowired	
   private MeditationBiz biz;

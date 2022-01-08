@@ -16,8 +16,8 @@
  font-family: 'Noto Sans KR', sans-serif;
 }
 .textcontainer{
-   margin-top:100px;
-   height: 15vh;
+   margin-top:20px;
+   height: 4vh;
    display:flex;
    justify-content:center; 
    align-items: stretch; 
@@ -26,7 +26,7 @@
    min-height:20px; 
 }
 .skipbutton{
-	top:800px;
+	top:100px;
     right:20px;
     height:100px;
     display:flex;
@@ -115,41 +115,14 @@ body{
 
 
 <body>
+ 
+	
     <div class="textcontainer">
         <div class="textbox">
-            <h2 style="font-size: 30px;">홍길동님, 오늘도 달려봐요</h2>
+            <h2 style="font-size: 20px;">오늘도 힘차게 달려봐요 </h2>
         </div>
     </div>
-
-    <!-- <div class="carousel">
-    
-	         <div class="carousel-item" onclick="location.href='exerdetail.do'">
-	             <img src="resources/img/1.jpg">
-	            <h3>${dto.exer_title}</h3>
-	        </div>
-	        
-	        <div class="carousel-item">
-	            <img src="resources/img/2.jpg">
-	            <h3>유산소로 기초체력을</h3>
-	        </div>
-	        
-	        <div class="carousel-item">
-	            <img src="resources/img/3.jpg">
-	            <h3>집에서하는 홈트레이닝</h3>
-	        </div>
-	        
-	        <div class="carousel-item">
-	            <img src="resources/img/4.jpg">
-	            <h3>가벼운 하체를 위해</h3>
-	        </div>
-	        
-	        <div class="carousel-item">
-	            <img src="resources/img/5.jpg">
-	            <h3>핫둘</h3>
-	        </div>
-
-    </div>
- -->
+   
  <div class="carousel">
  	<c:choose>
     		<c:when test="${empty list }">
@@ -160,8 +133,8 @@ body{
     		
     		<div class="carousel-item">
     		
-    		<img src="${dto.exer_thum }" onclick="location.href='exerdetail.do?exer_id=${dto.exer_id}'">
-    			<h3>${dto.exer_title}</h3>
+    		<img src="${dto.exer_thum }"  >
+    			<h3 onclick="location.href='exerdetail.do?exer_id=${dto.exer_id}'" style="cursor: pointer; ">${dto.exer_title}</h3>
     		</div>
     		
     		</c:forEach>
@@ -171,12 +144,12 @@ body{
     	
     	</c:choose>
  </div>
- 
+  
  
  
     <div class="skipbutton">
         <div class="textbox2">
-            <p>음..오늘은 마음을 챙겨볼게요</p> 
+            <p>오늘은 마음을 챙겨볼게요</p> 
             <button class="button-68"  onclick="location.href='newmeditation.do'">meditation</button>
         </div>
     </div>
