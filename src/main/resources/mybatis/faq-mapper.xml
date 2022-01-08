@@ -33,6 +33,12 @@
 		WHERE FAQNO = #{faqno}
 	</delete>
 	
+	<!-- 검색 -->
+	<select id = "search">
+		SELECT FAQTITLE, FAQCONTENT WHERE 
+	
+	</select>
+	
 	
 	
 	

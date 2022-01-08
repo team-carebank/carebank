@@ -23,15 +23,15 @@
         <h1 class="faq-heading">FAQ: 자주 물어보는 질문</h1>
         <form action='search_faq.do' method='POST' class='form-group'>
             <div class="form-horizontal">
-              <input type="text" name="search"
-                  class="form-control"
+              <input type="text" name = "keyword" id = "keyword"
+                  class="search form-control"
                   placeholder="원하는 내용을 검색해보세요. (로그인, 회원가입, 서비스이용 등)"
                   style="width:500px;display:inline-block; height:36px; margin-left: 300px;"/>
           
-              <button type="submit"
+              <input type="button" onclick = "search();"
                   class="btn btn-primary"
                   style="margin-left:-8px;margin-top:-2px; min-height:36px; width: 100px;background-color: green;"
-              >검색</button>
+              value = "검색">
             </div>
           </form>
  
@@ -125,6 +125,14 @@
 				});
 			}
 		}
+    	
+    	//검색
+    	function search(){
+    		var keyword = document.getElementById("keyword").value.trim();
+    		//console.log(keyword);
+    		
+    		
+    	};
 		
 		
 
