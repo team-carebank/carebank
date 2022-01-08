@@ -43,6 +43,11 @@
 	font-size: 9pt;
 	
 }
+.btn{
+	width: 100px !important;
+	font-size:10pt;
+	
+}
 
 
 </style>
@@ -167,44 +172,72 @@
                       <p class="text-center h6 fw-bold mb-1 mx-1 mx-md-4 mt-4">관심사 추가</p>
                       
                       <div class = row>
+                        <input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off" name = "test">
+<label class="btn btn-primary" for="btn-check-2">Checked2</label>
+                        <input type="checkbox" class="btn-check" id="btn-check-3" checked autocomplete="off" name = "test">
+<label class="btn btn-primary" for="btn-check-3">Checked3</label>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c1" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "여드름/두피염/아토피" onclick = "">
                         </div>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c2" onclick = "">
-                        </div>
-                        <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c3" onclick = "">
-                        </div>
-                        <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c4" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "빈혈/어지럼증" onclick = "">
                         </div>
                       </div>
                       <div class = row>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c5" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "비염" onclick = "">
                         </div>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c6" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "소화불량" onclick = "">
                         </div>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c7" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "혈액순환" onclick = "">
                         </div>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c8" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "디스크/허리통증/관절" onclick = "">
                         </div>
                       </div> <div class = row>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c9" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "고지혈증" onclick = "">
                         </div>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c10" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "노화예방" onclick = "">
                         </div>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c11" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "면역력 강화" onclick = "">
                         </div>
                         <div class = "col-md-3">
-                          <input type = "button" class = "btn btn-success" value = "c12" onclick = "">
+                          <input type = "button" class = "btn btn-success" value = "여성 건강" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "남성 건강" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "눈 건강" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "흡연자를 위한" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "스트레스 완화" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "우울감 완화" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "수면관리/불면증" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "명상" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "균형잡힌 식단" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "체중 감량" onclick = "">
+                        </div>
+                        <div class = "col-md-3">
+                          <input type = "button" class = "btn btn-success" value = "체중 증량" onclick = "">
                         </div>
                       </div>
                       </div>
