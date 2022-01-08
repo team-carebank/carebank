@@ -5,11 +5,11 @@ public class MyExerciseDto {
 	public int exer_id;
 	public Integer user_no;
 	public String regdate;
-	public String exer_count;
+	public Integer exer_count;
 	public MyExerciseDto() {
 		super(); 
 	}
-	public MyExerciseDto(int exer_id, Integer user_no, String regdate, String exer_count) {
+	public MyExerciseDto(int exer_id, Integer user_no, String regdate, Integer exer_count) {
 		super();
 		this.exer_id = exer_id;
 		this.user_no = user_no;
@@ -34,14 +34,13 @@ public class MyExerciseDto {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	public String getExer_count() {
+	public Integer getExer_count() {
 		return exer_count;
 	}
-	public void setExer_count(String exer_count) {
-		this.exer_count = exer_count;
-	} 
-	
-	
+	public Integer setExer_count(Integer exer_count) {
+		return this.exer_count = exer_count;
+	}
+
 	
 	
 }
