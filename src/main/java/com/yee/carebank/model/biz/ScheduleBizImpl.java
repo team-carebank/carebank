@@ -34,4 +34,9 @@ public class ScheduleBizImpl implements ScheduleBiz{
 		return dao.selectOne(hospital_no);
 	}
 
+	@Override
+	public int delete(ScheduleDto dto) {
+		return dao.delete(dto);
+	}
+
 }

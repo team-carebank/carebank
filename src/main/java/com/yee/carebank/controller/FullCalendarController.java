@@ -102,4 +102,17 @@ public class FullCalendarController {
 		
 		return map;
 	}	
+	
+	@ResponseBody
+	@RequestMapping(value="/scheduledelete.do", method=RequestMethod.POST)
+	public String delete(@RequestBody ScheduleDto dto) {
+		logger.info("schedule delete");
+		
+		int res = sBiz.delete(dto);
+		
+		String hosp = Integer.toString(res);
+		
+		return hosp;
+	}
+	
 }
