@@ -70,4 +70,18 @@ public class ScheduleDaoImpl implements ScheduleDao{
 		return dto;
 	}
 
+	@Override
+	public int delete(ScheduleDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"delete", dto);
+		} catch (Exception e) {
+			System.out.println("[error] : delete");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 }

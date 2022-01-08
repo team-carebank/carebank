@@ -36,4 +36,9 @@
   		WHERE HOSPITAL_NO = ${hospital_no}
   	</select>
   	
+  	<delete id="delete" parameterType="scheduleDto">
+  		DELETE FORM MY_VISIT
+  		WHERE HOSPITAL_NO = ${hospital_no}
+  	</delete>  	
+  	
   </mapper>
