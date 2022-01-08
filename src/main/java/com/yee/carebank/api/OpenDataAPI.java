@@ -104,7 +104,7 @@ public class OpenDataAPI {
 		String apiURL = null;
 
 		try {
-			apiURL = HOSPITAL_URL + "&yadmNm=" + URLEncoder.encode(yadmNm, "UTF-8") + "&sgguCd" + sgguCd;
+			apiURL = HOSPITAL_URL + "&yadmNm=" + URLEncoder.encode(yadmNm, "UTF-8") + "&sgguCd=" + sgguCd;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -141,7 +141,7 @@ public class OpenDataAPI {
 		String apiURL = null;
 
 		try {
-			apiURL = PHARMACY_URL + "&yadmNm=" + URLEncoder.encode(yadmNm, "UTF-8") + "&sgguCd" + sgguCd;
+			apiURL = PHARMACY_URL + "&yadmNm=" + URLEncoder.encode(yadmNm, "UTF-8") + "&sgguCd=" + sgguCd;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
