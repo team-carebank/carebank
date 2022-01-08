@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+    
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Overlock' rel='stylesheet' type='text/css'>
-<script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Overlock' rel='stylesheet' type='text/css'> 
  
+  <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  
+  
 <title>ExerciseDetail</title>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
@@ -42,10 +48,16 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+  
+ background-image:url('resources/img/1web.jpg');
+}
+
+.backimgweb{
+width:300px;
+height:400px; 
 }
 
 #canvas{
-	width:400px;
 	height:450px;
 	margin-top:30px;
 	display:flex;
@@ -132,6 +144,17 @@ body{
   list-style: none;
   color: #333;
 }
+
+
+#hello{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size:20px;
+	width:200px;
+	height:100px;
+	position:absolute;
+	top:400px;
+	left:100px;
+}
 	
 /*button */ 
 .button-68 {
@@ -192,21 +215,29 @@ body{
 </head>
 
 
-<body>
-   
+<body> 
   <div class="textbox">
-        <h2 style="font-size: 20px;">${dto.exer_notice }
+        <h2 style="font-size: 20px;">${dto.exer_notice }</h2>
         <br><br>
-        <div id="hello">운동 횟수: </div>
-        </h2>
-    </div>
+        <div id="hello">COUNT:</div>
+        
+        <!-- test --> 
+        
+        </div>  
+        
+        
+        
+         
+
 
     <div id="workoutcontainer">
-    
+     
 	        <div class="webcam">
-			    <button type="button" id="startbutton" class="button-68" onclick="init(); counterFn();">Start!</button>
+	        	 
+			    <button type="submit" id="startbutton" class="button-68" onclick="init(); counterFn();">Start!</button>
 			    <div><canvas id="canvas"></canvas></div>
 			    <div id="label-container"></div>
+			     
 	        </div>
 	        
 	        <div class="video">
@@ -215,32 +246,67 @@ body{
 				</iframe> -->
 				<div>${dto.exer_video_url }</div>
 	        </div>
-	        <div id="circletimer"></div>
+	       
     </div>
-
+   
     <div class="checkbox">
-        <h3>이번달도 고지가 눈앞에!</h3>
-        <div id="checkchart"> 
-        </div>
-       <button class="button-68" id="done">DONE</button>
-    </div>
-
+        <h3>이번달도 고지가 눈앞에!</h3> 
+         <div id="checkchart"> 
+                  
+       <button class="button-68" id="done" onclick  ="insert();">	DONE</button>
+       </div>
+		</div>
     <div class="calories">
       <h3>벌써</h3><br><h1 class="number"> </h1><br><h3>kcal나 불태웠어요</h3>
     </div>
+    
+    <!-- ajax test -->
+  
 
-    <!--  <div id="ViewTimer">
+  <!-- <div id="ViewTimer">
     	<div id="time_left"> 
         <h1 style="position: absolute; left:590px; font-family: 'Noto Sans KR', sans-serif;"></h1>
         </div>
-        <div id="hello">오늘의 운동 횟수:</div>
-    </div>-->
+ </div>--> 
+  
+  <!-- TM SCRIPT -->
+ 
+  
      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
     <script type="text/javascript"> 
+     
+    
+    
         const URL = "${dto.exer_tm_url}";
-        let model, webcam, ctx, labelContainer, maxPredictions,cc;
-
+        let model, webcam, ctx, labelContainer, maxPredictions;
+        
+        var cc;
+        
+        function insert(){
+        	var exerid = ${dto.exer_id};
+        	
+        	$.ajax({
+        		url : "inserttest",
+        		type : 'post',
+        		data :  
+        		 {
+        		 	count : "hello"
+        		 },
+        		success : function(data) {
+        					alert("성공");
+        	     },
+        		error : function() {
+        			alert("error");
+        		}
+        	});
+        }
+    console.log(cc);
+    
+     
+    
+    
+ 
         async function init() {
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
@@ -276,9 +342,10 @@ body{
         }
     
         //count 추가 
-       var status = "stretch"; //기본상태는 편걸로 한다.
+       var status = "stretch"; //기본상태 
         var count = 0 ;
-        //반복되는 함수 predict에 본격적인 count 로직 작성 ㄱ 
+       
+        //반복되는 함수 predict  
 
         async function predict() { 
             const { pose, posenetOutput } = await model.estimatePose(webcam.canvas); 
@@ -286,9 +353,18 @@ body{
     
             //count를 위해 추가되는 로직 
             if(prediction[1].probability.toFixed(2) > 0.90){
-                 // bound에서 stretch할때 count 해주기 
+                //동작 0에서 1로갈때 count가 추가됨 
                  if(status == "bound"){
                      cc=count++;
+                     
+                     
+                     console.log(document.getElementById("hello").innerText);
+                     console.log(document.getElementById("hello").innerHTML);
+                      //console.log(document.getElementById("hello").value);
+                     //console.log(labelContainer);
+                     // console.log(cc);
+                     //console.log(window['cc']); //var cc=~ 로 선언된 값을 출력하는 콘솔..  
+                     
                      //count할때 sound 삽입
                      var audio = new Audio('http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a');
                 audio.play();
@@ -299,12 +375,12 @@ body{
             } 
             
 
+            //동작인식시 html에append되는
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
                   cc;
-                labelContainer.childNodes[i].innerHTML = classPrediction;
+                labelContainer.innerHTML = classPrediction;
             }
-     
             drawPose(pose);
         }
     
@@ -317,15 +393,15 @@ body{
                     tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
                 }
             }
-        }
+        } 
     </script>
     
  
      
- 
+ <!-- kcal COUNT SCRIPT -->
  <script type="text/JavaScript">
         	 
-	  var cnt0 = 0;
+	  var cnt0 = 0; 
       var speed=(60/${dto.exer_kcal })*1000;
       var kcal=${dto.exer_kcal };
        
@@ -349,43 +425,50 @@ body{
 		    }
 		  }
     </script>
-     
+       
+       
+       
+       <!-- chart SCRIPT -->
+      
   <script>
+  	
+  	//var arr= 	<c:forEach items="${mylist }" var="mydto">
+	//'${mydto.regdate }'
+	//</c:forEach>;
+	
+	//console.log(arr);
+  
     ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
-    let chartData = [ //값은  [ 'YYYY-MM-DD', val],의 형식을 따라야함, 뒤에 'string'을 추가할수있음
-    	//val값이없으면 색이 표시되지 않으므로 새로운 배열값 추가시에 [오늘날짜, 임의의값(ex1000)]을 넣을것 
+    let chartData = [  
+    	['2022-01-12',1000],
+    	['2022-01-15',3000],
+    	['2022-01-02',2000],
+    	['2022-01-17',2000],
     	
-      ['2022-01-01',1000],
-      ['2022-01-02', 1600],
-      ['2022-01-03', 3000],
-      ['2022-01-04', 3400],
-      ['2022-01-05', 503],
-      ['2022-01-06', 1981],
-      ['2022-01-07', 2100],
-      ['2022-01-08', 914]
+    	//[arr,5000]
+    	  
     ];
 
     let chartConfig = {
       type: 'calendar',
       // backgroundColor: '#b3e7ff #e6f7ff',
       title: {
-        text: 'january',
+      //  text: 'workout!',
         fontColor: '#00344d',
-        fontFamily: 'Noto Sans KR',
-        fontSize: '10px'
+        fontFamily: 'Overlock',
+        fontSize: '34px'
       },
       subtitle: {
-        text: '',
-        fontColor: '#00344d',
-        fontFamily:'Noto Sans KR',
+        text: 'jan 2021',
+        fontColor: '#00344d', 
         fontSize: '12px',
         fontWeight: 'normal',
-        y: '10%'
+        y: '-5%'
       },
       options: {
         values: chartData,
-        startMonth: 1, 
-        endMonth: 1, 
+        startMonth: 1, // November
+        endMonth: 1, // November
         month: {
           values: [null, null, null, null, null, null, null, null, null, null, null, null]
         },
@@ -394,7 +477,7 @@ body{
           values: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
           item: {
             fontColor: '#00344d',
-            fontFamily: 'Noto Sans KR',
+            //fontFamily: 'Georgia',
             fontSize: '10px'
           }
         },
@@ -416,8 +499,5 @@ body{
       });
     });
   </script>
-
-
-
 </body>
 </html>
