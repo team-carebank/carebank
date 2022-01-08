@@ -7,7 +7,8 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
- 
+
+import com.yee.carebank.model.dto.FaqDto;
 import com.yee.carebank.model.dto.MyExerciseDto;
 
 @Repository
@@ -45,25 +46,39 @@ public class MyExerciseDaoImpl implements MyExerciseDao {
 	}
  
 
-	@Override
-	public int insert(MyExerciseDto dto) throws Exception{
-		return sqlSession.insert(NAMESPACE+"insert", dto);
-	}
-	
 //	@Override
+//	public int insert(MyExerciseDto dto) throws Exception{
+//		return sqlSession.insert(NAMESPACE+"insert", dto);
+//	}
+	
 //	public int insert(MyExerciseDto dto) {
-
-//		int res=0;
+//		int res = 0;
 //		
 //		try {
-//		res=sqlSession.insert(NAMESPACE+"insert", dto);
-//		}catch(Exception e) {
-//			System.out.println("[error] : insert ");
+//			res = sqlSession.insert(NAMESPACE + "insert", dto);
+//		} catch (Exception e) {
+//			System.out.println(" insert error ");
 //			e.printStackTrace();
 //		}
-//			return res; 
+//		return res;
+//	
 //	}
-// 
+
+	@Override
+	public int insert(Integer exer_count) {
+int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "insert",exer_count);
+		} catch (Exception e) {
+			System.out.println(" insert error ");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	
+	 
 
 	
 }

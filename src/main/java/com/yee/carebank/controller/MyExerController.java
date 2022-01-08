@@ -47,6 +47,111 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 		return null;
 	}
 	
+ 
+	//data:cc 카운트 값이 넘어왔음 
+	@RequestMapping(value = "/test", method = { RequestMethod.POST,RequestMethod.GET })	
+	@ResponseBody
+	public String test(@RequestParam("exer_count") String exer_count) {
+		
+		System.out.println(exer_count);
+		return exer_count; 
+	}
+	
+	
+	@RequestMapping(value = "/inserttest", method = { RequestMethod.POST,RequestMethod.GET })	
+	@ResponseBody
+	public int inserttest(@RequestParam("exer_count") Integer exer_count) {
+		
+		MyExerciseDto dto=new MyExerciseDto();
+		dto.setExer_count(exer_count);
+		System.out.println("count"+exer_count); 
+		int res=biz.insert(exer_count);
+		if(res>0) {
+			System.out.println("insert성공!!!!!!!");
+		}else {
+			System.out.println("실");
+		} 
+		return res; 
+	}
+	
+	 
+//	@RequestMapping(value="/inserttest", method= { RequestMethod.POST,RequestMethod.GET })
+//	@ResponseBody
+//	public int insert(@RequestParam("count") String count, MyExerciseDto dto) throws Exception{
+//		logger.info("insert");
+//		//MyExerciseDto dto=new MyExerciseDto();
+//		 
+//		dto.setExer_count(count);
+//		
+//		int res=biz.insert(dto);
+//		
+//		if(res>0) {
+//			System.out.println("ㅎㅎ"); 
+//			return res; 
+//		 
+//		}else {
+//			System.out.println("ㅜㅜ"); 
+//		}
+//		return res;
+//	}
+//	
+//	
+//	@RequestMapping(value="/inserttest", method= { RequestMethod.POST,RequestMethod.GET })
+//	@ResponseBody
+//	public int insert(@RequestParam("count") Integer count, MyExerciseDto dto,@RequestParam Map<String, Object> param) throws Exception{
+//		  
+//		Map<String, Object> result = new HashMap<String, Object>();
+//		
+//		logger.info("insert");			
+//		
+//			Integer cresult=dto.setExer_count(count);
+//			
+//			int res=biz.insert(cresult);
+//			if(res>0) {
+//				System.out.println("예쓰");
+//			}else {
+//				System.out.println("ㅡㅡ");
+//			}
+//			return res; 
+//			
+//		} 
+		 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	
+//	
+//	@RequestMapping("/inserttest")
+//	public @ResponseBody int method(@RequestParam Map<String, Object> param, 
+//			HttpServletRequest request, MyExerciseDto dto) {
+//		System.out.println("here");
+//		//biz.method(param);
+//			
+//		int res=biz.method(param);
+//		if(res>0) {
+//			System.out.println("insert성공");
+//		}else {
+//			System.out.println("실패");
+//		}
+//		return res;
+//		
+//	} 
+	 
+//	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//	public String login(Locale locale, Model model) {
+//		
+//		return "login";
+//	}
+//	 
+	
 
 //	@RequestMapping("/insertform.do")
 //	public String insertForm() {
@@ -81,64 +186,12 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 //		}
 //		 
 //	} 
+//	 
 
 //	@RequestMapping(value = "/testtest", method = { RequestMethod.POST,RequestMethod.GET })	
 //	public void test(@RequestParam("count") String count) {
 //		System.out.println(count); 
 //	}
 // 
-	//data:cc 카운트 값이 넘어왔음 
-	@RequestMapping(value = "/test", method = { RequestMethod.POST,RequestMethod.GET })	
-	@ResponseBody
-	public String test(@RequestParam("count") String count) {
-		System.out.println(count);
-		return count; 
-	}
-	 
-	@RequestMapping(value="/inserttest", method= { RequestMethod.POST,RequestMethod.GET })
-	@ResponseBody
-	public void insert(@RequestParam("count") String count) throws Exception{
-		
-		MyExerciseDto dto=new MyExerciseDto();
-		
-		dto.setExer_count(count);
-		
-		int res=biz.insert(dto);
-		if(res>0) {
-			System.out.println("ㅎㅎ"); 
-		}else {
-			System.out.println("ㅜㅜ"); 
-		} 
-	}
-	
-	
-	
-	
-	
-//	
-//	
-//	@RequestMapping("/inserttest")
-//	public @ResponseBody int method(@RequestParam Map<String, Object> param, 
-//			HttpServletRequest request, MyExerciseDto dto) {
-//		System.out.println("here");
-//		//biz.method(param);
-//			
-//		int res=biz.method(param);
-//		if(res>0) {
-//			System.out.println("insert성공");
-//		}else {
-//			System.out.println("실패");
-//		}
-//		return res;
-//		
-//	} 
-	 
-//	@RequestMapping(value = "/login", method = RequestMethod.GET)
-//	public String login(Locale locale, Model model) {
-//		
-//		return "login";
-//	}
-//	 
-	
 }
 

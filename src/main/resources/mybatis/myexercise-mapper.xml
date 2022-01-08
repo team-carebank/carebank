@@ -30,10 +30,9 @@
 		VALUES('1','1001', TO_CHAR(SYSDATE,'YYYY-MM-DD'),'document.getElementById("hello").innerText')
 	</insert>-->
 	
-	<insert id="insert" parameterType="MyExerciseDto">
+	<insert id="insert">
 		INSERT INTO MY_EXERCISE 
-		<!-- VALUES ('1','1001',SYSDATE,#{count});-->
-		VALUES ('1','1001',SYSDATE,'222')
+		VALUES ('1','1001',TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count}) 
 	</insert>
 	
   </mapper>

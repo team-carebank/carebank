@@ -281,7 +281,7 @@ height:400px;
         const URL = "${dto.exer_tm_url}";
         let model, webcam, ctx, labelContainer, maxPredictions;
         
-        var cc;
+        var cc; //임의값이므로 지워야함
         
         function insert(){
         	var exerid = ${dto.exer_id};
@@ -289,10 +289,8 @@ height:400px;
         	$.ajax({
         		url : "inserttest",
         		type : 'post',
-        		data :  
-        		 {
-        		 	count : "hello"
-        		 },
+        		data :  {exer_count:cc}
+        		,
         		success : function(data) {
         					alert("성공");
         	     },

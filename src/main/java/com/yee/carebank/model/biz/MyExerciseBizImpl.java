@@ -23,12 +23,19 @@ public class MyExerciseBizImpl implements MyExerciseBiz{
 	public MyExerciseDto selectOne(Integer user_no) {
 		return dao.selectOne(user_no);
 	}
-	
+
 	@Override
-	public int insert(MyExerciseDto dto) throws Exception{
-		return dao.insert(dto);
-		 
+	public int insert(Integer exer_count) { 
+		return dao.insert(exer_count);
 	}
+	
+//	@Override
+//	public int insert(MyExerciseDto dto) throws Exception{
+//		return dao.insert(dto);
+//	}
+ 
+	
+	
  
 	
 //	public int insert(MyExerciseDto dto) {
