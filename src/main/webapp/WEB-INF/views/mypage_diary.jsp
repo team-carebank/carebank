@@ -24,9 +24,25 @@
 	rel="stylesheet" />
 <title>마이페이지 다이어리</title>
 <style type="text/css">
-html, body {
-	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-	font-size: 14px;
+body{
+	width: 100%;
+	display: grid;
+}
+
+body > div{
+	width: 80%;
+	max-width: 1200px;
+	justify-self: center;
+	align-self: center;
+}
+
+#calendar-container{
+	display: grid;
+	margin: 0;
+}
+
+#calendar{
+	height: 1000px !important;
 }
 
 html::-webkit-scrollbar {
@@ -66,8 +82,9 @@ html::-webkit-scrollbar {
 }
 
 .calendar-button{
-	margin-top: 10px;
+	margin-block: 10px;
 }
+
 </style>
 <script type="text/javascript">
 function getOption(w, h){
@@ -153,7 +170,7 @@ function click_adds(){
 <%@include file = "../../header.jsp" %>
 </header>
 	<!-- calendar 태그 -->
-	<div  style="padding: 30px;">
+	<div style="padding: 30px;">
 	<div id='calendar-container'>
 		<div id='calendar'></div>
 			<div class="calendar-button">
