@@ -15,8 +15,8 @@ public class ScheduleBizImpl implements ScheduleBiz{
 	private ScheduleDao dao;
 	
 	@Override
-	public List<ScheduleDto> selectList(int user_no) {
-		return dao.selectList(user_no);
+	public List<ScheduleDto> selectList() {
+		return dao.selectList();
 	}
 
 	@Override
