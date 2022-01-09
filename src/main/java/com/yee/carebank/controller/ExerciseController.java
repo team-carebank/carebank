@@ -1,5 +1,8 @@
 package com.yee.carebank.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yee.carebank.model.biz.ExerciseBiz;
+import com.yee.carebank.model.biz.MyExerciseBiz;
 
 @Controller
 public class ExerciseController {
@@ -18,21 +22,29 @@ public class ExerciseController {
 	@Autowired
 	private ExerciseBiz biz;
 	
+	@Autowired
+	private MyExerciseBiz mybiz;
+	
 	@RequestMapping("/exerciselist.do")
 	public String exerciselist(Model model) {
 		logger.info("exercise list");
 		
-		model.addAttribute("list", biz.selectList());
+		model.addAttribute("list", biz.selectList()); 
 		
 		return "exercise_main";
 	}
 	
 	
 	
+	
+	
 	@RequestMapping("/exerdetail.do")
 	public String detail(Model model, Integer exer_id) {
-		logger.info("SELECT ONE");
+		logger.info("SELECT ONE"); 
+		
 		model.addAttribute("dto", biz.selectOne(exer_id)); 
+		model.addAttribute("mydto",mybiz.selectList());
+		
 		return "exercise_detail";
 	}
 	 
