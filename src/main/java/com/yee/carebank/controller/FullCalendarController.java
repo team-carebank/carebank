@@ -3,6 +3,8 @@ package com.yee.carebank.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +34,13 @@ public class FullCalendarController {
 	
 	
 	@RequestMapping("/diary.do")
-	public String diary(Model model) {
+	public String diary(Model model, HttpSession session) {
 		logger.info("mypage_diary");
 		
-		// 로그인 연결 시 수정
-		int user_no = 1014;
+		session.getAttribute("insert");
 		
-		model.addAttribute("dto", sBiz.selectList(user_no));
+		model.addAttribute("dto", sBiz.selectList());
+		
 		return "mypage_diary";
 	}
 	
@@ -78,24 +80,27 @@ public class FullCalendarController {
 	
 	@ResponseBody
 	@RequestMapping(value="/addschedule.do", method=RequestMethod.POST) 
-	public Map<Object, Object> insert(@RequestBody ScheduleDto dto) {
+	public Map<Object, Object> insert(HttpSession session, @RequestBody ScheduleDto dto) {
 		logger.info("insert");
+		
+		session.setAttribute("insert", dto.getUser_no());
+		
 		Map<Object, Object>map = new HashMap<Object, Object>();
+
+		int res = sBiz.insert(dto);
+
 		
-		dto.setUser_no(1014);
-		
-		sBiz.insert(dto);
+		map.put("res", res);
 		
 		return map;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/moodschedule.do", method= RequestMethod.POST)
-	public Map<Object, Object> insert(@RequestBody MoodDto dto) {
+	public Map<Object, Object> insert(@RequestBody MoodDto dto, HttpSession session) {
 		logger.info("MOOD INSERT");
 		Map<Object, Object>map = new HashMap<Object, Object>();
 		
-		dto.setUser_no(1008);
 		int res = mBiz.insert(dto);
 		
 		map.put("res", res);

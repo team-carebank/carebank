@@ -14,10 +14,8 @@
   		<result property="memo" column="MEMO" />
   	</resultMap>
   
-  	<select id="selectList" resultMap="scheduleMap" parameterType="int">
+  	<select id="selectList" resultMap="scheduleMap">
   		SELECT * FROM MY_VISIT
-  		WHERE USER_NO = ${user_no}
-  		ORDER BY REGDATE DESC
   	</select>
   	
   	<insert id="insert" parameterType="scheduleDto">
@@ -37,7 +35,7 @@
   	</select>
   	
   	<delete id="delete" parameterType="scheduleDto">
-  		DELETE FORM MY_VISIT
+  		DELETE FROM MY_VISIT
   		WHERE HOSPITAL_NO = ${hospital_no}
   	</delete>  	
   	

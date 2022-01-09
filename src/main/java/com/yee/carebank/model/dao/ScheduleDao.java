@@ -8,7 +8,7 @@ public interface ScheduleDao {
 
 	String NAMESPACE = "visit.";
 	
-	public List<ScheduleDto> selectList(int user_no);
+	public List<ScheduleDto> selectList();
 	public int insert(ScheduleDto dto);
 	public int update(ScheduleDto dto);
 	public int delete(ScheduleDto dto);
