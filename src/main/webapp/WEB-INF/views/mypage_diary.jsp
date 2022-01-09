@@ -70,10 +70,7 @@ html::-webkit-scrollbar {
 }
 </style>
 <script type="text/javascript">
-$(document).on("click", ".add-button#my_meal", function(e){
-	var w = 600;
-	var h = 600;
-
+function getOption(w, h){
 	//팝업이 화면의 중앙에 오게 설정
 	var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
     var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
@@ -82,7 +79,15 @@ $(document).on("click", ".add-button#my_meal", function(e){
     var left = ((width / 2) - (w / 2)) + dualScreenLeft;
     var top = ((height / 2) - (h / 2)) + dualScreenTop;
 
-	var option = "width="+w+", height="+h+", left="+left+", top="+top+", location=no";
+	return "width="+w+", height="+h+", left="+left+", top="+top+", location=no, resizable=no";
+}
+
+$(document).on("click", ".add-button#my_meal", function(e){
+	var w = 600;
+	var h = 600;
+	
+	var option = getOption(w, h);
+
 	var url = "mealPopup.do";
 	var name = "mealPopup";
 	window.open(url, name, option);

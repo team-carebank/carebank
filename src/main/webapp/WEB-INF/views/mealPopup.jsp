@@ -24,16 +24,17 @@ body>div {
 }
 
 .popup-content {
+	background-color: lightyellow;
 	display: grid;
 	justify-items: center;
 	align-items: center;
 	justify-items: center;
+	display: grid;
 }
 
 .popup-body-form {
 	display: grid;
 	margin-block: 20px;
-	justify-items: center;
 	align-items: center;
 	justify-items: center;
 }
@@ -48,12 +49,38 @@ input:not(input[type="radio"]) {
 	font-size: 12pt;
 }
 
+#meal_name {
+	border: 0;
+	background: linear-gradient(to top, #FFE400 50%, transparent 50%);
+}
+
 #mymeal {
+	width: 100%;
 	height: 50px;
 	font-size: large;
+	border: none;
+	background-color: transparent;
+}
+
+#mymeal:hover {
+	font-weight: bold;
+	cursor: pointer;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function getOption(w, h){
+	//팝업이 화면의 중앙에 오게 설정
+	var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+	return "width="+w+", height="+h+", left="+left+", top="+top+", location=no, resizable=no";
+}
+</script>
 <script>
 	function today() {
 		let d = new Date();
@@ -100,6 +127,7 @@ input:not(input[type="radio"]) {
 			contentType : 'application/json',
 			success : function(res) {
 				if (res.res) {
+					alert("다이어리에 기록되었습니다!");
 					opener.parent.location.reload();
 					window.close();
 				}
@@ -113,33 +141,24 @@ input:not(input[type="radio"]) {
 	$(document).on("click", "#meal_name", function(e){
 		var w = 600;
 		var h = 600;
-
-		//팝업이 화면의 중앙에 오게 설정
-		var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-	    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-	    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-	    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-	    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-	    var top = ((height / 2) - (h / 2)) + dualScreenTop;
-
-		var option = "width="+w+", height="+h+", left="+left+", top="+top+", location=no";
+		var option = getOption(w, h);
 		var url = "tm.do"
 		var name = "tm/tmpage";
 		window.open(url, name, option);
 	});
-	
 </script>
 </head>
 <body>
 	<div>
 		<div class="popup-content">
 			<div class="popup-head">
-				<h1>식단 기록</h1>
+				<h1>&#127828 식단 기록 &#127834</h1>
 			</div>
 			<div class="popup-body">
 				<div class="popup-body-form">
-					<h3>식단을 기록하세요.</h3>
-					<input type="text" id="meal_name" name="meal_name" readonly="readonly" placeholder="클릭하여 식단을 기록하세요.">
+					<h3>오늘 먹은 것은...</h3>
+					<input type="text" id="meal_name" name="meal_name"
+						readonly="readonly" placeholder="클릭하여 식단 기록하기!">
 				</div>
 				<div class="popup-body-form">
 					<h3>언제 먹었나요?</h3>
@@ -155,7 +174,7 @@ input:not(input[type="radio"]) {
 					<h3>날짜를 기록하세요.</h3>
 					<input type="date" name="regdate" id="regdate">
 				</div>
-				<input type="button" id="mymeal" value="기록하기">
+				<input type="button" id="mymeal" value="다이어리에 기록하기!">
 			</div>
 		</div>
 	</div>
