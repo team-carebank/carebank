@@ -17,7 +17,69 @@
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" /> -->
- 
+<style type="text/css">
+	html, body{
+	width : 100%;
+	height : 100%;
+	padding : 0%;
+	margin : 0%;
+}
+body.bodygroup:before{
+	content : '';
+	position : fixed;
+	left : 0;
+	right : 0;
+	top : 0;
+	bottom : 0;
+	background-color : rgba(255,255,255, 0.75);
+	-webkit-backdrop-filter : blur(5px);
+	backdrop-filter : blur(5px);
+}
+.group {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    min-width: 300px;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 55px -25px rgb(0 0 0 / 100%);
+}
+.group > .group-head{
+    border-radius: 15px 15px 0 0;
+    min-height: 40px;
+    color: #fff;
+    background-color: #b66;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+.popup > .content {
+    padding: 20px;
+    box-sizing: border-box;
+}
+.popup > .group-body {
+    bottom: 0;
+    min-height: 40px;
+    padding: 15px 15px;
+    box-sizing: border-box;
+    border-radius: 0 0 15px 15px;
+    min-height: 40px;
+    text-align: right;
+}
+.popup > .group-body .ok-button {
+    border-radius: 8px;
+    padding: 5px 10px;
+    border: 1px solid #aaa;
+}
+.popup > .group-body .ok-button:hover {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+</style>
 <script type="text/javascript">
 $(function() {
 	$.datepicker.setDefaults({
@@ -81,7 +143,7 @@ $.fn.serializeObject = function(){
 	};
 </script>
 </head>
-<body>
+<body class="bodygroup">
 	<div class="group" id="popupGroup">
 		<div class = "group-head">
 			<h1 class = "zTree-h1">병원 기록</h1>
@@ -91,7 +153,7 @@ $.fn.serializeObject = function(){
 				<div class="top">
 					<input class="subject" id="subject" type="text" name="hospital_name" placeholder="병원명을 입력해주세요.">
 					<input type="hidden" id="hospital_no" name="hospital_no">
-					<input type="hidden" id="userno" name="user_no">
+					<input type="hidden" id="user_no" name="user_no">
 				</div>
 				<div class="domain">
 					<h3 class="zTree-h3">오늘날짜 </h3>

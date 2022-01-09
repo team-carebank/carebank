@@ -75,8 +75,9 @@ $.fn.serializeObject = function(){
 			contentType : "application/json; charset=UTF-8",
 			
 			success : function(data){
-				
-				return "redirect:diary.do";
+				console.log(data);
+				alert("수정 성공!!");
+				 window.location.href = "http://localhost:8787/carebank/diary.do";
 			}
 		});
 	}; 
@@ -94,7 +95,7 @@ $.fn.serializeObject = function(){
 			success : function(data){
 				console.log(data);
 				alert("삭제 성공!");
-				return "redirect:diary.do";
+				window.location.href = "http://localhost:8787/carebank/diary.do";
 			}
 		});
 	};  
