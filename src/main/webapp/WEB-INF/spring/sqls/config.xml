@@ -37,6 +37,7 @@
   		<mapper resource = "/mybatis/myexercise-mapper.xml"/>
 	    <mapper resource = "/mybatis/schedule-mapper.xml"/>
   		<mapper resource = "/mybatis/mood-mapper.xml"/>
+  		<mapper resource = "/mybatis/mymeal-mapper.xml"/>
 	</mappers>
 
 </configuration>

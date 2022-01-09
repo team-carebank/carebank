@@ -17,26 +17,26 @@ import com.yee.carebank.model.dto.FoodDto;
 
 @Controller
 public class TeachableController {
-	
+
 	@Autowired
 	MealBiz biz;
-	
+
 	@RequestMapping("/tm.do")
 	public String goPage() {
 		return "tm/tmpage";
 	}
-	
-	@RequestMapping("/getinfo.do") 
+
+	@RequestMapping("/getinfo.do")
 	@ResponseBody
-	Map<String, FoodDto> getInfo(@RequestBody String food){
+	Map<String, FoodDto> getInfo(@RequestBody String data) {
 		Map<String, FoodDto> res = new HashMap<String, FoodDto>();
-		
-		JsonObject obj = new JsonParser().parse(food).getAsJsonObject();
-		
-		FoodDto dto = biz.selectNutrient(obj.get("food").getAsString());
-		
+
+		String food = new JsonParser().parse(data).getAsJsonObject().get("food").getAsString();
+
+		FoodDto dto = biz.selectNutrient(food);
+
 		res.put("res", dto);
-		
+
 		return res;
 	}
 }

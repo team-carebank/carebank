@@ -5,15 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/header.css">
 <style type="text/css">
+html {
+	display: grid;
+}
+
 body {
-	font-family: sans-serif;
 	background-color: #eeeeee;
+	width: 80vh;
+	height: 80vh;
+	justify-self: center;
+	align-self: center;
 }
 
 .file-upload {
 	background-color: #ffffff;
-	width: 600px;
 	margin: 0 auto;
 	padding: 20px;
 }
@@ -122,11 +130,11 @@ body {
 	transition: all .2s ease;
 }
 
-#start-predict{
+#start-predict {
 	display: none;
 }
 
-.teachable-machine-description{
+.teachable-machine-description {
 	display: grid;
 	justify-items: center;
 	align-items: center;
@@ -134,11 +142,15 @@ body {
 	margin-top: 30px;
 }
 
-#label-container{
+#label-container {
 	width: 100%;
 	display: grid;
 	justify-items: center;
 	align-items: center;
+}
+
+#add-meal {
+	margin-top: 30px;
 }
 </style>
 </head>
@@ -170,6 +182,9 @@ body {
 		</div>
 		<div id="label-container">
 			<span id="label-predict-result"></span>
+		</div>
+		<div>
+			<button class="file-upload-btn" type="button" id="add-meal">식단에 추가하기</button>		
 		</div>
 	</div>
 	<script
@@ -271,44 +286,51 @@ body {
 	        getInfo(fitName.trim());
 		}
 		
-		function getInfo(className){
+		function getInfo(className) {
 			$.ajax({
-				url: "getinfo.do",
-				method: 'post',
-				data: JSON.stringify({food: className}),
-				contentType: "application/json",
-				success: function(res){
+				url : "getinfo.do",
+				method : 'post',
+				data : JSON.stringify({
+					food : className
+				}),
+				contentType : "application/json",
+				success : function(res) {
 					$("#label-container").children("#info-container").empty();
 					setInfo(res.res);
 					alert("영양소 정보를 불러오는데 성공하였습니다.");
 				},
-				error: function(){
+				error : function() {
 					alert("통신 실패");
 				}
 			});
 		}
-		
-		function setInfo(res){
+
+		function setInfo(res) {
 			let calories = res.calories;
 			let carbo = res.carbo;
 			let fat = res.fat;
-			let protein = res. protein;
-			
+			let protein = res.protein;
+
 			let info_container = "<div id='info-container'>";
 
 			info_container += "<span>칼로리: " + calories + "kcal</span>"
-			+ "<br/><span>탄수화물: " + carbo + "g</span>"
-			+ "<br/><span>단백질: " + protein + "g</span>"
-			+ "<br/><span>지방: " + fat + "g</span>"
-			+ "</div>"
-			
+					+ "<br/><span>탄수화물: " + carbo + "g</span>"
+					+ "<br/><span>단백질: " + protein + "g</span>"
+					+ "<br/><span>지방: " + fat + "g</span>" + "</div>"
+
 			$(labelContainer).append(info_container);
-			
 		}
 	</script>
 	<script type="text/javascript">
 		$(function() {
 			init();
+		});
+
+		$(document).on("click", "#add-meal", function(e) {
+			let meal_name = $("#label-predict-result").text();
+
+			$(opener.document).find("input[name='meal_name']").val(meal_name);
+			self.close();
 		});
 	</script>
 </body>
