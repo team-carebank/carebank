@@ -219,10 +219,14 @@ height:400px;
   <div class="textbox">
         <h2 style="font-size: 20px;">${dto.exer_notice }</h2>
         <br><br>
-        <div id="hello">COUNT:</div>
-        
-        <!-- test --> 
-        
+        <div id="hello">COUNT: </div> 
+         
+        <!--<c:forEach var="MyExerciseDto" items="${mydto }">
+        	<c:out value="${MyExerciseDto.regdate}"/>
+        	
+        </c:forEach>-->
+          
+         
         </div>  
         
         
@@ -276,12 +280,14 @@ height:400px;
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
     <script type="text/javascript"> 
      
+    	//window load ajax
     
-    
+    	//window load ajax 
+    	
         const URL = "${dto.exer_tm_url}";
         let model, webcam, ctx, labelContainer, maxPredictions;
         
-        var cc; //임의값이므로 지워야함
+        var cc=7; 
         
         function insert(){
         	var exerid = ${dto.exer_id};
@@ -430,20 +436,23 @@ height:400px;
       
   <script>
   	
-  	//var arr= 	<c:forEach items="${mylist }" var="mydto">
-	//'${mydto.regdate }'
-	//</c:forEach>;
+
+  <!--<c:forEach var="MyExerciseDto" items="${mydto }">
+  	<c:out value="${MyExerciseDto.regdate}"/>
+  	
+  </c:forEach>-->
+  
+  
+  	var arr= 	<c:forEach items="${mydto }" var="MyExerciseDto">
+	'${MyExerciseDto.regdate }'
+	</c:forEach>;
 	
-	//console.log(arr);
+	console.log(arr);
   
     ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
     let chartData = [  
     	['2022-01-12',1000],
-    	['2022-01-15',3000],
-    	['2022-01-02',2000],
-    	['2022-01-17',2000],
-    	
-    	//[arr,5000]
+    	[arr,5000]
     	  
     ];
 

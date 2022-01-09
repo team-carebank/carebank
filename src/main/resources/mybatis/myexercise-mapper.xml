@@ -14,22 +14,11 @@
   </resultMap>
   
     <select id="selectList" resultMap="myexerciseMap">
-  	SELECT EXER_ID,USER_NO,REGDATE
+  	SELECT EXER_ID,USER_NO,REGDATE,EXER_COUNT
   	FROM MY_EXERCISE
-  </select>
+  	<!-- WHERE WHERE USER_NO= #{user_no} -->
+  </select> 
   
-  	<select id="selectOne" resultMap="myexerciseMap">
-		SELECT *
-		FROM MY_EXERCISE
-		WHERE USER_NO = #{user_no}
-	</select>
-  
-  	<!-- <insert id="insert">
-		INSERT INTO MY_EXERCISE
-		VALUES(#{exer_id}, #{user_no}, TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count} )
-		VALUES('1','1001', TO_CHAR(SYSDATE,'YYYY-MM-DD'),'document.getElementById("hello").innerText')
-	</insert>-->
-	
 	<insert id="insert">
 		INSERT INTO MY_EXERCISE 
 		VALUES ('1','1001',TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count}) 

@@ -1,6 +1,7 @@
 package com.yee.carebank.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -28,25 +29,45 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 	
 	@Autowired
 	private MyExerciseBiz biz;
+//	
+//	@RequestMapping(value="/myexerlist.do", method = { RequestMethod.POST,RequestMethod.GET })
+//	@ResponseBody
+//	public String myexerciselist(Model model) {
+//		logger.info("myexerciselist");
+//		
+//		model.addAttribute("mylist", biz.selectList()); 
+//		
+//		return "exercise_detail";
+//	}
+//	
+//	@RequestMapping("/myexerdetail.do")
+//	public String detail(Model model, Integer user_no) {
+//		logger.info("SELECT ONE");
+//		model.addAttribute("mydto", biz.selectOne(user_no)); 
+//		return null;
+//	}
+//	
 	
-	@RequestMapping("/myexerciselist.do")
-	public String myexerciselist(Model model) {
+	@RequestMapping(value="/")
+	public  String selectList(Model model) {
 		logger.info("myexerciselist");
-		
 		model.addAttribute("mylist", biz.selectList());
+		return "myexerlist.do/selectList";
 		
-		return "chart";
 	}
 	
+//	@RequestMapping(value="/myexerdetail.do", method = { RequestMethod.POST,RequestMethod.GET })
+//	public int selectOne(MyExerciseDto mydto, HttpServletRequest request) {
+//		logger.info("user_no");
+//		
+//		
+//		Integer user_no;
+//		request.setAttribute("mydto", biz.selectOne(user_no));
+//		return user_no;
+//	}
+//	
 	
-	
-	@RequestMapping("/myexerdetail.do")
-	public String detail(Model model, Integer user_no) {
-		logger.info("SELECT ONE");
-		model.addAttribute("mydto", biz.selectOne(user_no)); 
-		return null;
-	}
-	
+ 
  
 	//data:cc 카운트 값이 넘어왔음 
 	@RequestMapping(value = "/test", method = { RequestMethod.POST,RequestMethod.GET })	
@@ -60,12 +81,14 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 	
 	@RequestMapping(value = "/inserttest", method = { RequestMethod.POST,RequestMethod.GET })	
 	@ResponseBody
-	public int inserttest(@RequestParam("exer_count") Integer exer_count) {
+	public int inserttest(@RequestParam("exer_count") Integer exer_count, MyExerciseDto dto) {
+		 
+		dto.setExer_count(exer_count); 
 		
-		MyExerciseDto dto=new MyExerciseDto();
-		dto.setExer_count(exer_count);
-		System.out.println("count"+exer_count); 
-		int res=biz.insert(exer_count);
+		
+		System.out.println("count:: "+exer_count+"exerid:: "+dto.exer_id+"userno:: "+dto.user_no);  
+		//int res=biz.insert(exer_count);
+		int res=biz.insert(dto);
 		if(res>0) {
 			System.out.println("insert성공!!!!!!!");
 		}else {

@@ -23,7 +23,7 @@ public class ExerciseDaoImpl implements ExerciseDao {
 		List<ExerciseDto> list=new ArrayList<ExerciseDto>();
 		
 		try {
-		list=sqlSession.selectList(NAMESPACE+"selectList"); //예제 네임스페이스는 myboard.  
+		list=sqlSession.selectList(NAMESPACE+"selectList"); 
 		}catch(Exception e) {
 			System.out.println("error, select list");
 			e.printStackTrace();
