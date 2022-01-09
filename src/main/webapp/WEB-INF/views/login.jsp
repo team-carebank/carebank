@@ -137,8 +137,9 @@ img{
     <div class="sidenav">
         <div class="login-main-text">
            <h2>CARE BANK<br></h2>
-           <pre>케어뱅크 설명 케어뱅크 설명 케어뱅크 설명
-케어뱅크 설명 케어뱅크 설명 케어뱅크 설명
+           <br>
+           <h6>케어뱅크는 개인화된 헬스 케어 서비스를 제공하는 플랫폼입니다.</h3>
+           <h6>케어뱅크와 식단, 운동, 영양소의 밸런스를 손쉽게 유지해 보세요!</h3>
            </pre>
         </div>
      </div>
@@ -152,17 +153,17 @@ img{
         <div class="col-md-6 col-sm-12 login">
            <div class="login-form">
             			<p id = "loginChk">아이디 혹은 비밀번호를 확인해주세요</p>
-              <form action = "login.do" method = "post" autocomplete = "off">
+              <form action = "login.do" method = "post" autocomplete = "off" id = "loginform">
                  <div class="form-group">
                     <label>User ID</label>
-                    <input type="text" class="form-control id" name = "user_id" id = "user_id" placeholder="User ID" autocomplete = "off">
+                    <input type="text" class="form-control id" name = "user_id" id = "user_id" placeholder="User ID" autocomplete = "off" onKeyDown = "onEnter(this);">
                  </div>
                  <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" name = "user_pw" id = "user_pw" placeholder="Password">
+                    <input type="password" class="form-control" name = "user_pw" id = "user_pw" placeholder="Password" onKeyDown = "onEnter(this);">
                  </div>
                  <div class = "btns">
-                    <button type="button" class="btn btn-success" id = "login_btn" onclick = "login(); return false;">로그인</button>
+                    <button type="button" class="btn btn-success" id = "login_btn" onclick = "login();" return false;">로그인</button>
                     <button type="button" class="btn btn-secondary" id = "regis_btn" onclick = "location.href = 'regisform.do'">회원가입</button>
                </div>
             </form>
@@ -208,8 +209,15 @@ img{
 		$("#loginChk").hide(); 
 	});
 	
+	function onEnter(event){
+		var keycode = event.keyCode;
 	
-	function login(){
+		if(keycode == 13){
+			loginform.login(); 			
+		}
+	};
+
+	function login(){	
 		var user_id = $("#user_id").val().trim();
 		var user_pw = $("#user_pw").val().trim();
 		console.log(user_id + user_pw);
@@ -224,7 +232,7 @@ img{
 		}
 		else{
 			$.ajax({
-				type: "post",
+				type: "POST",
 				url:	 "login.do",
 				data: JSON.stringify(loginInfo),
 				contentType: "application/json",

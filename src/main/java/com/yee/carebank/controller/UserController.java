@@ -57,6 +57,7 @@ public class UserController {
 		 Map<String, Boolean> map = new HashMap<String, Boolean>();
 		 map.put("check",check);
 		 //test//
+		 System.out.println(session);
 		return map;
 	}
 	
@@ -69,6 +70,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
+		System.out.println(session);
 		return "redirect:loginform.do";
 	}
 	
