@@ -31,7 +31,7 @@
 	<div class="header">
 		<div class="header-logo">
 			<h1>
-				<a href="${pageContext.request.contextPath }/indexForTest.jsp">CareBank</a>
+				<a href="${pageContext.request.contextPath }/main.do">CareBank</a>
 			</h1>
 		</div>
 		<div class="header-nav">
@@ -39,10 +39,8 @@
 				<li class="nav-component"><a>이용하기</a>
 					<ul class="nav-sub">
 						<li><a href="${pageContext.request.contextPath}/mealmain.do">식단</a></li>
-						<li><a href="#">운동</a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/supplemain.do">영양제</a></li>
-						<li><a href="#">명상</a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/hospitalmain.do">병원</a></li>
 						<li><a
@@ -52,10 +50,10 @@
 					<ul class="nav-sub">
 						<li><a
 							href="${pageContext.request.contextPath}/prefer/meallist.do">식단</a></li>
-						<li><a href="${pageContext.request.contextPath}/exerciselist.do">운동</a></li>
+						<li><a href="${pageContext.request.contextPath}/exerciselist.do" target="_blank">운동</a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/prefer/supplelist.do">영양제</a></li>
-						<li><a href="${pageContext.request.contextPath}/newmeditation.do">명상</a></li>
+						<li><a href="${pageContext.request.contextPath}/newmeditation.do" target="_blank">명상</a></li>
 					</ul></li>
 				<li class="nav-component"><a>커뮤니티</a></li>
 				<li class="nav-component"><a>고객센터</a>
