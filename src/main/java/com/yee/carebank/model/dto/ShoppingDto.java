@@ -1,7 +1,5 @@
 package com.yee.carebank.model.dto;
 
-import com.google.gson.JsonObject;
-
 public class ShoppingDto {
 	private String title;
 	private String brand;
@@ -15,27 +13,19 @@ public class ShoppingDto {
 
 	public ShoppingDto(String title, String brand, String maker, String link, String image) {
 		super();
-		this.title = title;
+		this.title = title.replace("<b>", "").replace("</b>", "");
 		this.brand = brand;
 		this.maker = maker;
 		this.link = link;
 		this.image = image;
 	}
 
-	public ShoppingDto(JsonObject obj) {
-		this.title = obj.get("title").getAsString().replace("<b>", "").replace("</b>", "");
-		this.brand = obj.get("brand").getAsString();
-		this.maker = obj.get("maker").getAsString();
-		this.link = obj.get("link").getAsString();
-		this.image = obj.get("image").getAsString();
-	}
-
 	public String getTitle() {
-		return title;
+		return title.replace("<b>", "").replace("</b>", "");
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = title.replace("<b>", "").replace("</b>", "");
 	}
 
 	public String getBrand() {
