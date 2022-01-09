@@ -149,8 +149,13 @@ body {
 	align-items: center;
 }
 
-#add-meal {
+.result-not-fonud {
+	text-align: cetner;
+}
+
+#add-meal, #add-meal-self {
 	margin-top: 30px;
+	margin-bottom: 30px;
 }
 </style>
 </head>
@@ -185,6 +190,9 @@ body {
 		</div>
 		<div>
 			<button class="file-upload-btn" type="button" id="add-meal">식단에 추가하기</button>		
+		</div>
+		<div class="result-not-found">
+			<span>원하는 결과가 나오지 않았나요?</span><br><button class="file-upload-btn" id="add-meal-self">직접 식단 입력하기</button>
 		</div>
 	</div>
 	<script
@@ -330,6 +338,11 @@ body {
 			let meal_name = $("#label-predict-result").text();
 
 			$(opener.document).find("input[name='meal_name']").val(meal_name);
+			self.close();
+		});
+		
+		$(document).on("click", "#add-meal-self", function(e){
+			$(opener.document).find("input[name='meal_name']").attr("readonly", false);
 			self.close();
 		});
 	</script>
