@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -18,9 +20,12 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import com.yee.carebank.model.dto.HospitalDto;
 
 @Repository
 public class OpenDataAPI {
@@ -153,5 +158,14 @@ public class OpenDataAPI {
 				.getAsJsonObject().get("item").getAsJsonObject();
 
 		return item;
+	}
+
+	public List<HospitalDto> parse(String jsonString) {
+		Gson gson = new Gson();
+		Type type = new TypeToken<List<HospitalDto>>() {
+		}.getType();
+		List<HospitalDto> list = gson.fromJson(jsonString, type);
+
+		return list;
 	}
 }

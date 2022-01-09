@@ -1,13 +1,10 @@
 package com.yee.carebank.model.biz;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.yee.carebank.api.NaverSearchAPI;
 import com.yee.carebank.model.dao.SuppleDao;
 import com.yee.carebank.model.dto.ShoppingDto;
@@ -38,16 +35,8 @@ public class SuppleBiz {
 	}
 
 	public List<ShoppingDto> getShopping(String supplement) {
-		JsonArray items = api.shopping(supplement);
-		List<ShoppingDto> list = new ArrayList<ShoppingDto>();
 
-		if (items != null) {
-			for (int i = 0; i < items.size(); i++) {
-				list.add(new ShoppingDto(items.get(i).getAsJsonObject()));
-			}
-		}
-
-		return list;
+		return api.parse(api.shopping(supplement).toString());
 
 	}
 
