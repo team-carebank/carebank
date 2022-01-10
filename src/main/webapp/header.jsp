@@ -72,13 +72,15 @@
 					<ul class="nav-sub">
 						<li><a href="${pageContext.request.contextPath}/diary.do">다이어리</a></li>
 					</ul></li>
+					
 				<c:choose>
-					<c:when test = "${empty login}">
+					<c:when test = "${empty login_info}">
 						<li class="nav-component"><a href="${pageContext.request.contextPath}/loginform.do">로그인</a></li>
 					</c:when>
-					<c:when test = "${not empty login}">
+					<c:when test = "${not empty login_info}">
 						<li class="nav-component"><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
 					</c:when>
+					
 				</c:choose>	
 				
 			</ul>
