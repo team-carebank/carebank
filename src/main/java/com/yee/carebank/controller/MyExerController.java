@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +22,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.yee.carebank.model.biz.MyExerciseBiz;
 import com.yee.carebank.model.dto.MyExerciseDto;
- 
+import com.yee.carebank.model.dto.UserDto;
+
 @Controller
 public class MyExerController {
-private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
-	
-	
+	private static Logger logger = LoggerFactory.getLogger(ExerciseController.class);
+
 	@Autowired
 	private MyExerciseBiz biz;
 //	
@@ -47,15 +48,16 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 //		return null;
 //	}
 //	
-	
-	@RequestMapping(value="/")
-	public  String selectList(Model model) {
+
+	@RequestMapping(value = "/")
+	public String selectList(Model model) {
 		logger.info("myexerciselist");
 		model.addAttribute("mylist", biz.selectList());
+
 		return "myexerlist.do/selectList";
-		
+
 	}
-	
+
 //	@RequestMapping(value="/myexerdetail.do", method = { RequestMethod.POST,RequestMethod.GET })
 //	public int selectOne(MyExerciseDto mydto, HttpServletRequest request) {
 //		logger.info("user_no");
@@ -66,38 +68,35 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 //		return user_no;
 //	}
 //	
-	
- 
- 
-	//data:cc 카운트 값이 넘어왔음 
-	@RequestMapping(value = "/test", method = { RequestMethod.POST,RequestMethod.GET })	
+
+	// data:cc 카운트 값이 넘어왔음
+	@RequestMapping(value = "/test", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
 	public String test(@RequestParam("exer_count") String exer_count) {
-		
+
 		System.out.println(exer_count);
-		return exer_count; 
+		return exer_count;
 	}
-	
-	
-	@RequestMapping(value = "/inserttest", method = { RequestMethod.POST,RequestMethod.GET })	
+
+	@RequestMapping(value = "/inserttest", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
-	public int inserttest(@RequestParam("exer_count") Integer exer_count, MyExerciseDto dto) {
-		 
-		dto.setExer_count(exer_count); 
-		
-		
-		System.out.println("count:: "+exer_count+"exerid:: "+dto.exer_id+"userno:: "+dto.user_no);  
-		//int res=biz.insert(exer_count);
-		int res=biz.insert(dto);
-		if(res>0) {
+	public int inserttest(HttpSession session, @RequestBody MyExerciseDto dto) {
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			dto.setUser_no(loginUser.getUser_no());
+		} catch (Exception e) {
+			return -1;
+		}
+		int res = biz.insert(dto);
+		if (res > 0) {
 			System.out.println("insert성공!!!!!!!");
-		}else {
+		} else {
 			System.out.println("실");
-		} 
-		return res; 
+		}
+		return res;
 	}
-	
-	 
+
 //	@RequestMapping(value="/inserttest", method= { RequestMethod.POST,RequestMethod.GET })
 //	@ResponseBody
 //	public int insert(@RequestParam("count") String count, MyExerciseDto dto) throws Exception{
@@ -138,18 +137,7 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 //			return res; 
 //			
 //		} 
-		 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 //	
 //	
 //	@RequestMapping("/inserttest")
@@ -167,14 +155,13 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 //		return res;
 //		
 //	} 
-	 
+
 //	@RequestMapping(value = "/login", method = RequestMethod.GET)
 //	public String login(Locale locale, Model model) {
 //		
 //		return "login";
 //	}
 //	 
-	
 
 //	@RequestMapping("/insertform.do")
 //	public String insertForm() {
@@ -194,8 +181,7 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 //		} 
 //	}
 //	//////////////////// 
-	
-	
+
 //	@RequestMapping(value="/inserttest", method= {RequestMethod.GET, RequestMethod.POST})
 //		
 //	public String inserttest(@RequestParam Map<String, Object> param) {
@@ -217,4 +203,3 @@ private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
 //	}
 // 
 }
-

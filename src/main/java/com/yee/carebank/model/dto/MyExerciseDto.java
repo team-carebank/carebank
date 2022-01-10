@@ -3,13 +3,13 @@ package com.yee.carebank.model.dto;
 public class MyExerciseDto {
 
 	public int exer_id;
-	public Integer user_no;
+	public int user_no;
 	public String regdate;
 	public Integer exer_count;
 	public MyExerciseDto() {
 		super(); 
 	}
-	public MyExerciseDto(int exer_id, Integer user_no, String regdate, Integer exer_count) {
+	public MyExerciseDto(int exer_id, int user_no, String regdate, Integer exer_count) {
 		super();
 		this.exer_id = exer_id;
 		this.user_no = user_no;
@@ -22,10 +22,10 @@ public class MyExerciseDto {
 	public void setExer_id(int exer_id) {
 		this.exer_id = exer_id;
 	}
-	public Integer getUser_no() {
+	public int getUser_no() {
 		return user_no;
 	}
-	public void setUser_no(Integer user_no) {
+	public void setUser_no(int user_no) {
 		this.user_no = user_no;
 	}
 	public String getRegdate() {
