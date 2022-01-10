@@ -71,4 +71,10 @@ public class MyMealDto {
 		this.regdate = regdate;
 	}
 
+	@Override
+	public String toString() {
+		return "MyMealDto [record_id=" + record_id + ", user_no=" + user_no + ", meal_name=" + meal_name
+				+ ", meal_time=" + meal_time + ", regdate=" + regdate + "]";
+	}
+
 }

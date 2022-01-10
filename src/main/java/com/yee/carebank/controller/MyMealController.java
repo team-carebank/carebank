@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.MyMealBiz;
@@ -27,6 +30,82 @@ public class MyMealController {
 	@RequestMapping("/mealPopup.do")
 	public String goPopup() {
 		return "mealPopup";
+	}
+
+	@RequestMapping("/updateMealPopup.do")
+	public String goUpdatePopup(HttpSession session, Model model, int record_id) {
+		MyMealDto before = biz.selectOne(record_id);
+
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+		try {
+			if (before.getUser_no() != loginUser.getUser_no()) {
+				return "redirect: main.do";
+			}
+		} catch (Exception e) {
+			return "redirect: loginform.do";
+		}
+		model.addAttribute("before", before);
+
+		return "updateMealPopup";
+	}
+
+	@RequestMapping("/updatemymeal.do")
+	@ResponseBody
+	public Boolean update(HttpSession session, @RequestBody MyMealDto dto) {
+		int res = 0;
+
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		MyMealDto before = biz.selectOne(dto.getRecord_id());
+
+		try {
+			// 만일 현재 로그인된 유저가 수정하려는 유저의 번호와 다르다면
+			if (before.getUser_no() != loginUser.getUser_no()) {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+
+		dto.setUser_no(loginUser.getUser_no());
+
+		res = biz.update(dto);
+
+		if (res > 0) {
+			return true;
+		} else {
+			System.out.println("이런씨발");
+			return false;
+		}
+	}
+
+	@RequestMapping("/deletemymeal.do")
+	@ResponseBody
+	public Boolean delete(HttpSession session, @RequestBody MyMealDto dto) {
+		int res = 0;
+		int record_id = dto.getRecord_id();
+
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		MyMealDto before = biz.selectOne(record_id);
+
+		try {
+			// 만일 현재 로그인된 유저가 수정하려는 유저의 번호와 다르다면
+			if (before.getUser_no() != loginUser.getUser_no()) {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+
+		res = biz.delete(record_id);
+
+		if (res > 0) {
+			return true;
+		} else {
+			System.out.println("이런씨발");
+			return false;
+		}
 	}
 
 	@RequestMapping("/mymeallist.do")

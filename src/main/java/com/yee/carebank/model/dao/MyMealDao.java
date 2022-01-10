@@ -38,4 +38,20 @@ public class MyMealDao {
 
 		return res;
 	}
+
+	public int update(MyMealDto dto) {
+		int res = 0;
+
+		res = sqlSession.update(NAMESPACE + "update", dto);
+
+		return res;
+	}
+
+	public int delete(int record_id) {
+		int res = 0;
+
+		res = sqlSession.delete(NAMESPACE + "delete", record_id);
+
+		return res;
+	}
 }
