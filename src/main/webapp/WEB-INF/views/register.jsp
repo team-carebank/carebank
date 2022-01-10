@@ -308,7 +308,7 @@
  	};
  	
  	//회원가입 버튼 (유효성검사 확인)
- 	function submit();
+ 	//function submit();
  	
  	
  
