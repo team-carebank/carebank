@@ -17,11 +17,11 @@ public class ScheduleDaoImpl implements ScheduleDao{
 	
 
 	@Override
-	public List<ScheduleDto> selectList() {
+	public List<ScheduleDto> selectList(int user_no) {
 		List<ScheduleDto> list = new ArrayList<ScheduleDto>();
 		
 		try {
-			list = sqlSession.selectList(NAMESPACE+"selectList");
+			list = sqlSession.selectList(NAMESPACE+"selectList", user_no);
 		} catch (Exception e) {
 			System.out.println("[error] : select list");
 			e.printStackTrace();

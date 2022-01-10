@@ -48,7 +48,7 @@ public class UserController {
 		if(login_info != null) {
 			if(passwordEncoder.matches(userdto.getUser_pw(), login_info.getUser_pw())) {
 				
-				session.setAttribute("login", login_info);
+				session.setAttribute("login_info", login_info);
 				session.setMaxInactiveInterval(60*60); //세션 유지시간
 				check = true; 
 			}

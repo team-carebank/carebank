@@ -23,6 +23,7 @@
   		<typeAlias type = "com.yee.carebank.model.dto.MyExerciseDto" alias = "MyExerciseDto"/>
 		<typeAlias type = "com.yee.carebank.model.dto.ScheduleDto" alias="scheduleDto"/>
 		<typeAlias type = "com.yee.carebank.model.dto.MoodDto" alias = "moodDto"/>
+		<typeAlias type = "com.yee.carebank.model.dto.PillsDto" alias = "pillsDto" />
 	</typeAliases>
 
 	<mappers>
@@ -37,6 +38,7 @@
   		<mapper resource = "/mybatis/myexercise-mapper.xml"/>
 	    <mapper resource = "/mybatis/schedule-mapper.xml"/>
   		<mapper resource = "/mybatis/mood-mapper.xml"/>
+  		<mapper resource = "/mybatis/pills-mapper.xml"/>
 	</mappers>
 
 </configuration>

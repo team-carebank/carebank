@@ -14,8 +14,9 @@
   		<result property="memo" column="MEMO" />
   	</resultMap>
   
-  	<select id="selectList" resultMap="scheduleMap">
+  	<select id="selectList" resultMap="scheduleMap" parameterType="int">
   		SELECT * FROM MY_VISIT
+  		WHERE USER_NO = ${user_no}
   	</select>
   	
   	<insert id="insert" parameterType="scheduleDto">
