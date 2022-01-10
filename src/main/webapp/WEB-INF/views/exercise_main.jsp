@@ -119,7 +119,7 @@ body{
 	
     <div class="textcontainer">
         <div class="textbox">
-            <h2 style="font-size: 20px;">오늘도 힘차게 달려봐요 </h2>
+            <h2 style="font-size: 20px;">${login_info.user_name }님, 오늘도 힘차게 달려봐요 </h2>
         </div>
     </div>
    

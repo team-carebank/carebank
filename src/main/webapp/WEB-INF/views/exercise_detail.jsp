@@ -3,6 +3,7 @@
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
     
+ <%@ page import="com.yee.carebank.model.dto.UserDto" %>   
  
 <!DOCTYPE html>
 <html lang="en">
@@ -219,13 +220,10 @@ height:400px;
   <div class="textbox">
         <h2 style="font-size: 20px;">${dto.exer_notice }</h2>
         <br><br>
-        <div id="hello">COUNT: </div> 
-         
-        <!--<c:forEach var="MyExerciseDto" items="${mydto }">
-        	<c:out value="${MyExerciseDto.regdate}"/>
-        	
-        </c:forEach>-->
-          
+        <div id="hello">COUNT: </div>
+        <h1>exerid테스트:${dto.exer_id }</h1> 
+        <h1>userno테스트: ${login_info.user_no }</h1>
+         <h1>${login_info.user_name }님 환영합니다~</h1> 
          
         </div>  
         
@@ -295,8 +293,8 @@ height:400px;
         	$.ajax({
         		url : "inserttest",
         		type : 'post',
-        		data :  {exer_count:cc}
-        		,
+        		data :  JSON.stringify({exer_count:cc, exer_id: exerid}),
+        		contentType: "application/json",
         		success : function(data) {
         					alert("성공");
         	     },
@@ -443,16 +441,19 @@ height:400px;
   </c:forEach>-->
   
   
-  	var arr= 	<c:forEach items="${mydto }" var="MyExerciseDto">
-	'${MyExerciseDto.regdate }'
-	</c:forEach>;
+  //	var arr= 	
+  	//	<c:forEach items="${mydto }" var="MyExerciseDto">
+  //		<c:out value="${MyExerciseDto.regdate}" /> 
+//	</c:forEach>;
 	
-	console.log(arr);
+	//console.log(arr);
   
     ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
     let chartData = [  
-    	['2022-01-12',1000],
-    	[arr,5000]
+    	//['2022-01-12',1000],
+     <c:forEach items="${mydto }" var="MyExerciseDto">
+     ['${MyExerciseDto.regdate}',1000],
+     </c:forEach>
     	  
     ];
 

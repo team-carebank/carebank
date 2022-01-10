@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-    
+ <%@ page import="com.yee.carebank.model.dto.UserDto" %>   
     
 <!DOCTYPE html>
 <html>
@@ -150,6 +150,10 @@ th{
 
 <div id="body">
       <div class="flexbox-container1">
+      
+
+      
+      
       
           <div class="flexbox-item flexbox-item-1">
             <br><br><br><h3 class="sa sa-right">식단 관리를 시작해보세요</h3><br>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yee.carebank.model.dto.FaqDto;
 import com.yee.carebank.model.dto.MyExerciseDto;
+import com.yee.carebank.model.dto.UserDto;
 
 @Repository
 public class MyExerciseDaoImpl implements MyExerciseDao {
@@ -33,7 +34,7 @@ public class MyExerciseDaoImpl implements MyExerciseDao {
 	}
 	
 	@Override
-	public int selectOne(Integer user_no) {
+	public int selectOne(int user_no) {
 		
 		int dto=0;
 		
@@ -67,7 +68,7 @@ public class MyExerciseDaoImpl implements MyExerciseDao {
 
 	@Override
 	public int insert(MyExerciseDto dto) {
-int res = 0;
+		int res = 0;
 		
 		try {
 			res = sqlSession.insert(NAMESPACE + "insert",dto);
