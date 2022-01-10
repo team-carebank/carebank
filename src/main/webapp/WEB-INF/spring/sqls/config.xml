@@ -23,6 +23,8 @@
   		<typeAlias type = "com.yee.carebank.model.dto.MyExerciseDto" alias = "MyExerciseDto"/>
 		<typeAlias type = "com.yee.carebank.model.dto.ScheduleDto" alias="scheduleDto"/>
 		<typeAlias type = "com.yee.carebank.model.dto.MoodDto" alias = "moodDto"/>
+		<typeAlias type="com.yee.carebank.model.dto.MyMealDto" alias="myMealDto"/>
+		
 	</typeAliases>
 
 	<mappers>
