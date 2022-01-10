@@ -30,22 +30,10 @@ public class indexcontroller{
 	private UserBiz userbiz;
 	 
 	@RequestMapping("/main.do")
-	public String getMain(UserDto userdto,HttpSession session, Model model,HttpServletRequest request ) {
-		UserDto login_info = userbiz.login(userdto); //로그인정보가져오기
-		//HttpSession session=request.getSession();
-		if(session.getAttribute("login")==null) {
-			logger.info("로그인 안됨");
-		}else {
-			logger.info("로그인완료");
-		}
+	public String getMain( ) {
 		return "main";
 	}
 
-	
-//	@RequestMapping("/main.do")
-//	public String getMain(Model model) {
-//		return "main";
-//	}
 	@RequestMapping("/exercise.do")
 	public String getExercise(Model model) { 
 		return "exercise_main";

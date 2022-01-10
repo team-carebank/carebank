@@ -23,7 +23,7 @@
 	<insert id="insert" parameterType="myexerciseDto">
 		INSERT INTO MY_EXERCISE
 		<!-- VALUES ('1',#{user_no},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count})-->
-		VALUES ('1','1011',TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count})
+		VALUES (#{exer_id},#{user_no},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count})
 	</insert> 
 	
   </mapper>

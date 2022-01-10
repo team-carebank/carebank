@@ -222,8 +222,8 @@ height:400px;
         <br><br>
         <div id="hello">COUNT: </div>
         <h1>exerid테스트:${dto.exer_id }</h1> 
-        <h1>userno테스트: ${login.user_no }</h1>
-         <h1>${login.user_name }님 환영합니다~</h1> 
+        <h1>userno테스트: ${login_info.user_no }</h1>
+         <h1>${login_info.user_name }님 환영합니다~</h1> 
          
         </div>  
         
