@@ -85,34 +85,11 @@ html::-webkit-scrollbar {
 	margin-block: 10px;
 }
 
-.fc-event-time{
+.fc-event-time {
 	display: none;
 }
 </style>
 <script type="text/javascript">
-function getOption(w, h){
-	//팝업이 화면의 중앙에 오게 설정
-	var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-    var top = ((height / 2) - (h / 2)) + dualScreenTop;
-
-	return "width="+w+", height="+h+", left="+left+", top="+top+", location=no, resizable=no";
-}
-
-$(document).on("click", ".add-button#my_meal", function(e){
-	var w = 600;
-	var h = 600;
-	
-	var option = getOption(w, h);
-
-	var url = "mealPopup.do";
-	var name = "mealPopup";
-	window.open(url, name, option);
-});
-
 function click_add(){
 	var url = "schedulePopup.do";
 	var name = "schedulePopup";
@@ -131,7 +108,6 @@ $(function(){
 	var calendarEl = $('#calendar')[0];
 	// full-calendar 생성하기
 	var calendar = new FullCalendar.Calendar(calendarEl, {
-		
 		eventSources : [
 			{ events : [
 			<c:forEach var="item" items="${dto}">
@@ -144,6 +120,17 @@ $(function(){
 			{}
 			]}
 		],
+		eventClick:function(info){
+			/*
+			클릭한 이벤트의 대상이 MY_MEAL인 경우
+			*/
+			if(info.el.className.includes('calendar-mymeal')){
+				var event = info.event._def;
+				var record_id = Number(event.publicId);
+				
+				updateMyMeal(record_id);
+			}
+		},
 		height: '600px', // calendar 높이 설정
 		expandRows: true, // 화면에 맞게 높이 재설정
 		slotMinTime: '08:00', // Day 캘린더에서 시작 시간
@@ -167,21 +154,21 @@ $(function(){
 });
 </script>
 <script>
+// 왼쪽에 있는 공백을 제거한다. 
 function getMyMeal(calendar) {
 	$.ajax({
 		url: 'mymeallist.do',
 		success: function(res) {
 			var mealList = res.res;
 			mealList.forEach(function(mealData) {
-				console.log(mealData)
 				calendar.addEventSource( {
 					events: [
 						{
-							title: mealData.meal_name,
+							id: mealData.record_id,
+							title: mealData.meal_time+":"+mealData.meal_name,
 							start: mealData.regdate
 						}],
 					color: 'orange',
-					id: mealData.record_id,
 					className: 'calendar-mymeal'
 				});
 			});
@@ -191,6 +178,42 @@ function getMyMeal(calendar) {
 		}
 	});
 }
+
+function getOption(w, h){
+	//팝업이 화면의 중앙에 오게 설정
+	var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+	return "width="+w+", height="+h+", left="+left+", top="+top+", location=no, resizable=no";
+}
+
+function updateMyMeal(record_id){
+	var w = 600;
+	var h = 600;
+	
+	var option = getOption(w, h);
+	
+	var url = "updateMealPopup.do?record_id=" + record_id;
+	var name = "updateMealPopup";
+	
+	 window.open(url, name, option);
+}
+
+$(document).on("click", ".add-button#my_meal", function(e){
+	var w = 600;
+	var h = 600;
+	
+	var option = getOption(w, h);
+
+	var url = "mealPopup.do";
+	var name = "mealPopup";
+	
+	window.open(url, name, option);
+});
 </script>
 </head>
 <body>

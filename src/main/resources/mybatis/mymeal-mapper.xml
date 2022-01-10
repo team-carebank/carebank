@@ -6,7 +6,8 @@
 <mapper namespace="mymeal">
 	<insert id="insert" parameterType="myMealDto">
 		INSERT INTO MY_MEAL
-		VALUES(RECORD_SEQ.NEXTVAL, #{user_no}, #{meal_name}, #{meal_time}, #{regdate})
+		VALUES(RECORD_SEQ.NEXTVAL, #{user_no}, #{meal_name}, #{meal_time},
+		#{regdate})
 	</insert>
 	<select id="selectList" parameterType="int"
 		resultType="myMealDto">
@@ -17,4 +18,10 @@
 		resultType="myMealDto">
 		SELECT * FROM MY_MEAL WHERE RECORD_ID = ${record_id}
 	</select>
+	<update id="update" parameterType="myMealDto">
+		UPDATE MY_MEAL SET MEAL_NAME = #{meal_name}, MEAL_TIME = #{meal_time}, REGDATE = #{regdate} WHERE RECORD_ID = #{record_id}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM MY_MEAL WHERE RECORD_ID = ${record_id}
+	</delete>		
 </mapper>

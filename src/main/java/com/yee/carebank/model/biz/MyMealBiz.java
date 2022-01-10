@@ -25,4 +25,12 @@ public class MyMealBiz {
 	public MyMealDto selectOne(int record_id) {
 		return dao.selectOne(record_id);
 	}
+
+	public int update(MyMealDto dto) {
+		return dao.update(dto);
+	}
+
+	public int delete(int record_id) {
+		return dao.delete(record_id);
+	}
 }
