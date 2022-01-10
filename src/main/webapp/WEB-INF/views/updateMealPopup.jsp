@@ -54,17 +54,24 @@ input:not(input[type="radio"]) {
 	background: linear-gradient(to top, #FFE400 50%, transparent 50%);
 }
 
-#mymeal {
+#regdate {
+	margin-block-end: 0;
+}
+
+#mymeal, #delete-mymeal {
 	width: 100%;
-	height: 50px;
-	font-size: large;
+	height: 20px;
 	border: none;
 	background-color: transparent;
 }
 
-#mymeal:hover {
+#mymeal:hover, #delete-mymeal:hover {
 	font-weight: bold;
 	cursor: pointer;
+}
+
+.popup-body-button{
+	padding-bottom: 20px;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -82,6 +89,15 @@ function getOption(w, h){
 }
 </script>
 <script>
+$(function(){
+	var currentMealTime = document.querySelectorAll("input[name='meal_time']");
+	
+	for (var i=0; i<currentMealTime.length; i++){
+		if (currentMealTime[i].value == '${before.meal_time}'){
+			$(currentMealTime[i]).attr("checked", "checked");
+		}
+	}
+});
 	function today() {
 		let d = new Date();
 		let currDate = d.getDate();
@@ -91,21 +107,15 @@ function getOption(w, h){
 				+ ((currMonth < 10) ? '0' + currMonth : currMonth) + "-"
 				+ ((currDate < 10) ? '0' + currDate : currDate);
 	}
-
-	$(function() {
-		let regdate = document.getElementById("regdate");
-
-		regdate.value = today();
-	});
-
+	
 	$(document).on("change", "#regdate", function(e) {
 		if (e.currentTarget.value > today()) {
 			alert("오늘 날짜 이후로는 기록할 수 없습니다!");
 			e.currentTarget.value = today();
 		}
 	});
-
 	$(document).on("click", "input[type='button']#mymeal", function(e) {
+		let record_id = document.querySelector("input[name='record_id']").value;
 		let meal_name = document.querySelector("input[name='meal_name']").value;
 		let meal_time = document.querySelector("input[name='meal_time']:checked").value;
 		let regdate = document.querySelector("input[name='regdate']").value;
@@ -117,18 +127,22 @@ function getOption(w, h){
 		}
 
 		$.ajax({
-			url : 'submitmeal.do',
+			url : 'updatemymeal.do',
 			type : 'post',
 			data : JSON.stringify({
+				record_id : record_id,
 				meal_name : meal_name,
 				meal_time : meal_time,
 				regdate : regdate
 			}),
 			contentType : 'application/json',
 			success : function(res) {
-				if (res.res) {
+				if (res) {
 					alert("다이어리에 기록되었습니다!");
 					opener.parent.location.reload();
+					window.close();
+				} else {
+					alert("다이어리에 기록되지 않았습니다.");
 					window.close();
 				}
 			},
@@ -136,6 +150,33 @@ function getOption(w, h){
 				alert("통신 실패");
 			}
 		});
+	});
+	$(document).on("click", "input[type='button']#delete-mymeal", function(e) {
+		var confirmVal = confirm("정말로 지우시겠습니까?");
+		
+		if(confirmVal){
+			let record_id = document.querySelector("input[name='record_id']").value;
+
+			$.ajax({
+				url : 'deletemymeal.do',
+				type : 'post',
+				data : JSON.stringify({record_id}),
+				contentType: "application/json",
+				success : function(res) {
+					if (res) {
+						alert("다이어리에서 기록을 지웠어요!");
+						opener.parent.location.reload();
+						window.close();
+					} else {
+						alert("다이어리에서 기록을 지우지 못했어요.");
+						window.close();
+					}
+				},
+				error : function() {
+					alert("통신 실패");
+				}
+			});
+		}
 	});
 	
 	$(document).on("click", "#meal_name", function(e){
@@ -156,9 +197,11 @@ function getOption(w, h){
 			</div>
 			<div class="popup-body">
 				<div class="popup-body-form">
+					<input type="hidden" name="record_id" value="${before.record_id }">
 					<h3>오늘 먹은 것은...</h3>
 					<input type="text" id="meal_name" name="meal_name"
-						readonly="readonly" placeholder="클릭하여 식단 기록하기!">
+						readonly="readonly" placeholder="클릭하여 식단 기록하기!"
+						value="${before.meal_name }">
 				</div>
 				<div class="popup-body-form">
 					<h3>언제 먹었나요?</h3>
@@ -172,9 +215,13 @@ function getOption(w, h){
 				</div>
 				<div class="popup-body-form">
 					<h3>날짜를 기록하세요.</h3>
-					<input type="date" name="regdate" id="regdate">
+					<input type="date" name="regdate" id="regdate"
+						value="${before.regdate }">
 				</div>
-				<input type="button" id="mymeal" value="다이어리에 기록하기!">
+				<div class="popup-body-button">
+					<input type="button" id="mymeal" value="다이어리에 기록하기!"> <input
+						type="button" id="delete-mymeal" value="다이어리에서 지우기!">
+				</div>
 			</div>
 		</div>
 	</div>
