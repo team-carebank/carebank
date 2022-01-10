@@ -4,9 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mymeal">
-	<insert id="insert"
-		parameterType="com.yee.carebank.model.dto.MyMealDto">
+	<insert id="insert" parameterType="myMealDto">
 		INSERT INTO MY_MEAL
 		VALUES(RECORD_SEQ.NEXTVAL, #{user_no}, #{meal_name}, #{meal_time}, #{regdate})
 	</insert>
+	<select id="selectList" parameterType="int"
+		resultType="myMealDto">
+		SELECT RECORD_ID, MEAL_NAME, MEAL_TIME, REGDATE FROM
+		MY_MEAL WHERE USER_NO = ${user_no}
+	</select>
+	<select id="selectOne" parameterType="int"
+		resultType="myMealDto">
+		SELECT * FROM MY_MEAL WHERE RECORD_ID = ${record_id}
+	</select>
 </mapper>

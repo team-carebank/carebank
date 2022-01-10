@@ -1,12 +1,17 @@
 package com.yee.carebank.model.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class MyMealDto {
 	private int record_id;
 	private int user_no;
 	private String meal_name;
 	private String meal_time;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date regdate;
 
 	public MyMealDto() {
@@ -38,14 +43,6 @@ public class MyMealDto {
 		this.user_no = user_no;
 	}
 
-	public int getrecord_id() {
-		return record_id;
-	}
-
-	public void setrecord_id(int record_id) {
-		this.record_id = record_id;
-	}
-
 	public String getMeal_name() {
 		return meal_name;
 	}
@@ -62,18 +59,16 @@ public class MyMealDto {
 		this.meal_time = meal_time;
 	}
 
-	public Date getRegdate() {
-		return regdate;
+	public String getRegdate() {
+		int year = 1900 + regdate.getYear();
+		int month = 1 + regdate.getMonth();
+		int date = regdate.getDate();
+
+		return year + "-" + (month >= 10 ? month : ("0" + month)) + "-" + (date >= 10 ? date : ("0" + date));
 	}
 
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
-	}
-
-	@Override
-	public String toString() {
-		return "MyMealDto [record_id=" + record_id + ", user_no=" + user_no + ", meal_name=" + meal_name
-				+ ", meal_time=" + meal_time + ", regdate=" + regdate + "]";
 	}
 
 }
