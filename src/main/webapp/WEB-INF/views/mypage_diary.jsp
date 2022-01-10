@@ -24,29 +24,29 @@
 	rel="stylesheet" />
 <title>마이페이지 다이어리</title>
 <style type="text/css">
-body{
+body {
 	width: 100%;
 	display: grid;
 }
 
-body > div{
+body>div {
 	width: 80%;
 	max-width: 1200px;
 	justify-self: center;
 	align-self: center;
 }
 
-#calendar-container{
+#calendar-container {
 	display: grid;
 	margin: 0;
 }
 
-#calendar{
+#calendar {
 	height: 1000px !important;
 }
 
 html::-webkit-scrollbar {
-    width: 0px;
+	width: 0px;
 }
 /* 캘린더 위의 해더 스타일(날짜가 있는 부분) */
 .fc-header-toolbar {
@@ -55,36 +55,39 @@ html::-webkit-scrollbar {
 	padding-right: 1em;
 }
 
-.add-button, .adds-button{
-    direction: ltr;
-    box-sizing: border-box;
-    font-weight: 400;
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    text-transform: none;
-    margin: 0;
-    border: 1px solid transparent;
-    padding: .4em .65em;
-    font-size: 1em;
-    line-height: 1.5;
-    border-radius: .25em;
-    color: var(--fc-button-text-color,#fff);
-    background-color: var(--fc-button-bg-color,#2C3E50);
-    border-color: var(--fc-button-border-color,#2C3E50);
-    cursor: pointer;
-    position: relative;
-    flex: 1 1 auto;
+.add-button, .adds-button {
+	direction: ltr;
+	box-sizing: border-box;
+	font-weight: 400;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	text-transform: none;
+	margin: 0;
+	border: 1px solid transparent;
+	padding: .4em .65em;
+	font-size: 1em;
+	line-height: 1.5;
+	border-radius: .25em;
+	color: var(- -fc-button-text-color, #fff);
+	background-color: var(- -fc-button-bg-color, #2C3E50);
+	border-color: var(- -fc-button-border-color, #2C3E50);
+	cursor: pointer;
+	position: relative;
+	flex: 1 1 auto;
 }
 
-.add-button:hover, .adds-button:hover{
-	background-color: var(--fc-button-active-bg-color,#1a252f);
+.add-button:hover, .adds-button:hover {
+	background-color: var(- -fc-button-active-bg-color, #1a252f);
 }
 
-.calendar-button{
+.calendar-button {
 	margin-block: 10px;
 }
 
+.fc-event-time{
+	display: none;
+}
 </style>
 <script type="text/javascript">
 function getOption(w, h){
@@ -122,57 +125,83 @@ function click_adds(){
 	var option = "width=400, height=400, left=200, top=50, location=no";
 	window.open(url,name,option)
 };
-	(function(){
-		$(function(){
-			// calendar element 취득
-			var calendarEl = $('#calendar')[0];
-			// full-calendar 생성하기
-			var calendar = new FullCalendar.Calendar(calendarEl, {
-				
-				eventSources : [
-					{ events : [
-					<c:forEach var="item" items="${dto}">
-					{
-						title : '${item.hospital_name}',
-						start : '<fmt:formatDate value="${item.resdate }" type="both" pattern="yyyy-MM-dd"/>',
-						url : 'schedule.do?hospital_no=${item.hospital_no}',
-					},
-					</c:forEach>
-					{}
-					]}
-				],
-				height: '600px', // calendar 높이 설정
-				expandRows: true, // 화면에 맞게 높이 재설정
-				slotMinTime: '08:00', // Day 캘린더에서 시작 시간
-				slotMaxTime: '20:00', // Day 캘린더에서 종료 시간
-			// 해더에 표시할 툴바
-			headerToolbar: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+
+$(function(){
+	// calendar element 취득
+	var calendarEl = $('#calendar')[0];
+	// full-calendar 생성하기
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		
+		eventSources : [
+			{ events : [
+			<c:forEach var="item" items="${dto}">
+			{
+				title : '${item.hospital_name}',
+				start : '<fmt:formatDate value="${item.resdate }" type="both" pattern="yyyy-MM-dd"/>',
+				url : 'schedule.do?hospital_no=${item.hospital_no}',
 			},
-				initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
-				navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
-				editable: true, // 수정 가능?
-				nowIndicator: true, // 현재 시간 마크
-				dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
-				locale: 'ko', // 한국어 설정
-						});
-					// 캘린더 랜더링
-						calendar.render();
-					});
-					})();
+			</c:forEach>
+			{}
+			]}
+		],
+		height: '600px', // calendar 높이 설정
+		expandRows: true, // 화면에 맞게 높이 재설정
+		slotMinTime: '08:00', // Day 캘린더에서 시작 시간
+		slotMaxTime: '20:00', // Day 캘린더에서 종료 시간
+	// 해더에 표시할 툴바
+	headerToolbar: {
+		left: 'prev,next today',
+		center: 'title',
+		right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+	},
+		initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+		navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
+		editable: true, // 수정 가능?
+		nowIndicator: true, // 현재 시간 마크
+		dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+		locale: 'ko', // 한국어 설정
+				});
+			// 캘린더 랜더링
+	getMyMeal(calendar); // 다이어리-식단 기록 내용 불러오기
+	calendar.render();
+});
+</script>
+<script>
+function getMyMeal(calendar) {
+	$.ajax({
+		url: 'mymeallist.do',
+		success: function(res) {
+			var mealList = res.res;
+			mealList.forEach(function(mealData) {
+				console.log(mealData)
+				calendar.addEventSource( {
+					events: [
+						{
+							title: mealData.meal_name,
+							start: mealData.regdate
+						}],
+					color: 'orange',
+					id: mealData.record_id,
+					className: 'calendar-mymeal'
+				});
+			});
+		},
+		error: function() {
+			alert("통신 오류");
+		}
+	});
+}
 </script>
 </head>
 <body>
 
-<header>
-<%@include file = "../../header.jsp" %>
-</header>
+	<header>
+		<%@include file="../../header.jsp"%>
+	</header>
 	<!-- calendar 태그 -->
 	<div style="padding: 30px;">
-	<div id='calendar-container'>
-		<div id='calendar'></div>
+		<div id='calendar-container'>
+			<div id='calendar'></div>
 			<div class="calendar-button">
 				<button class="add-button" type="button" onclick="click_add();">병원
 					기록</button>
