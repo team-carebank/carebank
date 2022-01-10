@@ -23,6 +23,13 @@
 	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css"
 	rel="stylesheet" />
 
+<!-- 모달 창 띄우기 (include jQuery) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 
 <title>마이페이지 다이어리</title>
 <style type="text/css">
@@ -48,13 +55,18 @@ function click_add(){
 	var option = "width=600, height=600, left=200, top=50, location=no";
 	window.open(url,name,option)
 };
-function click_adds(){
+function click_mood(){
 	var url = "moodPopup.do";
 	var name = "moodPopup";
 	var option = "width=400, height=400, left=200, top=50, location=no";
 	window.open(url,name,option)
 };
-	(function(){
+function click_pills(){
+	var url = "pillsPopup.do";
+	var name = "pillsPopup";
+	var option = "width=400, height=400, left=200, top=50, location=no";
+	window.open(url,name,option)
+};
 		$(function(){
 			// calendar element 취득
 			var calendarEl = $('#calendar')[0];
@@ -68,14 +80,24 @@ function click_adds(){
 						title : '${item.hospital_name}',
 						start : '<fmt:formatDate value="${item.resdate }" type="both" pattern="yyyy-MM-dd"/>',
 						url : 'schedule.do?hospital_no=${item.hospital_no}',
-						
+						color : "skyblue",
+						textColor : "#000077",
 					},
-				
+					</c:forEach>
+					<c:forEach var="pill" items="${pills}">
+					<c:if test="${pill ne null}">
+					{
+						title : '영양제 섭취',
+						start : '<fmt:formatDate value="${pill.regdate }" type="both" pattern="yyyy-MM-dd"/>',
+						color : 'purple',
+						textColor : 'while',
+						url : 'pillsDelete.do?pills_no=${pill.pills_no}',
+					},
+					</c:if>
 					</c:forEach>
 					{}
 					]}
-				],
-			
+			],
 				
 				
 				height: '600px', // calendar 높이 설정
@@ -99,7 +121,6 @@ function click_adds(){
 					// 캘린더 랜더링
 						calendar.render();
 					});
-					})();
 	
 	
 </script>
@@ -113,10 +134,9 @@ function click_adds(){
 	<div  style="padding: 30px;">
 	<div id='calendar-container'>
 		<div id='calendar'></div>
-		<button class="add-button" type="button" onclick="click_add();">병원
-			기록</button>
-		<button class="adds-button" type="button" onclick="click_adds();">기분
-			상태</button>
+		<button class="add-button" type="button" onclick="click_add();">병원기록</button>
+		<button class="mood-button" type="button" onclick="click_mood();">기분상태</button>
+		<button class="pill-button" type="button" onclick="click_pills();">영양제 기록</button>
 	</div>
 	</div>
 </body>
