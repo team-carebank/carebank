@@ -48,7 +48,7 @@ public class UserController {
 		if(login_info != null) {
 			if(passwordEncoder.matches(userdto.getUser_pw(), login_info.getUser_pw())) {
 				
-				session.setAttribute("login", login_info);
+				session.setAttribute("login_info", login_info);
 				session.setMaxInactiveInterval(60*60); //세션 유지시간
 				check = true; 
 			}
@@ -57,6 +57,7 @@ public class UserController {
 		 Map<String, Boolean> map = new HashMap<String, Boolean>();
 		 map.put("check",check);
 		 //test//
+		// System.out.println(session);
 		return map;
 	}
 	
@@ -69,6 +70,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
+		System.out.println(session);
 		return "redirect:loginform.do";
 	}
 	
@@ -89,7 +91,7 @@ public class UserController {
 		userdto.setUser_pw(passwordEncoder.encode(userdto.getUser_pw()));
 		int res = userbiz.regis(userdto);
 		if(res>0) {
-
+			
 			return "redirect:loginform.do";
 		}
 		else {
@@ -102,9 +104,12 @@ public class UserController {
 	//회원가입 - 아이디중복체크
 	@RequestMapping(value = "/idchk.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String idchk(String user_id) {
+	public String idchk(@RequestBody String user_id ) {
 		
 		logger.info("ID CHECK");
+		
+	
+		System.out.println(user_id);
 		
 		int res = userbiz.idchk(user_id);
 		

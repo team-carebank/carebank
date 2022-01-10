@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -242,7 +243,7 @@
                       </div>
                       </div>
                       	
-                      	<input type = "submit" value = "가입">
+                      	<input type = "button" value = "가입" onclick = "submit();">
                       </form>
                       
                   </div>
@@ -305,6 +306,11 @@
  			
  		}
  	};
+ 	
+ 	//회원가입 버튼 (유효성검사 확인)
+ 	//function submit();
+ 	
+ 	
  
 </script>
 </body>

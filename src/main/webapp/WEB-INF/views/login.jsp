@@ -10,6 +10,7 @@
     
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
 <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
@@ -137,8 +138,9 @@ img{
     <div class="sidenav">
         <div class="login-main-text">
            <h2>CARE BANK<br></h2>
-           <pre>케어뱅크 설명 케어뱅크 설명 케어뱅크 설명
-케어뱅크 설명 케어뱅크 설명 케어뱅크 설명
+           <br>
+           <h6>케어뱅크는 개인화된 헬스 케어 서비스를 제공하는 플랫폼입니다.</h3>
+           <h6>케어뱅크와 식단, 운동, 영양소의 밸런스를 손쉽게 유지해 보세요!</h3>
            </pre>
         </div>
      </div>
@@ -152,17 +154,17 @@ img{
         <div class="col-md-6 col-sm-12 login">
            <div class="login-form">
             			<p id = "loginChk">아이디 혹은 비밀번호를 확인해주세요</p>
-              <form action = "login.do" method = "post" autocomplete = "off">
+              <form action = "login.do" method = "post" autocomplete = "off" id = "loginform">
                  <div class="form-group">
                     <label>User ID</label>
-                    <input type="text" class="form-control id" name = "user_id" id = "user_id" placeholder="User ID" autocomplete = "off">
+                    <input type="text" class="form-control id" name = "user_id" id = "user_id" placeholder="User ID" autocomplete = "off" onKeyDown = "onEnter(this);">
                  </div>
                  <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" name = "user_pw" id = "user_pw" placeholder="Password">
+                    <input type="password" class="form-control" name = "user_pw" id = "user_pw" placeholder="Password" onKeyDown = "onEnter(this);">
                  </div>
                  <div class = "btns">
-                    <button type="button" class="btn btn-success" id = "login_btn" onclick = "login(); return false;">로그인</button>
+                    <button type="button" class="btn btn-success" id = "login_btn" onclick = "login();" return false;">로그인</button>
                     <button type="button" class="btn btn-secondary" id = "regis_btn" onclick = "location.href = 'regisform.do'">회원가입</button>
                </div>
             </form>
@@ -171,7 +173,8 @@ img{
                 <div class = "container-fluid">
                     <div class = "row">
                         <div class="col-sm-2 col-2 offset-sm-3">
-                            <img class = "img-fluid rounded-circle" src="resources/img/kakao.png" onclick = "">
+                            <img class = "img-fluid rounded-circle" src="resources/img/kakao.png" 
+                            id = "kakao">
                         </div>
                         <div class="col-sm-2 col-2">
                             <img class = "img-fluid rounded-circle" src="resources/img/naver.png" onclick = "">
@@ -208,8 +211,15 @@ img{
 		$("#loginChk").hide(); 
 	});
 	
+/* 	function onEnter(event){
+		var keycode = event.keyCode;
 	
-	function login(){
+		if(keycode == 13){
+			loginform.login(); 			
+		}
+	}; */
+
+	function login(){	
 		var user_id = $("#user_id").val().trim();
 		var user_pw = $("#user_pw").val().trim();
 		console.log(user_id + user_pw);
@@ -224,7 +234,7 @@ img{
 		}
 		else{
 			$.ajax({
-				type: "post",
+				type: "POST",
 				url:	 "login.do",
 				data: JSON.stringify(loginInfo),
 				contentType: "application/json",
@@ -243,7 +253,82 @@ img{
 				}
 			});
 		}
-	}
+	};
+	
+	//카카오 로그인
+Kakao.init('d74b91e639c9bf043091f95d8002a85f');
+
+
+$("#kakao").on("click", function() {
+	 Kakao.Auth.login({
+		 success: function(authObj) {
+
+			 Kakao.API.request({
+				 url: '/v2/user/me',
+				 data: {
+					 property_keys: ["kakao_account.email", "kakao_account.profile_nickname"]
+				 },
+				 success: function(res) { // 1. 카카오 정보 가져오기 성공
+
+					 var user_id = String(res.id);
+					 //scope : 'account_email','profile_nickname';
+
+					 $.ajax({
+						 url: "kakaologin.do",
+						 method: "post",
+						 data: JSON.stringify({
+							 user_id: user_id,
+							 user_name: "kakaoNick",
+							 email: "kakao@test.com",
+							 user_pw: "kakao123"
+						 }),
+						 contentType: "application/json",
+						 success: function(res) {
+
+							 if (res) {
+
+								 location.href = "${pageContext.request.contextPath}/" + res
+							 }
+							 else {
+								 alert("카카오 로그 실패");
+								 location.href = "${pageContext.request.contextPath}/loginform.do";
+							 }
+						 },
+						 error:
+							 function() {
+								 alert("통신실패")
+							 }
+					 });
+					 //ajax end
+
+				 }// kakao sucess end
+			 });// request end
+		 },
+
+		 fail: function(err) {
+			 alert(JSON.stringify(err));
+		 }
+	 });
+});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	 
 </script>

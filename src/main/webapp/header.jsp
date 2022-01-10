@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +72,17 @@
 					<ul class="nav-sub">
 						<li><a href="${pageContext.request.contextPath}/diary.do">다이어리</a></li>
 					</ul></li>
-				<li class="nav-component"><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
+					
+				<c:choose>
+					<c:when test = "${empty login_info}">
+						<li class="nav-component"><a href="${pageContext.request.contextPath}/loginform.do">로그인</a></li>
+					</c:when>
+					<c:when test = "${not empty login_info}">
+						<li class="nav-component"><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
+					</c:when>
+					
+				</c:choose>	
+				
 			</ul>
 		</div>
 	</div>

@@ -21,12 +21,12 @@
   		SELECT * FROM CARE_USER
   		WHERE USER_ID = #{user_id}
   	</select>
-  
+  	
   	<!-- 회원가입 -->
   	<insert id="register">
   		INSERT INTO CARE_USER
   		VALUES(
-  		USER_NOSEQ.NEXTVAL,#{user_name}, #{user_id}, #{user_pw}, #{birth}, #{phone}, #{email}, DEFAULT, DEFAULT)
+  		USER_NOSEQ.NEXTVAL,#{user_name}, #{user_id}, #{user_pw}, #{birth,jdbcType=DATE}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, DEFAULT, DEFAULT)
   	</insert>
   	
   	<!-- 아이디 중복 확인 -->
