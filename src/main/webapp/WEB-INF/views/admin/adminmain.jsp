@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,14 +28,9 @@
 	});
 </script>
 </head>
-
+<%@ include file="../../../admin_header.jsp"%>
 <body>
 	<div class="container">
-		<div class="admin-info">
-			<h1>CareBank</h1>
-			<h2>ADMIN PAGE</h2>
-			<span>관리자 페이지</span> <span>로그아웃</span>
-		</div>
 		<div class="body-content">
 			<div class="content-admin-side">
 				<div>
