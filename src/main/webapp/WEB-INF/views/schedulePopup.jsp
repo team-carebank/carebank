@@ -103,7 +103,6 @@ $(function() {
 
 	});
 	 
-});
 
 $.fn.serializeObject = function(){
 	var o = {};
