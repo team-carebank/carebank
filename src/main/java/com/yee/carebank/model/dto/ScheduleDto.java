@@ -10,7 +10,7 @@ public class ScheduleDto {
 	private Date regdate;
 	private Date resdate;
 	private String memo;
-	
+
 	public ScheduleDto() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -74,5 +74,10 @@ public class ScheduleDto {
 		this.memo = memo;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "ScheduleDto [hospital_no=" + hospital_no + ", user_no=" + user_no + ", hospital_name=" + hospital_name
+				+ ", regdate=" + regdate + ", resdate=" + resdate + ", memo=" + memo + "]";
+	}
+
 }

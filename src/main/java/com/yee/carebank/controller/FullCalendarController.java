@@ -1,5 +1,8 @@
 package com.yee.carebank.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -60,14 +63,14 @@ public class FullCalendarController {
 			list = sBiz.selectList(1011);
 			// return "main";
 		}
-		
+
 		List<PillsDto> Pills = null;
-		if(loginUser != null) {
+		if (loginUser != null) {
 			Pills = pBiz.selectList(loginUser.getUser_no());
-		}else {
+		} else {
 			Pills = pBiz.selectList(1011);
 		}
-		
+
 		model.addAttribute("dto", list); // list
 		model.addAttribute("pills", Pills);
 		return "mypage_diary";
@@ -96,17 +99,25 @@ public class FullCalendarController {
 
 	@ResponseBody
 	@RequestMapping(value = "/scheduleupdate.do", method = RequestMethod.POST)
-	public String updateSchedule(HttpSession session, @RequestBody ScheduleDto dto) {
+	public String updateSchedule(HttpSession session, @RequestBody Map<String, String> data) {
 		logger.info("update schedule");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+		ScheduleDto dto = new ScheduleDto(Integer.parseInt(data.get("hospital_no")), 0, data.get("hospital_name"), null,
+				null, data.get("memo"));
+
+		Date new_regdate = new Date(data.get("regdate").replace('T', ' ').replace('-', '/'));
+		dto.setRegdate(new_regdate);
+		Date new_resdate = new Date(data.get("resdate").replace('T', ' ').replace('-', '/'));
+		dto.setResdate(new_resdate);
 
 		int res = 0;
-		if(loginUser.getUser_no() == 1011) {
-			System.out.println(loginUser.getUser_no());
+		try {
+			dto.setUser_no(loginUser.getUser_no());
 			res = sBiz.update(dto);
-		}else {
-		 }
+		} catch (Exception e) {
+			return "-1";
+		}
 
 		String st = Integer.toString(res);
 
@@ -116,31 +127,29 @@ public class FullCalendarController {
 
 	@ResponseBody
 	@RequestMapping(value = "/addschedule.do", method = RequestMethod.POST)
-	public Map<Object, Object> insert(HttpSession session, @RequestBody ScheduleDto dto) {
+	public Map<Object, Object> insert(HttpSession session, @RequestBody Map<String, String> data) {
 		logger.info("insert");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
-		/*
-		 * if(loginUser != null) List<Dto> list = sBiz.selectList(parameter값으로 loginUser
-		 * getUser_no) else {
-		 * 
-		 * List<Dto> list = sBiz.selectList(1011); }
-		 * 
-		 * model.addattribute("list", list);
-		 */
+		ScheduleDto dto = new ScheduleDto(0, 0, data.get("hospital_name"), null, null, data.get("memo"));
 
-		if (loginUser != null) {
-			dto.setUser_no(loginUser.getUser_no());
-		} else {
-			dto.setUser_no(1011);
-		}
+		Date new_regdate = new Date(data.get("regdate").replace('T', ' ').replace('-', '/'));
+		dto.setRegdate(new_regdate);
+		Date new_resdate = new Date(data.get("resdate").replace('T', ' ').replace('-', '/'));
+		dto.setResdate(new_resdate);
 
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		int res = sBiz.insert(dto);
+
+		int res = 0;
+		try {
+			dto.setUser_no(loginUser.getUser_no());
+			res = sBiz.insert(dto);
+		} catch (Exception e) {
+			res = -1;
+		}
 
 		map.put("res", res);
 
-		// session.setAttribute("insert", dto.getUser_no());
 		return map;
 	}
 
@@ -181,29 +190,29 @@ public class FullCalendarController {
 		logger.info("insert pills");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
-		
-		if(loginUser != null) {
+
+		if (loginUser != null) {
 			dto.setUser_no(loginUser.getUser_no());
-		}else {
+		} else {
 			dto.setUser_no(1011);
 		}
-		
+
 		int res = pBiz.insert(dto);
 
 		String pills = Integer.toString(res);
 
 		return pills;
 	}
-	
+
 	@RequestMapping("/pillsDelete.do")
 	public String pillsdelete(int pills_no) {
 		logger.info("PillsInfo delete");
-		
+
 		int res = pBiz.delete(pills_no);
-		
-		if(res>0) {
+
+		if (res > 0) {
 			return "redirect:diary.do";
-		}else {
+		} else {
 			return "redirect:diary.do";
 		}
 	}
