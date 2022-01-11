@@ -124,12 +124,13 @@ $(function(){
 	var calendarEl = $('#calendar')[0];
 	// full-calendar 생성하기
 	var calendar = new FullCalendar.Calendar(calendarEl, {
+		
 		eventSources : [
 			{ events : [
 			<c:forEach var="item" items="${dto}">
 			{
 				title : '${item.hospital_name}',
-				start : '<fmt:formatDate value="${item.resdate }" type="both" pattern="yyyy-MM-dd"/>',
+				start : '<fmt:formatDate value="${item.resdate }" type="both" pattern="yyyy-MM-dd hh:mm:ss"/>',
 				url : 'schedule.do?hospital_no=${item.hospital_no}',
 			},
 			</c:forEach>					
@@ -137,7 +138,7 @@ $(function(){
 			<c:if test="${pill ne null}">
 			{
 				title : '영양제 섭취',
-				start : '<fmt:formatDate value="${pill.regdate }" type="both" pattern="yyyy-MM-dd"/>',
+				start : '<fmt:formatDate value="${pill.regdate }" type="both" pattern="yyyy-MM-dd hh:mm:ss"/>',
 				color : 'purple',
 				textColor : 'while',
 				url : 'pillsDelete.do?pills_no=${pill.pills_no}',
@@ -147,6 +148,7 @@ $(function(){
 			{}
 			]}
 		],
+		
 		eventClick:function(info){
 			/*
 			클릭한 이벤트의 대상이 MY_MEAL인 경우
@@ -173,10 +175,11 @@ $(function(){
 		nowIndicator: true, // 현재 시간 마크
 		dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 		locale: 'ko', // 한국어 설정
-				});
+	});
 			// 캘린더 랜더링
 	getMyMeal(calendar); // 다이어리-식단 기록 내용 불러오기
 	calendar.render();
+	
 });
 </script>
 <script>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
     
 <!DOCTYPE html>
@@ -17,12 +19,17 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 
+<!--  datetiempicker -->
+<link rel="stylesheet" href="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
+
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" /> -->
  
 <script type="text/javascript">
 $(function() {
-	$.datepicker.setDefaults({
+	/* $.datepicker.setDefaults({
 		dateFormat : 'yy-mm-dd',	//input display formay 변경
 		showOtherMonths : true,		//빈 공간에 현재월의 앞뒤월의 날짜를 표기
 		showMonthAfterYear : true,	//년도 먼저 나오고, 뒤에 월표시
@@ -41,9 +48,22 @@ $(function() {
 	$("#startDate").datepicker('setDate','today');
 	$("#endDate").datepicker('setDate','today');   
 
-	/* $("#startDate, #endDate").datetimepicker({
-	    format: 'YYYY-MM-DD HH:mm'
+	
+	$("#startDate").datetimepicker({
+		lang:'ko',
+        format:'yyyy-MM-dd hh:mm'
+	});
+	$("#endDate").datetimepicker({
+		lang:'ko',
+        format:'yyyy-MM-dd hh:mm'
 	}); */
+
+	var regdate = '<fmt:formatDate value="${dto.regdate }" type="both" pattern="yyyy-MM-dd hh:mm:ss"/>';
+	var resdate = '<fmt:formatDate value="${dto.resdate }" type="both" pattern="yyyy-MM-dd hh:mm:ss"/>';
+	
+	console.log(regdate);
+	console.log(resdate);
+
 });
 
 $.fn.serializeObject = function(){
@@ -65,10 +85,9 @@ $.fn.serializeObject = function(){
 	return o;
 };
 	 function click_ok(){
-		var updateData = JSON.stringify($("form#updateData").serializeObject());
-		
+		var updateData = $("form#updateData").serializeObject();
 		$.ajax({
-			data : updateData,
+			data : JSON.stringify(updateData),
 			url : "scheduleupdate.do",
 			type : "post",
 			dataType : "json",
@@ -98,7 +117,11 @@ $.fn.serializeObject = function(){
 				window.location.href = "http://localhost:8787/carebank/diary.do";
 			}
 		});
-	};  
+	};
+	
+	$(document).on("change", "#endDate", function(e){
+		console.log(e);
+	});
 	
 </script>
 </head>
@@ -117,14 +140,18 @@ $.fn.serializeObject = function(){
 				<div class="domain">
 					<h3 class="zTree-h3">오늘날짜 </h3>
 				</div>
-				<div class="domain">
-					<input class="date" id="startDate" type="text" name="regdate" value="${dto.regdate }" readonly="readonly">
+				<div class="domain">								
+				<fmt:formatDate value="${dto.regdate }" type="both" pattern="yyyy-MM-dd" var="date"/>
+				<fmt:formatDate value="${dto.regdate }" type="both" pattern="HH:mm" var="time"/>
+					<input type="datetime-local" class="date" id="startDate" name="regdate" value='${date }T${time}' readonly="readonly">
 				</div>
 				<div class="domain">
 					<h3 class = "z-Tree-h3">예약일 </h3>
 				</div>
-				<div class="domain">
-					<input class="date" id="endDate" type="text" name="resdate" value="${dto.resdate }">
+				<div class="domain">					
+					<fmt:formatDate value="${dto.resdate }" type="both" pattern="yyyy-MM-dd" var="date2"/>
+					<fmt:formatDate value="${dto.resdate }" type="both" pattern="HH:mm" var="time2"/>
+					<input type="datetime-local" class="date" id="endDate" name="resdate" value='${date2 }T${time2}'>
 				</div>
 				<div class="domain">
 					<h3 class="zTree-h3">메모 </h3>
