@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.MyMealBiz;
@@ -110,46 +108,26 @@ public class MyMealController {
 
 	@RequestMapping("/mymeallist.do")
 	@ResponseBody
-	public Map<String, List<MyMealDto>> selectList(HttpServletRequest request) {
+	public Map<String, List<MyMealDto>> selectList(HttpSession session) {
 		Map<String, List<MyMealDto>> map = new HashMap<String, List<MyMealDto>>();
 
 		/*
 		 * 로그인 기능 연결시 수정
 		 */
-		UserDto loginUser = (UserDto) request.getSession().getAttribute("login_info");
-		if (loginUser != null) {
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
 			map.put("res", biz.selectList(loginUser.getUser_no()));
-		} else {
-			map.put("res", biz.selectList(1011));
+		} catch (Exception e) {
+			return null;
 		}
-
-		return map;
-	}
-
-	@RequestMapping("/mymealdetail.do")
-	@ResponseBody
-	public Map<String, MyMealDto> selectOne(HttpServletRequest request, int record_id) {
-		Map<String, MyMealDto> map = new HashMap<String, MyMealDto>();
-
-		/*
-		 * 로그인 기능 연결시 수정
-		 */
-		UserDto loginUser = (UserDto) request.getSession().getAttribute("login_info");
-
-		MyMealDto res = biz.selectOne(record_id);
-
-		/*
-		 * if loginUser.user_no equals res.user_no인 경우에만 가져오도록 수정
-		 */
-
-		map.put("res", res);
 
 		return map;
 	}
 
 	@RequestMapping("/submitmeal.do")
 	@ResponseBody
-	public Map<String, Boolean> record(HttpServletRequest request, @RequestBody Map<String, String> param) {
+	public Map<String, Boolean> record(HttpSession session, @RequestBody Map<String, String> param) {
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 
 		String meal_name = param.get("meal_name");
@@ -162,6 +140,8 @@ public class MyMealController {
 			e.printStackTrace();
 		}
 
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
 		MyMealDto dto = new MyMealDto();
 		dto.setMeal_name(meal_name);
 		dto.setMeal_time(meal_time);
@@ -169,14 +149,14 @@ public class MyMealController {
 		/*
 		 * 로그인 기능 연결시 수정
 		 */
-		UserDto loginUser = (UserDto) request.getSession().getAttribute("login");
-		if (loginUser != null) {
-			dto.setUser_no(loginUser.getUser_no());
-		} else {
-			dto.setUser_no(1011);
-		}
+		int res = 0;
 
-		int res = biz.insert(dto);
+		try {
+			dto.setUser_no(loginUser.getUser_no());
+			res = biz.insert(dto);
+		} catch (Exception e) {
+			res = -1;
+		}
 
 		if (res > 0) {
 			map.put("res", true);
