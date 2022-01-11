@@ -14,6 +14,6 @@
 	<a href="prefer/meallist.do">식단추천</a>
 	<a href="prefer/supplelist.do">영양제추천</a>
 	<a href="tm.do">Teachable Machine API</a>
-	<a href="admin.do">admin</a>
+	<a href="admin/main.do">admin</a>
 </body>
 </html>

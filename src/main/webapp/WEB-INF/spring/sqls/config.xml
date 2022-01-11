@@ -41,6 +41,7 @@
   		<mapper resource = "/mybatis/mood-mapper.xml"/>
   		<mapper resource = "/mybatis/pills-mapper.xml"/>
   		<mapper resource = "/mybatis/mymeal-mapper.xml"/>
+  		<mapper resource = "/mybatis/admin-mapper.xml"/>
 	</mappers>
 
 </configuration>
