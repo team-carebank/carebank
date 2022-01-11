@@ -6,15 +6,18 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.yee.carebank.model.dto.MyExerciseDto;
+import com.yee.carebank.model.dto.UserDto;
  
 public interface MyExerciseBiz {
 
 	public List<MyExerciseDto> selectList();
-	public MyExerciseDto selectOne(Integer user_no);  
-	//public int insert(MyExerciseDto dto); 
 	
-	//public int insert(MyExerciseDto dto) throws Exception;
-	public int insert(Integer exer_count);
+	public int insert( MyExerciseDto dto);
+ 
+
+	public int selectOne(int user_no); 
+	 
+	//public int insert(Integer exer_count);
  
 	
 	

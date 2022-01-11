@@ -8,9 +8,11 @@
 <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
 <title>Document</title>
 <style type="text/css">
+
+
  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
  
- 
+ 	
  *{
     margin:0px;
 	}
@@ -18,6 +20,7 @@
 #int{  
                display:inline;
                position:absolute;
+               
                top:40vh;
                
                left:20vw; 

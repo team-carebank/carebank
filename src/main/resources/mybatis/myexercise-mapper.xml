@@ -4,35 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="myexercise">
+   
+    
   
   <resultMap type="myexerciseDto" id="myexerciseMap">
-  	<result property="exer_id" column="EXER_ID"/>
-  	<result property="user_no" column="USER_NO"/>
-  	<result property="regdate" column="REGDATE"/>
-  	<result property="exer_count" column="EXER_COUNT"/>
+  	<result property="exer_id" column="EXER_ID"/> 
+  	<result property="user_no" column="USER_NO"/> 
+  	<result property="regdate" column="REGDATE"/> 
+  	<result property="exer_count" column="EXER_COUNT"/> 
   	
   </resultMap>
   
-    <select id="selectList" resultMap="myexerciseMap">
-  	SELECT EXER_ID,USER_NO,REGDATE
-  	FROM MY_EXERCISE
-  </select>
+       <select id="selectList" parameterType="int" resultType="myexerciseDto">
+     	SELECT EXER_ID,USER_NO,REGDATE,EXER_COUNT
+     	FROM MY_EXERCISE JOIN CARE_USER USING(USER_NO)
+    </select>  
   
-  	<select id="selectOne" resultMap="myexerciseMap">
-		SELECT *
-		FROM MY_EXERCISE
-		WHERE USER_NO = #{user_no}
-	</select>
-  
-  	<!-- <insert id="insert">
+	<insert id="insert" parameterType="myexerciseDto">
 		INSERT INTO MY_EXERCISE
-		VALUES(#{exer_id}, #{user_no}, TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count} )
-		VALUES('1','1001', TO_CHAR(SYSDATE,'YYYY-MM-DD'),'document.getElementById("hello").innerText')
-	</insert>-->
-	
-	<insert id="insert">
-		INSERT INTO MY_EXERCISE 
-		VALUES ('1','1001',TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count}) 
-	</insert>
+		<!-- VALUES ('1',#{user_no},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count})-->
+		VALUES (#{exer_id},#{user_no},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count})
+	</insert> 
 	
   </mapper>

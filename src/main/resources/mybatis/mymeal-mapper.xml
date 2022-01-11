@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mymeal">
+	<insert id="insert" parameterType="myMealDto">
+		INSERT INTO MY_MEAL
+		VALUES(RECORD_SEQ.NEXTVAL, #{user_no}, #{meal_name}, #{meal_time},
+		#{regdate})
+	</insert>
+	<select id="selectList" parameterType="int"
+		resultType="myMealDto">
+		SELECT RECORD_ID, MEAL_NAME, MEAL_TIME, REGDATE FROM
+		MY_MEAL WHERE USER_NO = ${user_no}
+	</select>
+	<select id="selectOne" parameterType="int"
+		resultType="myMealDto">
+		SELECT * FROM MY_MEAL WHERE RECORD_ID = ${record_id}
+	</select>
+	<update id="update" parameterType="myMealDto">
+		UPDATE MY_MEAL SET MEAL_NAME = #{meal_name}, MEAL_TIME = #{meal_time}, REGDATE = #{regdate} WHERE RECORD_ID = #{record_id}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM MY_MEAL WHERE RECORD_ID = ${record_id}
+	</delete>		
+</mapper>

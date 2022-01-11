@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yee.carebank.model.dto.FaqDto;
 import com.yee.carebank.model.dto.MyExerciseDto;
+import com.yee.carebank.model.dto.UserDto;
 
 @Repository
 public class MyExerciseDaoImpl implements MyExerciseDao {
@@ -25,7 +26,7 @@ public class MyExerciseDaoImpl implements MyExerciseDao {
 		try {
 			list=sqlSession.selectList(NAMESPACE+"selectList");
 		}catch(Exception e) {
-			System.out.println("error");
+			System.out.println("selectlist error");
 			e.printStackTrace();
 		}
 		
@@ -33,8 +34,9 @@ public class MyExerciseDaoImpl implements MyExerciseDao {
 	}
 	
 	@Override
-	public MyExerciseDto selectOne(Integer user_no) {
-		MyExerciseDto dto=null;
+	public int selectOne(int user_no) {
+		
+		int dto=0;
 		
 		try {
 			dto=sqlSession.selectOne(NAMESPACE+"selectOne",user_no);
@@ -65,17 +67,18 @@ public class MyExerciseDaoImpl implements MyExerciseDao {
 //	}
 
 	@Override
-	public int insert(Integer exer_count) {
-int res = 0;
+	public int insert(MyExerciseDto dto) {
+		int res = 0;
 		
 		try {
-			res = sqlSession.insert(NAMESPACE + "insert",exer_count);
+			res = sqlSession.insert(NAMESPACE + "insert",dto);
 		} catch (Exception e) {
-			System.out.println(" insert error ");
+			System.out.println(" DAOinsert error ");
 			e.printStackTrace();
 		}
 		return res;
 	}
+ 
 	
 	
 	 

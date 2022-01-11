@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.yee.carebank.model.dao.MyExerciseDao;
 import com.yee.carebank.model.dto.MyExerciseDto;
+import com.yee.carebank.model.dto.UserDto;
 
 @Service
 public class MyExerciseBizImpl implements MyExerciseBiz{
@@ -20,13 +21,23 @@ public class MyExerciseBizImpl implements MyExerciseBiz{
 		return dao.selectList();
 	}
 	
-	public MyExerciseDto selectOne(Integer user_no) {
-		return dao.selectOne(user_no);
-	}
+//	public MyExerciseDto selectOne(Integer user_no) {
+//		return dao.selectOne(user_no);
+//	}
 
 	@Override
-	public int insert(Integer exer_count) { 
-		return dao.insert(exer_count);
+	public int insert(MyExerciseDto dto) { 
+		//return dao.insert(exer_count); 
+		return dao.insert(dto);
+	}
+//
+//	@Override
+//	public int selectOne(Integer user_no) { 
+//		return dao.selectOne(user_no);
+//	}
+
+	public int selectOne(int user_no) { 
+		return dao.selectOne(user_no);
 	}
 	
 //	@Override
