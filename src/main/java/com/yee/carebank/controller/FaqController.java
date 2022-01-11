@@ -1,5 +1,7 @@
 package com.yee.carebank.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.FaqBiz;
 import com.yee.carebank.model.dto.FaqDto;
+import com.yee.carebank.model.dto.UserDto;
 
 
 
@@ -30,10 +33,20 @@ public class FaqController {
 		return "faq";
 	}
 	
+	//디테일
+	@RequestMapping("/faqDetail.do")
+	public String faqdetail(Model model, int faqno) {
+		logger.info("FAQ DETAIL");
+		
+		model.addAttribute("faqdetail", faqbiz.selectOne(faqno));
+		return "faqdetail";
+	}
+	
 	//작성 form
 	@RequestMapping("/faqform.do")
 	public String faqform() {
 		logger.info("FAQ INSERT FORM");
+		
 		return "faqinsert";
 	}
 	
@@ -43,6 +56,7 @@ public class FaqController {
 	@ResponseBody
 	public int faqinsert(@RequestBody FaqDto newfaq) {
 		logger.info("FAQ INSERT");
+		
 		int res = faqbiz.insert(newfaq);
 		
 		if(res > 0) {			
@@ -57,20 +71,51 @@ public class FaqController {
 	@RequestMapping("/faqupdateform.do")
 	public String faqupdateform(Model model, int faqno) {
 		logger.info("FAQ UPDATE FORM");
+		
 		return "faqupdate";
 	}
 	
 	//수정
 	@RequestMapping("faqupdate.do")
-	public String faqupdate(FaqDto faqdto) {
+	@ResponseBody
+	public int faqupdate(@RequestBody FaqDto faqdto) {
 		logger.info("FAQ UPDATE");
-		return null;
+		
+		//String title = faqdto.getFaqtitle();
+		//System.out.println(title);
+		int res = faqbiz.update(faqdto);
+		if(res > 0) {
+			return res;
+		}
+		else {
+			return 0;
+		}
+
 	}
 	
 	//삭제 
 	@RequestMapping("faqdelete.do")
-	public String faqdelete(int faqno) {
-		return null;
+	@ResponseBody
+	public int faqdelete(HttpSession session, Integer faqno) {
+		logger.info("FAQ DELETE");
+		
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+		String usertype = loginUser.getUser_type();
+		
+		System.out.println(usertype);
+		
+		if(usertype.equals("USER")) {
+			return -1;
+		} 
+		else {
+			int res = faqbiz.delete(faqno);
+			if(res > 0) {
+				return res;
+			}
+			else {
+				return 0;
+			}
+		}
 	}	
 	
 	//검색

@@ -21,6 +21,11 @@ public class FaqBiz {
 		return faqdao.selectList();
 	}
 
+	//디테일
+	public FaqDto selectOne(int faqno) {
+		return faqdao.selectOne(faqno);
+	}
+	
 	//작성
 	public int insert(FaqDto faqdto) {
 		return faqdao.insert(faqdto);

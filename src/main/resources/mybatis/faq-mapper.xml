@@ -17,6 +17,12 @@
 		ORDER BY FAQNO DESC
 	</select>
 	
+	<select id = "selectOne" resultType = "faqDto" parameterType = "int">
+		SELECT FAQNO, FAQTITLE, FAQCONTENT
+		FROM FAQ
+		WHERE FAQNO = #{faqno}
+	</select>
+	
 	<insert id="insertList" parameterType = "faqDto">
 		INSERT INTO FAQ
 		VALUES(FAQNO.NEXTVAL, #{faqtitle}, #{faqcontent})

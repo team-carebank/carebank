@@ -58,7 +58,9 @@ body{
     outline: none;
     transition: 0.4s;
     margin: auto;
-    font-size: 13pt;
+}
+.faq-title *{
+	font-size: 13pt !important;
 }
 .faq-body{
     margin: auto;

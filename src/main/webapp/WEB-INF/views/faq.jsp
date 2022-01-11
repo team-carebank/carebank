@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-    <link rel="stylesheet" href="resources/css/faq_style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/faq_style.css">
     
     
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,20 +39,38 @@
          	<c:forEach items="${list}" var="faqdto">
             <div class="faq-one">
                 <!-- faq question -->
-                <h1 class="faq-title">${faqdto.faqtitle}</h1>
+      
+                		<h1 class="faq-title" id = "${faqdto.faqno }">
+                		${faqdto.faqtitle}
+                		</h1>
+              
                 <!-- faq answer -->
-                <div class="faq-body">
-                    <p>${faqdto.faqcontent}
-					</p>
+                <div class = "faq-body">
+                    <p class = "faq-content" id = "${faqdto.faqno }">
+                    		${faqdto.faqcontent}
+                    </p>
+					<c:if test = "${login_info.user_type == 'ADMIN' }">
+		                	<div class = "modify_btns">
+		                		<input type = "button" value = "수정" onclick = "change_area(${faqdto.faqno}, this);">
+		                		<!-- <input type = "button" value = "삭제" onclick = "location.href='faqdelete.do?faqno=${faqdto.faqno}';"> -->
+		                		<input type = "button" value = "삭제" onclick = "deleteFunc(${faqdto.faqno});">	
+		                		
+		                	</div>
+					</c:if>
                 </div>
             </div>
             <hr class="hr-line">
-            	</c:forEach>
+			</c:forEach>
+				<c:if test="${login_info.user_type == 'ADMIN' }">
+					<div>
+						<input type="button" value="작성" onclick="show();">
+					</div>
+				</c:if>
             	
         <!-- 관리자 로그인시 보여질 화면 -->
-        <c:if test = "${login.user_type == 'ADMIN' }">
+        <c:if test = "${login_info.user_type == 'ADMIN' }">
             		
-        <div class="insert-area">
+        <div class="insert-area" id = "insert-area">
 				<h2>작성</h2>
 				<div class="comment-write">
 					<input type = "text" class = "new-faq-title" id = "new-faq-title" placeholder="FAQ 제목">
@@ -75,7 +93,9 @@
 				
 				this.classList.toggle("active");
 			
+				//var body = this.nextElementSibling;
 				var body = this.nextElementSibling;
+				
 				if (body.style.display === "block") {
 					body.style.display = "none";
 				} else {
@@ -84,6 +104,11 @@
 			});
 		};
     };
+    
+    	function show(){
+    		var insertArea = document.getElementById("insert-area");
+    		insertArea.show();
+    	}
 		
     	//관리자 FAQ 작성
 		function insert(){
@@ -125,6 +150,96 @@
 				});
 			}
 		}
+    	
+
+    	//수정시 화면변경
+    	function change_area(faqno, currentButton){
+    		var faqbody = $(currentButton).parent().parent();
+    		var faqtitle = $(faqbody).siblings(".faq-title");
+    		var faqone = $(faqtitle).parent();
+    		var p_area = $("#"+faqno+".faq-content").hide();
+    		var faqcontent = p_area.text().trim();
+    		var btn_area = $(".modify_btns").hide();
+    		faqtitle.hide();
+    		
+    		var new_title = "<h1 class='faq-title' id='modify'><input type='text' class='new-faq-title' id='"+faqno+"' value='"+faqtitle.text().trim()+"'></h1>"
+    		var new_area = "<div class='new-faq-content'><textarea class='new-faq-textarea' id='"+faqno+"'>" + faqcontent + "</textarea><input type = 'button' onclick = 'faqupdate("+faqno+");' value = '수정'></button><input type = 'button' onclick = 'cancel();' value = '취소'></div>";
+    		
+    		faqone.prepend(new_title);
+    		faqbody.append(new_area);
+    	}
+    	
+    	//수정-취소 시
+    	function cancel(){
+    		$(".new-faq-content").remove();
+    		$(".faq-title").show();
+    		$("#modify").remove();
+    		$(".faq-content").show();
+    		$(".modify_btns").show();
+    		
+    		
+    	}
+    	
+    	
+    	
+    	//관리자 FAQ 수정
+    	function faqupdate(faqno){
+    		
+    		
+    		var faqtitle = $("#"+faqno+".new-faq-title").val().trim();
+    		var faqcontent = $("#" + faqno + ".new-faq-textarea").val().trim();
+    		var faq_update = {"faqtitle" : faqtitle, "faqcontent" : faqcontent, "faqno":faqno};
+    		
+    		
+    		console.log(faqtitle);
+    		console.log(faqcontent);
+  
+    		$.ajax({
+    			url: "faqupdate.do",
+    			type: "post",
+    			data: JSON.stringify(faq_update),
+    			contentType:"application/json",
+    			dataType: "json",
+    			success:
+    				function(res){
+    					if(res > 0){
+    						alert("수정되었습니다.")
+    						window.location.reload();
+    					}
+    					else{
+    						alert("수정에 실패했습니다.")
+    					}
+    				},
+    			error: 
+    				function(){
+    					alert("통신실패")
+    				},
+    		});//ajax end
+    	}
+    	
+    	
+    	//삭제
+    	function deleteFunc(faqno){
+    		$.ajax({
+    			url: "faqdelete.do?faqno="+faqno,
+    			success: function(res){
+    				
+    				if(res > 0){
+    					alert("삭제되었습니다");
+    					window.location.reload();
+    				}
+    				else{
+    					alert("삭제실패");
+    				}
+    			},
+    			error:
+    				function(){
+    				alert("통신실패");
+    			}
+    			
+    		});//ajax end	
+    	}
+    	
     	
     	//검색
     	function search(){

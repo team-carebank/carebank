@@ -31,10 +31,20 @@ public class FaqDao {
 		return list; 
 
 	}
-	/*public FaqDto selectOne(int faqno){
-		return null;
+	
+	public FaqDto selectOne(int faqno){
+		FaqDto faqdto = null;
 		
-	}*/
+		try {
+			faqdto = sqlSession.selectOne(NAMESPACE + "selectOne", faqno);
+		} catch (Exception e) {
+			System.out.println("[error] : selectOne");
+			e.printStackTrace();
+		}
+		
+		return faqdto;
+		
+	}
 	public int insert(FaqDto faqdto) {
 		int res = 0;
 		try {
