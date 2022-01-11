@@ -65,7 +65,6 @@ $.fn.serializeObject = function(){
 			contentType : "application/json; charset=UTF-8",
 			success : function(data){
 				opener.parent.location.reload();
-			//	backgroundColor : skyblue;
 				window.close();
 			}
 		});
@@ -83,7 +82,7 @@ $.fn.serializeObject = function(){
 					<input type="hidden" id="user_no" name="user_no">
 				</div>
 				<div class="domain">
-					<h3 class="zTree-h3">영양제 당일 복용</h3>
+					<h3 class="zTree-h3">영양제 섭취 날짜</h3>
 				</div>
 				<div class="domain">
 					<input class="date" id="startDate" type="text" name="regdate">

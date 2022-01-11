@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/fmt' prefix='fmt' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +17,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" /> -->
 <style type="text/css">
 	html, body{
 	width : 100%;
@@ -101,9 +101,8 @@ $(function() {
 	$("#startDate").datepicker('setDate','today');
 	$("#endDate").datepicker('setDate','today');   
 
-	/* $("#startDate, #endDate").datetimepicker({
-	    format: 'YYYY-MM-DD HH:mm'
-	}); */
+	});
+	 
 });
 
 $.fn.serializeObject = function(){
@@ -159,13 +158,17 @@ $.fn.serializeObject = function(){
 					<h3 class="zTree-h3">오늘날짜 </h3>
 				</div>
 				<div class="domain">
-					<input class="date" id="startDate" type="text" name="regdate">
+				
+				<c:set var = "now" value = "<%= new java.util.Date() %>" />
+				<fmt:formatDate value="${now }" type="both" pattern="yyyy-MM-dd" var="date"/>
+				<fmt:formatDate value="${now }" type="both" pattern="HH:mm" var="time"/>
+				<input type="datetime-local" class="date" id="startDate" name="regdate" value="${date }T${time}">
 				</div>
 				<div class="domain">
 					<h3 class = "z-Tree-h3">예약일 </h3>
 				</div>
 				<div class="domain">
-					<input class="date" id="endDate" type="text" name="resdate">
+					<input type="datetime-local" class="date" id="endDate" name="resdate" value="${date }T${time}">
 				</div>
 				<div class="domain">
 					<h3 class="zTree-h3">메모 </h3>
