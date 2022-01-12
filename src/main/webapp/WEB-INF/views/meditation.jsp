@@ -53,8 +53,16 @@ body{
   top:0px;
 }
 .carousel .carousel-item{
-  width:300px; 
+  width:300px;  
+  
+    transition: box-shadow .3s; 
+  float: left;
 }
+
+.carousel .carousel-item:hover{
+   box-shadow: 33 33 33px rgba(33,33,33,.2); 
+  }
+  
 .carousel .carousel-item h3{
   margin:-5px 0 0 ;
   padding:0; 

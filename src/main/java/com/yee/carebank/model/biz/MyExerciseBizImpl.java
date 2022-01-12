@@ -16,43 +16,25 @@ public class MyExerciseBizImpl implements MyExerciseBiz{
 	@Autowired
 	private MyExerciseDao dao;
 	
-	public List<MyExerciseDto> selectList(){
+	public List<MyExerciseDto> selectList(int user_no){
 		
-		return dao.selectList();
+		return dao.selectList(user_no);
 	}
-	
-//	public MyExerciseDto selectOne(Integer user_no) {
-//		return dao.selectOne(user_no);
-//	}
+	 
 
 	@Override
 	public int insert(MyExerciseDto dto) { 
 		//return dao.insert(exer_count); 
 		return dao.insert(dto);
 	}
-//
-//	@Override
-//	public int selectOne(Integer user_no) { 
+
+ 
+ 
+
+//	public int selectOne(int user_no) { 
 //		return dao.selectOne(user_no);
 //	}
-
-	public int selectOne(int user_no) { 
-		return dao.selectOne(user_no);
-	}
-	
-//	@Override
-//	public int insert(MyExerciseDto dto) throws Exception{
-//		return dao.insert(dto);
-//	}
- 
-	
-	
- 
-	
-//	public int insert(MyExerciseDto dto) {
-//		return dao.insert(dto);
-//	}
- 
+//	 
 	
 	
 

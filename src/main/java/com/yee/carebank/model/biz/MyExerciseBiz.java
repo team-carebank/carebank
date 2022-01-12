@@ -10,12 +10,12 @@ import com.yee.carebank.model.dto.UserDto;
  
 public interface MyExerciseBiz {
 
-	public List<MyExerciseDto> selectList();
+	public List<MyExerciseDto> selectList(int user_no);
 	
 	public int insert( MyExerciseDto dto);
  
 
-	public int selectOne(int user_no); 
+	//public int selectOne(int user_no); 
 	 
 	//public int insert(Integer exer_count);
  

@@ -25,8 +25,8 @@ public class MyExerciseDto {
 	public int getUser_no() {
 		return user_no;
 	}
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
+	public int setUser_no(int user_no) {
+		return this.user_no = user_no;
 	}
 	public String getRegdate() {
 		return regdate;
