@@ -7,8 +7,8 @@
 		SELECT DISTINCT * FROM MEAL WHERE SUBCAT_ID = ${subcat_id}
 	</select>
 	<select id="selectFood" resultType="String" parameterType="int">
-		SELECT DISTINCT FOOD FROM MEAL JOIN INGREDIENT USING(MEAL_ID,
-		SUBCAT_ID) WHERE SUBCAT_ID = ${subcat_id}
+		SELECT DISTINCT FOOD FROM MEAL JOIN INGREDIENT i USING(MEAL_ID) WHERE
+		SUBCAT_ID = ${subcat_id}
 	</select>
 	<select id="selectCategory" resultType="String"
 		parameterType="int">
@@ -16,15 +16,15 @@
 		${subcat_id}
 	</select>
 	<select id="selectOne" resultType="mealDto" parameterType="int">
-		SELECT *
-		FROM MEAL
-		WHERE MEAL_ID = ${meal_id}
+
+		SELECT MEAL_ID, MEAL_NAME, RECIPE, SRC, SUBCAT_NAME FROM MEAL NATURAL
+		JOIN CATEGORY c WHERE MEAL_ID = ${meal_id}
 	</select>
 	<select id="selectIngredient" resultType="foodDto"
 		parameterType="int">
 		SELECT FOOD, DESCRIPTION, CARBO, PROTEIN, FAT, CALORIES
-		FROM (MEAL JOIN INGREDIENT i USING(MEAL_ID, SUBCAT_ID)) JOIN NUTRIENT
-		n USING(FOOD)
+		FROM (MEAL JOIN INGREDIENT USING(MEAL_ID)) JOIN NUTRIENT
+		USING(FOOD)
 		WHERE MEAL_ID = ${meal_id}
 	</select>
 	<select id="selectCatList" resultType="Integer">
@@ -64,7 +64,8 @@
 		WHERE USER_NO
 		=${user_no}
 	</select>
-	<select id="selectNutrient" parameterType="String" resultType="foodDto">
+	<select id="selectNutrient" parameterType="String"
+		resultType="foodDto">
 		SELECT MEAL_NAME, CALORIES, FAT, CARBO, PROTEIN
 		FROM TM_MEAL
 		WHERE MEAL_NAME = '${food}'

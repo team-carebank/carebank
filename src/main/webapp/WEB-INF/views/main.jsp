@@ -164,13 +164,13 @@ th{
           	</div>
           	
           	<div class="flexbox-item flexbox-item-2"> 
-            <div class="sa sa-left"><img src="resources/img/salad2.png" style="width: 80%; height:80%;"></div>
+            <div class="sa sa-left"><img src="${pageContext.request.contextPath }/resources/img/salad2.png" style="width: 80%; height:80%;"></div>
             </div>
       </div> 
 
       <div class="flexbox-container2">
             <div class="flexbox-item flexbox-item2-2"> 
-            <div class="sa sa-right"><img src="resources/img/nutri.png" style="width: 80%; height:80%;"></div>
+            <div class="sa sa-right"><img src="${pageContext.request.contextPath }/resources/img/nutri.png" style="width: 80%; height:80%;"></div>
             </div>
         
             <div class="flexbox-item flexbox-item2-1">
@@ -189,13 +189,13 @@ th{
             </div>
             
             <div class="flexbox-item flexbox-item3-2"> 
-            <div class="sa sa-right"><img src="resources/img/workout.png" style="width: 100%; height:100%;"></div>
+            <div class="sa sa-right"><img src="${pageContext.request.contextPath }/resources/img/workout.png" style="width: 100%; height:100%;"></div>
             </div>
       </div>
 
       <div class="flexbox-container4">
             <div class="flexbox-item flexbox-item4-2"> 
-            <div class="sa sa-right"><img src="resources/img/dashboardd.png" style="width: 100%; height:100%;"></div>
+            <div class="sa sa-right"><img src="${pageContext.request.contextPath }/resources/img/dashboardd.png" style="width: 100%; height:100%;"></div>
             </div>
             
             <div class="flexbox-item flexbox-item4-1"> 

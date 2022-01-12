@@ -28,25 +28,11 @@
 	});
 </script>
 </head>
-<%@ include file="../../../admin_header.jsp"%>
+<%@ include file="header.jsp"%>
 <body>
 	<div class="container">
 		<div class="body-content">
-			<div class="content-admin-side">
-				<div>
-					<h3>Administration</h3>
-					<!--메뉴 구분선-->
-					<h4>Information</h4>
-					<span>Meal</span> <span>Exercise</span> <span>Supplement</span> <span>Meditation</span>
-					<!--메뉴 구분선-->
-					<h4>User Management</h4>
-					<span>Member</span> <span>Report</span>
-					<!--메뉴 구분선-->
-					<h4>Customer Service</h4>
-					<span>Notice</span> <span>QnA</span> <span>FAQ</span>
-				</div>
-			</div>
-			<div class="content-admin-main">
+			<%@ include file="side.jsp"%>
 				<div class="admin-main-description">
 					<h1>Information : Meal</h1>
 					<span>식단 정보를 관리합니다.</span>
