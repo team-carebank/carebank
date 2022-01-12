@@ -45,7 +45,7 @@
 			onclick="window.location.href='${pageContext.request.contextPath}/admin/main.do'">ADMIN
 			PAGE</h2>
 		<span id="logout"
-			onclick="window.location.href='${pageContext.request.contextPath}'/logout.do">로그아웃</span>
+			onclick="window.location.href='${pageContext.request.contextPath}/logout.do'">로그아웃</span>
 	</div>
 </body>
 </html>
