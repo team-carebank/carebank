@@ -20,6 +20,7 @@
 	crossorigin="anonymous"></script>
 <script>
 	$(document).on("click", "#comment-button", function(e) {
+
 		var comment = document.getElementById("comment-text").value.trim();
 
 		if (comment == "" || comment == null) {
@@ -52,13 +53,10 @@
 	});
 	
 	$(document).on("click", "#comment-text", function(e) {
-		/*
-		if ("${sessionScope.loginUser}" == null
-				|| "${sessionScope.loginUser}" == "") {
+		<c:if test="${empty login_info }">
 			alert("로그인 후에 사용 가능합니다.");
-		} else {
-			("#comment-text").attr("readonly", false);
-		}*/
+			return false;
+		</c:if>
 		$("#comment-text").attr("readonly", false);
 	});
 
