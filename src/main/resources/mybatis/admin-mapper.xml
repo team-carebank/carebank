@@ -3,7 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
-	<select id="selectMList">
+	<select id="selectMList" resultType="mealDto"
+		parameterType="map">
 
+		SELECT
+		*
+		FROM
+		(
+		SELECT
+		ROWNUM AS POSTNO,
+		MEAL_CAT.*
+		FROM
+		(
+		SELECT
+		MEAL_ID,
+		MEAL_NAME,
+		SUBCAT_NAME,
+		SUPERCAT_ID
+		FROM
+		MEAL JOIN CATEGORY
+		USING(SUBCAT_ID)) MEAL_CAT)
+		WHERE
+		POSTNO BETWEEN #{start} AND #{end}
+		ORDER BY POSTNO
+	</select>
+	<select id="getMTotalCnt" resultType="int">
+		SELECT COUNT(*) FROM MEAL
 	</select>
 </mapper>
