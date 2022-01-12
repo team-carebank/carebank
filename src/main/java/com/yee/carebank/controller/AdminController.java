@@ -46,7 +46,7 @@ public class AdminController {
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - NOT AUTHORIZED USER");
+				logger.error("ERROR - UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 				model.addAttribute("res", res);
@@ -71,7 +71,7 @@ public class AdminController {
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - NOT AUTHORIZED USER");
+				logger.error("ERROR - UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 				res = biz.selectMList(page);
@@ -96,7 +96,7 @@ public class AdminController {
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - NOT AUTHORIZED USER");
+				logger.error("ERROR - UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 				model.addAttribute("meal", mBiz.selectOne(meal_id));
@@ -110,6 +110,58 @@ public class AdminController {
 		return "admin/minfo";
 	}
 
+	@RequestMapping("admin/mwrite.do")
+	public String writeMeal(HttpSession session, Model model) {
+		logger.info("INFO - INSERT PAGE [MEAL]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			} else {
+				model.addAttribute("category", biz.selectCList());
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		return "admin/mwrite";
+	}
+
+	@RequestMapping("admin/minsert.do")
+	public String insertM(HttpSession session, @RequestParam String meal_name, @RequestParam int subcat_id,
+			@RequestParam String recipe, @RequestParam String src, @RequestParam String[] food,
+			@RequestParam String[] description) {
+		logger.info("INFO - INSERT DATA [MEAL]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		MealDto m = new MealDto();
+		m.setMeal_name(meal_name);
+		m.setRecipe(recipe);
+		m.setSrc(src);
+		m.setSubcat_id(subcat_id);
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			} else {
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		return "redirect: meal.do";
+	}
+
+	/*
+	 * Exception Handler - Missing Parameter Exception
+	 */
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	public void handleMissingParams(MissingServletRequestParameterException e, HttpServletResponse response,
 			HttpServletRequest request) {

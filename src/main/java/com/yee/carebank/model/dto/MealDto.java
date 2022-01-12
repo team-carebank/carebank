@@ -90,4 +90,10 @@ public class MealDto {
 		this.src = src;
 	}
 
+	@Override
+	public String toString() {
+		return "MealDto [meal_id=" + meal_id + ", meal_name=" + meal_name + ", recipe=" + recipe + ", subcat_id="
+				+ subcat_id + ", subcat_name=" + subcat_name + ", src=" + src + ", supercat_id=" + supercat_id + "]";
+	}
+
 }

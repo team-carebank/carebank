@@ -16,7 +16,8 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 <style type="text/css">
-body > div.container > div > div.content-admin-main > div.admin-main-content > div.main-content-board > div:nth-child(1) > div > span.board-content-name {
+body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-content-board>div:nth-child(1)>div>span.board-content-name
+	{
 	color: black !important;
 	cursor: default !important;
 }
@@ -58,6 +59,10 @@ body > div.container > div > div.content-admin-main > div.admin-main-content > d
 		
 		window.location.href = path + id;
 	});
+	
+	$(document).on("click", "#add.board-content-config", function(e){
+		window.location.href="mwrite.do";
+	})
 </script>
 <style>
 .pagination-page>span:hover, .board-content-name:hover,

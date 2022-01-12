@@ -30,4 +30,8 @@
 	<select id="getMTotalCnt" resultType="int">
 		SELECT COUNT(*) FROM MEAL
 	</select>
+	<select id="selectCList" resultType="categoryDto">
+		SELECT SUBCAT_ID,
+		SUBCAT_NAME, SUPERCAT_ID FROM CATEGORY
+	</select>
 </mapper>

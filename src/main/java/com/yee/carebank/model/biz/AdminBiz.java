@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yee.carebank.model.dao.AdminDao;
+import com.yee.carebank.model.dto.CategoryDto;
 import com.yee.carebank.model.dto.MealDto;
 
 @Service
@@ -25,6 +26,10 @@ public class AdminBiz {
 
 	public int getMTotalCnt() {
 		return dao.getMTotalCnt();
+	}
+
+	public List<CategoryDto> selectCList() {
+		return dao.selectCList();
 	}
 
 }

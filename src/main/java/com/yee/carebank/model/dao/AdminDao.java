@@ -11,6 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yee.carebank.model.dto.CategoryDto;
 import com.yee.carebank.model.dto.MealDto;
 
 @Repository
@@ -39,6 +40,10 @@ public class AdminDao {
 
 	public int getMTotalCnt() {
 		return sqlSession.selectOne(NAMESPACE + "getMTotalCnt");
+	}
+
+	public List<CategoryDto> selectCList() {
+		return sqlSession.selectList(NAMESPACE + "selectCList");
 	}
 
 }
