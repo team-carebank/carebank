@@ -1,11 +1,9 @@
 package com.yee.carebank.controller;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,12 +19,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.yee.carebank.model.biz.CommentBiz;
 import com.yee.carebank.model.biz.MealBiz;
-import com.yee.carebank.model.biz.SuppleBiz;
 import com.yee.carebank.model.dto.CommentDto;
 import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
-import com.yee.carebank.model.dto.ShoppingDto;
-import com.yee.carebank.model.dto.SuppleDto;
 import com.yee.carebank.model.dto.UserDto;
 
 @Controller
@@ -128,7 +123,7 @@ public class MealController {
 			CommentDto before = cBiz.read(comm_no, 1);
 
 			if (before.getUser_no() != loginUser.getUser_no()) {
-				logger.info("ERROR - NOT AUTHORIZED USER");
+				logger.error("ERROR - UNAUTHORIZED USER");
 				return false;
 			}
 
@@ -153,7 +148,7 @@ public class MealController {
 	@RequestMapping("/mcommdelete.do")
 	@ResponseBody
 	public boolean delete(HttpSession session, @RequestBody int comm_no) {
-		logger.info("INFO - DELETE AD COMMENT [MEAL]");
+		logger.info("INFO - DELETE A COMMENT [MEAL]");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 		int res = 0;
@@ -161,14 +156,14 @@ public class MealController {
 		try {
 			CommentDto before = cBiz.read(comm_no, 1);
 			if (before.getUser_no() != loginUser.getUser_no()) {
-				logger.info("ERROR - NOT AUTHORIZED USER");
+				logger.info("ERROR - UNAUTHORIZED USER");
 				return false;
 			}
 
 			res = cBiz.delete(comm_no, 1);
 
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN OR COMMENT DATA IS NOT FOUND");
+			logger.error("ERROR - DELETE ERROR");
 			return false;
 		}
 
@@ -195,7 +190,7 @@ public class MealController {
 			try {
 				model.addAttribute("meal", biz.selectMeal(prefer.get(0)));
 			} catch (Exception e) {
-				logger.info("ERROR - PRFERENCE IS NOT SET UP");
+				logger.error("ERROR - PRFERENCE IS NOT SET");
 				model.addAttribute("msg", "선호도를 체크한 후에 이용이 가능합니다!");
 
 				return "msg/alert";
