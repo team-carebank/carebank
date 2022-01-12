@@ -1,6 +1,7 @@
 package com.yee.carebank.model.dto;
 
 public class FoodDto {
+	private int food_id;
 	private String food;
 	private String description;
 	private double carbo;
@@ -10,6 +11,26 @@ public class FoodDto {
 
 	public FoodDto() {
 		super();
+	}
+
+	public int getFood_id() {
+		return food_id;
+	}
+
+	public void setFood_id(int food_id) {
+		this.food_id = food_id;
+	}
+
+	public FoodDto(int food_id, String food, String description, double carbo, double protein, double fat,
+			int calories) {
+		super();
+		this.food_id = food_id;
+		this.food = food;
+		this.description = description;
+		this.carbo = carbo;
+		this.protein = protein;
+		this.fat = fat;
+		this.calories = calories;
 	}
 
 	public String getFood() {
@@ -72,8 +93,7 @@ public class FoodDto {
 
 	@Override
 	public String toString() {
-		return "FoodDto [food=" + food + ", description=" + description + ", carbo=" + carbo + ", protein=" + protein
-				+ ", fat=" + fat + ", calories=" + calories + "]";
+		return "FoodDto [food_id=" + food_id + ", food=" + food + ", description=" + description + ", carbo=" + carbo
+				+ ", protein=" + protein + ", fat=" + fat + ", calories=" + calories + "]";
 	}
-
 }

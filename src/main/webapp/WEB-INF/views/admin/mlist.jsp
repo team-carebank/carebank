@@ -15,6 +15,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<style type="text/css">
+body > div.container > div > div.content-admin-main > div.admin-main-content > div.main-content-board > div:nth-child(1) > div > span.board-content-name {
+	color: black !important;
+	cursor: default !important;
+}
+</style>
 <script>
 	$(document).on("submit", '#search-keyword-data', function(e) {
 		let keyword = e.target[1].value.trim();
@@ -44,6 +50,9 @@
 	});
 	
 	$(document).on("click", ".board-content-name", function(e){
+		if(e.currentTarget.parentElement.className == 'board-header-content'){
+			return false;
+		}
 		let id = e.currentTarget.previousElementSibling.innerText;
 		let path = "${pageContext.request.contextPath}/admin/minfo.do?id=";
 		
