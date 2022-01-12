@@ -10,8 +10,7 @@ public interface MyExerciseDao {
 
 	String NAMESPACE="myexercise.";
 	
-	public List<MyExerciseDto> selectList();
-	public int selectOne(int user_no);
+	public List<MyExerciseDto> selectList(int user_no); 
 	public int insert(MyExerciseDto dto);  
 	//public int insert(Integer exer_count);
 }

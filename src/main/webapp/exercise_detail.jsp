@@ -17,13 +17,12 @@
   
   
 <title>ExerciseDetail</title>
-<style type="text/css">  
+<style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
-
 *{
  margin:0px;
  padding: 0px;
- font-family: 'Noto Sans KR';
+ font-family: 'Noto Sans KR', sans-serif;
 }
 body{
  width:100%;
@@ -56,7 +55,8 @@ body{
  background-image:url('resources/img/camready.jpg');
  background-size: cover;
  
- border-radius: 20px; 
+ border-radius: 20px;
+background: linear-gradient(145deg, #e6e6e6, #ffffff);
 box-shadow:  5px 5px 10px #d9d9d9,
              -5px -5px 10px #ffffff;
  
@@ -89,7 +89,8 @@ height:400px;
   align-items: center;
   justify-content: center;
   
-  border-radius: 20px; 
+  border-radius: 20px;
+background: linear-gradient(145deg, #e6e6e6, #ffffff);
 box-shadow:  5px 5px 10px #d9d9d9,
              -5px -5px 10px #ffffff;
 }
@@ -137,13 +138,11 @@ box-shadow:  5px 5px 10px #d9d9d9,
  right: 40px;
  width:150px;
  height:100px;
- font-size:0.8em;
  padding:20px;
  border-radius: 20px;
 background: linear-gradient(145deg, #e6e6e6, #ffffff);
 box-shadow:  5px 5px 10px #d9d9d9,
              -5px -5px 10px #ffffff;
-            
 }
  
 
@@ -165,7 +164,7 @@ box-shadow:  5px 5px 10px #d9d9d9,
 	}
 	
 	h1{
-	font-family: 'Noto Sans KR';
+	font-family: 'Noto Sans KR', sans-serif;
 	TSmd}
 	
 
@@ -174,20 +173,21 @@ box-shadow:  5px 5px 10px #d9d9d9,
     }	
 	
 	 .number {  
-  font-size:20px;
+  font-size:30px;
   list-style: none;
   color: #333;
 }
 
-/* #hello{
-	font-family: 'Noto Sans KR';
+
+#hello{
+	font-family: 'Noto Sans KR', sans-serif;
 	font-size:20px;
 	width:200px;
 	height:100px;
 	position:absolute;
 	top:400px;
 	left:100px;
-}-*/
+}
 	
 /*button */ 
 .button-68 {
@@ -242,55 +242,26 @@ box-shadow:  5px 5px 10px #d9d9d9,
 	
 }
 
-#hello{
+#count{
 border-radius: 20px;
 background: linear-gradient(145deg, #e6e6e6, #ffffff);
 box-shadow:  5px 5px 10px #d9d9d9,
              -5px -5px 10px #ffffff;
              }
-.desc{
-              font-family: 'Noto Sans KR';
+
+#desc{
 border-radius: 20px;
 background: linear-gradient(145deg, #e6e6e6, #ffffff);
 box-shadow:  5px 5px 10px #d9d9d9,
              -5px -5px 10px #ffffff;
-             overflow:auto;
-              padding:20px;
              }
-             
-             
              
              #textnotice{
-              font-family: 'Noto Sans KR';
-             align-items:center;
-             
              border-radius: 20px;
 background: linear-gradient(145deg, #e6e6e6, #ffffff);
 box-shadow:  5px 5px 10px #d9d9d9,
              -5px -5px 10px #ffffff;
              }
-             
-             
-             
-/* 스크롤바 설정*/
-.desc::-webkit-scrollbar{
-    width: 6px;
-    height:3px;
-}
-
-/* 스크롤바 막대 설정*/
-.desc::-webkit-scrollbar-thumb{
-    height: 3%;
-    background-color: rgba(142,178,151,0.7);
-    /* 스크롤바 둥글게 설정    */
-    border-radius: 10px;    
-}
-
-/* 스크롤바 뒷 배경 설정*/
-.desc::-webkit-scrollbar-track{
-    background-color: rgba(0,0,0,0);
-}
-
 </style>
 
  
@@ -299,14 +270,16 @@ box-shadow:  5px 5px 10px #d9d9d9,
 
 <body> 
   <div class="textbox">
-  <span id="textnotice" style="padding:10px; font-family: 'Noto Sans KR', sans-serif; color:#7C847F;">${dto.exer_notice }</span>
+  <div id="textnotice">
+        <h2 style="font-size: 20px;">${dto.exer_notice }</h2></div>
         <br><br>
-       <!--  <div id="hello">COUNT: </div>--> 
-        
+        <div id="hello">COUNT: </div> 
+        <h1>test:${dto.exer_description }</h1>
         </div>   
     <div id="workoutcontainer">
      
 	        <div class="webcam">
+	        	 
 			    <button type="submit" id="startbutton" class="button-68" onclick="init(); counterFn();">Start!</button>
 			    <div><canvas id="canvas"></canvas></div>
 			    <div id="label-container"></div>
@@ -323,23 +296,22 @@ box-shadow:  5px 5px 10px #d9d9d9,
     </div>
    
     <div class="checkbox">
-        <h3 style="text-align:center;margin-top:5px;color:#7C847F;">이번달도 고지가 눈앞에!</h3> 
+        <h3 style="text-align:center;">이번달도 고지가 눈앞에!</h3> 
          <div id="checkchart"> 
                   
        <button class="button-68" id="done" onclick  ="insert();">	DONE</button>
        </div>
 		</div>
     <div class="calories">
-      <h3 style="color:#7C847F;">벌써</h3><br><h1 class="number"> </h1><h3 style="color:#7C847F;">kcal나 불태웠어요</h3>
+      <h3>벌써</h3><br><h1 class="number"> </h1><br><h3>kcal나 불태웠어요</h3>
     </div>
     
     <div class="exerinfo">
     
-    <div id="hello" style="background-color:red;width:150px;height:100px;position:absolute;top:250px;left:100px;text-align:center;">
-	<div id="tm" style="margin-top:35px; font-size:20px; font-weight:bolder; color:#8EB297;">COUNT:</div>
+    <div id="count" style="background-color:red;width:150px;height:100px;position:absolute;top:250px;left:100px;">
+
     </div>
-    <div class="desc" style="background-color:blue;width:220px;height:180px;position:absolute;top:400px;left:50px;font-family: 'Noto Sans KR';color:#9A9B9A;">
-     <span>${dto.exer_description }</span>
+    <div id="desc" style="background-color:blue;width:240px;height:200px;position:absolute;top:400px;left:50px;">dddddd
     </div>
     
     </div>
@@ -366,7 +338,7 @@ box-shadow:  5px 5px 10px #d9d9d9,
         const URL = "${dto.exer_tm_url}";
         let model, webcam, ctx, labelContainer, maxPredictions;
         
-        var cc=0; 
+        var cc=7; 
         
         function insert(){
         	var exerid = ${dto.exer_id};
@@ -412,7 +384,7 @@ box-shadow:  5px 5px 10px #d9d9d9,
             const canvas = document.getElementById("canvas");
             canvas.width = size; canvas.height = size;
             ctx = canvas.getContext("2d");
-            labelContainer = document.getElementById("tm");
+            labelContainer = document.getElementById("hello");
             for (let i = 0; i < maxPredictions; i++) { // and class labels
                 labelContainer.appendChild(document.createElement("div"));
             }
@@ -440,6 +412,13 @@ box-shadow:  5px 5px 10px #d9d9d9,
                  if(status == "bound"){
                      cc=count++;
                      
+                     
+                     console.log(document.getElementById("hello").innerText);
+                     console.log(document.getElementById("hello").innerHTML);
+                      //console.log(document.getElementById("hello").value);
+                     //console.log(labelContainer);
+                     // console.log(cc);
+                     //console.log(window['cc']); //var cc=~ 로 선언된 값을 출력하는 콘솔..  
                      
                      //count할때 sound 삽입
                      var audio = new Audio('http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a');
