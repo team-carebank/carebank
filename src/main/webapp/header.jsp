@@ -61,7 +61,7 @@
 							href="${pageContext.request.contextPath}/newmeditation.do"
 							target="_blank">명상</a></li>
 					</ul></li>
-				<li class="nav-component"><a>커뮤니티</a></li>
+				
 				<li class="nav-component"><a>고객센터</a>
 					<ul class="nav-sub">
 						<li><a href="#">공지사항</a></li>
@@ -78,6 +78,7 @@
 							<li class="nav-component"><a href="#">마이페이지</a>
 								<ul class="nav-sub">
 									<li><a href="${pageContext.request.contextPath}/diary.do">다이어리</a></li>
+									<li><a href="${pageContext.request.contextPath}/myinfo.do">내정보</a></li>
 								</ul></li>
 						</c:when>
 						<c:otherwise>
@@ -86,6 +87,7 @@
 						</c:otherwise>
 					</c:choose>
 				</c:if>
+
 				<c:choose>
 					<c:when test="${empty login_info}">
 						<li class="nav-component"><a

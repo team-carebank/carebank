@@ -104,7 +104,7 @@ public class UserController {
 	//회원가입 - 아이디중복체크
 	@RequestMapping(value = "/idchk.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String idchk(@RequestBody String user_id ) {
+	public String idchk(String user_id) {
 		
 		logger.info("ID CHECK");
 		
