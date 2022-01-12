@@ -1,5 +1,7 @@
 package com.yee.carebank.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +29,15 @@ private MyInfoBiz infobiz;
 	
 	@RequestMapping("/myinfoUpdate.do")
 	@ResponseBody
-	public boolean myinfoUpdate(@RequestBody UserDto newdto) {
+	public boolean myinfoUpdate(HttpSession session, @RequestBody UserDto newdto) {
 		logger.info("MYPAGE INFO UPDATE");
 		
 		int res = infobiz.myinfoUpdate(newdto);
 		
 		if(res > 0) {
+			session.setAttribute("login_info", newdto);
 			return true;
+
 		}
 		else {
 			return false;

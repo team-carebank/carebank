@@ -295,6 +295,7 @@
   					if(res){
   						alert("정보가 수정되었습니다.")
   						window.location.reload();
+  						
   					}
   					else{
   						alert("수정에 실패하였습니다.");
