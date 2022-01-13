@@ -17,7 +17,7 @@
 	</select>
 	<select id="selectOne" resultType="mealDto" parameterType="int">
 
-		SELECT MEAL_ID, MEAL_NAME, RECIPE, SRC, SUBCAT_NAME FROM MEAL NATURAL
+		SELECT MEAL_ID, MEAL_NAME, RECIPE, SRC, SUBCAT_ID, SUBCAT_NAME FROM MEAL NATURAL
 		JOIN CATEGORY c WHERE MEAL_ID = ${meal_id}
 	</select>
 	<select id="selectIngredient" resultType="foodDto"

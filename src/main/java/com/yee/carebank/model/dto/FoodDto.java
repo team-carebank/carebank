@@ -1,5 +1,7 @@
 package com.yee.carebank.model.dto;
 
+import java.util.List;
+
 public class FoodDto {
 	private int food_id;
 	private String food;
@@ -7,22 +9,17 @@ public class FoodDto {
 	private double carbo;
 	private double protein;
 	private double fat;
-	private int calories;
+	private double calories;
+
+	private List<FoodDto> foods;
 
 	public FoodDto() {
 		super();
-	}
-
-	public int getFood_id() {
-		return food_id;
-	}
-
-	public void setFood_id(int food_id) {
-		this.food_id = food_id;
+		// TODO Auto-generated constructor stub
 	}
 
 	public FoodDto(int food_id, String food, String description, double carbo, double protein, double fat,
-			int calories) {
+			double calories) {
 		super();
 		this.food_id = food_id;
 		this.food = food;
@@ -31,6 +28,24 @@ public class FoodDto {
 		this.protein = protein;
 		this.fat = fat;
 		this.calories = calories;
+	}
+
+	public FoodDto(String food, String description, double carbo, double protein, double fat, double calories) {
+		super();
+		this.food = food;
+		this.description = description;
+		this.carbo = carbo;
+		this.protein = protein;
+		this.fat = fat;
+		this.calories = calories;
+	}
+
+	public int getFood_id() {
+		return food_id;
+	}
+
+	public void setFood_id(int food_id) {
+		this.food_id = food_id;
 	}
 
 	public String getFood() {
@@ -73,27 +88,33 @@ public class FoodDto {
 		this.fat = fat;
 	}
 
-	public int getCalories() {
+	public double getCalories() {
 		return calories;
 	}
 
-	public void setCalories(int calories) {
+	public void setCalories(double calories) {
 		this.calories = calories;
 	}
 
-	public FoodDto(String food, String description, double carbo, double protein, double fat, int calories) {
+	public FoodDto(int food_id, String food, String description, double carbo, double protein, double fat,
+			double calories, List<FoodDto> foods) {
 		super();
+		this.food_id = food_id;
 		this.food = food;
 		this.description = description;
 		this.carbo = carbo;
 		this.protein = protein;
 		this.fat = fat;
 		this.calories = calories;
+		this.foods = foods;
 	}
 
-	@Override
-	public String toString() {
-		return "FoodDto [food_id=" + food_id + ", food=" + food + ", description=" + description + ", carbo=" + carbo
-				+ ", protein=" + protein + ", fat=" + fat + ", calories=" + calories + "]";
+	public List<FoodDto> getFoods() {
+		return foods;
 	}
+
+	public void setFoods(List<FoodDto> foods) {
+		this.foods = foods;
+	}
+
 }

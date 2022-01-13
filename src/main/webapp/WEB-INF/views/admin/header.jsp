@@ -30,6 +30,7 @@
 
 .admin-info *:hover {
 	cursor: pointer;
+	text-shadow: 1px 1px 20px #038857;
 }
 
 .admin-info *:nth-child(2) {
