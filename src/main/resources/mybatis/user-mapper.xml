@@ -19,7 +19,7 @@
   	<!-- 로그인처리 -->
   	<select id = "login" parameterType = "userDto" resultType = "userDto">
   		SELECT * FROM CARE_USER
-  		WHERE USER_ID = #{user_id}
+  		WHERE USER_ID = #{user_id} AND ENABLED_YN = 'Y'
   	</select>
   	
   	<!-- 회원가입 -->
@@ -41,6 +41,11 @@
   		WHERE USER_NO = #{user_no}
   	</update>
   
+  <update id = "disable">
+  		UPDATE CARE_USER
+  		SET ENABLED_YN = 'N' 
+  		WHERE USER_NO = #{user_no}
+  </update>
   
   
   </mapper>

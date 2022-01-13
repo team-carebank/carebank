@@ -15,4 +15,8 @@ public class MyInfoBiz {
 	public int myinfoUpdate(UserDto newdto) {
 		return userdao.myinfoUpdate(newdto);
 	}
+	
+	public int disable(int user_no) {
+		return userdao.disable(user_no);
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.MyInfoBiz;
@@ -41,6 +42,23 @@ private MyInfoBiz infobiz;
 		}
 		else {
 			return false;
+		}
+	}
+	
+	@RequestMapping("/disable.do")
+	//@ResponseBody
+	public String disable(HttpSession session, @RequestParam int user_no) {
+		logger.info("MYPAGE USER DISABLE");
+	
+		int res = infobiz.disable(user_no);
+		
+		if (res > 0) {
+			
+			return "redirect:logout.do";
+		}
+		else {
+			return "redirect:myinfo.do";
+		
 		}
 	}
 	

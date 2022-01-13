@@ -46,14 +46,16 @@ public class UserController {
 		
 		boolean check = false;
 		if(login_info != null) {
+			
 			if(passwordEncoder.matches(userdto.getUser_pw(), login_info.getUser_pw())) {
-				
-				session.setAttribute("login_info", login_info);
-				session.setMaxInactiveInterval(60*60); //세션 유지시간
-				check = true; 
+					session.setAttribute("login_info", login_info);
+					session.setMaxInactiveInterval(60*60); //세션 유지시간
+					check = true; 
 			}
 		}
-		
+		else {
+			check = false;
+		}
 		 Map<String, Boolean> map = new HashMap<String, Boolean>();
 		 map.put("check",check);
 		 //test//
