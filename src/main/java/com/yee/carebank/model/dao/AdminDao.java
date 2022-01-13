@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -105,6 +102,34 @@ public class AdminDao {
 			System.out.println(e.getMessage());
 			return -1;
 		}
+	}
+
+	public List<MealDto> searchByName(String keyword, int start, int end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("start", start);
+		map.put("end", end);
+		map.put("keyword", keyword);
+
+		return sqlSession.selectList(NAMESPACE + "searchMeal", map);
+	}
+
+	public List<MealDto> searchByCategory(String keyword, int start, int end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("start", start);
+		map.put("end", end);
+		map.put("keyword", keyword);
+		return sqlSession.selectList(NAMESPACE + "searchCat", map);
+	}
+
+	public List<MealDto> searchAll(String keyword, int start, int end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("start", start);
+		map.put("end", end);
+		map.put("keyword", keyword);
+		return sqlSession.selectList(NAMESPACE + "searchAll", map);
 	}
 
 }

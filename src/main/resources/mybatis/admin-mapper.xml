@@ -92,4 +92,85 @@
 		SET CARBO=#{carbo}, PROTEIN=#{protein}, FAT=#{fat}, CALORIES=#{calories}
 		WHERE FOOD_ID = #{food_id}
 	</update>
+	<select id="searchAll" parameterType="String" resultType="mealDto">
+		SELECT
+		*
+		FROM
+		(
+		SELECT
+		ROWNUM AS POSTNO,
+		MEAL_CAT.*
+		FROM
+		(
+		SELECT
+		MEAL_ID,
+		MEAL_NAME,
+		SUBCAT_NAME,
+		SUPERCAT_ID
+		FROM
+		MEAL JOIN CATEGORY
+		USING(SUBCAT_ID)
+		WHERE
+		SUBCAT_NAME LIKE '%${keyword}%' OR MEAL_NAME LIKE '%${keyword}%'
+		ORDER BY MEAL_ID
+		) MEAL_CAT)
+		WHERE
+		POSTNO BETWEEN
+		#{start} AND #{end}
+		ORDER BY POSTNO
+	</select>
+		<select id="searchCat" parameterType="String" resultType="mealDto">
+		SELECT
+		*
+		FROM
+		(
+		SELECT
+		ROWNUM AS POSTNO,
+		MEAL_CAT.*
+		FROM
+		(
+		SELECT
+		MEAL_ID,
+		MEAL_NAME,
+		SUBCAT_NAME,
+		SUPERCAT_ID
+		FROM
+		MEAL JOIN CATEGORY
+		USING(SUBCAT_ID)
+		WHERE
+		SUBCAT_NAME LIKE '%${keyword}%'
+		ORDER BY MEAL_ID
+		) MEAL_CAT)
+		WHERE
+		POSTNO BETWEEN
+		#{start} AND #{end}
+		ORDER BY POSTNO
+	</select>
+		<select id="searchMeal" parameterType="String" resultType="mealDto">
+		SELECT
+		*
+		FROM
+		(
+		SELECT
+		ROWNUM AS POSTNO,
+		MEAL_CAT.*
+		FROM
+		(
+		SELECT
+		MEAL_ID,
+		MEAL_NAME,
+		SUBCAT_NAME,
+		SUPERCAT_ID
+		FROM
+		MEAL JOIN CATEGORY
+		USING(SUBCAT_ID)
+		WHERE
+		MEAL_NAME LIKE '%${keyword}%'
+		ORDER BY MEAL_ID
+		) MEAL_CAT)
+		WHERE
+		POSTNO BETWEEN
+		#{start} AND #{end}
+		ORDER BY POSTNO
+	</select>
 </mapper>
