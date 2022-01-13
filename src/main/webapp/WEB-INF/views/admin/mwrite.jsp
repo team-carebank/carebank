@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ taglib
-	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ taglib
-	prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,6 +94,15 @@
 	});
 	
 	$(document).on("click", "#submit", function(e){
+		$("#mForm").each(function(i){
+			$(this).find("input[name='food']").attr("name", "foods["+i+"].food");
+			$(this).find("textarea[name='description']").attr("name", "foods[" + i + "].description");
+			$(this).find("input[name='carbo']").attr("name", "foods["+i+"].carbo");
+			$(this).find("input[name='protein']").attr("name", "foods["+i+"].protein");
+			$(this).find("input[name='fat']").attr("name", "foods["+i+"].fat");
+			$(this).find("input[name='calories']").attr("name", "foods["+i+"].calories");
+		});
+		
 		document.getElementById("mForm").submit();
 	});
 

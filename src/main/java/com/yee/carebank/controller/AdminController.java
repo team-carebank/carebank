@@ -18,12 +18,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yee.carebank.model.biz.AdminBiz;
 import com.yee.carebank.model.biz.MealBiz;
 import com.yee.carebank.model.dto.FoodDto;
+import com.yee.carebank.model.dto.FoodsDto;
 import com.yee.carebank.model.dto.MealDto;
 import com.yee.carebank.model.dto.UserDto;
 
@@ -134,9 +136,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("admin/minsert.do")
-	public String insertM(HttpSession session, Model model, MealDto meal, @RequestParam List<String> food,
-			@RequestParam List<String> description, @RequestParam List<Double> carbo,
-			@RequestParam List<Double> protein, @RequestParam List<Double> fat, @RequestParam List<Double> calories) {
+	public String insertM(HttpSession session, Model model, MealDto meal, @ModelAttribute FoodsDto foods) {
 		logger.info("INFO - INSERT DATA [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
@@ -151,15 +151,7 @@ public class AdminController {
 			return "redirect: ../main.do";
 		}
 
-		List<FoodDto> foods = new ArrayList<FoodDto>();
-
-		for (int i = 0; i < food.size(); i++) {
-			FoodDto f = new FoodDto(food.get(i), description.get(i), carbo.get(i), protein.get(i), fat.get(i),
-					calories.get(i));
-			foods.add(f);
-		}
-
-		int res = biz.insertM(meal, foods);
+		int res = biz.insertM(meal, foods.getFoods());
 
 		if (res > 0) {
 			model.addAttribute("msg", "게시글이 작성되었습니다.");
@@ -196,9 +188,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("admin/mmodify.do")
-	public String updateM(HttpSession session, Model model, MealDto meal, @RequestParam List<String> food,
-			@RequestParam List<String> description, @RequestParam List<Double> carbo,
-			@RequestParam List<Double> protein, @RequestParam List<Double> fat, @RequestParam List<Double> calories) {
+	public String updateM(HttpSession session, Model model, MealDto meal, @ModelAttribute FoodsDto foods) {
 		logger.info("INFO - MODIFY DATA [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
@@ -213,15 +203,7 @@ public class AdminController {
 			return "redirect: ../main.do";
 		}
 
-		List<FoodDto> foods = new ArrayList<FoodDto>();
-
-		for (int i = 0; i < food.size(); i++) {
-			FoodDto f = new FoodDto(food.get(i), description.get(i), carbo.get(i), protein.get(i), fat.get(i),
-					calories.get(i));
-			foods.add(f);
-		}
-
-		int res = biz.updateM(meal, foods);
+		int res = biz.updateM(meal, foods.getFoods());
 
 		if (res > 0) {
 			model.addAttribute("msg", "게시글이 삭제되었습니다.");

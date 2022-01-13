@@ -109,6 +109,15 @@ public class FoodDto {
 		this.foods = foods;
 	}
 
+	public FoodDto(String food, String description, String carbo, String protein, String fat, String calories) {
+		this.food = food;
+		this.description = description;
+		this.carbo = Double.parseDouble(carbo);
+		this.protein = Double.parseDouble(protein);
+		this.fat = Double.parseDouble(fat);
+		this.calories = Double.parseDouble(calories);
+	}
+
 	public List<FoodDto> getFoods() {
 		return foods;
 	}
