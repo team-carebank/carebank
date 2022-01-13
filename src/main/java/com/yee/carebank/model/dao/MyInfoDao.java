@@ -25,4 +25,18 @@ public class MyInfoDao {
 		}
 		return res;
 	}
+	
+	public int disable(int user_no) {
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE + "disable", user_no);
+		} catch (Exception e) {
+			System.out.println("[error]: user disable");
+			e.printStackTrace();
+		}
+		return res;
+		
+		
+		
+	}
 }

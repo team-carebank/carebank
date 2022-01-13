@@ -239,7 +239,8 @@
                               <span class="board-content-config" id="add" onclick = "">비밀번호 재설정</span>
                             </div>
                             <div class="board-header-content">
-                                <span class="board-content-config" id="add" onclick = "">회원탈퇴</span>
+                                <span class="board-content-config" id="add" onclick = "location.href = 'disable.do?user_no=${login_info.user_no}'">회원탈퇴</span>
+                                								
                             </div>
                         </div>
                     </div>
@@ -271,6 +272,11 @@
     		$('#new_update').remove();
     		$('#cancel').remove();
     		$('#footer').children().show();
+    		
+    		var input= $('.board-content-name');
+    		for(var i = 0; i < input.length; i++){
+		   		input[i].setAttribute('readonly', 'true')
+    		}
     	};
     	
     	function update(){
@@ -305,13 +311,10 @@
   					function(){
   						alert("통신실패")
   				}
-  				
-  				
   			});//ajax end
-  			
     	};
     
-    
+
     
     
     </script>
