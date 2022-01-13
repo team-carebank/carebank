@@ -47,12 +47,12 @@ public class ExerciseController {
 	 
 		logger.info("exerlist detail"); 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
-		int user_no=dto.setUser_no(loginUser.getUser_no());
 		
-		System.out.println("유저넘버는..."+dto.getUser_no());
+		 
+		int user_no=dto.setUser_no(loginUser.getUser_no());
 		model.addAttribute("dto", biz.selectOne(exer_id)); 
 		model.addAttribute("mydtooo",mybiz.selectList(user_no));
-		
+		 
 		return "exercise_detail";
 	}
 	 

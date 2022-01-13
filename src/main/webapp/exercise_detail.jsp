@@ -315,14 +315,8 @@ box-shadow:  5px 5px 10px #d9d9d9,
     </div>
     
     </div>
-    <!-- ajax test -->
-  
-
-  <!-- <div id="ViewTimer">
-    	<div id="time_left"> 
-        <h1 style="position: absolute; left:590px; font-family: 'Noto Sans KR', sans-serif;"></h1>
-        </div>
- </div>--> 
+     
+ 
   
   <!-- TM SCRIPT -->
  

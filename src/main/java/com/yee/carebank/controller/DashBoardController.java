@@ -1,53 +1,42 @@
 package com.yee.carebank.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-public class DashBoardController {
+import com.yee.carebank.model.biz.MyExerciseBiz;
+import com.yee.carebank.model.dto.MyExerciseDto;
+import com.yee.carebank.model.dto.UserDto;
 
-	@Controller
-	public class MainController {
+@Controller
+public class DashboardController {
+
+	private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
+
+
+	@Autowired
+	private MyExerciseBiz mybiz;
+	
+	@RequestMapping("/dashboard.do")
+	public String dashboard(Model model,MyExerciseDto dto, HttpSession session) {
+		 
+		logger.info("dashlist");
+
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+		int user_no=dto.setUser_no(loginUser.getUser_no());
 		
-		@RequestMapping(value="/", method=RequestMethod.GET)
-		public String home(Model model) {
-			
-			
-			model.addAttribute("menu","home");
-			return "dashboard_main";
-		}
+		model.addAttribute("mydtooo",mybiz.selectList(user_no));
 		
-		@RequestMapping(value="/bmi", method=RequestMethod.GET)
-		public String bmi(Model model) {
-
-			model.addAttribute("menu","bmi");
-
-			return "dashboard_bmi";
-		}
+		return "dashboard";
 		
-		@RequestMapping(value="/health", method=RequestMethod.GET)
-		public String health(Model model) {
-
-			model.addAttribute("menu","health");
-
-			return "dashboard_health";
-		}
-		
-		@RequestMapping(value="/Mind", method=RequestMethod.GET)
-		public String Mind(Model model) {
-			
-			model.addAttribute("menu","Mind");
-
-			return "dashboard_mind";
-		}
-		
-		@RequestMapping(value="/Nutrient", method=RequestMethod.GET)
-		public String Nutrient(Model model) {
-			
-			model.addAttribute("menu","Nutrient");
-
-			return "dashboard_nutrient";
-		}
 	}
+	
+	
+	
+	
 }

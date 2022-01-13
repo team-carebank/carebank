@@ -23,7 +23,7 @@
 *{
  margin:0px;
  padding: 0px;
- font-family: 'Noto Sans KR';
+ font-family: 'Noto Sans KR', sans serif !important;
 }
 body{
  width:100%;
