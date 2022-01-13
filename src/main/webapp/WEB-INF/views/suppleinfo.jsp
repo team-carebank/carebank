@@ -236,10 +236,14 @@ function update(comm_no){
 								<span>${comm.content }</span>
 							</div>
 						</div>
-						<div class="comment-item-manage">
-							<span class="comment-item-modify" id="${comm.comm_no }">수정</span><span
-								class="comment-item-delete" id="${comm.comm_no }">삭제</span>
-						</div>
+						<c:if test="${ not empty login_info }">
+							<c:if test="${ login_info.user_no eq comm.user_no }">
+								<div class="comment-item-manage">
+									<span class="comment-item-modify" id="${comm.comm_no }">수정</span><span
+										class="comment-item-delete" id="${comm.comm_no }">삭제</span>
+								</div>
+							</c:if>
+						</c:if>
 					</div>
 				</c:forEach>
 			</div>

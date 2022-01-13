@@ -228,7 +228,7 @@
 	transition: 0.2s;
 }
 
-@media screen and (max-width:1000px) {
+@media screen and (max-width:1200px) {
 	.content-admin-side {
 		width: 100%;
 		box-shadow: none;

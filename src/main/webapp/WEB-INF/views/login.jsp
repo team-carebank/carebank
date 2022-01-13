@@ -222,6 +222,7 @@ img{
 	function login(){	
 		var user_id = $("#user_id").val().trim();
 		var user_pw = $("#user_pw").val().trim();
+	
 		console.log(user_id + user_pw);
 		
 		var loginInfo = {
@@ -242,6 +243,7 @@ img{
 				success: 
 					function(msg){
 						if(msg.check == true){
+						
 							location.href = "main.do";
 						}
 						else{
@@ -290,7 +292,7 @@ $("#kakao").on("click", function() {
 								 location.href = "${pageContext.request.contextPath}/" + res
 							 }
 							 else {
-								 alert("카카오 로그 실패");
+								 alert("카카오 로그인 실패");
 								 location.href = "${pageContext.request.contextPath}/loginform.do";
 							 }
 						 },

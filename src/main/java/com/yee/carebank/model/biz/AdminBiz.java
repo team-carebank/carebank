@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yee.carebank.model.dao.AdminDao;
+import com.yee.carebank.model.dto.CategoryDto;
+import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
 
 @Service
@@ -27,4 +30,35 @@ public class AdminBiz {
 		return dao.getMTotalCnt();
 	}
 
+	public List<CategoryDto> selectCList() {
+		return dao.selectCList();
+	}
+
+	public int insertM(MealDto meal, List<FoodDto> foods) {
+		return dao.insertM(meal, foods);
+	}
+
+	public int deleteMeal(int meal_id) {
+		return dao.deleteMeal(meal_id);
+	}
+
+	public int updateM(MealDto m, List<FoodDto> food) {
+		return dao.updateM(m, food);
+	}
+
+	public List<MealDto> search(String searchType, String keyword, int page) {
+		int start = 1, end = 20;
+
+		start = (20 * (page - 1)) + 1;
+		end = start + 19;
+		
+		switch (searchType) {
+		case "name":
+			return dao.searchByName(keyword, start, end);
+		case "category":
+			return dao.searchByCategory(keyword, start, end);
+		default:
+			return dao.searchAll(keyword, start, end);
+		}
+	}
 }

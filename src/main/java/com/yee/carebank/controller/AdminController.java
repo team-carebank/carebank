@@ -1,6 +1,7 @@
 package com.yee.carebank.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -17,12 +18,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.resource.HttpResource;
 
 import com.yee.carebank.model.biz.AdminBiz;
 import com.yee.carebank.model.biz.MealBiz;
+import com.yee.carebank.model.dto.FoodDto;
+import com.yee.carebank.model.dto.FoodsDto;
 import com.yee.carebank.model.dto.MealDto;
 import com.yee.carebank.model.dto.UserDto;
 
@@ -46,17 +49,18 @@ public class AdminController {
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - NOT AUTHORIZED USER");
+				logger.error("ERROR - UNAUTHORIZED USER");
 				return "redirect: ../main.do";
-			} else {
-				model.addAttribute("res", res);
-				model.addAttribute("cnt", biz.getMTotalCnt());
-				model.addAttribute("page", 1);
 			}
 		} catch (Exception e) {
 			logger.error("ERROR - LOGIN NOT FOUND");
 			return "redirect: ../main.do";
 		}
+
+		model.addAttribute("res", res);
+		model.addAttribute("cnt", biz.getMTotalCnt());
+		model.addAttribute("page", 1);
+		model.addAttribute("category", biz.selectCList());
 
 		return "admin/mlist";
 	}
@@ -71,19 +75,20 @@ public class AdminController {
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - NOT AUTHORIZED USER");
+				logger.error("ERROR - UNAUTHORIZED USER");
 				return "redirect: ../main.do";
-			} else {
-				res = biz.selectMList(page);
-
-				model.addAttribute("res", res);
-				model.addAttribute("cnt", biz.getMTotalCnt());
-				model.addAttribute("page", page);
 			}
 		} catch (Exception e) {
 			logger.error("ERROR - LOGIN NOT FOUND");
 			return "redirect: ../main.do";
 		}
+
+		res = biz.selectMList(page);
+
+		model.addAttribute("res", res);
+		model.addAttribute("cnt", biz.getMTotalCnt());
+		model.addAttribute("page", page);
+		model.addAttribute("category", biz.selectCList());
 
 		return "admin/mlist";
 	}
@@ -96,20 +101,176 @@ public class AdminController {
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - NOT AUTHORIZED USER");
+				logger.error("ERROR - UNAUTHORIZED USER");
 				return "redirect: ../main.do";
-			} else {
-				model.addAttribute("meal", mBiz.selectOne(meal_id));
-				model.addAttribute("food", mBiz.selectIngredient(meal_id));
 			}
 		} catch (Exception e) {
 			logger.error("ERROR - LOGIN NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
+		model.addAttribute("meal", mBiz.selectOne(meal_id));
+		model.addAttribute("food", mBiz.selectIngredient(meal_id));
+
 		return "admin/minfo";
 	}
 
+	@RequestMapping("admin/mwrite.do")
+	public String writeMeal(HttpSession session, Model model) {
+		logger.info("INFO - INSERT PAGE [MEAL]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		model.addAttribute("category", biz.selectCList());
+		return "admin/mwrite";
+	}
+
+	@RequestMapping("admin/minsert.do")
+	public String insertM(HttpSession session, Model model, MealDto meal, @ModelAttribute FoodsDto foods) {
+		logger.info("INFO - INSERT DATA [MEAL]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		int res = biz.insertM(meal, foods.getFoods());
+
+		if (res > 0) {
+			model.addAttribute("msg", "게시글이 작성되었습니다.");
+		} else {
+			model.addAttribute("msg", "게시글이 작성되지 않았습니다.");
+		}
+
+		return "redirect: meal.do";
+	}
+
+	@RequestMapping("admin/mmodi.do")
+	public String updateMeal(HttpSession session, Model model, @RequestParam int meal_id) {
+		logger.info("INFO - UPDATE PAGE [MEAL]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			} else {
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		model.addAttribute("meal", mBiz.selectOne(meal_id));
+		model.addAttribute("food", mBiz.selectIngredient(meal_id));
+		model.addAttribute("category", biz.selectCList());
+
+		return "admin/mmodify";
+
+	}
+
+	@RequestMapping("admin/mmodify.do")
+	public String updateM(HttpSession session, Model model, MealDto meal, @ModelAttribute FoodsDto foods) {
+		logger.info("INFO - MODIFY DATA [MEAL]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		int res = biz.updateM(meal, foods.getFoods());
+
+		if (res > 0) {
+			model.addAttribute("msg", "게시글이 삭제되었습니다.");
+		} else {
+			model.addAttribute("msg", "게시글이 삭제되지 못하였습니다.");
+		}
+
+		return "redirect: meal.do";
+	}
+
+	@RequestMapping("admin/mdel.do")
+	public String deleteMeal(HttpSession session, Model model, @RequestParam int meal_id) {
+		logger.info("INFO - DELETE DATA [MEAL]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			} else {
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		int res = biz.deleteMeal(meal_id);
+
+		if (res > 0) {
+			model.addAttribute("msg", "게시글이 삭제되었습니다.");
+		} else {
+			model.addAttribute("msg", "게시글이 삭제되지 못하였습니다.");
+		}
+
+		return "redirect: meal.do";
+	}
+
+	@RequestMapping("admin/msearch.do")
+	public String searchMeal(HttpSession session, Model model, @RequestParam String search,
+			@RequestParam String keyword, @RequestParam int page) {
+		logger.info("INFO - SEARCH DATA [MEAL]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			}
+
+			model.addAttribute("res", biz.search(search, keyword, page));
+			model.addAttribute("search", search);
+			model.addAttribute("keyword", keyword);
+			model.addAttribute("page", page);
+			model.addAttribute("category", biz.selectCList());
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		return "admin/msearch";
+	}
+
+	/*
+	 * Exception Handler - Missing Parameter Exception
+	 */
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	public void handleMissingParams(MissingServletRequestParameterException e, HttpServletResponse response,
 			HttpServletRequest request) {
@@ -117,6 +278,8 @@ public class AdminController {
 		String url = request.getRequestURL().toString();
 		String redirectURL = null;
 		if (url.contains("meal.do")) {
+			redirectURL = "/carebank/admin/meal.do?page=1";
+		} else if (url.contains("admin/m")) {
 			redirectURL = "/carebank/admin/meal.do?page=1";
 		}
 		try {

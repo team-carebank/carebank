@@ -19,7 +19,7 @@
   	<!-- 로그인처리 -->
   	<select id = "login" parameterType = "userDto" resultType = "userDto">
   		SELECT * FROM CARE_USER
-  		WHERE USER_ID = #{user_id}
+  		WHERE USER_ID = #{user_id} AND ENABLED_YN = 'Y'
   	</select>
   	
   	<!-- 회원가입 -->
@@ -34,8 +34,18 @@
   		SELECT COUNT(*) FROM CARE_USER WHERE USER_ID = #{user_id}
   	</select>
   
+  <!-- 유저 기본정보 수정 -->
+  	<update id="infoUpdate" parameterType = "userDto">
+  		UPDATE CARE_USER
+  		SET USER_NAME = #{user_name}, USER_ID = #{user_id}, BIRTH = #{birth}, PHONE = #{phone}, EMAIL = #{email}
+  		WHERE USER_NO = #{user_no}
+  	</update>
   
-  
+  <update id = "disable">
+  		UPDATE CARE_USER
+  		SET ENABLED_YN = 'N' 
+  		WHERE USER_NO = #{user_no}
+  </update>
   
   
   </mapper>

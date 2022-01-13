@@ -72,7 +72,7 @@
 	<div class="container">
 		<div class="prefer-contents">
 			<div class="prefer-content-title">
-				<h1>___님의 관심사에 따라 식단을 추천드려요!</h1>
+				<h1>${login_info.user_name }님의 관심사에 따라 식단을 추천드려요!</h1>
 			</div>
 			<div class="prefer-content-item">
 				<div class="content-title">

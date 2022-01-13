@@ -25,6 +25,7 @@
 		<typeAlias type = "com.yee.carebank.model.dto.MoodDto" alias = "moodDto"/>
 		<typeAlias type = "com.yee.carebank.model.dto.PillsDto" alias = "pillsDto" />
 		<typeAlias type="com.yee.carebank.model.dto.MyMealDto" alias="myMealDto" />
+		<typeAlias type="com.yee.carebank.model.dto.CategoryDto" alias="categoryDto"/>
 	</typeAliases>
 
 	<mappers>

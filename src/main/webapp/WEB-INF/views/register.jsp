@@ -243,7 +243,7 @@
                       </div>
                       </div>
                       	
-                      	<input type = "button" value = "가입" onclick = "submit();">
+                      	<input type = "submit" value = "가입">
                       </form>
                       
                   </div>
@@ -261,6 +261,7 @@
 	$('#user_id').on("propertychange change keyup paste input",function(){
 		var user_id = $('#user_id').val();
 		var idchk = {"user_id" : user_id}
+		console.log(user_id);
 		
 		$.ajax({
 			type: "post",
@@ -269,13 +270,14 @@
 			success: 
 				function(res){
 					var msg = document.getElementsByClassName("id_chk")[0];
-				if(res != 'fail'){
+				if(res == 'success'){
 					
 					msg.innerHTML = "사용가능한 아이디입니다."
 					$('.id_chk').css({
 						'display' : 'inline-block',
 						'color' : 'green'
 					});
+					return true;
 				}
 				else{
 					msg.innerHTML = "이미 사용중인 아이디입니다."
@@ -283,6 +285,7 @@
 						'display':'inline-block',
 						'color': 'red'
 					});
+					return false;
 				}
 			}
 		});
@@ -301,14 +304,24 @@
 	 				pw.focus();
  				});
  				return false;
- 				
+ 			}
+ 			else{
+ 				return true;
  			}
  			
  		}
  	};
  	
+ 	function validate(){
+ 		if(pw_chk() == fale){
+ 			return false;
+ 		}
+ 	}
+ 	
  	//회원가입 버튼 (유효성검사 확인)
- 	//function submit();
+ 	/* function submit(){
+ 		if()	
+ 	} */
  	
  	
  

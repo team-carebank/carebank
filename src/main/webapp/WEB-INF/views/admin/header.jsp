@@ -30,6 +30,7 @@
 
 .admin-info *:hover {
 	cursor: pointer;
+	text-shadow: 1px 1px 20px #038857;
 }
 
 .admin-info *:nth-child(2) {
@@ -45,7 +46,7 @@
 			onclick="window.location.href='${pageContext.request.contextPath}/admin/main.do'">ADMIN
 			PAGE</h2>
 		<span id="logout"
-			onclick="window.location.href='${pageContext.request.contextPath}'/logout.do">로그아웃</span>
+			onclick="window.location.href='${pageContext.request.contextPath}/logout.do'">로그아웃</span>
 	</div>
 </body>
 </html>

@@ -13,15 +13,6 @@ public class MealDto {
 		super();
 	}
 
-	public MealDto(int meal_id, String meal_name, String recipe, int subcat_id, String src) {
-		super();
-		this.meal_id = meal_id;
-		this.meal_name = meal_name;
-		this.recipe = recipe;
-		this.subcat_id = subcat_id;
-		this.src = src;
-	}
-
 	public MealDto(int meal_id, String meal_name, String recipe, int subcat_id, String subcat_name, String src,
 			int supercat_id) {
 		super();
@@ -34,20 +25,12 @@ public class MealDto {
 		this.supercat_id = supercat_id;
 	}
 
-	public String getSubcat_name() {
-		return subcat_name;
-	}
-
-	public void setSubcat_name(String subcat_name) {
-		this.subcat_name = subcat_name;
-	}
-
-	public int getSupercat_id() {
-		return supercat_id;
-	}
-
-	public void setSupercat_id(int supercat_id) {
-		this.supercat_id = supercat_id;
+	public MealDto(String meal_name, String recipe, int subcat_id, String src) {
+		super();
+		this.meal_name = meal_name;
+		this.recipe = recipe;
+		this.subcat_id = subcat_id;
+		this.src = src;
 	}
 
 	public int getMeal_id() {
@@ -82,12 +65,28 @@ public class MealDto {
 		this.subcat_id = subcat_id;
 	}
 
+	public String getSubcat_name() {
+		return subcat_name;
+	}
+
+	public void setSubcat_name(String subcat_name) {
+		this.subcat_name = subcat_name;
+	}
+
 	public String getSrc() {
 		return src;
 	}
 
 	public void setSrc(String src) {
 		this.src = src;
+	}
+
+	public int getSupercat_id() {
+		return supercat_id;
+	}
+
+	public void setSupercat_id(int supercat_id) {
+		this.supercat_id = supercat_id;
 	}
 
 }
