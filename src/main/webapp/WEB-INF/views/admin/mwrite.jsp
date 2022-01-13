@@ -94,7 +94,9 @@
 	});
 	
 	$(document).on("click", "#submit", function(e){
-		$("#mForm").each(function(i){
+		var foods = $(".desc-item-food");
+		
+		foods.each(function(i){
 			$(this).find("input[name='food']").attr("name", "foods["+i+"].food");
 			$(this).find("textarea[name='description']").attr("name", "foods[" + i + "].description");
 			$(this).find("input[name='carbo']").attr("name", "foods["+i+"].carbo");
