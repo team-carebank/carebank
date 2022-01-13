@@ -45,4 +45,20 @@ public class AdminBiz {
 	public int updateM(MealDto m, List<FoodDto> food) {
 		return dao.updateM(m, food);
 	}
+
+	public List<MealDto> search(String searchType, String keyword, int page) {
+		int start = 1, end = 20;
+
+		start = (20 * (page - 1)) + 1;
+		end = start + 19;
+		
+		switch (searchType) {
+		case "name":
+			return dao.searchByName(keyword, start, end);
+		case "category":
+			return dao.searchByCategory(keyword, start, end);
+		default:
+			return dao.searchAll(keyword, start, end);
+		}
+	}
 }

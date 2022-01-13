@@ -58,6 +58,8 @@ public class AdminController {
 		model.addAttribute("res", res);
 		model.addAttribute("cnt", biz.getMTotalCnt());
 		model.addAttribute("page", 1);
+		model.addAttribute("category", biz.selectCList());
+
 		return "admin/mlist";
 	}
 
@@ -84,6 +86,7 @@ public class AdminController {
 		model.addAttribute("res", res);
 		model.addAttribute("cnt", biz.getMTotalCnt());
 		model.addAttribute("page", page);
+		model.addAttribute("category", biz.selectCList());
 
 		return "admin/mlist";
 	}
@@ -255,6 +258,32 @@ public class AdminController {
 		}
 
 		return "redirect: meal.do";
+	}
+
+	@RequestMapping("admin/msearch.do")
+	public String searchMeal(HttpSession session, Model model, @RequestParam String search,
+			@RequestParam String keyword, @RequestParam int page) {
+		logger.info("INFO - SEARCH DATA [MEAL]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			}
+
+			model.addAttribute("res", biz.search(search, keyword, page));
+			model.addAttribute("search", search);
+			model.addAttribute("keyword", keyword);
+			model.addAttribute("page", page);
+			model.addAttribute("category", biz.selectCList());
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		return "admin/msearch";
 	}
 
 	/*

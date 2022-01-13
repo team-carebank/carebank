@@ -33,18 +33,22 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			return true;
 		}
 	});
-	$(document).on("click", ".pagination-page span", function(e) {
-		let span = e.currentTarget;
-		let path = "${pageContext.request.contextPath}/admin/meal.do?page=";
-		if (span.id == 'prev') {
-			window.location.href = path + "${page-1}";
-		} else if (span.id == 'next') {
-			window.location.href = path + "${page+1}";
-		} else {
-			let page = e.currentTarget.innerText.trim();
-			window.location.href = path + page;
-		}
-	});
+	$(document)
+			.on(
+					"click",
+					".pagination-page span",
+					function(e) {
+						let span = e.currentTarget;
+						let path = "${pageContext.request.contextPath}/admin/msearch.do?search=${search}&keyword=%{keword}page=";
+						if (span.id == 'prev') {
+							window.location.href = path + "${page-1}";
+						} else if (span.id == 'next') {
+							window.location.href = path + "${page+1}";
+						} else {
+							let page = e.currentTarget.innerText.trim();
+							window.location.href = path + page;
+						}
+					});
 
 	$(document).on("click", ".board-content-name", function(e) {
 		if (e.currentTarget.parentElement.className == 'board-header-content') {
@@ -75,8 +79,8 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			<%@ include file="side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Information : Meal</h1>
-					<span>식단 정보를 관리합니다.</span>
+					<h1>Search : Meal</h1>
+					<span>식단 정보를 검색합니다.</span>
 				</div>
 				<div class="admin-main-content">
 					<div class="main-content-board">
