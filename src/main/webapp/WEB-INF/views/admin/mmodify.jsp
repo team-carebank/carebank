@@ -56,6 +56,14 @@
 }
 </style>
 <script>
+	$(function(){
+		var textarea = document.getElementsByTagName("textarea");
+		for(var i=0; i<textarea.length; i++){
+			resize(textarea[i]);
+		}
+	});
+</script>
+<script>
 	$(document).on("keydown", "textarea", function(e) {
 		resize(e.currentTarget);
 	});
@@ -102,9 +110,18 @@
 	});
 	
 	$(document).on("click", "#submit", function(e){
+		$("#mForm").each(function(i){
+			$(this).find("input[name='food']").attr("name", "foods["+i+"].food");
+			$(this).find("textarea[name='description']").attr("name", "foods[" + i + "].description");
+			$(this).find("input[name='carbo']").attr("name", "foods["+i+"].carbo");
+			$(this).find("input[name='protein']").attr("name", "foods["+i+"].protein");
+			$(this).find("input[name='fat']").attr("name", "foods["+i+"].fat");
+			$(this).find("input[name='calories']").attr("name", "foods["+i+"].calories");
+		});
+		
 		document.getElementById("mForm").submit();
 	});
-
+	
 	function resize(obj) {
 		obj.style.height = "1px";
 		obj.style.height = (12 + obj.scrollHeight) + "px";

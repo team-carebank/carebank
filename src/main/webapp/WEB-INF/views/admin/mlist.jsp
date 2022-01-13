@@ -60,6 +60,14 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 		window.location.href = "mwrite.do";
 	})
 </script>
+
+<c:if test="${not empty msg}">
+	<script>
+	$(function(){
+		alert("${msg}");
+	}
+	</script>
+</c:if>
 <style>
 .pagination-page>span:hover, .board-content-name:hover,
 	.board-content-config:hover {
@@ -102,7 +110,8 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 								<div class="board-body-content">
 									<span id="meal_id">${dto.meal_id }</span> <span
 										class="board-content-name">${dto.meal_name }</span> <span>${dto.subcat_name }</span>
-									<span class="board-content-config" id="modify">수정하기</span>
+									<span class="board-content-config" id="modify"
+										onclick="window.location.href='mmodi.do?meal_id=${dto.meal_id}'">수정하기</span>
 								</div>
 							</c:forEach>
 						</div>
