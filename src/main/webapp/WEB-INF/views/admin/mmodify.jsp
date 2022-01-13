@@ -30,13 +30,13 @@
 	align-items: center;
 }
 
-#remove-food, #add-food {
+#remove-food, #add-food, #cancle-img {
 	border: none;
 	border-radius: 2px;
 	padding: 5px 10px;
 }
 
-#remove-food:hover, #add-food:hover {
+#remove-food:hover, #add-food:hover, #cancle-img:hover {
 	background-color: green;
 	color: white;
 }
@@ -53,7 +53,6 @@
 
 .desc-item-img img {
 	width: 300px;
-	display: none;
 }
 </style>
 <script>
@@ -86,13 +85,20 @@
 		currentParent.remove();
 	});
 
-	$(document).on("click", "input[name='src']", function(e) {
+	$(document).on("click", "input[name='src']", function(e){
 		let img = e.currentTarget.nextElementSibling;
 		navigator.clipboard.readText().then(clipText =>{
 			e.currentTarget.value = clipText
 			img.setAttribute("src", clipText);
-			img.style.display = "inherit";
 		});
+	});
+	
+	$(document).on("click", "#cancle-img", function(e){
+		let src = document.querySelector("input[name='src']");
+		let img = src.nextElementSibling;
+		
+		src.value = "${meal.src}";
+		img.setAttribute("src", "${meal.src}");
 	});
 	
 	$(document).on("click", "#submit", function(e){
@@ -117,58 +123,70 @@
 				</div>
 				<div class="main-content-info">
 					<div class="content-desc">
-						<form action="minsert.do" method="post" id="mForm">
+						<form action="mmodify.do" method="post" id="mForm">
+							<input type="hidden" name="meal_id" value="${meal.meal_id }">
 							<div class="content-desc-item">
 								<h3>식단명</h3>
-								<input type="text" name="meal_name">
+								<input type="text" name="meal_name" value="${meal.meal_name }">
 							</div>
 							<div class="content-desc-item">
 								<h3>카테고리</h3>
 								<select name="subcat_id">
 									<c:forEach var="cat" items="${category }">
-										<option value="${cat.subcat_id}">${cat.subcat_name }</option>
+										<c:choose>
+											<c:when test="${cat.subcat_id eq meal.subcat_id }">
+												<option value="${cat.subcat_id }" selected="selected">${cat.subcat_name }</option>
+											</c:when>
+											<c:otherwise>
+												<option value="${cat.subcat_id}">${cat.subcat_name }</option>
+											</c:otherwise>
+										</c:choose>
 									</c:forEach>
 								</select>
 							</div>
 							<hr>
 							<div class="content-desc-item">
 								<h3>레시피</h3>
-								<textarea name="recipe" placeholder="레시피를 입력하세요!"></textarea>
+								<textarea name="recipe" placeholder="레시피를 입력하세요!">${meal.recipe }</textarea>
 							</div>
 							<hr>
 							<div class="content-desc-item">
 								<h3>이미지</h3>
 								<div class="desc-item-img">
 									<input type="text" name="src"
-										placeholder="클릭 시 클립보드에 복사된 내용을 붙여넣습니다." readonly="readonly">
-									<img alt="이미지" src="">
+										placeholder="클릭 시 클립보드에 복사된 내용을 붙여넣습니다." readonly="readonly"
+										value=${meal.src }> <img alt="이미지" src="${meal.src }">
+									<input type="button" id="cancle-img" value="사진 되돌리기">
 								</div>
 							</div>
 							<hr>
 							<div class="content-desc-item">
 								<h3>메인푸드</h3>
-								<div class="desc-item-food" id="one">
-									<div>
-										<span>식품명</span> <input type="text" name="food"
-											placeholder="ex) 사과, 바나나">
+								<c:forEach var="item" items="${food }">
+									<div class="desc-item-food" id="one">
+										<div>
+											<span>식품명</span> <input type="text" name="food"
+												placeholder="ex) 사과, 바나나" value="${item.food }">
+										</div>
+										<div>
+											<span>설명</span>
+											<textarea name="description"
+												placeholder="효능 또는 간단한 설명을 입력하세요!">${item.description}</textarea>
+										</div>
+										<div>
+											<span style="margin-block: 30px; font-weight: bold;">영양소</span><span>영양소
+												정보는 100g을 기준으로 입력합니다.</span> <span>탄수화물</span> <input type="number"
+												name="carbo" value="${item.carbo }" step="0.01"> <span>단백질</span>
+											<input type="number" name="protein" value="${item.protein }"
+												step="0.01"> <span>지방</span> <input type="number"
+												name="fat" value="${item.fat }" step="0.01"> <span>칼로리</span>
+											<input type="number" name="calories"
+												value="${item.calories }" step="0.01">
+										</div>
+										<input type="button" value="+" id="add-food"> <input
+											type="button" value="-" id="remove-food">
 									</div>
-									<div>
-										<span>설명</span>
-										<textarea name="description"
-											placeholder="효능 또는 간단한 설명을 입력하세요!"></textarea>
-									</div>
-									<div>
-										<span style="margin-block: 30px; font-weight: bold;">영양소</span><span>영양소
-											정보는 100g을 기준으로 입력합니다.</span> <span>탄수화물</span> <input type="number"
-											name="carbo" value="0" step="0.01"> <span>단백질</span>
-										<input type="number" name="protein" value="0" step="0.01">
-										<span>지방</span> <input type="number" name="fat" value="0"
-											step="0.01"> <span>칼로리</span> <input type="number"
-											name="calories" value="0" step="0.01">
-									</div>
-									<input type="button" value="+" id="add-food"> <input
-										type="button" value="-" id="remove-food">
-								</div>
+								</c:forEach>
 							</div>
 						</form>
 					</div>

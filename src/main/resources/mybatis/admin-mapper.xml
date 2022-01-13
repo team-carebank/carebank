@@ -22,9 +22,12 @@
 		SUPERCAT_ID
 		FROM
 		MEAL JOIN CATEGORY
-		USING(SUBCAT_ID)) MEAL_CAT)
+		USING(SUBCAT_ID)
+		ORDER BY MEAL_ID
+		) MEAL_CAT)
 		WHERE
-		POSTNO BETWEEN #{start} AND #{end}
+		POSTNO BETWEEN
+		#{start} AND #{end}
 		ORDER BY POSTNO
 	</select>
 	<select id="getMTotalCnt" resultType="int">
@@ -34,4 +37,59 @@
 		SELECT SUBCAT_ID,
 		SUBCAT_NAME, SUPERCAT_ID FROM CATEGORY
 	</select>
+	<select id="selectFood" resultType="foodDto"
+		parameterType="String">
+		SELECT * FROM NUTRIENTS WHERE FOOD=#{food}
+	</select>
+	<insert id="insertMeal" parameterType="mealDto">
+		<selectKey resultType="int" keyProperty="meal_id"
+			order="BEFORE">
+			SELECT MEAL_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO MEAL VALUES(#{meal_id}, #{meal_name}, #{recipe},
+		#{subcat_id}, #{src})
+	</insert>
+	<insert id="insertFood" parameterType="foodDto">
+		<selectKey resultType="int" keyProperty="food_id"
+			order="AFTER">
+			SELECT FOOD_ID FROM NUTRIENTS WHERE FOOD=#{food} AND ROWNUM = 1
+		</selectKey>
+		MERGE INTO NUTRIENTS N
+		USING DUAL
+		ON (N.FOOD = #{food})
+		WHEN MATCHED THEN
+		UPDATE SET N.CARBO=${carbo}, N.PROTEIN=#{protein}, N.FAT=#{fat}, N.CALORIES=#{calories}
+		WHEN NOT MATCHED THEN
+		INSERT(N.FOOD_ID, N.FOOD, N.CARBO, N.PROTEIN, N.FAT, N.CALORIES)
+		VALUES(FOOD_SEQ.NEXTVAL,#{food}, #{carbo}, #{protein}, #{fat}, #{calories})
+	</insert>
+	<insert id="insertIng" parameterType="map">
+		INSERT INTO
+		INGREDIENTS
+		VALUES(#{meal_id}, #{food_id}, #{description})
+	</insert>
+	<delete id="deleteIng" parameterType="int">
+		DELETE FROM INGREDIENTS
+		WHERE MEAL_ID=#{meal_id}
+	</delete>
+	<delete id="deleteMeal" parameterType="int">
+		DELETE FROM MEAL
+		WHERE
+		MEAL_ID=#{meal_id}
+	</delete>
+	<update id="updateMeal" parameterType="mealDto">
+		UPDATE MEAL
+		SET MEAL_NAME = #{meal_name}, RECIPE = #{recipe}, SRC = #{src}
+		WHERE MEAL_ID = #{meal_id}
+	</update>
+	<delete id="deleteFood" parameterType="int">
+		DELETE FROM NUTRIENTS
+		WHERE
+		FOOD_ID=#{food_id}
+	</delete>
+	<update id="updateFood" parameterType="foodDto">
+		UPDATE NUTRIENTS
+		SET CARBO=#{carbo}, PROTEIN=#{protein}, FAT=#{fat}, CALORIES=#{calories}
+		WHERE FOOD_ID = #{food_id}
+	</update>
 </mapper>

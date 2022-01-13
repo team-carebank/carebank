@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yee.carebank.model.dao.AdminDao;
 import com.yee.carebank.model.dto.CategoryDto;
+import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
 
 @Service
@@ -32,4 +34,15 @@ public class AdminBiz {
 		return dao.selectCList();
 	}
 
+	public int insertM(MealDto meal, List<FoodDto> foods) {
+		return dao.insertM(meal, foods);
+	}
+
+	public int deleteMeal(int meal_id) {
+		return dao.deleteMeal(meal_id);
+	}
+
+	public int updateM(MealDto m, List<FoodDto> food) {
+		return dao.updateM(m, food);
+	}
 }

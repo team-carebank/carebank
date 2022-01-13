@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +14,15 @@
 	crossorigin="anonymous"></script>
 <style>
 </style>
+<script>
+	$(document).on("click", "button#delete", function(e) {
+		if (confirm("정말로 삭제하시겠습니까?")) {
+			window.location.href = "mdel.do?meal_id=${meal.meal_id}";
+		} else {
+			return false;
+		}
+	})
+</script>
 </head>
 <%@ include file="header.jsp"%>
 <body>
@@ -71,8 +79,9 @@
 				<div class="main-content-option">
 					<div class="content-option-menu">
 						<button onclick="history.back()">목록</button>
-						<button>수정</button>
-						<button>삭제</button>
+						<button
+							onclick="window.location.href='mmodi.do?meal_id=${meal.meal_id}'">수정</button>
+						<button id="delete">삭제</button>
 					</div>
 				</div>
 			</div>
