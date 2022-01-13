@@ -132,4 +132,32 @@ public class AdminDao {
 		return sqlSession.selectList(NAMESPACE + "searchAll", map);
 	}
 
+	public int getAllCount(String keyword) {
+		try {
+			return sqlSession.selectOne(NAMESPACE + "getAllCount", keyword);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	public int getCatCount(String keyword) {
+
+		try {
+			return sqlSession.selectOne(NAMESPACE + "getCatCount", keyword);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	public int getMealCount(String keyword) {
+		try {
+			return sqlSession.selectOne(NAMESPACE + "getMealCount", keyword);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
 }

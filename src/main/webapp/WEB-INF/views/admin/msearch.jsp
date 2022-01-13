@@ -39,7 +39,7 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 					".pagination-page span",
 					function(e) {
 						let span = e.currentTarget;
-						let path = "${pageContext.request.contextPath}/admin/msearch.do?search=${search}&keyword=%{keword}page=";
+						let path = "${pageContext.request.contextPath}/admin/msearch.do?search=${search}&keyword=${keword}&page=";
 						if (span.id == 'prev') {
 							window.location.href = path + "${page-1}";
 						} else if (span.id == 'next') {
@@ -102,6 +102,11 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 							</div>
 						</div>
 						<div class="board-body">
+							<c:if test="${empty res }">
+								<div class="board-body-content">
+									<span style="grid-column: 1/6">검색 결과가 존재하지 않습니다.</span>
+								</div>
+							</c:if>
 							<c:forEach var="dto" items="${res }">
 								<div class="board-body-content">
 									<span id="meal_id">${dto.meal_id }</span> <span

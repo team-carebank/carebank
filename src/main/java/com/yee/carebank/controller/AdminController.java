@@ -256,6 +256,7 @@ public class AdminController {
 			}
 
 			model.addAttribute("res", biz.search(search, keyword, page));
+			model.addAttribute("cnt", biz.getCount(search, keyword));
 			model.addAttribute("search", search);
 			model.addAttribute("keyword", keyword);
 			model.addAttribute("page", page);

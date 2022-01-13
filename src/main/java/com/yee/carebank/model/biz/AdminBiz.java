@@ -51,7 +51,7 @@ public class AdminBiz {
 
 		start = (20 * (page - 1)) + 1;
 		end = start + 19;
-		
+
 		switch (searchType) {
 		case "name":
 			return dao.searchByName(keyword, start, end);
@@ -59,6 +59,17 @@ public class AdminBiz {
 			return dao.searchByCategory(keyword, start, end);
 		default:
 			return dao.searchAll(keyword, start, end);
+		}
+	}
+
+	public int getCount(String searchType, String keyword) {
+		switch (searchType) {
+		case "name":
+			return dao.getMealCount(keyword);
+		case "category":
+			return dao.getCatCount(keyword);
+		default:
+			return dao.getAllCount(keyword);
 		}
 	}
 }
