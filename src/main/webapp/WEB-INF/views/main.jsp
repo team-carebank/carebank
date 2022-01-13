@@ -202,58 +202,12 @@ th{
             <br><br><br><h3 class="sa sa-left">내 몸의 변화를 쉽게 체크하세요</h3><br>
             <p class="sa sa-left">식단 일지를 기록하여 균형잡힌 식단을 유지하고<br>
             대시보드를 통해 칼로리 소모량, 몸무게 변화, 운동량을<br>
-            체크하여 몸의 변화를 시각적으로 한눈에 체크해보세요<br><br><button class="button-68" role="button">dashboard</button></p> 
+            체크하여 몸의 변화를 시각적으로 한눈에 체크해보세요<br><br><button class="button-68" onclick="location.href='dashboard.do'">dashboard</button></p> 
  		    </div>
       </div>
 
 
-      <div class="flexbox-container5"> <!-- notice controller 완성되어있지 않아 임의로 list,dto,mapping.do로 넣음  -->
-            <div class="flexbox-item flexbox-item5-1"> 
-            <h3 style="text-align: left;">notice</h3>
-            <table class="notice_table">
-            <thead>
-            <tr>
-            <th>No</th>
-            <th>TITLE</th> 
-            </tr>
-            </thead>
-            
-            <c:choose>
-            	<c:when test="${empty list }">
-            	<tr>
-            	<td colspan="2" align="center">작성된 글이 없습니다.</td>
-            	</tr>
-            	</c:when>
-            	
-            <c:otherwise>
-            	<c:forEach items="${list }" var="dto">
-            	
-            	<tr>
-            		<td>${dto.notice_no }</td>
-            		<td><a href="mapping.do?notice_no=${dto.notice_no}">${dto.notice_title }</a></td> 
-            	</tr>
-            	</c:forEach>
-            
-            </c:otherwise>	
-            
-            </c:choose>
-            
-            <!-- 삭제될table값 -->
-            <tbody>
-            <tr>
-            <td>1</td>
-            <td>새로운 레시피가 업데이트 되었습니다.</td> 
-            </tr>
-            <tr>
-            <td>2</td> 
-            <td>대시보드에서 운동 날짜 기록 에러를 수정하였습니다.</td> 
-            </tr> 
-            </tbody>
-            
-            
-            </table>
-            </div>
-      </div>
+      <br><br><br><br><br><br><br>
       
       
       

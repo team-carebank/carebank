@@ -13,7 +13,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
 
 *{
- font-family: 'Noto Sans KR', sans-serif; 
+ font-family: 'Noto Sans KR', sans-serif !important; 
 }
 .textcontainer{
    margin-top:20px;
@@ -148,8 +148,7 @@ transform: scale(1.05);
 </head>
 
 
-<body>
- 
+<body> 
 	
     <div class="textcontainer">
         <div class="textbox">
