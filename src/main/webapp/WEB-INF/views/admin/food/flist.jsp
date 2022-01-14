@@ -61,13 +61,13 @@
 	grid-column: 9;
 }
 
+.board-header-content, .board-body-content {
+	grid-template-columns: repeat(9, 1fr);
+}
+
 .board-content-name:hover {
 	color: black !important;
 	cursor: inherit !important;
-}
-
-.board-header-content, .board-body-content {
-	grid-template-columns: repeat(9, 1fr);
 }
 
 .content-admin-side>#food {

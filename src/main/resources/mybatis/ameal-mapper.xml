@@ -57,7 +57,7 @@
 		USING DUAL
 		ON (N.FOOD = #{food})
 		WHEN MATCHED THEN
-		UPDATE SET N.CARBO=${carbo}, N.PROTEIN=#{protein}, N.FAT=#{fat},
+		UPDATE SET N.CARBO=#{carbo}, N.PROTEIN=#{protein}, N.FAT=#{fat},
 		N.CALORIES=#{calories}
 		WHEN NOT MATCHED THEN
 		INSERT(N.FOOD_ID, N.FOOD,

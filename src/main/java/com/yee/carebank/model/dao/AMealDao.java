@@ -22,12 +22,8 @@ public class AMealDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	public List<MealDto> selectMList(int start, int end) {
+	public List<MealDto> selectMList(Map<String, Object> map) {
 		List<MealDto> res = new ArrayList<MealDto>();
-		Map<String, Integer> map = new HashMap<String, Integer>();
-
-		map.put("start", start);
-		map.put("end", end);
 
 		try {
 			res = sqlSession.selectList(NAMESPACE + "selectMList", map);
@@ -104,30 +100,18 @@ public class AMealDao {
 		}
 	}
 
-	public List<MealDto> searchByName(String keyword, int start, int end) {
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("start", start);
-		map.put("end", end);
+	public List<MealDto> searchByName(String keyword, Map<String, Object> map) {
 		map.put("keyword", keyword);
 
 		return sqlSession.selectList(NAMESPACE + "searchMeal", map);
 	}
 
-	public List<MealDto> searchByCategory(String keyword, int start, int end) {
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("start", start);
-		map.put("end", end);
+	public List<MealDto> searchByCategory(String keyword, Map<String, Object> map) {
 		map.put("keyword", keyword);
 		return sqlSession.selectList(NAMESPACE + "searchCat", map);
 	}
 
-	public List<MealDto> searchAll(String keyword, int start, int end) {
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("start", start);
-		map.put("end", end);
+	public List<MealDto> searchAll(String keyword, Map<String, Object> map) {
 		map.put("keyword", keyword);
 		return sqlSession.selectList(NAMESPACE + "searchAll", map);
 	}
