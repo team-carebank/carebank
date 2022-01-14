@@ -39,6 +39,8 @@
   		UPDATE CARE_USER
   		SET USER_NAME = #{user_name}, USER_ID = #{user_id}, BIRTH = #{birth}, PHONE = #{phone}, EMAIL = #{email}
   		WHERE USER_NO = #{user_no}
+  		<selectKey resultType="String" keyProperty="user_type" order="AFTER"> 
+  		SELECT USER_TYPE FROM CARE_USER WHERE USER_NO = #{user_no}</selectKey>
   	</update>
   
   <update id = "disable">
