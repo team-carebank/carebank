@@ -153,4 +153,12 @@ public class AdminBiz {
 
 		return res;
 	}
+
+	public int updateS(EfficacyDto dto) {
+		return sDao.update(dto);
+	}
+
+	public int deleteSupple(int supple_id) {
+		return sDao.delete(supple_id);
+	}
 }

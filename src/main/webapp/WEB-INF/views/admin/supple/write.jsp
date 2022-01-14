@@ -156,18 +156,15 @@
 			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Modify : Supple</h1>
-					<span>영양제 정보를 수정합니다.</span>
+					<h1>Write : Supple</h1>
+					<span>영양제 정보를 작성합니다.</span>
 				</div>
 				<div class="main-content-info">
 					<div class="content-desc">
-						<form action="supdate.do" method="post" id="mForm">
-							<input type="hidden" name="supple.supple_id"
-								value="${res.supple.supple_id }">
+						<form action="sinsert.do" method="post" id="mForm">
 							<div class="content-desc-item">
 								<h3>식단명</h3>
-								<input type="text" name="supple.supple_name"
-									value="${res.supple.supple_name }">
+								<input type="text" name="supple.supple_name" value="">
 							</div>
 							<hr>
 							<div class="content-desc-item">
@@ -175,52 +172,35 @@
 								<div class="desc-item-img">
 									<input type="text" name="supple.src"
 										placeholder="클릭 시 클립보드에 복사된 내용을 붙여넣습니다." readonly="readonly"
-										value="${res.supple.src }"> <img alt="이미지"
-										src="${res.supple.src }"> <input type="button"
-										id="cancle-img" value="사진 되돌리기">
+										value=""> <img alt="이미지" src=""> <input
+										type="button" id="cancle-img" value="사진 되돌리기">
 								</div>
 							</div>
 							<hr>
 							<div class="content-desc-item">
 								<h3>효능</h3>
-								<c:forEach var="item" items="${res.efficacy }">
-									<div class="content-sub-item" id="one">
-										<div>
-											<label for="subcat">기존 : ${item.subcat_name }</label> <select
-												name="subcat_id" id="subcat" id="select-category">
-												<option disabled selected>카테고리 선택</option>
-												<c:forEach var="cat" items="${category }">
-													<c:choose>
-														<c:when test="${cat.subcat_id eq item.subcat_id }">
-															<option value="${cat.subcat_id }" selected>${cat.subcat_name }</option>
-														</c:when>
-														<c:otherwise>
-															<option value="${cat.subcat_id }">${cat.subcat_name }</option>
-														</c:otherwise>
-													</c:choose>
-												</c:forEach>
-											</select>
-										</div>
-										<textarea rows="" cols="" name="description"
-											placeholder="효능을 입력하세요">${item.description }</textarea>
-										<input type="button" value="+" id="add-food"> <input
-											type="button" value="-" id="remove-food">
-									</div>
-								</c:forEach>
-								<c:if test="${empty res.efficacy }">
-									<div class="content-sub-item" id="zero">
-										<select name="subcat_id">
+								<div class="content-sub-item" id="one">
+									<div>
+										<label for="subcat">기존 : ${item.subcat_name }</label> <select
+											name="subcat_id" id="subcat" id="select-category">
 											<option disabled selected>카테고리 선택</option>
 											<c:forEach var="cat" items="${category }">
-												<option value="${cat.subcat_id }">${cat.subcat_name }</option>
+												<c:choose>
+													<c:when test="${cat.subcat_id eq item.subcat_id }">
+														<option value="${cat.subcat_id }" selected>${cat.subcat_name }</option>
+													</c:when>
+													<c:otherwise>
+														<option value="${cat.subcat_id }">${cat.subcat_name }</option>
+													</c:otherwise>
+												</c:choose>
 											</c:forEach>
 										</select>
-										<textarea rows="" cols="" name="description"
-											placeholder="효능을 입력하세요"></textarea>
-										<input type="button" value="+" id="add-food"> <input
-											type="button" value="-" id="remove-food">
 									</div>
-								</c:if>
+									<textarea rows="" cols="" name="description"
+										placeholder="효능을 입력하세요"></textarea>
+									<input type="button" value="+" id="add-food"> <input
+										type="button" value="-" id="remove-food">
+								</div>
 							</div>
 						</form>
 					</div>

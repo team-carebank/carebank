@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yee.carebank.model.dto.EfficacyDto;
 import com.yee.carebank.model.dto.SuppleDto;
 
 @Repository
@@ -59,6 +60,39 @@ public class ASuppleDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public int update(EfficacyDto dto) {
+		try {
+			List<SuppleDto> efficacy = dto.getEfficacy();
+			SuppleDto supple = dto.getSupple();
+
+			int res = 0;
+
+			res += sqlSession.delete(NAMESPACE + "deleteEffi", supple.getSupple_id());
+			res += sqlSession.insert(NAMESPACE + "insertSupple", supple);
+
+			for (int i = 0; i < efficacy.size(); i++) {
+				SuppleDto tmp = efficacy.get(i);
+				tmp.setSupple_id(supple.getSupple_id());
+
+				res += sqlSession.insert(NAMESPACE + "insertEffi", tmp);
+			}
+
+			return res;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
+	public int delete(int supple_id) {
+		try {
+			return sqlSession.delete(NAMESPACE + "deleteSupple", supple_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
 		}
 	}
 

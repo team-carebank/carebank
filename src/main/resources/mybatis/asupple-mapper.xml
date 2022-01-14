@@ -33,20 +33,27 @@
 		VALUES(SUPPLE_SEQ.NEXTVAL,
 		#{supple_name}, #{src})
 	</insert>
+	<delete id="deleteSupple" parameterType="int">
+		DELETE FROM SUPPLEMENT
+		WHERE SUPPLE_ID = #{supple_id}
+	</delete>
 	<delete id="deleteEffi" parameterType="int">
 		DELETE FROM EFFICACY WHERE
 		SUPPLE_ID = #{supple_id}
 	</delete>
-	<insert id="insertEffi">
-		MERGE INTO EFFICACY
-		USING DUAL
+	<insert id="insertEffi" parameterType="suppleDto">
+		MERGE INTO EFFICACY E
+		USING
+		DUAL
 		ON (E.SUPPLE_ID =
 		#{supple_id} AND E.SUBCAT_ID = #{subcat_id})
-		WHEN MATCHED THEN
+		WHEN
+		MATCHED THEN
 		UPDATE
 		SET E.DESCRIPTION = #{description}
 		WHEN NOT
-		MATCHED THEN
+		MATCHED
+		THEN
 		INSERT(E.SUPPLE_ID, E.SUBCAT_ID, E.DESCRIPTION)
 		VALUES(#{supple_id},
 		#{subcat_id}, #{description})
