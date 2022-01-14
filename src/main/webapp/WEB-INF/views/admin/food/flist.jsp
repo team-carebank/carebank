@@ -26,22 +26,18 @@
 			return true;
 		}
 	});
-	$(document)
-			.on(
-					"click",
-					".pagination-page span",
-					function(e) {
-						let span = e.currentTarget;
-						let path = "${pageContext.request.contextPath}/admin/fsearch.do?keyword=${keyword}&page=";
-						if (span.id == 'prev') {
-							window.location.href = path + "${page-1}";
-						} else if (span.id == 'next') {
-							window.location.href = path + "${page+1}";
-						} else {
-							let page = e.currentTarget.innerText.trim();
-							window.location.href = path + page;
-						}
-					});
+	$(document).on("click", ".pagination-page span", function(e) {
+		let span = e.currentTarget;
+		let path = "${pageContext.request.contextPath}/admin/food.do?page=";
+		if (span.id == 'prev') {
+			window.location.href = path + "${page-1}";
+		} else if (span.id == 'next') {
+			window.location.href = path + "${page+1}";
+		} else {
+			let page = e.currentTarget.innerText.trim();
+			window.location.href = path + page;
+		}
+	});
 
 	$(document).on("click", "#add.board-content-config", function(e) {
 		window.location.href = "fwrite.do";
@@ -51,9 +47,7 @@
 		let parentElement = e.currentTarget.parentElement;
 		let id = parentElement.childNodes[1].innerHTML.trim();
 
-		if (confirm("삭제하시겠습니까?")) {
-			window.location.href = "fdel.do?id=" + id;
-		}
+		window.location.href = "fdel.do?id=" + id;
 	});
 </script>
 <style>
@@ -83,15 +77,15 @@
 }
 </style>
 </head>
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 <body>
 	<div class="container">
 		<div class="body-content">
-			<%@ include file="side.jsp"%>
+			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Search : Food</h1>
-					<span>"${keyword }"에 대한 검색 결과입니다.</span>
+					<h1>Information : Food</h1>
+					<span>식단과 관련된 음식의 영양소 정보를 관리합니다.</span>
 				</div>
 				<div class="admin-main-content">
 					<div class="main-content-board">
@@ -102,11 +96,6 @@
 							</div>
 						</div>
 						<div class="board-body">
-							<c:if test="${empty res }">
-								<div class="board-body-content">
-									<span style="grid-column: 1/10">검색 결과가 존재하지 않습니다.</span>
-								</div>
-							</c:if>
 							<c:forEach var="dto" items="${res }">
 								<div class="board-body-content">
 									<span id="food_id">${dto.food_id }</span><span

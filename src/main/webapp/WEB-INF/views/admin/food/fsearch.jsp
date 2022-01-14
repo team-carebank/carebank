@@ -15,19 +15,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<style type="text/css">
-body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-content-board>div:nth-child(1)>div>span.board-content-name
-	{
-	color: black !important;
-	cursor: default !important;
-}
-
-.content-admin-side>#meal {
-	background: linear-gradient(to right, #04AA6D, #05C480);
-	color: white;
-	box-shadow: -10px 0 0 white;
-}
-</style>
 <script>
 	$(document).on("submit", '#search-keyword-data', function(e) {
 		let keyword = e.target[1].value.trim();
@@ -45,7 +32,7 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 					".pagination-page span",
 					function(e) {
 						let span = e.currentTarget;
-						let path = "${pageContext.request.contextPath}/admin/msearch.do?search=${search}&keyword=${keword}&page=";
+						let path = "${pageContext.request.contextPath}/admin/fsearch.do?keyword=${keyword}&page=";
 						if (span.id == 'prev') {
 							window.location.href = path + "${page-1}";
 						} else if (span.id == 'next') {
@@ -56,19 +43,18 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 						}
 					});
 
-	$(document).on("click", ".board-content-name", function(e) {
-		if (e.currentTarget.parentElement.className == 'board-header-content') {
-			return false;
-		}
-		let id = e.currentTarget.previousElementSibling.innerText;
-		let path = "${pageContext.request.contextPath}/admin/minfo.do?id=";
-
-		window.location.href = path + id;
+	$(document).on("click", "#add.board-content-config", function(e) {
+		window.location.href = "fwrite.do";
 	});
 
-	$(document).on("click", "#add.board-content-config", function(e) {
-		window.location.href = "mwrite.do";
-	})
+	$(document).on("click", "#delete.board-content-config", function(e) {
+		let parentElement = e.currentTarget.parentElement;
+		let id = parentElement.childNodes[1].innerHTML.trim();
+
+		if (confirm("삭제하시겠습니까?")) {
+			window.location.href = "fdel.do?id=" + id;
+		}
+	});
 </script>
 <style>
 .pagination-page>span:hover, .board-content-name:hover,
@@ -76,49 +62,59 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 	cursor: pointer;
 	color: green;
 }
+
+.board-header#footer * {
+	grid-column: 9;
+}
+
+.board-content-name:hover {
+	color: black !important;
+	cursor: inherit !important;
+}
+
+.board-header-content, .board-body-content {
+	grid-template-columns: repeat(9, 1fr);
+}
+
+.content-admin-side>#food {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	box-shadow: -10px 0 0 white;
+}
 </style>
 </head>
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 <body>
 	<div class="container">
 		<div class="body-content">
-			<%@ include file="side.jsp"%>
+			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Search : Meal</h1>
+					<h1>Search : Food</h1>
 					<span>"${keyword }"에 대한 검색 결과입니다.</span>
 				</div>
 				<div class="admin-main-content">
 					<div class="main-content-board">
 						<div class="board-header">
 							<div class="board-header-content">
-								<span>번호</span> <span class="board-content-name">이름</span>
-								<form method="post" action="msearch.do">
-									<input type="hidden" name="page" value="1"> <input
-										type="hidden" name="search" value="category"> <select
-										name="keyword" id="select-category"
-										onchange="this.form.submit()">
-										<option disabled selected>카테고리별로 보기</option>
-										<c:forEach var="cat" items="${category }">
-											<option value="${cat.subcat_name }">${cat.subcat_name }</option>
-										</c:forEach>
-									</select>
-								</form>
-								<span>메뉴</span>
+								<span>번호</span><span class="board-content-name">이름</span> <span>칼로리</span><span>탄수화물</span><span>단백질</span><span>지방</span>
+								<span style="grid-column: 8/10;">메뉴</span>
 							</div>
 						</div>
 						<div class="board-body">
 							<c:if test="${empty res }">
 								<div class="board-body-content">
-									<span style="grid-column: 1/6">검색 결과가 존재하지 않습니다.</span>
+									<span style="grid-column: 1/10">검색 결과가 존재하지 않습니다.</span>
 								</div>
 							</c:if>
 							<c:forEach var="dto" items="${res }">
 								<div class="board-body-content">
-									<span id="meal_id">${dto.meal_id }</span> <span
-										class="board-content-name">${dto.meal_name }</span> <span>${dto.subcat_name }</span>
+									<span id="food_id">${dto.food_id }</span><span
+										class="board-content-name">${dto.food }</span> <span>${dto.calories }</span>
+									<span>${dto.carbo }</span><span>${dto.protein }</span><span>${dto.fat }</span>
 									<span class="board-content-config" id="modify"
-										onclick="window.location.href='mmodi.do?meal_id=${dto.meal_id}'">수정하기</span>
+										onclick="window.location.href='fmodi.do?id=${dto.food_id}'">수정</span><span
+										class="board-content-config" id="delete">삭제</span>
 								</div>
 							</c:forEach>
 						</div>
@@ -150,13 +146,9 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 						</div>
 					</div>
 					<div class="main-content-search">
-						<form method="post" action="msearch.do" id="search-keyword-data">
-							<input type="hidden" name="page" value="1"> <select
-								name="search" id="">
-								<option value="all" selected="selected">전체</option>
-								<option value="name">식단명</option>
-								<option value="category">카테고리명</option>
-							</select> <input type="text" name="keyword"> <input type="submit"
+						<form method="post" action="fsearch.do" id="search-keyword-data">
+							<input type="hidden" name="page" value="1"><input
+								type="text" name="keyword"> <input type="submit"
 								value="검색">
 						</form>
 					</div>

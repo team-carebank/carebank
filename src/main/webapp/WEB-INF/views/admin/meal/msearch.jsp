@@ -21,6 +21,12 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 	color: black !important;
 	cursor: default !important;
 }
+
+.content-admin-side>#meal {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	box-shadow: -10px 0 0 white;
+}
 </style>
 <script>
 	$(document).on("submit", '#search-keyword-data', function(e) {
@@ -33,18 +39,22 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			return true;
 		}
 	});
-	$(document).on("click", ".pagination-page span", function(e) {
-		let span = e.currentTarget;
-		let path = "${pageContext.request.contextPath}/admin/meal.do?page=";
-		if (span.id == 'prev') {
-			window.location.href = path + "${page-1}";
-		} else if (span.id == 'next') {
-			window.location.href = path + "${page+1}";
-		} else {
-			let page = e.currentTarget.innerText.trim();
-			window.location.href = path + page;
-		}
-	});
+	$(document)
+			.on(
+					"click",
+					".pagination-page span",
+					function(e) {
+						let span = e.currentTarget;
+						let path = "${pageContext.request.contextPath}/admin/msearch.do?search=${search}&keyword=${keword}&page=";
+						if (span.id == 'prev') {
+							window.location.href = path + "${page-1}";
+						} else if (span.id == 'next') {
+							window.location.href = path + "${page+1}";
+						} else {
+							let page = e.currentTarget.innerText.trim();
+							window.location.href = path + page;
+						}
+					});
 
 	$(document).on("click", ".board-content-name", function(e) {
 		if (e.currentTarget.parentElement.className == 'board-header-content') {
@@ -66,23 +76,17 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 	cursor: pointer;
 	color: green;
 }
-
-.content-admin-side>#meal {
-	background: linear-gradient(to right, #04AA6D, #05C480);
-	color: white;
-	box-shadow: -10px 0 0 white;
-}
 </style>
 </head>
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 <body>
 	<div class="container">
 		<div class="body-content">
-			<%@ include file="side.jsp"%>
+			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Information : Meal</h1>
-					<span>식단 정보를 관리합니다.</span>
+					<h1>Search : Meal</h1>
+					<span>"${keyword }"에 대한 검색 결과입니다.</span>
 				</div>
 				<div class="admin-main-content">
 					<div class="main-content-board">
@@ -104,12 +108,17 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 							</div>
 						</div>
 						<div class="board-body">
+							<c:if test="${empty res }">
+								<div class="board-body-content">
+									<span style="grid-column: 1/6">검색 결과가 존재하지 않습니다.</span>
+								</div>
+							</c:if>
 							<c:forEach var="dto" items="${res }">
 								<div class="board-body-content">
 									<span id="meal_id">${dto.meal_id }</span> <span
 										class="board-content-name">${dto.meal_name }</span> <span>${dto.subcat_name }</span>
 									<span class="board-content-config" id="modify"
-										onclick="window.location.href='mmodi.do?id=${dto.meal_id}'">수정하기</span>
+										onclick="window.location.href='mmodi.do?meal_id=${dto.meal_id}'">수정하기</span>
 								</div>
 							</c:forEach>
 						</div>

@@ -69,7 +69,7 @@ public class AdminController {
 		model.addAttribute("page", 1);
 		model.addAttribute("category", biz.selectCList());
 
-		return "admin/mlist";
+		return "admin/meal/mlist";
 	}
 
 	@RequestMapping("admin/meal.do")
@@ -97,7 +97,7 @@ public class AdminController {
 		model.addAttribute("page", page);
 		model.addAttribute("category", biz.selectCList());
 
-		return "admin/mlist";
+		return "admin/meal/mlist";
 	}
 
 	@RequestMapping("admin/minfo.do")
@@ -119,7 +119,7 @@ public class AdminController {
 		model.addAttribute("meal", mBiz.selectOne(meal_id));
 		model.addAttribute("food", mBiz.selectIngredient(meal_id));
 
-		return "admin/minfo";
+		return "admin/meal/minfo";
 	}
 
 	@RequestMapping("admin/mwrite.do")
@@ -139,7 +139,7 @@ public class AdminController {
 		}
 
 		model.addAttribute("category", biz.selectCList());
-		return "admin/mwrite";
+		return "admin/meal/mwrite";
 	}
 
 	@RequestMapping("admin/minsert.do")
@@ -192,7 +192,7 @@ public class AdminController {
 		model.addAttribute("food", mBiz.selectIngredient(meal_id));
 		model.addAttribute("category", biz.selectCList());
 
-		return "admin/mmodify";
+		return "admin/meal/mmodify";
 
 	}
 
@@ -279,7 +279,7 @@ public class AdminController {
 			return "redirect: ../main.do";
 		}
 
-		return "admin/msearch";
+		return "admin/meal/msearch";
 	}
 
 	/*
@@ -307,7 +307,7 @@ public class AdminController {
 		model.addAttribute("cnt", biz.getFTotalCount());
 		model.addAttribute("page", page);
 
-		return "admin/flist";
+		return "admin/food/flist";
 	}
 
 	@RequestMapping("admin/fdel.do")
@@ -337,7 +337,7 @@ public class AdminController {
 			model.addAttribute("url", "food.do");
 		}
 
-		return "admin/redirect";
+		return "admin/food/redirect";
 	}
 
 	@RequestMapping("admin/fwrite.do")
@@ -357,7 +357,7 @@ public class AdminController {
 			return "redirect: ../main.do";
 		}
 
-		return "admin/fwrite";
+		return "admin/food/fwrite";
 	}
 
 	@RequestMapping("admin/finsert.do")
@@ -387,7 +387,7 @@ public class AdminController {
 			model.addAttribute("url", "food.do");
 		}
 
-		return "admin/redirect";
+		return "admin/food/redirect";
 	}
 
 	@RequestMapping("admin/fcheck.do")
@@ -419,7 +419,7 @@ public class AdminController {
 
 		model.addAttribute("food", biz.selectFood(food_id));
 
-		return "admin/fmodi";
+		return "admin/food/fmodi";
 
 	}
 
@@ -474,7 +474,7 @@ public class AdminController {
 			return "redirect: ../main.do";
 		}
 
-		return "admin/fsearch";
+		return "admin/food/fsearch";
 	}
 
 	/*
