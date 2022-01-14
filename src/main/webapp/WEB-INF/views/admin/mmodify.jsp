@@ -41,7 +41,7 @@
 	color: white;
 }
 
-#one>#remove-food {
+#one>#remove-food, #zero>#remove-food {
 	display: none;
 }
 
@@ -53,6 +53,12 @@
 
 .desc-item-img img {
 	width: 300px;
+}
+
+.content-admin-side>#meal {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	box-shadow: -10px 0 0 white;
 }
 </style>
 <script>
@@ -66,7 +72,7 @@
 			if(i != 0){
 				$(this).removeAttr("id");
 			}
-		})
+		});
 	});
 </script>
 <script>
@@ -91,7 +97,7 @@
 	$(document).on("click", "#remove-food", function(e) {
 		let currentParent = e.currentTarget.parentElement;
 
-		if (currentParent.id == 'one') {
+		if (currentParent.id == 'one' || currentParent.id == 'zero') {
 			alert("첫번째 항목은 삭제할 수 없습니다!");
 			return false;
 		}
@@ -143,8 +149,8 @@
 			<%@ include file="side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Write : Meal</h1>
-					<span>식단 정보를 작성합니다.</span>
+					<h1>Modify : Meal</h1>
+					<span>식단 정보를 수정합니다.</span>
 				</div>
 				<div class="main-content-info">
 					<div class="content-desc">
@@ -212,6 +218,30 @@
 											type="button" value="-" id="remove-food">
 									</div>
 								</c:forEach>
+								<c:if test="${empty food }">
+									<div class="desc-item-food" id="zero">
+										<div>
+											<span>식품명</span> <input type="text" name="food"
+												placeholder="ex) 사과, 바나나" value="${item.food }">
+										</div>
+										<div>
+											<span>설명</span>
+											<textarea name="description"
+												placeholder="효능 또는 간단한 설명을 입력하세요!">${item.description}</textarea>
+										</div>
+										<div>
+											<span style="margin-block: 30px; font-weight: bold;">영양소</span><span>영양소
+												정보는 100g을 기준으로 입력합니다.</span> <span>탄수화물</span> <input type="number"
+												name="carbo" value="0" step="0.01"> <span>단백질</span>
+											<input type="number" name="protein" value="0" step="0.01">
+											<span>지방</span> <input type="number" name="fat" value="0"
+												step="0.01"> <span>칼로리</span> <input type="number"
+												name="calories" value="0" step="0.01">
+										</div>
+										<input type="button" value="+" id="add-food"> <input
+											type="button" value="-" id="remove-food">
+									</div>
+								</c:if>
 							</div>
 						</form>
 					</div>

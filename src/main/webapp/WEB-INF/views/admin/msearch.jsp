@@ -21,6 +21,12 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 	color: black !important;
 	cursor: default !important;
 }
+
+.content-admin-side>#meal {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	box-shadow: -10px 0 0 white;
+}
 </style>
 <script>
 	$(document).on("submit", '#search-keyword-data', function(e) {
@@ -80,7 +86,7 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			<div class="content-admin-main">
 				<div class="admin-main-description">
 					<h1>Search : Meal</h1>
-					<span>식단 정보를 검색합니다.</span>
+					<span>"${keyword }"에 대한 검색 결과입니다.</span>
 				</div>
 				<div class="admin-main-content">
 					<div class="main-content-board">

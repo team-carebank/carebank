@@ -37,6 +37,13 @@
 	grid-column: 2/5;
 }
 </style>
+<script type="text/javascript">
+	$(document).on("keydown", "name='keyword'", function(e) {
+		if (window.event.keyCode == 13) {
+			$(e.currentTarget.parentElement).submit();
+		}
+	});
+</script>
 </head>
 <body>
 	<div class="admin-info">

@@ -21,11 +21,12 @@
 		<h3>Administration</h3>
 		<!--메뉴 구분선-->
 		<h4>Information</h4>
-		<span
+		<span id="meal"
 			onclick="window.location.href='${pageContext.request.contextPath}/admin/meal.do?page=1'">Meal</span><span
 			id="food"
 			onclick="window.location.href='${pageContext.request.contextPath}/admin/food.do?page=1'">Food</span>
-		<span>Exercise</span> <span>Supplement</span> <span>Meditation</span>
+		<span id="exer">Exercise</span> <span id="supple">Supplement</span> <span
+			id="medi">Meditation</span>
 		<!--메뉴 구분선-->
 		<h4>User Management</h4>
 		<span>Member</span> <span>Report</span>

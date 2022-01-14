@@ -60,19 +60,17 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 		window.location.href = "mwrite.do";
 	})
 </script>
-
-<c:if test="${not empty msg}">
-	<script>
-	$(function(){
-		alert("${msg}");
-	}
-	</script>
-</c:if>
 <style>
 .pagination-page>span:hover, .board-content-name:hover,
 	.board-content-config:hover {
 	cursor: pointer;
 	color: green;
+}
+
+.content-admin-side>#meal {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	box-shadow: -10px 0 0 white;
 }
 </style>
 </head>

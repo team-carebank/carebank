@@ -27,6 +27,12 @@
 	margin-block: 20px;
 	align-items: center;
 }
+
+.content-admin-side>#food {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	box-shadow: -10px 0 0 white;
+}
 </style>
 <script>
 	$(document).on("keydown", "textarea", function(e) {
