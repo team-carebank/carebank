@@ -72,4 +72,37 @@ public class AdminBiz {
 			return dao.getAllCount(keyword);
 		}
 	}
+
+	public List<FoodDto> selectFList(int page) {
+		int start = 1, end = 20;
+
+		start = (20 * (page - 1)) + 1;
+		end = start + 19;
+
+		return dao.selectFList(start, end);
+	}
+
+	public int getFTotalCount() {
+		return dao.getFTotalCount();
+	}
+
+	public int deleteFood(int food_id) {
+		return dao.deleteFood(food_id);
+	}
+
+	public int insertF(FoodDto food) {
+		return dao.insertFood(food);
+	}
+
+	public int checkFName(String foodname) {
+		return dao.checkFName(foodname);
+	}
+
+	public FoodDto selectFood(int food_id) {
+		return dao.selectFood(food_id);
+	}
+
+	public int updateF(FoodDto food) {
+		return dao.updateF(food);
+	}
 }

@@ -17,7 +17,7 @@
 <script>
 	$(document).on("click", "button#delete", function(e) {
 		if (confirm("정말로 삭제하시겠습니까?")) {
-			window.location.href = "mdel.do?meal_id=${meal.meal_id}";
+			window.location.href = "mdel.do?id=${meal.meal_id}";
 		} else {
 			return false;
 		}
@@ -80,7 +80,7 @@
 					<div class="content-option-menu">
 						<button onclick="history.back()">목록</button>
 						<button
-							onclick="window.location.href='mmodi.do?meal_id=${meal.meal_id}'">수정</button>
+							onclick="window.location.href='mmodi.do?id=${meal.meal_id}'">수정</button>
 						<button id="delete">삭제</button>
 					</div>
 				</div>

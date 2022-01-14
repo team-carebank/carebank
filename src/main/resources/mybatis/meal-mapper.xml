@@ -38,7 +38,7 @@
 		JOIN PREFERENCES p USING(SUBCAT_ID) WHERE USER_NO = ${user_no}
 		ORDER BY
 		dbms_random.value) MEAL_PREFER 
-		<![CDATA[WHERE ROWNUM <= 5]]>
+		WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	<select id="selectByComment" resultType="mealDto">
 		SELECT MEAL_CNT_TB.*
@@ -56,7 +56,7 @@
 		) USING(MEAL_ID) ORDER BY MEAL_CNT DESC NULLS LAST
 		)
 		MEAL_CNT_TB
-		<![CDATA[ WHERE ROWNUM <= 5]]>
+		WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	<select id="selectPreferCat" resultType="int"
 		parameterType="int">
