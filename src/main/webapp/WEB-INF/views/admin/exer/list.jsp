@@ -33,35 +33,31 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			return true;
 		}
 	});
-	$(document)
-			.on(
-					"click",
-					".pagination-page span",
-					function(e) {
-						let span = e.currentTarget;
-						let path = "${pageContext.request.contextPath}/admin/ssearch.do?keyword=${keyword}&search=${searchType}&page=";
-						if (span.id == 'prev') {
-							window.location.href = path + "${page-1}";
-						} else if (span.id == 'next') {
-							window.location.href = path + "${page+1}";
-						} else {
-							let page = e.currentTarget.innerText.trim();
-							window.location.href = path + page;
-						}
-					});
+	$(document).on("click", ".pagination-page span", function(e) {
+		let span = e.currentTarget;
+		let path = "${pageContext.request.contextPath}/admin/exer.do?page=";
+		if (span.id == 'prev') {
+			window.location.href = path + "${page-1}";
+		} else if (span.id == 'next') {
+			window.location.href = path + "${page+1}";
+		} else {
+			let page = e.currentTarget.innerText.trim();
+			window.location.href = path + page;
+		}
+	});
 
 	$(document).on("click", ".board-content-name", function(e) {
 		if (e.currentTarget.parentElement.className == 'board-header-content') {
 			return false;
 		}
 		let id = e.currentTarget.previousElementSibling.innerText;
-		let path = "${pageContext.request.contextPath}/admin/sinfo.do?id=";
+		let path = "${pageContext.request.contextPath}/admin/einfo.do?id=";
 
 		window.location.href = path + id;
 	});
 
 	$(document).on("click", "#add.board-content-config", function(e) {
-		window.location.href = "swrite.do";
+		window.location.href = "ewrite.do";
 	})
 </script>
 <style>
@@ -71,16 +67,22 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 	color: green;
 }
 
-.content-admin-side>#supple {
+.content-admin-side>#exer {
 	background: linear-gradient(to right, #04AA6D, #05C480);
 	color: white;
 	box-shadow: -10px 0 0 white;
 }
 
-.efficacy-list {
+.board-header-content, .board-body-content {
 	display: grid;
-	justify-items: center;
+	grid-template-columns: repeat(6, 1fr);
 	align-items: center;
+	justify-items: center;
+	margin-block: 15px;
+}
+
+#add.board-content-config {
+	grid-column: 6;
 }
 </style>
 </head>
@@ -91,15 +93,27 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Search : Supplement</h1>
-					<span>"${keyword }"에 대한 검색 결과입니다.</span>
+					<h1>Information : Exercise</h1>
+					<span>운동 정보를 관리합니다.</span>
 				</div>
 				<div class="admin-main-content">
 					<div class="main-content-board">
 						<div class="board-header">
 							<div class="board-header-content">
 								<span>번호</span> <span class="board-content-name">이름</span>
-								<form method="post" action="ssearch.do">
+								<form method="post" action="esearch.do">
+									<input type="hidden" name="page" value="1"> <input
+										type="hidden" name="search" value="type"> <select
+										name="keyword" id="select-category"
+										onchange="this.form.submit()">
+										<option disabled selected>운동 유형</option>
+										<option value="유산소">유산소</option>
+										<option value="무산소">무산소</option>
+										<option value="기타">기타</option>
+									</select>
+								</form>
+
+								<form method="post" action="esearch.do">
 									<input type="hidden" name="page" value="1"> <input
 										type="hidden" name="search" value="category"> <select
 										name="keyword" id="select-category"
@@ -116,28 +130,13 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 						<div class="board-body">
 							<c:forEach var="dto" items="${res }">
 								<div class="board-body-content">
-									<span id="supple_id">${dto.supple_id }</span> <span
-										class="board-content-name">${dto.supple_name }</span>
-									<div class="efficacy-list">
-										<c:forEach var="map" items="${maps}">
-											<c:forEach var="entry" items="${map }">
-												<c:if test="${entry.key eq dto.supple_id }">
-													<c:forEach var="effi" items="${entry.value }">
-														<span>${effi }</span>
-													</c:forEach>
-												</c:if>
-											</c:forEach>
-										</c:forEach>
-									</div>
-									<span class="board-content-config" id="modify"
-										onclick="window.location.href='smodi.do?id=${dto.supple_id}'">수정하기</span>
+									<span id="supple_id">${dto.exer_id }</span> <span
+										class="board-content-name">${dto.exer_name }</span> <span>${dto.exer_type }</span>
+									<span>${dto.subcat_name }</span> <span
+										class="board-content-config" id="modify"
+										onclick="window.location.href='emodi.do?id=${dto.exer_id}'">수정하기</span>
 								</div>
 							</c:forEach>
-							<c:if test="${empty res }">
-								<div class="board-body-content">
-									<span style="grid-column: 1/6">검색 결과가 존재하지 않습니다.</span>
-								</div>
-							</c:if>
 						</div>
 						<div class="board-header" id="footer">
 							<div class="board-header-content">
@@ -167,14 +166,11 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 						</div>
 					</div>
 					<div class="main-content-search">
-						<form method="post" action="ssearch.do" id="search-keyword-data">
-							<input type="hidden" name="page" value="1"> <select
-								name="search" id="">
-								<option value="all" selected="selected">전체</option>
-								<option value="name">영양제명</option>
-								<option value="desc">효능</option>
-							</select> <input type="text" name="keyword"> <input type="submit"
-								value="검색">
+						<form method="post" action="esearch.do" id="search-keyword-data">
+							<input type="hidden" name="page" value="1"> <input
+								type="text" name="keyword"> <input type="submit"
+								value="검색"> <input type="hidden" name="search"
+								value="name">
 						</form>
 					</div>
 				</div>

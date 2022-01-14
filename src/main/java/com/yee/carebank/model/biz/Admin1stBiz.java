@@ -14,7 +14,7 @@ import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
 
 @Service
-public class AdminBiz {
+public class Admin1stBiz {
 
 	@Autowired
 	AMealDao dao;

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yee.carebank.model.biz.AdminBiz;
+import com.yee.carebank.model.biz.Admin1stBiz;
 import com.yee.carebank.model.biz.MealBiz;
 import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.FoodsDto;
@@ -28,11 +28,11 @@ import com.yee.carebank.model.dto.MealDto;
 import com.yee.carebank.model.dto.UserDto;
 
 @Controller
-public class AdminController {
+public class Admin1stController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	AdminBiz biz;
+	Admin1stBiz biz;
 
 	@Autowired
 	MealBiz mBiz;
@@ -395,6 +395,12 @@ public class AdminController {
 			redirectURL = "/carebank/admin/food.do?page=1";
 		} else if (url.contains("admin/s")) {
 			redirectURL = "/carebank/admin/supple.do?page=1";
+		} else if (url.contains("admin/e")) {
+			redirectURL = "/carebank/admin/exer.do?page=1";
+		}
+
+		else {
+			redirectURL = "/carebank/admin/main.do";
 		}
 
 		try {
