@@ -27,36 +27,56 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" /> -->
  
+ <style>
+ 	body{
+	display : grid;
+	width : 100vh;
+	height : 100vh;
+	justify-items : center;
+	align-items : center;
+}
+body>div{
+	display : grid;
+	width : 100vh;
+	height: 100vh;
+	box-shadow: 0 0 10px gainsboro;
+}
+.group{
+	background-color: beige;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	justify-items: center;
+	display: grid;
+}
+.top{
+	display : grid;
+	align-items: center;
+	justify-items: center;
+}
+.domain{
+	display: grid;
+	align-items: center;
+	justify-items: center;
+}
+.domain>*{
+	margin-block-end: 10px;
+}
+.ok-button{
+	width: 100%;
+	height: 50px;
+	font-size: large;
+	border: none;
+	background-color: transparent;
+}
+.ok-button:hover {
+	font-weight: bold;
+	cursor: pointer;
+}
+ </style>
+ 
 <script type="text/javascript">
 $(function() {
-	/* $.datepicker.setDefaults({
-		dateFormat : 'yy-mm-dd',	//input display formay 변경
-		showOtherMonths : true,		//빈 공간에 현재월의 앞뒤월의 날짜를 표기
-		showMonthAfterYear : true,	//년도 먼저 나오고, 뒤에 월표시
-		changeYear : true,			//콤보박스에서 년 선택 가능
-		changeMonth : true,			//콤보박스에서 월 선택 가능
-		yearSuffix : "년",			//달력의 년도 부분 뒤에 붙는 텍스트
-		monthNamesShort : ['1','2','3','4','5','6','7','8','9','10','11','12'],					//달력의 월 부분 텍스트
-		monthNames : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],		//달력의 월 부분 tooltip 텍스트
-		dayNamesMin : ['일','월','화','수','목','금','토'],											//달력의 요일 부분 텍스트
-		dayNames : ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],							//달력의 요일 부분 tooltip 텍스트
-		
-	});
-	$("#startDate").datepicker();
-	$("#endDate").datepicker();
-	
-	$("#startDate").datepicker('setDate','today');
-	$("#endDate").datepicker('setDate','today');   
-
-	
-	$("#startDate").datetimepicker({
-		lang:'ko',
-        format:'yyyy-MM-dd hh:mm'
-	});
-	$("#endDate").datetimepicker({
-		lang:'ko',
-        format:'yyyy-MM-dd hh:mm'
-	}); */
 
 	var regdate = '<fmt:formatDate value="${dto.regdate }" type="both" pattern="yyyy-MM-dd hh:mm:ss"/>';
 	var resdate = '<fmt:formatDate value="${dto.resdate }" type="both" pattern="yyyy-MM-dd hh:mm:ss"/>';
@@ -128,7 +148,7 @@ $.fn.serializeObject = function(){
 <body>
 	<div class="group" id="popupGroup">
 		<div class = "group-head">
-			<h1 class = "zTree-h1">병원 기록</h1>
+			<h1 class = "zTree-h1">&#128198 병원 기록 &#127973</h1>
 		</div>
 		<div class = "group-body">
 			<form id = "updateData">
@@ -160,8 +180,8 @@ $.fn.serializeObject = function(){
 					<textarea rows="10" cols="70" class="memo" id="memo" name="memo" style="resize:none;" >${dto.memo }</textarea>
 				</div>
 			</form>
-				<button class="ok-button" type="button" onclick="click_ok();">수정</button>
-				<button class="ok-button" type="button" onclick="click_button();">삭제</button>
+				<button class="ok-button" type="button" onclick="click_ok();">다이어리에 병원기록 수정하기!</button>
+				<button class="ok-button" type="button" onclick="click_button();">다이어리에 병원기록 삭제하기!</button>
 		</div>
 	</div>
 </body>
