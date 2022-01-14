@@ -188,12 +188,12 @@
 	<select id="getMealCount" resultType="int">
 		select count(*) from meal
 		join category USING(SUBCAT_ID)
-		MEAL_NAME LIKE '%${keyword}%'
+		WHERE MEAL_NAME LIKE '%${keyword}%'
 	</select>
 	<select id="getCatCount" resultType="int">
 		select count(*) from meal
 		join category USING(SUBCAT_ID)
-		SUBCAT_NAME LIKE '%${keyword}%'
+		WHERE SUBCAT_NAME LIKE '%${keyword}%'
 	</select>
 	<select id="getAllCount" resultType="int">
 		select count(*) from meal

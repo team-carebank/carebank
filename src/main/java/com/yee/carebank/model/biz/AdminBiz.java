@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yee.carebank.model.dao.AdminDao;
+import com.yee.carebank.model.dao.AFoodDao;
+import com.yee.carebank.model.dao.AMealDao;
 import com.yee.carebank.model.dto.CategoryDto;
 import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
@@ -15,7 +16,10 @@ import com.yee.carebank.model.dto.MealDto;
 public class AdminBiz {
 
 	@Autowired
-	AdminDao dao;
+	AMealDao dao;
+
+	@Autowired
+	AFoodDao fdao;
 
 	public List<MealDto> selectMList(int pageNo) {
 		int start = 1, end = 20;
@@ -79,30 +83,43 @@ public class AdminBiz {
 		start = (20 * (page - 1)) + 1;
 		end = start + 19;
 
-		return dao.selectFList(start, end);
+		return fdao.selectFList(start, end);
 	}
 
 	public int getFTotalCount() {
-		return dao.getFTotalCount();
+		return fdao.getFTotalCount();
 	}
 
 	public int deleteFood(int food_id) {
-		return dao.deleteFood(food_id);
+		return fdao.deleteFood(food_id);
 	}
 
 	public int insertF(FoodDto food) {
-		return dao.insertFood(food);
+		return fdao.insertFood(food);
 	}
 
 	public int checkFName(String foodname) {
-		return dao.checkFName(foodname);
+		return fdao.checkFName(foodname);
 	}
 
 	public FoodDto selectFood(int food_id) {
-		return dao.selectFood(food_id);
+		return fdao.selectFood(food_id);
 	}
 
 	public int updateF(FoodDto food) {
-		return dao.updateF(food);
+		return fdao.updateF(food);
+	}
+
+	public List<FoodDto> searchFood(String keyword, int page) {
+		int start = 1, end = 20;
+
+		start = (20 * (page - 1)) + 1;
+		end = start + 19;
+
+		return fdao.searchFood(keyword, start, end);
+	}
+
+	public int getSearchCntFood(String keyword) {
+		return fdao.getSearchCnt(keyword);
 	}
 }
