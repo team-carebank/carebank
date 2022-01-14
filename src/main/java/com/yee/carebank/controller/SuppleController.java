@@ -36,7 +36,7 @@ public class SuppleController {
 
 	@RequestMapping("/supplemain.do")
 	public String sMain(Model model) {
-		logger.info("INFO - MAIN [SUPPLEMENT]");
+		logger.info("MAIN [SUPPLEMENT]");
 
 		model.addAttribute("category", sBiz.selectCatList());
 
@@ -46,7 +46,7 @@ public class SuppleController {
 	@RequestMapping("/supplelist.do")
 	@ResponseBody
 	public Map<String, Object> selectSList(@RequestBody int subcat_id) {
-		logger.info("INFO - SELECT LIST [SUPPLEMENT]");
+		logger.info("SELECT LIST [SUPPLEMENT]");
 
 		Map<String, Object> res = new HashMap<String, Object>();
 
@@ -57,7 +57,7 @@ public class SuppleController {
 
 	@RequestMapping("/suppleinfo.do")
 	public String selectSupple(Model model, int id) {
-		logger.info("INFO - REQUEST DETAIL [SUPPLEMENT]");
+		logger.info("REQUEST DETAIL [SUPPLEMENT]");
 
 		SuppleDto supple = sBiz.selectOne(id);
 		List<String> description = sBiz.selectInfo(id);
@@ -75,7 +75,7 @@ public class SuppleController {
 	@RequestMapping("/supplecomm.do")
 	@ResponseBody
 	public boolean write(HttpSession session, @RequestBody String data) {
-		logger.info("INFO - WRITE A COMMENT [SUPPLEMENT]");
+		logger.info("WRITE A COMMENT [SUPPLEMENT]");
 
 		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
 		int info_id = jo.get("info_id").getAsInt();
@@ -94,7 +94,7 @@ public class SuppleController {
 
 			res = cBiz.write(dto, 3);
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return false;
 		}
 
@@ -119,7 +119,7 @@ public class SuppleController {
 			CommentDto before = cBiz.read(comm_no, 3);
 
 			if (before.getUser_no() != loginUser.getUser_no()) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return false;
 			}
 
@@ -129,7 +129,7 @@ public class SuppleController {
 
 			res = cBiz.update(after, 3);
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN OR COMMENT DATA IS NOT FOUND");
+			logger.error("LOGIN OR COMMENT DATA IS NOT FOUND");
 			return false;
 		}
 
@@ -143,7 +143,7 @@ public class SuppleController {
 	@RequestMapping("/scommdelete.do")
 	@ResponseBody
 	public boolean delete(HttpSession session, @RequestBody int comm_no) {
-		logger.info("INFO - DELETE A COMMENT [SUPPLEMENT]");
+		logger.info("DELETE A COMMENT [SUPPLEMENT]");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 		int res = 0;
@@ -151,12 +151,12 @@ public class SuppleController {
 		try {
 			CommentDto before = cBiz.read(comm_no, 1);
 			if (before.getUser_no() != loginUser.getUser_no()) {
-				logger.info("ERROR - UNAUTHORIZED USER");
+				logger.info("UNAUTHORIZED USER");
 				return false;
 			}
 			res = cBiz.delete(comm_no, 3);
 		} catch (Exception e) {
-			logger.error("ERROR - DELETE ERROR");
+			logger.error("DELETE ERROR");
 			return false;
 		}
 
@@ -169,7 +169,7 @@ public class SuppleController {
 
 	@RequestMapping("prefer/supplelist.do")
 	public String prefer(HttpSession session, Model model) {
-		logger.info("INFO - GET PREFER LIST [SUPPLEMENT]");
+		logger.info("GET PREFER LIST [SUPPLEMENT]");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 		int user_no;
@@ -184,13 +184,13 @@ public class SuppleController {
 			try {
 				model.addAttribute("supple", sBiz.selectList(prefer.get(0)));
 			} catch (Exception e) {
-				logger.error("ERROR - PREFERENCE IS NOT SET");
+				logger.error("PREFERENCE IS NOT SET");
 				model.addAttribute("msg", "선호도를 체크한 후에 이용이 가능합니다!");
 
 				return "msg/alert";
 			}
 		} catch (Exception e) {
-			logger.info("ERROR - LOGIN DATA IS NOT FOUND");
+			logger.info("LOGIN DATA IS NOT FOUND");
 			return "redirect: ../loginform.do";
 		}
 
@@ -200,7 +200,7 @@ public class SuppleController {
 	@RequestMapping("prefer/supplereq.do")
 	@ResponseBody
 	public Map<String, Object> request(@RequestBody int subcat_id) {
-		logger.info("INFO - AJAX REQUSET [SUPPLEMENT]");
+		logger.info("AJAX REQUSET [SUPPLEMENT]");
 
 		Map<String, Object> res = new HashMap<String, Object>();
 		List<SuppleDto> supple = sBiz.selectList(subcat_id);

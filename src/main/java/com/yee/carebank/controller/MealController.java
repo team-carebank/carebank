@@ -36,7 +36,7 @@ public class MealController {
 
 	@RequestMapping("/mealmain.do")
 	public String main(Model model) {
-		logger.info("INFO - MAIN [MEAL]");
+		logger.info("MAIN [MEAL]");
 
 		model.addAttribute("category", biz.selectCatList());
 
@@ -46,7 +46,7 @@ public class MealController {
 	@RequestMapping("/meallist.do")
 	@ResponseBody
 	public Map<String, Object> selectList(@RequestBody int subcat_id) {
-		logger.info("INFO - SELECT LIST [MEAL]");
+		logger.info("SELECT LIST [MEAL]");
 
 		Map<String, Object> res = new HashMap<String, Object>();
 
@@ -61,7 +61,7 @@ public class MealController {
 
 	@RequestMapping("/mealinfo.do")
 	public String selectMeal(Model model, int id) {
-		logger.info("INFO - REQUEST DETAIL [MEAL]");
+		logger.info("REQUEST DETAIL [MEAL]");
 
 		MealDto meal = biz.selectOne(id);
 		List<FoodDto> ingredient = biz.selectIngredient(id);
@@ -77,7 +77,7 @@ public class MealController {
 	@RequestMapping("/mealcomm.do")
 	@ResponseBody
 	public boolean write(HttpSession session, @RequestBody String data) {
-		logger.info("INFO - WRITE A COMMENT [MEAL]");
+		logger.info("WRITE A COMMENT [MEAL]");
 
 		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
 		int info_id = jo.get("info_id").getAsInt();
@@ -96,7 +96,7 @@ public class MealController {
 
 			res = cBiz.write(dto, 1);
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA IS NOT FOUND");
+			logger.error("LOGIN DATA IS NOT FOUND");
 			return false;
 		}
 
@@ -110,7 +110,7 @@ public class MealController {
 	@RequestMapping("/mcommupdate.do")
 	@ResponseBody
 	public boolean modify(HttpSession session, @RequestBody String data) {
-		logger.info("INFO - MODIFY A COMMENT [MEAL]");
+		logger.info("MODIFY A COMMENT [MEAL]");
 
 		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
 		int comm_no = jo.get("comm_no").getAsInt();
@@ -123,7 +123,7 @@ public class MealController {
 			CommentDto before = cBiz.read(comm_no, 1);
 
 			if (before.getUser_no() != loginUser.getUser_no()) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return false;
 			}
 
@@ -134,7 +134,7 @@ public class MealController {
 			res = cBiz.update(after, 1);
 
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN OR COMMENT DATA IS NOT FOUND");
+			logger.error("LOGIN OR COMMENT DATA IS NOT FOUND");
 			return false;
 		}
 
@@ -148,7 +148,7 @@ public class MealController {
 	@RequestMapping("/mcommdelete.do")
 	@ResponseBody
 	public boolean delete(HttpSession session, @RequestBody int comm_no) {
-		logger.info("INFO - DELETE A COMMENT [MEAL]");
+		logger.info("DELETE A COMMENT [MEAL]");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 		int res = 0;
@@ -156,14 +156,14 @@ public class MealController {
 		try {
 			CommentDto before = cBiz.read(comm_no, 1);
 			if (before.getUser_no() != loginUser.getUser_no()) {
-				logger.info("ERROR - UNAUTHORIZED USER");
+				logger.info("UNAUTHORIZED USER");
 				return false;
 			}
 
 			res = cBiz.delete(comm_no, 1);
 
 		} catch (Exception e) {
-			logger.error("ERROR - DELETE ERROR");
+			logger.error("DELETE ERROR");
 			return false;
 		}
 
@@ -176,7 +176,7 @@ public class MealController {
 
 	@RequestMapping("prefer/meallist.do")
 	public String preferMeal(HttpSession session, Model model) {
-		logger.info("INFO - GET PREFER LIST [MEAL]");
+		logger.info("GET PREFER LIST [MEAL]");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 		int user_no = 0;
@@ -190,13 +190,13 @@ public class MealController {
 			try {
 				model.addAttribute("meal", biz.selectMeal(prefer.get(0)));
 			} catch (Exception e) {
-				logger.error("ERROR - PRFERENCE IS NOT SET");
+				logger.error("PRFERENCE IS NOT SET");
 				model.addAttribute("msg", "선호도를 체크한 후에 이용이 가능합니다!");
 
 				return "msg/alert";
 			}
 		} catch (Exception e) {
-			logger.info("ERROR - LOGIN DATA IS NOT FOUND");
+			logger.info("LOGIN DATA IS NOT FOUND");
 			return "redirect: ../loginform.do";
 		}
 
@@ -206,7 +206,7 @@ public class MealController {
 	@RequestMapping("prefer/mealreq.do")
 	@ResponseBody
 	public Map<String, Object> requestMeal(@RequestBody int subcat_id) {
-		logger.info("INFO - AJAX REQUEST [MEAL]");
+		logger.info("AJAX REQUEST [MEAL]");
 
 		Map<String, Object> res = new HashMap<String, Object>();
 		List<MealDto> meal = biz.selectMeal(subcat_id);
