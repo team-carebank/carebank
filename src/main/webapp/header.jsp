@@ -74,7 +74,7 @@
 			<ul class="user-login">
 				<c:if test="${not empty login_info }">
 					<c:choose>
-						<c:when test="${login_info.user_type eq 'USER' }">
+						<c:when test="${login_info.user_type ne 'ADMIN' }">
 							<li class="nav-component"><a href="#">마이페이지</a>
 								<ul class="nav-sub">
 									<li><a href="${pageContext.request.contextPath}/diary.do">다이어리</a></li>
