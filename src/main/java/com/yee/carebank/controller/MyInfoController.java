@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +31,12 @@ private PreferenceBiz preferbiz;
 
 	//기본정보 조회
 	@RequestMapping("/myinfo.do")
-	public String myinfo() {
+	public String myinfo(HttpSession session, Model model) {
 		logger.info("MYPAGE");
+		
+		UserDto login_info = (UserDto)session.getAttribute("login_info");
+		int user_no = login_info.getUser_no();
+		model.addAttribute("preferlist", preferbiz.selectAll(user_no));
 		return "mypage_myinfo";
 	}
 	
@@ -83,8 +88,8 @@ private PreferenceBiz preferbiz;
 //	public String selectAll(Model model) {
 //		logger.info("PREFER LIST");
 //		model.addAttribute("preferlist", preferbiz.selectAll());
-//		
-//		return "mypage_prefer";
+//	
+//		return "redirect:myinfo.do";
 //	}
 	
 	//관심사 설정

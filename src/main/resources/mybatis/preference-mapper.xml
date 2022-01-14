@@ -9,7 +9,7 @@
   		<result property = "subcat_id" column = "SUBCAT_ID"/>
   	</resultMap>
   
-  <select id = "selectOne" resultType = "preferDto">
+  <select id = "selectAll" resultType = "preferDto">
   		SELECT CATEGORY.SUBCAT_NAME, CATEGORY.SUPERCAT_ID
   		FROM PREFERENCES, CATEGORY
   		WHERE PREFERENCES.SUBCAT_ID = CATEGORY.SUBCAT_ID

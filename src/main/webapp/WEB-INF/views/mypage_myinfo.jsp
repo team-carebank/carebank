@@ -194,7 +194,7 @@
             </div>
             <div class="content-admin-main">
                 <div class="admin-main-description">
-                    <h1>${login_info.user_name }님의 정보</h1>
+                    <h1>${login_info.user_name } 님의 정보</h1>
                   
                     
                 </div>
@@ -247,6 +247,49 @@
                                 								
                             </div>
                         </div>
+                            <div class="board-header">
+                            <div class="admin-main-description">
+                                <h1>${login_info.user_name } 님의 관심사</h1>
+                            </div>
+                        
+                            <div class="board-header-content">
+                                <span class="board-content-title">관심사</span><hr>
+                            </div>
+                        </div>
+                        <div class="board-body">
+                            <div class="board-body-content">
+                                 <div class="board-header-content">
+                                <span class="board-content-title">만성질환</span>
+                            </div>
+                                <c:forEach items ="${preferlist }" var = "preferDto">
+                                	
+                                <div>${preferDto.subcat_name }</div>
+                                
+                                </c:forEach>
+                            </div>
+                            <div class="board-body-content">
+                                <span>건강증진</span>
+                                    <c:forEach items ="${preferlist }" var = "preferDto">
+                                	
+                                		<div>${preferDto.subcat_name }</div>
+                                
+                                	</c:forEach>
+                            </div>
+                            <div class="board-body-content">
+                                <span>멘탈케어</span>
+                               
+                            </div>
+                            <div class="board-body-content">
+                                <span>다이어트</span>
+                              
+                            </div>
+                            
+   
+                            
+                        </div> 
+                        <input type = button value = "관심사 설정하러가기" onclick = "location.href = 'regis_prefer.do?user_no=${login_info.user_no}'">
+                        
+                        
                     </div>
               
                 </div>
