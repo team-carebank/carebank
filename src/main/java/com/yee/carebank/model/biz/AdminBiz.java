@@ -51,7 +51,7 @@ public class AdminBiz {
 
 		start = (20 * (page - 1)) + 1;
 		end = start + 19;
-		
+
 		switch (searchType) {
 		case "name":
 			return dao.searchByName(keyword, start, end);
@@ -60,5 +60,49 @@ public class AdminBiz {
 		default:
 			return dao.searchAll(keyword, start, end);
 		}
+	}
+
+	public int getCount(String searchType, String keyword) {
+		switch (searchType) {
+		case "name":
+			return dao.getMealCount(keyword);
+		case "category":
+			return dao.getCatCount(keyword);
+		default:
+			return dao.getAllCount(keyword);
+		}
+	}
+
+	public List<FoodDto> selectFList(int page) {
+		int start = 1, end = 20;
+
+		start = (20 * (page - 1)) + 1;
+		end = start + 19;
+
+		return dao.selectFList(start, end);
+	}
+
+	public int getFTotalCount() {
+		return dao.getFTotalCount();
+	}
+
+	public int deleteFood(int food_id) {
+		return dao.deleteFood(food_id);
+	}
+
+	public int insertF(FoodDto food) {
+		return dao.insertFood(food);
+	}
+
+	public int checkFName(String foodname) {
+		return dao.checkFName(foodname);
+	}
+
+	public FoodDto selectFood(int food_id) {
+		return dao.selectFood(food_id);
+	}
+
+	public int updateF(FoodDto food) {
+		return dao.updateF(food);
 	}
 }

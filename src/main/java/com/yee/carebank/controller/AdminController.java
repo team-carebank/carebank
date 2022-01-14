@@ -1,6 +1,7 @@
 package com.yee.carebank.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -19,8 +20,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.AdminBiz;
 import com.yee.carebank.model.biz.MealBiz;
@@ -38,6 +41,10 @@ public class AdminController {
 
 	@Autowired
 	MealBiz mBiz;
+
+	/*
+	 * 관리자 - 식단 페이지 관리자 메인은 가장 상단에 있는 식단 페이지를 보여줌
+	 */
 
 	@RequestMapping("admin/main.do")
 	public String main(HttpSession session, Model model) {
@@ -117,7 +124,7 @@ public class AdminController {
 
 	@RequestMapping("admin/mwrite.do")
 	public String writeMeal(HttpSession session, Model model) {
-		logger.info("INFO - INSERT PAGE [MEAL]");
+		logger.info("INFO - WRITE INFORMATION [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
@@ -154,16 +161,18 @@ public class AdminController {
 		int res = biz.insertM(meal, foods.getFoods());
 
 		if (res > 0) {
-			model.addAttribute("msg", "게시글이 작성되었습니다.");
+			model.addAttribute("msg", "데이터가 등록되었습니다.");
+			model.addAttribute("url", "meal.do");
 		} else {
-			model.addAttribute("msg", "게시글이 작성되지 않았습니다.");
+			model.addAttribute("msg", "데이터가 등록되지 않았습니다.");
+			model.addAttribute("url", "meal.do");
 		}
 
-		return "redirect: meal.do";
+		return "admin/redirect";
 	}
 
 	@RequestMapping("admin/mmodi.do")
-	public String updateMeal(HttpSession session, Model model, @RequestParam int meal_id) {
+	public String updateMeal(HttpSession session, Model model, @RequestParam("id") int meal_id) {
 		logger.info("INFO - UPDATE PAGE [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
@@ -206,16 +215,18 @@ public class AdminController {
 		int res = biz.updateM(meal, foods.getFoods());
 
 		if (res > 0) {
-			model.addAttribute("msg", "게시글이 삭제되었습니다.");
+			model.addAttribute("msg", "데이터가 수정되었습니다.");
+			model.addAttribute("url", "meal.do");
 		} else {
-			model.addAttribute("msg", "게시글이 삭제되지 못하였습니다.");
+			model.addAttribute("msg", "데이터가 수정되지 않았습니다.");
+			model.addAttribute("url", "meal.do");
 		}
 
-		return "redirect: meal.do";
+		return "admin/redirect";
 	}
 
 	@RequestMapping("admin/mdel.do")
-	public String deleteMeal(HttpSession session, Model model, @RequestParam int meal_id) {
+	public String deleteMeal(HttpSession session, Model model, @RequestParam("id") int meal_id) {
 		logger.info("INFO - DELETE DATA [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
@@ -234,12 +245,14 @@ public class AdminController {
 		int res = biz.deleteMeal(meal_id);
 
 		if (res > 0) {
-			model.addAttribute("msg", "게시글이 삭제되었습니다.");
+			model.addAttribute("msg", "데이터가 삭제되었습니다.");
+			model.addAttribute("url", "meal.do");
 		} else {
-			model.addAttribute("msg", "게시글이 삭제되지 못하였습니다.");
+			model.addAttribute("msg", "데이터가 삭제되지 않았습니다.");
+			model.addAttribute("url", "meal.do");
 		}
 
-		return "redirect: meal.do";
+		return "admin/redirect";
 	}
 
 	@RequestMapping("admin/msearch.do")
@@ -256,6 +269,7 @@ public class AdminController {
 			}
 
 			model.addAttribute("res", biz.search(search, keyword, page));
+			model.addAttribute("cnt", biz.getCount(search, keyword));
 			model.addAttribute("search", search);
 			model.addAttribute("keyword", keyword);
 			model.addAttribute("page", page);
@@ -269,6 +283,177 @@ public class AdminController {
 	}
 
 	/*
+	 * 식단 - 영양소 페이지
+	 */
+	@RequestMapping("admin/food.do")
+	public String selectFood(HttpSession session, Model model, @RequestParam int page) {
+		logger.info("INFO - GET LIST [FOOD]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+		FoodsDto foods = new FoodsDto();
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType).equals("ADMIN")) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		foods.setFoods(biz.selectFList(page));
+		model.addAttribute("res", foods.getFoods());
+		model.addAttribute("cnt", biz.getFTotalCount());
+		model.addAttribute("page", page);
+
+		return "admin/flist";
+	}
+
+	@RequestMapping("admin/fdel.do")
+	public String deleteFood(HttpSession session, Model model, @RequestParam("id") int food_id) {
+		logger.info("INFO - DELETE DATA [FOOD]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			} else {
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		int res = biz.deleteFood(food_id);
+
+		if (res > 0) {
+			model.addAttribute("msg", "데이터가 삭제되었습니다.");
+			model.addAttribute("url", "food.do");
+		} else {
+			model.addAttribute("msg", "데이터가 삭제되지 않았습니다.");
+			model.addAttribute("url", "food.do");
+		}
+
+		return "admin/redirect";
+	}
+
+	@RequestMapping("admin/fwrite.do")
+	public String writeFood(HttpSession session) {
+		logger.info("INFO - WRITE INFORMATION [FOOD]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			} else {
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		return "admin/fwrite";
+	}
+
+	@RequestMapping("admin/finsert.do")
+	public String writeFood(HttpSession session, Model model, FoodDto food) {
+		logger.info("INFO - WRITE INFORMATION [FOOD]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			} else {
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		int res = biz.insertF(food);
+
+		if (res > 0) {
+			model.addAttribute("msg", "데이터가 등록되었습니다.");
+			model.addAttribute("url", "food.do");
+		} else {
+			model.addAttribute("msg", "데이터가 등록되지 않았습니다.");
+			model.addAttribute("url", "food.do");
+		}
+
+		return "admin/redirect";
+	}
+
+	@RequestMapping("admin/fcheck.do")
+	@ResponseBody
+	public int checkFName(HttpSession session, String foodname) {
+		logger.info("INFO - AJAX REQUEST [FOOD]");
+
+		int check = biz.checkFName(foodname);
+
+		return check;
+	}
+
+	@RequestMapping("admin/fmodi.do")
+	public String updateFood(HttpSession session, Model model, @RequestParam("id") int food_id) {
+		logger.info("INFO - UPDATE PAGE [FOOD]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			} else {
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		model.addAttribute("food", biz.selectFood(food_id));
+
+		return "admin/fmodi";
+
+	}
+
+	@RequestMapping("admin/fupdate.do")
+	public String updateFood(HttpSession session, Model model, FoodDto food) {
+		logger.info("INFO - UPDATE INFORMATION [FOOD]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("ERROR - UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			} else {
+			}
+		} catch (Exception e) {
+			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		int res = biz.updateF(food);
+
+		if (res > 0) {
+			model.addAttribute("msg", "데이터가 수정되었습니다.");
+			model.addAttribute("url", "food.do");
+		} else {
+			model.addAttribute("msg", "데이터가 수정되지 않았습니다.");
+			model.addAttribute("url", "food.do");
+		}
+
+		return "admin/redirect";
+	}
+
+	/*
 	 * Exception Handler - Missing Parameter Exception
 	 */
 	@ExceptionHandler(MissingServletRequestParameterException.class)
@@ -277,10 +462,10 @@ public class AdminController {
 		logger.error("ERROR - MISSING PARAMETER");
 		String url = request.getRequestURL().toString();
 		String redirectURL = null;
-		if (url.contains("meal.do")) {
+		if (url.contains("admin/m")) {
 			redirectURL = "/carebank/admin/meal.do?page=1";
-		} else if (url.contains("admin/m")) {
-			redirectURL = "/carebank/admin/meal.do?page=1";
+		} else if (url.contains("admin/f")) {
+			redirectURL = "/carebank/admin/food.do?page=1";
 		}
 		try {
 			response.sendRedirect(redirectURL);
@@ -288,4 +473,5 @@ public class AdminController {
 			e1.printStackTrace();
 		}
 	}
+
 }

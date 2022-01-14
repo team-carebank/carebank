@@ -2,10 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="admin">
+<mapper namespace="admin.meal">
 	<select id="selectMList" resultType="mealDto"
 		parameterType="map">
-
 		SELECT
 		*
 		FROM
@@ -58,10 +57,13 @@
 		USING DUAL
 		ON (N.FOOD = #{food})
 		WHEN MATCHED THEN
-		UPDATE SET N.CARBO=${carbo}, N.PROTEIN=#{protein}, N.FAT=#{fat}, N.CALORIES=#{calories}
+		UPDATE SET N.CARBO=${carbo}, N.PROTEIN=#{protein}, N.FAT=#{fat},
+		N.CALORIES=#{calories}
 		WHEN NOT MATCHED THEN
-		INSERT(N.FOOD_ID, N.FOOD, N.CARBO, N.PROTEIN, N.FAT, N.CALORIES)
-		VALUES(FOOD_SEQ.NEXTVAL,#{food}, #{carbo}, #{protein}, #{fat}, #{calories})
+		INSERT(N.FOOD_ID, N.FOOD,
+		N.CARBO, N.PROTEIN, N.FAT, N.CALORIES)
+		VALUES(FOOD_SEQ.NEXTVAL,#{food}, #{carbo}, #{protein}, #{fat},
+		#{calories})
 	</insert>
 	<insert id="insertIng" parameterType="map">
 		INSERT INTO
@@ -79,8 +81,10 @@
 	</delete>
 	<update id="updateMeal" parameterType="mealDto">
 		UPDATE MEAL
-		SET MEAL_NAME = #{meal_name}, RECIPE = #{recipe}, SRC = #{src}
-		WHERE MEAL_ID = #{meal_id}
+		SET MEAL_NAME =
+		#{meal_name}, RECIPE = #{recipe}, SRC = #{src}
+		WHERE MEAL_ID =
+		#{meal_id}
 	</update>
 	<delete id="deleteFood" parameterType="int">
 		DELETE FROM NUTRIENTS
@@ -89,10 +93,12 @@
 	</delete>
 	<update id="updateFood" parameterType="foodDto">
 		UPDATE NUTRIENTS
-		SET CARBO=#{carbo}, PROTEIN=#{protein}, FAT=#{fat}, CALORIES=#{calories}
+		SET
+		CARBO=#{carbo}, PROTEIN=#{protein}, FAT=#{fat}, CALORIES=#{calories}
 		WHERE FOOD_ID = #{food_id}
 	</update>
-	<select id="searchAll" parameterType="String" resultType="mealDto">
+	<select id="searchAll" parameterType="String"
+		resultType="mealDto">
 		SELECT
 		*
 		FROM
@@ -111,15 +117,18 @@
 		MEAL JOIN CATEGORY
 		USING(SUBCAT_ID)
 		WHERE
-		SUBCAT_NAME LIKE '%${keyword}%' OR MEAL_NAME LIKE '%${keyword}%'
+		SUBCAT_NAME LIKE '%${keyword}%' OR MEAL_NAME LIKE
+		'%${keyword}%'
 		ORDER BY MEAL_ID
 		) MEAL_CAT)
 		WHERE
 		POSTNO BETWEEN
-		#{start} AND #{end}
+		#{start}
+		AND #{end}
 		ORDER BY POSTNO
 	</select>
-		<select id="searchCat" parameterType="String" resultType="mealDto">
+	<select id="searchCat" parameterType="String"
+		resultType="mealDto">
 		SELECT
 		*
 		FROM
@@ -140,13 +149,15 @@
 		WHERE
 		SUBCAT_NAME LIKE '%${keyword}%'
 		ORDER BY MEAL_ID
-		) MEAL_CAT)
+		)
+		MEAL_CAT)
 		WHERE
 		POSTNO BETWEEN
 		#{start} AND #{end}
 		ORDER BY POSTNO
 	</select>
-		<select id="searchMeal" parameterType="String" resultType="mealDto">
+	<select id="searchMeal" parameterType="String"
+		resultType="mealDto">
 		SELECT
 		*
 		FROM
@@ -167,10 +178,30 @@
 		WHERE
 		MEAL_NAME LIKE '%${keyword}%'
 		ORDER BY MEAL_ID
-		) MEAL_CAT)
+		)
+		MEAL_CAT)
 		WHERE
 		POSTNO BETWEEN
 		#{start} AND #{end}
 		ORDER BY POSTNO
+	</select>
+	<select id="getMealCount" resultType="int">
+		select count(*) from meal
+		join category USING(SUBCAT_ID)
+		MEAL_NAME LIKE '%${keyword}%'
+	</select>
+	<select id="getCatCount" resultType="int">
+		select count(*) from meal
+		join category USING(SUBCAT_ID)
+		SUBCAT_NAME LIKE '%${keyword}%'
+	</select>
+	<select id="getAllCount" resultType="int">
+		select count(*) from meal
+		join category
+		USING(SUBCAT_ID)
+		WHERE SUBCAT_NAME LIKE '%${keyword}%' OR
+		MEAL_NAME
+		LIKE
+		'%${keyword}%'
 	</select>
 </mapper>

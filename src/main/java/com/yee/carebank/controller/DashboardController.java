@@ -16,27 +16,23 @@ import com.yee.carebank.model.dto.UserDto;
 @Controller
 public class DashboardController {
 
-	private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
-
+	private static Logger logger = LoggerFactory.getLogger(ExerciseController.class);
 
 	@Autowired
 	private MyExerciseBiz mybiz;
-	
+
 	@RequestMapping("/dashboard.do")
-	public String dashboard(Model model,MyExerciseDto dto, HttpSession session) {
-		 
+	public String dashboard(Model model, MyExerciseDto dto, HttpSession session) {
+
 		logger.info("dashlist");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
-		int user_no=dto.setUser_no(loginUser.getUser_no());
-		
-		model.addAttribute("mydtooo",mybiz.selectList(user_no));
-		
+		int user_no = dto.setUser_no(loginUser.getUser_no());
+
+		model.addAttribute("mydtooo", mybiz.selectList(user_no));
+
 		return "dashboard";
-		
+
 	}
-	
-	
-	
-	
+
 }
