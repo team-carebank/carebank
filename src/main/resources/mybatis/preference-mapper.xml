@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace = "prefer">
+  	<resultMap type = "preferDto" id = "preferMap">
+  		<result property = "user_no" column = "USER_NO"/>
+  		<result property = "subcat_id" column = "SUBCAT_ID"/>
+  	</resultMap>
+  
+  <select id = "selectOne" resultType = "preferDto">
+  		SELECT CATEGORY.SUBCAT_NAME, CATEGORY.SUPERCAT_ID
+  		FROM PREFERENCES, CATEGORY
+  		WHERE PREFERENCES.SUBCAT_ID = CATEGORY.SUBCAT_ID
+  		AND USER_NO = #{user_no}
+  </select>
+  
+  <!--관심사 설정 -->
+ <insert id = "setprefer" parameterType = "map">
+		MERGE INTO PREFERENCES P 
+		USING DUAL
+		ON(P.USER_NO = #{user_no} AND P.SUBCAT_ID = #{subcat_id})
+		WHEN NOT MATCHED THEN
+		INSERT (P.USER_NO, P.SUBCAT_ID)
+		VALUES (#{user_no}, #{subcat_id})
+ 
+ </insert>
+ 
+ 
+ <!-- 삭제 후 수정 -->
+ <delete id="delete" parameterType = "int">
+ 		DELETE FROM PREFERENCES WHERE USER_NO = #{user_no}
+ </delete>
+  
+  </mapper>

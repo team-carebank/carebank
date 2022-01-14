@@ -1,5 +1,7 @@
 package com.yee.carebank.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.MyInfoBiz;
+import com.yee.carebank.model.biz.PreferenceBiz;
 import com.yee.carebank.model.dto.UserDto;
 
 
@@ -22,12 +25,17 @@ public class MyInfoController {
 @Autowired
 private MyInfoBiz infobiz;
 
+@Autowired
+private PreferenceBiz preferbiz;
+
+	//기본정보 조회
 	@RequestMapping("/myinfo.do")
 	public String myinfo() {
 		logger.info("MYPAGE");
 		return "mypage_myinfo";
 	}
 	
+	//기본정보 수정
 	@RequestMapping("/myinfoUpdate.do")
 	@ResponseBody
 	public boolean myinfoUpdate(HttpSession session, @RequestBody UserDto newdto) {
@@ -38,13 +46,13 @@ private MyInfoBiz infobiz;
 		if(res > 0) {
 			session.setAttribute("login_info", newdto);
 			return true;
-
 		}
 		else {
 			return false;
 		}
 	}
 	
+	//회원탈퇴 
 	@RequestMapping("/disable.do")
 	//@ResponseBody
 	public String disable(HttpSession session, @RequestParam int user_no) {
@@ -63,6 +71,37 @@ private MyInfoBiz infobiz;
 	}
 	
 	
+	//관심사 설정페이지
+	@RequestMapping("/regis_prefer.do")
+	public String regisPrefer() {
+		return "regis_prefer";
+	}
+
+
+	//관심사 조회
+//	@RequestMapping("/preferlist.do")
+//	public String selectAll(Model model) {
+//		logger.info("PREFER LIST");
+//		model.addAttribute("preferlist", preferbiz.selectAll());
+//		
+//		return "mypage_prefer";
+//	}
 	
-	
+	//관심사 설정
+	@RequestMapping("/setprefer.do")
+	@ResponseBody
+	public boolean setprefer(@RequestParam(value="subcat_id[]") List<Integer> subcat_id, @RequestParam(value="user_no") int user_no)
+	{
+		
+		logger.info("SET PREFER");
+		
+		int res = preferbiz.setprefer(subcat_id, user_no);
+		
+		if(res > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
