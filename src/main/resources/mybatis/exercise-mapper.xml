@@ -24,13 +24,13 @@
   
   <select id="selectList" resultMap="exerciseMap">
   	SELECT *
-  	FROM EXERCISE
+  	FROM EXERCISE_TMP JOIN TM_EXERCISE USING(EXER_ID)
   </select>
   
     	<select id="selectOne" resultMap="exerciseMap">
 		SELECT *
-		FROM EXERCISE
-		WHERE EXER_ID = #{exer_id}
+		FROM EXERCISE_TMP JOIN TM_EXERCISE USING(EXER_ID)
+		WHERE EXER_ID=#{exer_id}
 	</select>
 	 
   </mapper>

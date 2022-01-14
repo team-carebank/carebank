@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.food">
+	<select id="selectFList" resultType="foodDto"
+		parameterType="map">
+		SELECT * FROM (SELECT ROWNUM AS POSTNO, N.* FROM
+		NUTRIENTS N) WHERE POSTNO BETWEEN #{start} AND #{end} ORDER BY POSTNO
+	</select>
+	<select id="getTotalCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		NUTRIENTS
+	</select>
+	<delete id="deleteFood" parameterType="int">
+		DELETE FROM NUTRIENTS
+		WHERE FOOD_ID = #{food_id}
+	</delete>
+	<select id="checkFood" resultType="int">
+		SELECT COUNT(FOOD) FROM
+		NUTRIENTS WHERE FOOD = #{food}
+	</select>
+	<insert id="insertFood" parameterType="foodDto">
+		INSERT INTO NUTRIENTS
+		VALUES(FOOD_SEQ.NEXTVAL, #{food}, #{carbo}, #{protein}, #{fat},
+		#{calories})
+	</insert>
+	<select id="selectFood" resultType="foodDto">
+		SELECT * FROM NUTRIENTS WHERE
+		FOOD_ID = #{food_id}
+	</select>
+	<update id="updateFood" parameterType="foodDto">
+		UPDATE NUTRIENTS SET
+		CARBO=#{carbo}, PROTEIN=#{protein}, FAT=#{fat}, CALORIES=#{calories}
+		WHERE FOOD_ID=#{food_id}
+	</update>
+	<select id="searchFood" parameterType="map" resultType="foodDto">
+		SELECT *
+		FROM
+		(SELECT ROWNUM
+		AS POSTNO, N.* FROM
+		NUTRIENTS N WHERE FOOD LIKE
+		'%${keyword}%') WHERE
+		POSTNO BETWEEN #{start} AND #{end} ORDER BY
+		POSTNO
+	</select>
+	<select id="getSearchCnt" parameterType="String"
+		resultType="int">
+		SELECT COUNT(*) FROM
+		NUTRIENTS WHERE FOOD LIKE '%${food}%'
+	</select>
+</mapper>

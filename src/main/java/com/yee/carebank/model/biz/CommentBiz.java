@@ -25,6 +25,18 @@ public class CommentBiz {
 		return null;
 	}
 
+	public CommentDto read(int comm_no, int type) {
+		switch (type) {
+		case 1:
+			return dao.selectM(comm_no);
+		case 3:
+			return dao.selectS(comm_no);
+		}
+
+		return null;
+
+	}
+
 	public int write(CommentDto dto, int type) {
 		switch (type) {
 		case 1:

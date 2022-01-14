@@ -20,6 +20,7 @@
 	crossorigin="anonymous"></script>
 <script>
 	$(document).on("click", "#comment-button", function(e) {
+
 		var comment = document.getElementById("comment-text").value.trim();
 
 		if (comment == "" || comment == null) {
@@ -52,13 +53,10 @@
 	});
 	
 	$(document).on("click", "#comment-text", function(e) {
-		/*
-		if ("${sessionScope.loginUser}" == null
-				|| "${sessionScope.loginUser}" == "") {
+		<c:if test="${empty login_info }">
 			alert("로그인 후에 사용 가능합니다.");
-		} else {
-			("#comment-text").attr("readonly", false);
-		}*/
+			return false;
+		</c:if>
 		$("#comment-text").attr("readonly", false);
 	});
 
@@ -197,10 +195,14 @@
 								<span>${comm.content }</span>
 							</div>
 						</div>
-						<div class="comment-item-manage">
-							<span class="comment-item-modify" id="${comm.comm_no }">수정</span><span
-								class="comment-item-delete" id="${comm.comm_no }">삭제</span>
-						</div>
+						<c:if test="${ not empty login_info }">
+							<c:if test="${ login_info.user_no eq comm.user_no }">
+								<div class="comment-item-manage">
+									<span class="comment-item-modify" id="${comm.comm_no }">수정</span><span
+										class="comment-item-delete" id="${comm.comm_no }">삭제</span>
+								</div>
+							</c:if>
+						</c:if>
 					</div>
 				</c:forEach>
 			</div>

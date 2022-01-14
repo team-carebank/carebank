@@ -13,7 +13,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
 
 *{
- font-family: 'Noto Sans KR', sans-serif;
+ font-family: 'Noto Sans KR', sans-serif !important; 
 }
 .textcontainer{
    margin-top:20px;
@@ -47,14 +47,48 @@ body{
 .carousel{
    transform: translateY(-150px);
    height:800px;
-   perspective: 800px;
+   perspective:1500px; 
+   position:absolute;
+   top:0px;
 }
+ 
+  
 .carousel .carousel-item{
-   width:400px;
+   width:300px; 
 }
+ 
 .carousel .carousel-item img{
    width:100%;
+box-shadow: 3px 6px 27px -1px rgba(140,140,140,0.7);
+-webkit-box-shadow: 3px 6px 27px -1px rgba(140,140,140,0.7);
+-moz-box-shadow: 3px 6px 27px -1px rgba(140,140,140,0.7);
+
+-webkit-transform:scale(1);
+-moz-transform:scale(1);
+-ms-transform:scale(1);
+ -o-transform:scale(1);  
+    transform:scale(1);
+    -webkit-transition:.3s;
+    -moz-transition:.3s;
+    -ms-transition:.3s;
+    -o-transition:.3s;
+    transition:.3s;
 }
+
+.carousel .carousel-item img:hover{ 
+
+transform: translate(0px,-50px);
+-webkit-transform: translate(0px,-50px);
+-moz-transform: translate(0px,-50px);
+
+-webkit-transform:scale(1.05);
+-moz-transform: scale(1.05);
+-ms-transform:scale(1.05);   
+-o-transform:scale(1.05);
+transform: scale(1.05);
+}
+ 
+  
 .carousel .carousel-item h3{
    margin:-5px 0 0 ;
    padding:0;
@@ -114,8 +148,7 @@ body{
 </head>
 
 
-<body>
- 
+<body> 
 	
     <div class="textcontainer">
         <div class="textbox">
@@ -132,8 +165,7 @@ body{
     		<c:forEach items="${list }" var="dto">
     		
     		<div class="carousel-item">
-    		
-    		<img src="${dto.exer_thum }"  >
+    		<img src="${dto.exer_thum }" >
     			<h3 onclick="location.href='exerdetail.do?exer_id=${dto.exer_id}'" style="cursor: pointer; ">${dto.exer_title}</h3>
     		</div>
     		

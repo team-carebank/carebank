@@ -14,15 +14,19 @@
   	<result property="exer_count" column="EXER_COUNT"/> 
   	
   </resultMap>
-  
-       <select id="selectList" parameterType="int" resultType="myexerciseDto">
-     	SELECT EXER_ID,USER_NO,REGDATE,EXER_COUNT
-     	FROM MY_EXERCISE JOIN CARE_USER USING(USER_NO)
-    </select>  
+
+<select id="selectList" parameterType="int" resultType="myexerciseDto">
+     	SELECT 
+     	MY_EXERCISE.EXER_ID,MY_EXERCISE.USER_NO,MY_EXERCISE.REGDATE,MY_EXERCISE.EXER_COUNT,CARE_USER.USER_NO
+     	FROM MY_EXERCISE
+     	INNER JOIN CARE_USER 
+     	ON MY_EXERCISE.USER_NO=CARE_USER.USER_NO
+     	<!-- WHERE MY_EXERCISE.USER_NO='1000'-->
+     	WHERE MY_EXERCISE.USER_NO=${user_no}
+</select>  
   
 	<insert id="insert" parameterType="myexerciseDto">
 		INSERT INTO MY_EXERCISE
-		<!-- VALUES ('1',#{user_no},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count})-->
 		VALUES (#{exer_id},#{user_no},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{exer_count})
 	</insert> 
 	

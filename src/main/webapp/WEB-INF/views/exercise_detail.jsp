@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
     
@@ -16,12 +17,13 @@
   
   
 <title>ExerciseDetail</title>
-<style type="text/css">
+<style type="text/css">  
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
+
 *{
  margin:0px;
  padding: 0px;
- font-family: 'Noto Sans KR', sans-serif;
+ font-family: 'Noto Sans KR', sans serif !important;
 }
 body{
  width:100%;
@@ -40,6 +42,7 @@ body{
   margin-top:80px;
   text-align: center;
   padding-top: 20px; 
+  
 }
 .webcam{
   width:300px; 
@@ -50,7 +53,13 @@ body{
   align-items: center;
   justify-content: center;
   
- background-image:url('resources/img/1web.jpg');
+ background-image:url('resources/img/camready.jpg');
+ background-size: cover;
+ 
+ border-radius: 20px; 
+box-shadow:  5px 5px 10px #d9d9d9,
+             -5px -5px 10px #ffffff;
+ 
 }
 
 .backimgweb{
@@ -79,6 +88,10 @@ height:400px;
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  border-radius: 20px; 
+box-shadow:  5px 5px 10px #d9d9d9,
+             -5px -5px 10px #ffffff;
 }
 
 #iframe{
@@ -91,6 +104,12 @@ height:400px;
   position: absolute;
   top:200px;
   right: 30px;
+  background-color:yellow;
+  border-radius: 20px;
+background: linear-gradient(145deg, #e6e6e6, #ffffff);
+box-shadow:  5px 5px 10px #d9d9d9,
+             -5px -5px 10px #ffffff;
+             padding:3px;
 }
 #checkchart{
  overflow: hidden;
@@ -101,6 +120,11 @@ height:400px;
   height:130px;
   margin-left: 23px;
   margin-top:20px;
+  border-radius: 20px;
+background: linear-gradient(145deg, #e6e6e6, #ffffff);
+box-shadow:  5px 5px 10px #d9d9d9,
+             -5px -5px 10px #ffffff;
+  
 } 
 #done{
   position: absolute;
@@ -110,7 +134,16 @@ height:400px;
 .calories{
  top:500px;
  position: absolute;
- right: 160px;
+ right: 40px;
+ width:150px;
+ height:100px;
+ font-size:0.8em;
+ padding:20px;
+ border-radius: 20px;
+background: linear-gradient(145deg, #e6e6e6, #ffffff);
+box-shadow:  5px 5px 10px #d9d9d9,
+             -5px -5px 10px #ffffff;
+            
 }
  
 
@@ -132,7 +165,7 @@ height:400px;
 	}
 	
 	h1{
-	font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Noto Sans KR';
 	TSmd}
 	
 
@@ -141,21 +174,20 @@ height:400px;
     }	
 	
 	 .number {  
-  font-size:30px;
+  font-size:20px;
   list-style: none;
   color: #333;
 }
 
-
-#hello{
-	font-family: 'Noto Sans KR', sans-serif;
+/* #hello{
+	font-family: 'Noto Sans KR';
 	font-size:20px;
 	width:200px;
 	height:100px;
 	position:absolute;
 	top:400px;
 	left:100px;
-}
+}-*/
 	
 /*button */ 
 .button-68 {
@@ -210,6 +242,55 @@ height:400px;
 	
 }
 
+#hello{
+border-radius: 20px;
+background: linear-gradient(145deg, #e6e6e6, #ffffff);
+box-shadow:  5px 5px 10px #d9d9d9,
+             -5px -5px 10px #ffffff;
+             }
+.desc{
+              font-family: 'Noto Sans KR';
+border-radius: 20px;
+background: linear-gradient(145deg, #e6e6e6, #ffffff);
+box-shadow:  5px 5px 10px #d9d9d9,
+             -5px -5px 10px #ffffff;
+             overflow:auto;
+              padding:20px;
+             }
+             
+             
+             
+             #textnotice{
+              font-family: 'Noto Sans KR';
+             align-items:center;
+             
+             border-radius: 20px;
+background: linear-gradient(145deg, #e6e6e6, #ffffff);
+box-shadow:  5px 5px 10px #d9d9d9,
+             -5px -5px 10px #ffffff;
+             }
+             
+             
+             
+/* 스크롤바 설정*/
+.desc::-webkit-scrollbar{
+    width: 6px;
+    height:3px;
+}
+
+/* 스크롤바 막대 설정*/
+.desc::-webkit-scrollbar-thumb{
+    height: 3%;
+    background-color: rgba(142,178,151,0.7);
+    /* 스크롤바 둥글게 설정    */
+    border-radius: 10px;    
+}
+
+/* 스크롤바 뒷 배경 설정*/
+.desc::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0);
+}
+
 </style>
 
  
@@ -218,24 +299,14 @@ height:400px;
 
 <body> 
   <div class="textbox">
-        <h2 style="font-size: 20px;">${dto.exer_notice }</h2>
+  <span id="textnotice" style="padding:10px; font-family: 'Noto Sans KR', sans-serif; color:#7C847F;">${dto.exer_notice }</span>
         <br><br>
-        <div id="hello">COUNT: </div>
-        <h1>exerid테스트:${dto.exer_id }</h1> 
-        <h1>userno테스트: ${login_info.user_no }</h1>
-         <h1>${login_info.user_name }님 환영합니다~</h1> 
-         
-        </div>  
+       <!--  <div id="hello">COUNT: </div>--> 
         
-        
-        
-         
-
-
+        </div>   
     <div id="workoutcontainer">
      
 	        <div class="webcam">
-	        	 
 			    <button type="submit" id="startbutton" class="button-68" onclick="init(); counterFn();">Start!</button>
 			    <div><canvas id="canvas"></canvas></div>
 			    <div id="label-container"></div>
@@ -252,16 +323,26 @@ height:400px;
     </div>
    
     <div class="checkbox">
-        <h3>이번달도 고지가 눈앞에!</h3> 
+        <h3 style="text-align:center;margin-top:5px;color:#7C847F;">이번달도 고지가 눈앞에!</h3> 
          <div id="checkchart"> 
                   
        <button class="button-68" id="done" onclick  ="insert();">	DONE</button>
        </div>
 		</div>
     <div class="calories">
-      <h3>벌써</h3><br><h1 class="number"> </h1><br><h3>kcal나 불태웠어요</h3>
+      <h3 style="color:#7C847F;">벌써</h3><br><h1 class="number"> </h1><h3 style="color:#7C847F;">kcal나 불태웠어요</h3>
     </div>
     
+    <div class="exerinfo">
+    
+    <div id="hello" style="background-color:red;width:150px;height:100px;position:absolute;top:250px;left:100px;text-align:center;">
+	<div id="tm" style="margin-top:35px; font-size:20px; font-weight:bolder; color:#8EB297;">COUNT:</div>
+    </div>
+    <div class="desc" style="background-color:blue;width:220px;height:180px;position:absolute;top:400px;left:50px;font-family: 'Noto Sans KR';color:#9A9B9A;">
+     <span>${dto.exer_description }</span>
+    </div>
+    
+    </div>
     <!-- ajax test -->
   
 
@@ -285,7 +366,7 @@ height:400px;
         const URL = "${dto.exer_tm_url}";
         let model, webcam, ctx, labelContainer, maxPredictions;
         
-        var cc=7; 
+        var cc=0; 
         
         function insert(){
         	var exerid = ${dto.exer_id};
@@ -331,7 +412,7 @@ height:400px;
             const canvas = document.getElementById("canvas");
             canvas.width = size; canvas.height = size;
             ctx = canvas.getContext("2d");
-            labelContainer = document.getElementById("hello");
+            labelContainer = document.getElementById("tm");
             for (let i = 0; i < maxPredictions; i++) { // and class labels
                 labelContainer.appendChild(document.createElement("div"));
             }
@@ -359,13 +440,6 @@ height:400px;
                  if(status == "bound"){
                      cc=count++;
                      
-                     
-                     console.log(document.getElementById("hello").innerText);
-                     console.log(document.getElementById("hello").innerHTML);
-                      //console.log(document.getElementById("hello").value);
-                     //console.log(labelContainer);
-                     // console.log(cc);
-                     //console.log(window['cc']); //var cc=~ 로 선언된 값을 출력하는 콘솔..  
                      
                      //count할때 sound 삽입
                      var audio = new Audio('http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a');
@@ -433,25 +507,11 @@ height:400px;
        <!-- chart SCRIPT -->
       
   <script>
-  	
-
-  <!--<c:forEach var="MyExerciseDto" items="${mydto }">
-  	<c:out value="${MyExerciseDto.regdate}"/>
-  	
-  </c:forEach>-->
-  
-  
-  //	var arr= 	
-  	//	<c:forEach items="${mydto }" var="MyExerciseDto">
-  //		<c:out value="${MyExerciseDto.regdate}" /> 
-//	</c:forEach>;
-	
-	//console.log(arr);
-  
+  	 
     ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
     let chartData = [  
     	//['2022-01-12',1000],
-     <c:forEach items="${mydto }" var="MyExerciseDto">
+     <c:forEach items="${mydtooo }" var="MyExerciseDto">
      ['${MyExerciseDto.regdate}',1000],
      </c:forEach>
     	  
@@ -507,5 +567,7 @@ height:400px;
       });
     });
   </script>
+  
+ 
 </body>
 </html>

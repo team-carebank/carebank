@@ -1,12 +1,13 @@
 package com.yee.carebank.controller;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +19,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.yee.carebank.model.biz.CommentBiz;
 import com.yee.carebank.model.biz.MealBiz;
-import com.yee.carebank.model.biz.SuppleBiz;
 import com.yee.carebank.model.dto.CommentDto;
 import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
-import com.yee.carebank.model.dto.ShoppingDto;
-import com.yee.carebank.model.dto.SuppleDto;
+import com.yee.carebank.model.dto.UserDto;
 
 @Controller
 public class MealController {
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	MealBiz biz;
@@ -36,6 +36,8 @@ public class MealController {
 
 	@RequestMapping("/mealmain.do")
 	public String main(Model model) {
+		logger.info("MAIN [MEAL]");
+
 		model.addAttribute("category", biz.selectCatList());
 
 		return "meallist";
@@ -44,6 +46,8 @@ public class MealController {
 	@RequestMapping("/meallist.do")
 	@ResponseBody
 	public Map<String, Object> selectList(@RequestBody int subcat_id) {
+		logger.info("SELECT LIST [MEAL]");
+
 		Map<String, Object> res = new HashMap<String, Object>();
 
 		List<MealDto> meal = biz.selectMeal(subcat_id);
@@ -57,6 +61,8 @@ public class MealController {
 
 	@RequestMapping("/mealinfo.do")
 	public String selectMeal(Model model, int id) {
+		logger.info("REQUEST DETAIL [MEAL]");
+
 		MealDto meal = biz.selectOne(id);
 		List<FoodDto> ingredient = biz.selectIngredient(id);
 		List<CommentDto> comment = cBiz.selectList(id, 1);
@@ -70,18 +76,29 @@ public class MealController {
 
 	@RequestMapping("/mealcomm.do")
 	@ResponseBody
-	public boolean write(HttpServletRequest request, @RequestBody String data) {
-		// MemberDto user = request.getSession().getAttribute("loginUser");
+	public boolean write(HttpSession session, @RequestBody String data) {
+		logger.info("WRITE A COMMENT [MEAL]");
+
 		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
 		int info_id = jo.get("info_id").getAsInt();
 		String comment = jo.get("comment").getAsString();
 
-		CommentDto dto = new CommentDto();
-		dto.setInfo_id(info_id);
-		dto.setContent(comment);
-		dto.setUser_no(1001);
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
-		int res = cBiz.write(dto, 1);
+		CommentDto dto = new CommentDto();
+
+		int res = 0;
+
+		try {
+			dto.setInfo_id(info_id);
+			dto.setContent(comment);
+			dto.setUser_no(loginUser.getUser_no());
+
+			res = cBiz.write(dto, 1);
+		} catch (Exception e) {
+			logger.error("LOGIN DATA IS NOT FOUND");
+			return false;
+		}
 
 		if (res > 0) {
 			return true;
@@ -92,17 +109,34 @@ public class MealController {
 
 	@RequestMapping("/mcommupdate.do")
 	@ResponseBody
-	public boolean modify(HttpServletRequest request, @RequestBody String data) {
-		// MemberDto user = request.getSession().getAttribute("loginUser");
+	public boolean modify(HttpSession session, @RequestBody String data) {
+		logger.info("MODIFY A COMMENT [MEAL]");
+
 		JsonObject jo = new JsonParser().parse(data).getAsJsonObject();
 		int comm_no = jo.get("comm_no").getAsInt();
 		String comment = jo.get("comment").getAsString();
 
-		CommentDto dto = new CommentDto();
-		dto.setComm_no(comm_no);
-		dto.setContent(comment);
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+		int res = 0;
 
-		int res = cBiz.update(dto, 1);
+		try {
+			CommentDto before = cBiz.read(comm_no, 1);
+
+			if (before.getUser_no() != loginUser.getUser_no()) {
+				logger.error("UNAUTHORIZED USER");
+				return false;
+			}
+
+			CommentDto after = new CommentDto();
+			after.setComm_no(comm_no);
+			after.setContent(comment);
+
+			res = cBiz.update(after, 1);
+
+		} catch (Exception e) {
+			logger.error("LOGIN OR COMMENT DATA IS NOT FOUND");
+			return false;
+		}
 
 		if (res > 0) {
 			return true;
@@ -113,10 +147,25 @@ public class MealController {
 
 	@RequestMapping("/mcommdelete.do")
 	@ResponseBody
-	public boolean delete(HttpServletRequest request, @RequestBody int comm_no) {
-		// MemberDto user = request.getSession().getAttribute("loginUser");
+	public boolean delete(HttpSession session, @RequestBody int comm_no) {
+		logger.info("DELETE A COMMENT [MEAL]");
 
-		int res = cBiz.delete(comm_no, 1);
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+		int res = 0;
+
+		try {
+			CommentDto before = cBiz.read(comm_no, 1);
+			if (before.getUser_no() != loginUser.getUser_no()) {
+				logger.info("UNAUTHORIZED USER");
+				return false;
+			}
+
+			res = cBiz.delete(comm_no, 1);
+
+		} catch (Exception e) {
+			logger.error("DELETE ERROR");
+			return false;
+		}
 
 		if (res > 0) {
 			return true;
@@ -126,15 +175,30 @@ public class MealController {
 	}
 
 	@RequestMapping("prefer/meallist.do")
-	public String preferMeal(Model model) {
-		// <!--- 로그인 기능 연결 시 수정 --->
-		int user_no = 1001;
-		// <!--- 끝 --->
-		List<Integer> prefer = biz.selectPreferCat(user_no);
-		model.addAttribute("prefer", prefer);
-		model.addAttribute("meal", biz.selectMeal(prefer.get(0)));
-		model.addAttribute("random", biz.selectRandom(user_no));
-		model.addAttribute("comment", biz.selectByComment());
+	public String preferMeal(HttpSession session, Model model) {
+		logger.info("GET PREFER LIST [MEAL]");
+
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+		int user_no = 0;
+
+		try {
+			user_no = loginUser.getUser_no();
+			List<Integer> prefer = biz.selectPreferCat(user_no);
+			model.addAttribute("prefer", prefer);
+			model.addAttribute("random", biz.selectRandom(user_no));
+			model.addAttribute("comment", biz.selectByComment());
+			try {
+				model.addAttribute("meal", biz.selectMeal(prefer.get(0)));
+			} catch (Exception e) {
+				logger.error("PRFERENCE IS NOT SET");
+				model.addAttribute("msg", "선호도를 체크한 후에 이용이 가능합니다!");
+
+				return "msg/alert";
+			}
+		} catch (Exception e) {
+			logger.info("LOGIN DATA IS NOT FOUND");
+			return "redirect: ../loginform.do";
+		}
 
 		return "mealprefer";
 	}
@@ -142,10 +206,10 @@ public class MealController {
 	@RequestMapping("prefer/mealreq.do")
 	@ResponseBody
 	public Map<String, Object> requestMeal(@RequestBody int subcat_id) {
+		logger.info("AJAX REQUEST [MEAL]");
+
 		Map<String, Object> res = new HashMap<String, Object>();
-
 		List<MealDto> meal = biz.selectMeal(subcat_id);
-
 		res.put("meal", meal);
 
 		return res;

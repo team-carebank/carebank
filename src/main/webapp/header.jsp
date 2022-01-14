@@ -52,12 +52,16 @@
 					<ul class="nav-sub">
 						<li><a
 							href="${pageContext.request.contextPath}/prefer/meallist.do">식단</a></li>
-						<li><a href="${pageContext.request.contextPath}/exerciselist.do" target="_blank">운동</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/exerciselist.do"
+							target="_blank">운동</a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/prefer/supplelist.do">영양제</a></li>
-						<li><a href="${pageContext.request.contextPath}/newmeditation.do" target="_blank">명상</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/newmeditation.do"
+							target="_blank">명상</a></li>
 					</ul></li>
-				<li class="nav-component"><a>커뮤니티</a></li>
+				
 				<li class="nav-component"><a>고객센터</a>
 					<ul class="nav-sub">
 						<li><a href="#">공지사항</a></li>
@@ -68,21 +72,32 @@
 		</div>
 		<div class="header-user">
 			<ul class="user-login">
-				<li class="nav-component"><a href="#">마이페이지</a>
-					<ul class="nav-sub">
-						<li><a href="${pageContext.request.contextPath}/diary.do">다이어리</a></li>
-					</ul></li>
-					
+				<c:if test="${not empty login_info }">
+					<c:choose>
+						<c:when test="${login_info.user_type eq 'USER' }">
+							<li class="nav-component"><a href="#">마이페이지</a>
+								<ul class="nav-sub">
+									<li><a href="${pageContext.request.contextPath}/diary.do">다이어리</a></li>
+									<li><a href="${pageContext.request.contextPath}/myinfo.do">내정보</a></li>
+								</ul></li>
+						</c:when>
+						<c:otherwise>
+							<li class="nav-component"><a
+								href="${pageContext.request.contextPath }/admin/main.do">관리자페이지</a>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+
 				<c:choose>
-					<c:when test = "${empty login_info}">
-						<li class="nav-component"><a href="${pageContext.request.contextPath}/loginform.do">로그인</a></li>
+					<c:when test="${empty login_info}">
+						<li class="nav-component"><a
+							href="${pageContext.request.contextPath}/loginform.do">로그인</a></li>
 					</c:when>
-					<c:when test = "${not empty login_info}">
-						<li class="nav-component"><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
+					<c:when test="${not empty login_info}">
+						<li class="nav-component"><a
+							href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
 					</c:when>
-					
-				</c:choose>	
-				
+				</c:choose>
 			</ul>
 		</div>
 	</div>

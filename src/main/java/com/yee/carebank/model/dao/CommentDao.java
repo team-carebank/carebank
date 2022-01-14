@@ -31,6 +31,10 @@ public class CommentDao {
 		return res;
 	}
 
+	public CommentDto selectM(int comm_no) {
+		return sqlSession.selectOne(NAMESPACE + "selectM", comm_no);
+	}
+
 	public int writeM(CommentDto comment) {
 		int res = 0;
 
@@ -81,6 +85,10 @@ public class CommentDao {
 		}
 
 		return res;
+	}
+
+	public CommentDto selectS(int comm_no) {
+		return sqlSession.selectOne(NAMESPACE + "selectS", comm_no);
 	}
 
 	public int writeS(CommentDto comment) {
