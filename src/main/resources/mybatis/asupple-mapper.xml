@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.supple">
+	<select id="selectList" parameterType="map"
+		resultType="suppleDto">
+		SELECT * FROM (SELECT ROWNUM AS POST_NO, S.* FROM
+		SUPPLEMENT S) WHERE POST_NO BETWEEN #{start} AND #{end}
+	</select>
+	<select id="getCnt" resultType="int">
+		SELECT COUNT(*) FROM SUPPLEMENT
+	</select>
+	<select id="selectCById" resultType="String">
+		SELECT SUBCAT_NAME FROM
+		EFFICACY e JOIN CATEGORY c
+		USING(SUBCAT_ID)
+		WHERE SUPPLE_ID =
+		#{supple_id}
+	</select>
+	<insert id="insertSupple" parameterType="suppleDto">
+		<selectKey resultType="int" keyProperty="supple_id"
+			order="AFTER">
+			SELECT SUPPLE_ID FROM SUPPLEMENT WHERE
+			SUPPLE_NAME=#{supple_name} AND ROWNUM = 1
+		</selectKey>
+		MERGE INTO SUPPLEMENT S
+		USING DUAL
+		ON (S.SUPPLE_NAME = #{supple_name})
+		WHEN MATCHED THEN
+		UPDATE SET S.SRC = #{src}
+		WHEN NOT MATCHED THEN
+		INSERT(S.SUPPLE_ID, S.SUPPLE_NAME, S.SRC)
+		VALUES(SUPPLE_SEQ.NEXTVAL,
+		#{supple_name}, #{src})
+	</insert>
+	<delete id="deleteEffi" parameterType="int">
+		DELETE FROM EFFICACY WHERE
+		SUPPLE_ID = #{supple_id}
+	</delete>
+	<insert id="insertEffi">
+		MERGE INTO EFFICACY
+		USING DUAL
+		ON (E.SUPPLE_ID =
+		#{supple_id} AND E.SUBCAT_ID = #{subcat_id})
+		WHEN MATCHED THEN
+		UPDATE
+		SET E.DESCRIPTION = #{description}
+		WHEN NOT
+		MATCHED THEN
+		INSERT(E.SUPPLE_ID, E.SUBCAT_ID, E.DESCRIPTION)
+		VALUES(#{supple_id},
+		#{subcat_id}, #{description})
+	</insert>
+	<select id="selectEffi" parameterType="int"
+		resultType="suppleDto">
+		SELECT SUBCAT_ID, SUBCAT_NAME, DESCRIPTION
+		FROM EFFICACY
+		JOIN CATEGORY USING(SUBCAT_ID)
+		WHERE SUPPLE_ID = #{supple_id}
+	</select>
+</mapper>

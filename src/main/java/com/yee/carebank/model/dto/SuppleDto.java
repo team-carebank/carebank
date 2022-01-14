@@ -70,4 +70,10 @@ public class SuppleDto {
 		this.subcat_name = subcat_name;
 		this.src = src;
 	}
+
+	@Override
+	public String toString() {
+		return "SuppleDto [supple_id=" + supple_id + ", supple_name=" + supple_name + ", description=" + description
+				+ ", subcat_id=" + subcat_id + ", subcat_name=" + subcat_name + ", src=" + src + "]";
+	}
 }

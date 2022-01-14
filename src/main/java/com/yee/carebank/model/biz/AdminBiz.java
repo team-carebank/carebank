@@ -1,6 +1,8 @@
 package com.yee.carebank.model.biz;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yee.carebank.model.dao.AFoodDao;
 import com.yee.carebank.model.dao.AMealDao;
+import com.yee.carebank.model.dao.ASuppleDao;
+import com.yee.carebank.model.dao.SuppleDao;
 import com.yee.carebank.model.dto.CategoryDto;
+import com.yee.carebank.model.dto.EfficacyDto;
 import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
+import com.yee.carebank.model.dto.SuppleDto;
 
 @Service
 public class AdminBiz {
@@ -19,15 +25,31 @@ public class AdminBiz {
 	AMealDao dao;
 
 	@Autowired
-	AFoodDao fdao;
+	AFoodDao fDao;
 
-	public List<MealDto> selectMList(int pageNo) {
+	@Autowired
+	ASuppleDao sDao;
+
+	@Autowired
+	SuppleDao s2Dao;
+
+	private static Map<String, Object> createParameter(int page) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
 		int start = 1, end = 20;
 
-		start = (20 * (pageNo - 1)) + 1;
+		start = (20 * (page - 1)) + 1;
 		end = start + 19;
 
-		return dao.selectMList(start, end);
+		map.put("start", start);
+		map.put("end", end);
+
+		return map;
+	}
+
+	// Meal
+	public List<MealDto> selectMList(int page) {
+		return dao.selectMList(createParameter(page));
 	}
 
 	public int getMTotalCnt() {
@@ -51,18 +73,13 @@ public class AdminBiz {
 	}
 
 	public List<MealDto> search(String searchType, String keyword, int page) {
-		int start = 1, end = 20;
-
-		start = (20 * (page - 1)) + 1;
-		end = start + 19;
-
 		switch (searchType) {
 		case "name":
-			return dao.searchByName(keyword, start, end);
+			return dao.searchByName(keyword, createParameter(page));
 		case "category":
-			return dao.searchByCategory(keyword, start, end);
+			return dao.searchByCategory(keyword, createParameter(page));
 		default:
-			return dao.searchAll(keyword, start, end);
+			return dao.searchAll(keyword, createParameter(page));
 		}
 	}
 
@@ -77,49 +94,63 @@ public class AdminBiz {
 		}
 	}
 
+	// Food(Nutrients)
+
 	public List<FoodDto> selectFList(int page) {
-		int start = 1, end = 20;
-
-		start = (20 * (page - 1)) + 1;
-		end = start + 19;
-
-		return fdao.selectFList(start, end);
+		return fDao.selectFList(createParameter(page));
 	}
 
 	public int getFTotalCount() {
-		return fdao.getFTotalCount();
+		return fDao.getFTotalCount();
 	}
 
 	public int deleteFood(int food_id) {
-		return fdao.deleteFood(food_id);
+		return fDao.deleteFood(food_id);
 	}
 
 	public int insertF(FoodDto food) {
-		return fdao.insertFood(food);
+		return fDao.insertFood(food);
 	}
 
 	public int checkFName(String foodname) {
-		return fdao.checkFName(foodname);
+		return fDao.checkFName(foodname);
 	}
 
 	public FoodDto selectFood(int food_id) {
-		return fdao.selectFood(food_id);
+		return fDao.selectFood(food_id);
 	}
 
 	public int updateF(FoodDto food) {
-		return fdao.updateF(food);
+		return fDao.updateF(food);
 	}
 
 	public List<FoodDto> searchFood(String keyword, int page) {
-		int start = 1, end = 20;
-
-		start = (20 * (page - 1)) + 1;
-		end = start + 19;
-
-		return fdao.searchFood(keyword, start, end);
+		return fDao.searchFood(keyword, createParameter(page));
 	}
 
 	public int getSearchCntFood(String keyword) {
-		return fdao.getSearchCnt(keyword);
+		return fDao.getSearchCnt(keyword);
+	}
+
+	// Supplement
+	public int getSuppleCnt() {
+		return sDao.getSuppleCnt();
+	}
+
+	public List<SuppleDto> selectSupple(int page) {
+		return sDao.selectList(createParameter(page));
+	}
+
+	public List<Map<Integer, List<String>>> selectCatBySId(List<SuppleDto> res) {
+		return sDao.selectCById(res);
+	}
+
+	public EfficacyDto selectEffi(int supple_id) {
+		EfficacyDto res = new EfficacyDto();
+
+		res.setEfficacy(sDao.selectEffi(supple_id));
+		res.setSupple(s2Dao.selectOne(supple_id));
+
+		return res;
 	}
 }
