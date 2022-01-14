@@ -48,7 +48,7 @@ public class AdminController {
 
 	@RequestMapping("admin/main.do")
 	public String main(HttpSession session, Model model) {
-		logger.info("INFO - ADMIN MAIN");
+		logger.info("ADMIN MAIN");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		List<MealDto> res = biz.selectMList(1);
@@ -56,11 +56,11 @@ public class AdminController {
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN NOT FOUND");
+			logger.error("LOGIN NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -74,7 +74,7 @@ public class AdminController {
 
 	@RequestMapping("admin/meal.do")
 	public String selectList(HttpSession session, Model model, @RequestParam("page") int page) {
-		logger.info("INFO - GET LIST [MEAL]");
+		logger.info("GET LIST [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		List<MealDto> res = null;
@@ -82,11 +82,11 @@ public class AdminController {
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN NOT FOUND");
+			logger.error("LOGIN NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -102,17 +102,17 @@ public class AdminController {
 
 	@RequestMapping("admin/minfo.do")
 	public String selectMeal(HttpSession session, Model model, @RequestParam("id") int meal_id) {
-		logger.info("INFO - GET DETAILS [MEAL]");
+		logger.info("GET DETAILS [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN NOT FOUND");
+			logger.error("LOGIN NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -124,17 +124,17 @@ public class AdminController {
 
 	@RequestMapping("admin/mwrite.do")
 	public String writeMeal(HttpSession session, Model model) {
-		logger.info("INFO - WRITE INFORMATION [MEAL]");
+		logger.info("WRITE INFORMATION [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -144,17 +144,17 @@ public class AdminController {
 
 	@RequestMapping("admin/minsert.do")
 	public String insertM(HttpSession session, Model model, MealDto meal, @ModelAttribute FoodsDto foods) {
-		logger.info("INFO - INSERT DATA [MEAL]");
+		logger.info("INSERT DATA [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -173,18 +173,18 @@ public class AdminController {
 
 	@RequestMapping("admin/mmodi.do")
 	public String updateMeal(HttpSession session, Model model, @RequestParam("id") int meal_id) {
-		logger.info("INFO - UPDATE PAGE [MEAL]");
+		logger.info("UPDATE PAGE [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -198,17 +198,17 @@ public class AdminController {
 
 	@RequestMapping("admin/mmodify.do")
 	public String updateM(HttpSession session, Model model, MealDto meal, @ModelAttribute FoodsDto foods) {
-		logger.info("INFO - MODIFY DATA [MEAL]");
+		logger.info("MODIFY DATA [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -227,18 +227,18 @@ public class AdminController {
 
 	@RequestMapping("admin/mdel.do")
 	public String deleteMeal(HttpSession session, Model model, @RequestParam("id") int meal_id) {
-		logger.info("INFO - DELETE DATA [MEAL]");
+		logger.info("DELETE DATA [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -258,13 +258,13 @@ public class AdminController {
 	@RequestMapping("admin/msearch.do")
 	public String searchMeal(HttpSession session, Model model, @RequestParam String search,
 			@RequestParam String keyword, @RequestParam int page) {
-		logger.info("INFO - SEARCH DATA [MEAL]");
+		logger.info("SEARCH DATA [MEAL]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			}
 
@@ -275,7 +275,7 @@ public class AdminController {
 			model.addAttribute("page", page);
 			model.addAttribute("category", biz.selectCList());
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -287,18 +287,18 @@ public class AdminController {
 	 */
 	@RequestMapping("admin/food.do")
 	public String selectFood(HttpSession session, Model model, @RequestParam int page) {
-		logger.info("INFO - GET LIST [FOOD]");
+		logger.info("GET LIST [FOOD]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 		FoodsDto foods = new FoodsDto();
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType).equals("ADMIN")) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN NOT FOUND");
+			logger.error("LOGIN NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -312,18 +312,18 @@ public class AdminController {
 
 	@RequestMapping("admin/fdel.do")
 	public String deleteFood(HttpSession session, Model model, @RequestParam("id") int food_id) {
-		logger.info("INFO - DELETE DATA [FOOD]");
+		logger.info("DELETE DATA [FOOD]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -342,18 +342,18 @@ public class AdminController {
 
 	@RequestMapping("admin/fwrite.do")
 	public String writeFood(HttpSession session) {
-		logger.info("INFO - WRITE INFORMATION [FOOD]");
+		logger.info(" WRITE INFORMATION [FOOD]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -362,18 +362,18 @@ public class AdminController {
 
 	@RequestMapping("admin/finsert.do")
 	public String writeFood(HttpSession session, Model model, FoodDto food) {
-		logger.info("INFO - WRITE INFORMATION [FOOD]");
+		logger.info("WRITE INFORMATION [FOOD]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -393,7 +393,7 @@ public class AdminController {
 	@RequestMapping("admin/fcheck.do")
 	@ResponseBody
 	public int checkFName(HttpSession session, String foodname) {
-		logger.info("INFO - AJAX REQUEST [FOOD]");
+		logger.info(" AJAX REQUEST [FOOD]");
 
 		int check = biz.checkFName(foodname);
 
@@ -402,18 +402,18 @@ public class AdminController {
 
 	@RequestMapping("admin/fmodi.do")
 	public String updateFood(HttpSession session, Model model, @RequestParam("id") int food_id) {
-		logger.info("INFO - UPDATE PAGE [FOOD]");
+		logger.info("UPDATE PAGE [FOOD]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -425,18 +425,18 @@ public class AdminController {
 
 	@RequestMapping("admin/fupdate.do")
 	public String updateFood(HttpSession session, Model model, FoodDto food) {
-		logger.info("INFO - UPDATE INFORMATION [FOOD]");
+		logger.info("UPDATE INFORMATION [FOOD]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		try {
 			String userType = loginUser.getUser_type();
 			if (!(userType.equals("ADMIN"))) {
-				logger.error("ERROR - UNAUTHORIZED USER");
+				logger.error("UNAUTHORIZED USER");
 				return "redirect: ../main.do";
 			} else {
 			}
 		} catch (Exception e) {
-			logger.error("ERROR - LOGIN DATA NOT FOUND");
+			logger.error("LOGIN DATA NOT FOUND");
 			return "redirect: ../main.do";
 		}
 
@@ -453,13 +453,37 @@ public class AdminController {
 		return "admin/redirect";
 	}
 
+	@RequestMapping("admin/fsearch.do")
+	public String searchFood(HttpSession session, Model model, @RequestParam String keyword, @RequestParam int page) {
+		logger.info(" SEARCH DATA [FOOD]");
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			String userType = loginUser.getUser_type();
+			if (!(userType.equals("ADMIN"))) {
+				logger.error("UNAUTHORIZED USER");
+				return "redirect: ../main.do";
+			}
+
+			model.addAttribute("res", biz.searchFood(keyword, page));
+			model.addAttribute("cnt", biz.getSearchCntFood(keyword));
+			model.addAttribute("keyword", keyword);
+			model.addAttribute("page", page);
+		} catch (Exception e) {
+			logger.error("LOGIN DATA NOT FOUND");
+			return "redirect: ../main.do";
+		}
+
+		return "admin/fsearch";
+	}
+
 	/*
 	 * Exception Handler - Missing Parameter Exception
 	 */
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	public void handleMissingParams(MissingServletRequestParameterException e, HttpServletResponse response,
 			HttpServletRequest request) {
-		logger.error("ERROR - MISSING PARAMETER");
+		logger.error("MISSING PARAMETER");
 		String url = request.getRequestURL().toString();
 		String redirectURL = null;
 		if (url.contains("admin/m")) {
@@ -473,5 +497,4 @@ public class AdminController {
 			e1.printStackTrace();
 		}
 	}
-
 }

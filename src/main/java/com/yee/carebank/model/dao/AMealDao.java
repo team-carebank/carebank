@@ -15,20 +15,12 @@ import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
 
 @Repository
-public class AdminDao {
+public class AMealDao {
 
-	private final String NAMESPACE_MEAL = "admin.meal.";
-	private final String NAMESPACE_FOOD = "admin.food.";
-	private final String NAMESPACE_SUPPLE = "admin.supple.";
-	private final String NAMESPACE_EXER = "admin.exer.";
-	private final String NAMESPACE_MEDI = "admin.medi.";
+	private final String NAMESPACE = "admin.meal.";
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-
-	/*
-	 * admin.meal
-	 */
 
 	public List<MealDto> selectMList(int start, int end) {
 		List<MealDto> res = new ArrayList<MealDto>();
@@ -38,7 +30,7 @@ public class AdminDao {
 		map.put("end", end);
 
 		try {
-			res = sqlSession.selectList(NAMESPACE_MEAL + "selectMList", map);
+			res = sqlSession.selectList(NAMESPACE + "selectMList", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,21 +39,21 @@ public class AdminDao {
 	}
 
 	public int getMTotalCnt() {
-		return sqlSession.selectOne(NAMESPACE_MEAL + "getMTotalCnt");
+		return sqlSession.selectOne(NAMESPACE + "getMTotalCnt");
 	}
 
 	public List<CategoryDto> selectCList() {
-		return sqlSession.selectList(NAMESPACE_MEAL + "selectCList");
+		return sqlSession.selectList(NAMESPACE + "selectCList");
 	}
 
 	@Transactional
 	public int insertM(MealDto meal, List<FoodDto> foods) {
 		try {
-			sqlSession.insert(NAMESPACE_MEAL + "insertMeal", meal);
+			sqlSession.insert(NAMESPACE + "insertMeal", meal);
 
 			for (int i = 0; i < foods.size(); i++) {
 				FoodDto food = foods.get(i);
-				sqlSession.insert(NAMESPACE_MEAL + "insertFood", food);
+				sqlSession.insert(NAMESPACE + "insertFood", food);
 
 				Map<String, Object> map = new HashMap<String, Object>();
 
@@ -69,7 +61,7 @@ public class AdminDao {
 				map.put("food_id", food.getFood_id());
 				map.put("description", food.getDescription());
 
-				sqlSession.insert(NAMESPACE_MEAL + "insertIng", map);
+				sqlSession.insert(NAMESPACE + "insertIng", map);
 			}
 
 			return 1;
@@ -81,19 +73,19 @@ public class AdminDao {
 	}
 
 	public int deleteMeal(int meal_id) {
-		return sqlSession.delete(NAMESPACE_MEAL + "deleteMeal", meal_id);
+		return sqlSession.delete(NAMESPACE + "deleteMeal", meal_id);
 	}
 
 	public int updateM(MealDto meal, List<FoodDto> food2) {
 		try {
 			// 재료 테이블에 존재하는 재료들 다 제거하기
-			sqlSession.delete(NAMESPACE_MEAL + "deleteIng", meal.getMeal_id());
+			sqlSession.delete(NAMESPACE + "deleteIng", meal.getMeal_id());
 
-			sqlSession.update(NAMESPACE_MEAL + "updateMeal", meal);
+			sqlSession.update(NAMESPACE + "updateMeal", meal);
 
 			for (int i = 0; i < food2.size(); i++) {
 				FoodDto food = food2.get(i);
-				sqlSession.insert(NAMESPACE_MEAL + "insertFood", food);
+				sqlSession.insert(NAMESPACE + "insertFood", food);
 
 				Map<String, Object> map = new HashMap<String, Object>();
 
@@ -101,7 +93,7 @@ public class AdminDao {
 				map.put("food_id", food.getFood_id());
 				map.put("description", food.getDescription());
 
-				sqlSession.insert(NAMESPACE_MEAL + "insertIng", map);
+				sqlSession.insert(NAMESPACE + "insertIng", map);
 			}
 
 			return 1;
@@ -119,7 +111,7 @@ public class AdminDao {
 		map.put("end", end);
 		map.put("keyword", keyword);
 
-		return sqlSession.selectList(NAMESPACE_MEAL + "searchMeal", map);
+		return sqlSession.selectList(NAMESPACE + "searchMeal", map);
 	}
 
 	public List<MealDto> searchByCategory(String keyword, int start, int end) {
@@ -128,7 +120,7 @@ public class AdminDao {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("keyword", keyword);
-		return sqlSession.selectList(NAMESPACE_MEAL + "searchCat", map);
+		return sqlSession.selectList(NAMESPACE + "searchCat", map);
 	}
 
 	public List<MealDto> searchAll(String keyword, int start, int end) {
@@ -137,12 +129,12 @@ public class AdminDao {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("keyword", keyword);
-		return sqlSession.selectList(NAMESPACE_MEAL + "searchAll", map);
+		return sqlSession.selectList(NAMESPACE + "searchAll", map);
 	}
 
 	public int getAllCount(String keyword) {
 		try {
-			return sqlSession.selectOne(NAMESPACE_MEAL + "getAllCount", keyword);
+			return sqlSession.selectOne(NAMESPACE + "getAllCount", keyword);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
@@ -152,7 +144,7 @@ public class AdminDao {
 	public int getCatCount(String keyword) {
 
 		try {
-			return sqlSession.selectOne(NAMESPACE_MEAL + "getCatCount", keyword);
+			return sqlSession.selectOne(NAMESPACE + "getCatCount", keyword);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
@@ -161,79 +153,10 @@ public class AdminDao {
 
 	public int getMealCount(String keyword) {
 		try {
-			return sqlSession.selectOne(NAMESPACE_MEAL + "getMealCount", keyword);
+			return sqlSession.selectOne(NAMESPACE + "getMealCount", keyword);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
-		}
-	}
-
-	/*
-	 * admin.food
-	 */
-
-	public List<FoodDto> selectFList(int start, int end) {
-		List<FoodDto> res = new ArrayList<FoodDto>();
-		Map<String, Integer> map = new HashMap<String, Integer>();
-
-		map.put("start", start);
-		map.put("end", end);
-
-		try {
-			res = sqlSession.selectList(NAMESPACE_FOOD + "selectFList", map);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return res;
-	}
-
-	public int getFTotalCount() {
-		return sqlSession.selectOne(NAMESPACE_FOOD + "getTotalCnt");
-	}
-
-	public int deleteFood(int food_id) {
-		try {
-			return sqlSession.delete(NAMESPACE_FOOD + "deleteFood", food_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
-	}
-
-	public int insertFood(FoodDto food) {
-		try {
-			return sqlSession.insert(NAMESPACE_FOOD + "insertFood", food);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
-	}
-
-	public int checkFName(String food) {
-		try {
-			return sqlSession.selectOne(NAMESPACE_FOOD + "checkFood", food);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
-	}
-
-	public FoodDto selectFood(int food_id) {
-		try {
-			return sqlSession.selectOne(NAMESPACE_FOOD + "selectFood", food_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public int updateF(FoodDto food) {
-		try {
-			return sqlSession.update(NAMESPACE_FOOD + "updateFood", food);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
 		}
 	}
 }

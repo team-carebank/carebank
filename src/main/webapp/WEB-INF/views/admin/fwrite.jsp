@@ -27,6 +27,12 @@
 	margin-block: 20px;
 	align-items: center;
 }
+
+.content-admin-side>#food {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	box-shadow: -10px 0 0 white;
+}
 </style>
 <script>
 	$(document).on("keydown", "textarea", function(e) {
@@ -41,8 +47,8 @@
 		let food = document.getElementById("foodName");
 		let foodName = $(food).val().trim();
 		let idChk = $(food.nextElementSibling).attr("id");
-		
-		if(idChk == "false" || idChk == null){
+
+		if (idChk == "false" || idChk == null) {
 			alert("중복된 데이터는 입력할 수 없습니다!");
 			return false;
 		}
@@ -63,11 +69,11 @@
 	$(document).on("blur", "#foodName", function(e) {
 		let foodName = $(e.currentTarget).val();
 		let foodText = $(e.currentTarget.nextElementSibling);
-		
-		if(foodName.trim() == ""){
+
+		if (foodName.trim() == "") {
 			return false;
 		}
-		
+
 		$.ajax({
 			url : "fcheck.do",
 			type : "post",
@@ -110,7 +116,7 @@
 						<form action="finsert.do" method="post" id="mForm">
 							<div class="content-desc-item">
 								<h3>식품명</h3>
-								<input type="text" name="food" id="foodName">　<span></span>
+								<input type="text" name="food" id="foodName"> <span></span>
 							</div>
 							<hr>
 							<div class="content-desc-item">
