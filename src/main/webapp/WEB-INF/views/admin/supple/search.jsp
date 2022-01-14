@@ -33,18 +33,22 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			return true;
 		}
 	});
-	$(document).on("click", ".pagination-page span", function(e) {
-		let span = e.currentTarget;
-		let path = "${pageContext.request.contextPath}/admin/supple.do?page=";
-		if (span.id == 'prev') {
-			window.location.href = path + "${page-1}";
-		} else if (span.id == 'next') {
-			window.location.href = path + "${page+1}";
-		} else {
-			let page = e.currentTarget.innerText.trim();
-			window.location.href = path + page;
-		}
-	});
+	$(document)
+			.on(
+					"click",
+					".pagination-page span",
+					function(e) {
+						let span = e.currentTarget;
+						let path = "${pageContext.request.contextPath}/admin/ssearch.do?keyword=${keyword}&search=${searchType}&page=";
+						if (span.id == 'prev') {
+							window.location.href = path + "${page-1}";
+						} else if (span.id == 'next') {
+							window.location.href = path + "${page+1}";
+						} else {
+							let page = e.currentTarget.innerText.trim();
+							window.location.href = path + page;
+						}
+					});
 
 	$(document).on("click", ".board-content-name", function(e) {
 		if (e.currentTarget.parentElement.className == 'board-header-content') {
@@ -87,8 +91,8 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Information : Supplement</h1>
-					<span>영양제 정보를 관리합니다.</span>
+					<h1>Search : Supplement</h1>
+					<span>${keyword }에 대한 검색 결과입니다.</span>
 				</div>
 				<div class="admin-main-content">
 					<div class="main-content-board">
@@ -129,6 +133,11 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 										onclick="window.location.href='smodi.do?id=${dto.supple_id}'">수정하기</span>
 								</div>
 							</c:forEach>
+							<c:if test="${empty res }">
+								<div class="board-body-content">
+									<span style="grid-column: 1/6">검색 결과가 존재하지 않습니다.</span>
+								</div>
+							</c:if>
 						</div>
 						<div class="board-header" id="footer">
 							<div class="board-header-content">

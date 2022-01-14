@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yee.carebank.model.biz.Admin2ndBiz;
 import com.yee.carebank.model.biz.AdminBiz;
 import com.yee.carebank.model.dto.EfficacyDto;
 import com.yee.carebank.model.dto.SuppleDto;
@@ -33,6 +34,9 @@ public class Admin2ndController {
 	@Autowired
 	AdminBiz biz;
 
+	@Autowired
+	Admin2ndBiz biz2;
+
 	@RequestMapping("admin/supple.do")
 	public String selectList(HttpSession session, Model model, @RequestParam("page") int page) {
 		logger.info("GET LIST [SUPPLEMENT]");
@@ -42,11 +46,11 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		List<SuppleDto> res = biz.selectSupple(page);
+		List<SuppleDto> res = biz2.selectSupple(page);
 
 		model.addAttribute("res", res);
-		model.addAttribute("maps", biz.selectCatBySId(res));
-		model.addAttribute("cnt", biz.getSuppleCnt());
+		model.addAttribute("maps", biz2.selectCatBySId(res));
+		model.addAttribute("cnt", biz2.getSuppleCnt());
 		model.addAttribute("page", page);
 		model.addAttribute("category", biz.selectCList());
 
@@ -62,7 +66,7 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		EfficacyDto res = biz.selectEffi(supple_id);
+		EfficacyDto res = biz2.selectEffi(supple_id);
 		model.addAttribute("res", res);
 
 		return "admin/supple/detail";
@@ -91,7 +95,7 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		int res = biz.updateS(dto);
+		int res = biz2.updateS(dto);
 
 		if (res > 0) {
 			model.addAttribute("msg", "데이터가 추가되었습니다.");
@@ -112,7 +116,7 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		EfficacyDto res = biz.selectEffi(supple_id);
+		EfficacyDto res = biz2.selectEffi(supple_id);
 		model.addAttribute("res", res);
 		model.addAttribute("category", biz.selectCList());
 
@@ -129,7 +133,7 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		int res = biz.updateS(dto);
+		int res = biz2.updateS(dto);
 
 		if (res > 0) {
 			model.addAttribute("msg", "데이터가 수정되었습니다.");
@@ -150,7 +154,7 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		int res = biz.deleteSupple(supple_id);
+		int res = biz2.deleteSupple(supple_id);
 
 		if (res > 0) {
 			model.addAttribute("msg", "데이터가 삭제되었습니다.");
@@ -161,6 +165,33 @@ public class Admin2ndController {
 
 		return redirectPath;
 
+	}
+
+	@RequestMapping("admin/ssearch.do")
+	public String search(HttpSession session, Model model, @RequestParam("search") String searchType,
+			@RequestParam("keyword") String keyword, @RequestParam("page") int page) {
+		logger.info("SEARCH LIST [SUPPLEMENT] KEYWORD=" + keyword + "SEARCH TYPE=" + searchType);
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		if (check(loginUser)) {
+			return "redirect: ../main.do";
+		}
+
+		List<SuppleDto> res = biz2.searchSupple(searchType, keyword, page);
+
+		for (int i = 0; i < res.size(); i++) {
+			System.out.println(res.get(i));
+		}
+
+		model.addAttribute("res", res);
+		model.addAttribute("maps", biz2.selectCatBySId(res));
+		model.addAttribute("cnt", biz2.getSuppleCount(searchType, keyword));
+		model.addAttribute("page", page);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("category", biz.selectCList());
+
+		return "admin/supple/search";
 	}
 
 	@ExceptionHandler(MissingServletRequestParameterException.class)

@@ -65,4 +65,72 @@
 		JOIN CATEGORY USING(SUBCAT_ID)
 		WHERE SUPPLE_ID = #{supple_id}
 	</select>
+	<select id="searchByName" parameterType="map"
+		resultType="suppleDto">
+		SELECT * FROM (SELECT ROWNUM AS POST_NO, S.* FROM
+		SUPPLEMENT S WHERE SUPPLE_NAME LIKE '%${keyword}%') WHERE POST_NO
+		BETWEEN #{start} AND #{end}
+	</select>
+	<select id="getCountByName" parameterType="String"
+		resultType="int">
+		SELECT COUNT(*) FROM
+		SUPPLEMENT
+		WHERE SUPPLE_NAME LIKE
+		'%${keyword}%'
+	</select>
+	<select id="searchByDesc" parameterType="map"
+		resultType="suppleDto">
+		SELECT * FROM (SELECT ROWNUM AS POST_NO, S.* FROM
+		SUPPLEMENT
+		S WHERE SUPPLE_ID IN (SELECT SUPPLE_ID FROM EFFICACY e WHERE
+		DESCRIPTION LIKE '%${keyword}%')) WHERE POST_NO
+		BETWEEN #{start} AND
+		#{end}
+	</select>
+	<select id="getCountByDesc" parameterType="String"
+		resultType="int">
+		SELECT COUNT(*) FROM SUPPLEMENT WHERE SUPPLE_ID IN
+		(SELECT
+		SUPPLE_ID FROM EFFICACY e WHERE
+		DESCRIPTION LIKE
+		'%${keyword}%')
+	</select>
+	<select id="searchAll" parameterType="map"
+		resultType="suppleDto">
+		SELECT * FROM (SELECT ROWNUM AS POST_NO, S.* FROM
+		SUPPLEMENT S WHERE SUPPLE_NAME LIKE '%${keyword}%' OR SUPPLE_ID
+		IN
+		(SELECT SUPPLE_ID FROM EFFICACY WHERE DESCRIPTION LIKE
+		'%${keyword}%')) WHERE POST_NO
+		BETWEEN #{start} AND #{end}
+	</select>
+	<select id="getCountAll" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM SUPPLEMENT WHERE SUPPLE_ID IN
+		(SELECT
+		SUPPLE_ID
+		FROM EFFICACY e WHERE
+		DESCRIPTION LIKE
+		'%${keyword}%') OR SUPPLE_NAME
+		LIKE '%${keyword}%'
+	</select>
+	<select id="searchByCategory" parameterType="map"
+		resultType="suppleDto">
+		SELECT * FROM (SELECT ROWNUM AS POST_NO, S.* FROM
+		SUPPLEMENT
+		S WHERE SUPPLE_ID IN (SELECT SUPPLE_ID FROM EFFICACY e JOIN
+		CATEGORY
+		USING(SUBCAT_ID) WHERE
+		SUBCAT_NAME LIKE '%${keyword}%')) WHERE
+		POST_NO
+		BETWEEN #{start} AND
+		#{end}
+	</select>
+	<select id="getCountByCategory" parameterType="String"
+		resultType="int">
+		SELECT COUNT(*) FROM SUPPLEMENT WHERE SUPPLE_ID IN
+		(SELECT
+		SUPPLE_ID FROM EFFICACY e JOIN CATEGORY USING(SUBCAT_ID) WHERE
+		SUBCAT_NAME LIKE '%${keyword}%')
+	</select>
+
 </mapper>

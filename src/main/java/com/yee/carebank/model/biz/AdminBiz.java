@@ -6,17 +6,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.yee.carebank.model.dao.AFoodDao;
 import com.yee.carebank.model.dao.AMealDao;
-import com.yee.carebank.model.dao.ASuppleDao;
-import com.yee.carebank.model.dao.SuppleDao;
 import com.yee.carebank.model.dto.CategoryDto;
-import com.yee.carebank.model.dto.EfficacyDto;
 import com.yee.carebank.model.dto.FoodDto;
 import com.yee.carebank.model.dto.MealDto;
-import com.yee.carebank.model.dto.SuppleDto;
 
 @Service
 public class AdminBiz {
@@ -27,13 +22,7 @@ public class AdminBiz {
 	@Autowired
 	AFoodDao fDao;
 
-	@Autowired
-	ASuppleDao sDao;
-
-	@Autowired
-	SuppleDao s2Dao;
-
-	private static Map<String, Object> createParameter(int page) {
+	protected static Map<String, Object> createParameter(int page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		int start = 1, end = 20;
@@ -130,35 +119,5 @@ public class AdminBiz {
 
 	public int getSearchCntFood(String keyword) {
 		return fDao.getSearchCnt(keyword);
-	}
-
-	// Supplement
-	public int getSuppleCnt() {
-		return sDao.getSuppleCnt();
-	}
-
-	public List<SuppleDto> selectSupple(int page) {
-		return sDao.selectList(createParameter(page));
-	}
-
-	public List<Map<Integer, List<String>>> selectCatBySId(List<SuppleDto> res) {
-		return sDao.selectCById(res);
-	}
-
-	public EfficacyDto selectEffi(int supple_id) {
-		EfficacyDto res = new EfficacyDto();
-
-		res.setEfficacy(sDao.selectEffi(supple_id));
-		res.setSupple(s2Dao.selectOne(supple_id));
-
-		return res;
-	}
-
-	public int updateS(EfficacyDto dto) {
-		return sDao.update(dto);
-	}
-
-	public int deleteSupple(int supple_id) {
-		return sDao.delete(supple_id);
 	}
 }
