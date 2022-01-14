@@ -179,7 +179,7 @@
                     <!--메뉴 구분선-->
                     <h4>Information</h4>
                     <span>내 정보</span>
-                    <span><a href="${pageContext.request.contextPath}/regis_prefer.do">관심사설정 </a></span>
+                    <span>관심사 </span>
                     <span>대시보드</span>
                     <!--메뉴 구분선-->
                     <h4></h4>
@@ -203,16 +203,36 @@
                         <div class="board-header">
                             <div class="board-header-content">
                                 
-                                <span class="board-content-title">기본정보</span>
+                                <span class="board-content-title">관심사 설정하기</span>
                                
                             </div>
                         </div>
+                        	
+                        	<c:forEach items = "${preferlist }" var = "prefer">
+                        		<span>${preferlist.subcat_name }</span>	
+                        	
+                        	</c:forEach>
+                        	
+
+                        
+                        
+                        
+                        	
                         <div class="board-body">
                             <div class="board-body-content">
                                 <span>이름</span>
                                 <input type = "text" class="board-content-name" id = "user_name" value = "${login_info.user_name}" readonly = "true">
                                	<input type = "hidden" value = "${login_info.user_no }" id = "user_no">
                             </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             <div class="board-body-content">
                                 <span>아이디</span>
                                 <input type = "text" class="board-content-name" id = "user_id" value = "${login_info.user_id }" readonly = "true">
@@ -255,70 +275,7 @@
     </div>
     
     <script type = "text/javascript">
-    
-    	//속성 변경
-    	function change(){
-    		var input= $('.board-content-name');
-    		var new_btn = "<input type = 'button' id = 'new_update' onclick = 'update();' class = 'new_btn' value = '수정'><input type = 'button' id = 'cancel' onclick = 'cancel();' class = 'new_btn' value = '취소'>";
-    		    		//readonly 속성 제거 후 focus
-    		for(var i = 0; i < input.length; i++){
-		   		input[i].removeAttribute('readonly')
-    		}
-    		input[0].focus();
-    		
-    		//수정버튼 클릭시 수정버튼 숨김/ 취소버튼 보이기
-   			var update_btn = $("#footer").children().hide();
-   			$("#footer").append(new_btn);
-    	};
-    	
-    	//취소시 버튼 다시 보이기
-    	function cancel(){
-    		$('#new_update').remove();
-    		$('#cancel').remove();
-    		$('#footer').children().show();
-    		
-    		var input= $('.board-content-name');
-    		for(var i = 0; i < input.length; i++){
-		   		input[i].setAttribute('readonly', 'true')
-    		}
-    	};
-    	
-    	function update(){
-    	
-    		var user_no = $('#user_no').val();
-    		var user_name = $('#user_name').val();
-  			var user_id = $('#user_id').val();
-  			var phone = $('#phone').val();
-  			var email =$('#email').val();
-  			var birth = $('#birth').val();
-  			
-  			var update_val = {"user_no" : user_no, "user_name" : user_name, "user_id" : user_id, "phone" : phone,
-  								"email" : email, "birth" : birth}
-  			$.ajax({
-  				url: "myinfoUpdate.do",
-  				type: "post",
-  				data: JSON.stringify(update_val),
-  				contentType: "application/json",
-  				dataType: "json",
-  				success:
-  					function(res){
-  					if(res){
-  						alert("정보가 수정되었습니다.")
-  						window.location.reload();
-  						
-  					}
-  					else{
-  						alert("수정에 실패하였습니다.");
-  					}
-  				},
-  				fail:
-  					function(){
-  						alert("통신실패")
-  				}
-  			});//ajax end
-    	};
-    
-
+ 
     
     
     </script>
