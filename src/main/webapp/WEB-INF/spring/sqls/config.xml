@@ -47,7 +47,6 @@
   		<mapper resource = "/mybatis/qna-mapper.xml"/>
   		<mapper resource = "/mybatis/ameal-mapper.xml"/>
   		<mapper resource = "/mybatis/afood-mapper.xml"/>
-  		<mapper resource = "/mybatis/admin-mapper.xml"/>
   		<mapper resource = "/mybatis/preference-mapper.xml"/>
 
 	</mappers>
