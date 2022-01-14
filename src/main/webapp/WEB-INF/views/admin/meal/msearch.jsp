@@ -78,11 +78,11 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 }
 </style>
 </head>
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 <body>
 	<div class="container">
 		<div class="body-content">
-			<%@ include file="side.jsp"%>
+			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
 					<h1>Search : Meal</h1>

@@ -17,12 +17,8 @@ public class AFoodDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	public List<FoodDto> selectFList(int start, int end) {
+	public List<FoodDto> selectFList(Map<String, Object> map) {
 		List<FoodDto> res = new ArrayList<FoodDto>();
-		Map<String, Integer> map = new HashMap<String, Integer>();
-
-		map.put("start", start);
-		map.put("end", end);
 
 		try {
 			res = sqlSession.selectList(NAMESPACE + "selectFList", map);
@@ -82,11 +78,7 @@ public class AFoodDao {
 		}
 	}
 
-	public List<FoodDto> searchFood(String keyword, int start, int end) {
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("start", start);
-		map.put("end", end);
+	public List<FoodDto> searchFood(String keyword, Map<String, Object> map) {
 		map.put("keyword", keyword);
 
 		try {

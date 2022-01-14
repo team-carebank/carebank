@@ -5,6 +5,7 @@ public class SuppleDto {
 	private String supple_name;
 	private String description;
 	private int subcat_id;
+	private String subcat_name;
 	private String src;
 
 	public int getSupple_id() {
@@ -39,6 +40,14 @@ public class SuppleDto {
 		this.subcat_id = subcat_id;
 	}
 
+	public String getSubcat_name() {
+		return subcat_name;
+	}
+
+	public void setSubcat_name(String subcat_name) {
+		this.subcat_name = subcat_name;
+	}
+
 	public String getSrc() {
 		return src;
 	}
@@ -49,16 +58,22 @@ public class SuppleDto {
 
 	public SuppleDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public SuppleDto(int supple_id, String supple_name, String description, int subcat_id, String src) {
+	public SuppleDto(int supple_id, String supple_name, String description, int subcat_id, String subcat_name,
+			String src) {
 		super();
 		this.supple_id = supple_id;
 		this.supple_name = supple_name;
 		this.description = description;
 		this.subcat_id = subcat_id;
+		this.subcat_name = subcat_name;
 		this.src = src;
 	}
 
+	@Override
+	public String toString() {
+		return "SuppleDto [supple_id=" + supple_id + ", supple_name=" + supple_name + ", description=" + description
+				+ ", subcat_id=" + subcat_id + ", subcat_name=" + subcat_name + ", src=" + src + "]";
+	}
 }

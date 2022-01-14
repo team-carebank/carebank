@@ -35,7 +35,7 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 	});
 	$(document).on("click", ".pagination-page span", function(e) {
 		let span = e.currentTarget;
-		let path = "${pageContext.request.contextPath}/admin/meal.do?page=";
+		let path = "${pageContext.request.contextPath}/admin/supple.do?page=";
 		if (span.id == 'prev') {
 			window.location.href = path + "${page-1}";
 		} else if (span.id == 'next') {
@@ -51,13 +51,13 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			return false;
 		}
 		let id = e.currentTarget.previousElementSibling.innerText;
-		let path = "${pageContext.request.contextPath}/admin/minfo.do?id=";
+		let path = "${pageContext.request.contextPath}/admin/sinfo.do?id=";
 
 		window.location.href = path + id;
 	});
 
 	$(document).on("click", "#add.board-content-config", function(e) {
-		window.location.href = "mwrite.do";
+		window.location.href = "swrite.do";
 	})
 </script>
 <style>
@@ -67,29 +67,35 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 	color: green;
 }
 
-.content-admin-side>#meal {
+.content-admin-side>#supple {
 	background: linear-gradient(to right, #04AA6D, #05C480);
 	color: white;
 	box-shadow: -10px 0 0 white;
 }
+
+.efficacy-list {
+	display: grid;
+	justify-items: center;
+	align-items: center;
+}
 </style>
 </head>
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 <body>
 	<div class="container">
 		<div class="body-content">
-			<%@ include file="side.jsp"%>
+			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Information : Meal</h1>
-					<span>식단 정보를 관리합니다.</span>
+					<h1>Information : Supplement</h1>
+					<span>영양제 정보를 관리합니다.</span>
 				</div>
 				<div class="admin-main-content">
 					<div class="main-content-board">
 						<div class="board-header">
 							<div class="board-header-content">
 								<span>번호</span> <span class="board-content-name">이름</span>
-								<form method="post" action="msearch.do">
+								<form method="post" action="ssearch.do">
 									<input type="hidden" name="page" value="1"> <input
 										type="hidden" name="search" value="category"> <select
 										name="keyword" id="select-category"
@@ -106,10 +112,21 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 						<div class="board-body">
 							<c:forEach var="dto" items="${res }">
 								<div class="board-body-content">
-									<span id="meal_id">${dto.meal_id }</span> <span
-										class="board-content-name">${dto.meal_name }</span> <span>${dto.subcat_name }</span>
+									<span id="supple_id">${dto.supple_id }</span> <span
+										class="board-content-name">${dto.supple_name }</span>
+									<div class="efficacy-list">
+										<c:forEach var="map" items="${maps}">
+											<c:forEach var="entry" items="${map }">
+												<c:if test="${entry.key eq dto.supple_id }">
+													<c:forEach var="effi" items="${entry.value }">
+														<span>${effi }</span>
+													</c:forEach>
+												</c:if>
+											</c:forEach>
+										</c:forEach>
+									</div>
 									<span class="board-content-config" id="modify"
-										onclick="window.location.href='mmodi.do?id=${dto.meal_id}'">수정하기</span>
+										onclick="window.location.href='smodi.do?id=${dto.supple_id}'">수정하기</span>
 								</div>
 							</c:forEach>
 						</div>
@@ -141,12 +158,12 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 						</div>
 					</div>
 					<div class="main-content-search">
-						<form method="post" action="msearch.do" id="search-keyword-data">
+						<form method="post" action="ssearch.do" id="search-keyword-data">
 							<input type="hidden" name="page" value="1"> <select
 								name="search" id="">
 								<option value="all" selected="selected">전체</option>
-								<option value="name">식단명</option>
-								<option value="category">카테고리명</option>
+								<option value="name">영양제명</option>
+								<option value="category">효능</option>
 							</select> <input type="text" name="keyword"> <input type="submit"
 								value="검색">
 						</form>

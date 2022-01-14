@@ -44,6 +44,15 @@
 	});
 
 	$(document).on("click", "#submit", function(e) {
+		let food = document.getElementById("foodName");
+		let foodName = $(food).val().trim();
+		let idChk = $(food.nextElementSibling).attr("id");
+
+		if (idChk == "false" || idChk == null) {
+			alert("중복된 데이터는 입력할 수 없습니다!");
+			return false;
+		}
+
 		if (foodName == '' || foodName == null) {
 			alert("식품명을 입력하세요!");
 			return false;
@@ -56,38 +65,69 @@
 		obj.style.height = "1px";
 		obj.style.height = (12 + obj.scrollHeight) + "px";
 	}
+
+	$(document).on("blur", "#foodName", function(e) {
+		let foodName = $(e.currentTarget).val();
+		let foodText = $(e.currentTarget.nextElementSibling);
+
+		if (foodName.trim() == "") {
+			return false;
+		}
+
+		$.ajax({
+			url : "fcheck.do",
+			type : "post",
+			data : {
+				foodname : foodName
+			},
+			success : function(res) {
+				if (res > 0) {
+					foodText.text("데이터가 이미 존재합니다.");
+					foodText.css({
+						"color" : "red",
+						"font-size" : "medium"
+					});
+					foodText.attr("id", "false");
+				} else {
+					foodText.text("신규 등록이 가능한 데이터입니다.");
+					foodText.css({
+						"color" : "green",
+						"font-size" : "medium"
+					});
+					foodText.attr("id", "true");
+				}
+			}
+		});
+	});
 </script>
 </head>
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 <body>
 	<div class="container">
 		<div class="body-content">
-			<%@ include file="side.jsp"%>
+			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Modify : Food</h1>
-					<span>식단과 관련된 음식의 영양소 정보를 수정합니다.</span>
+					<h1>Write : Food</h1>
+					<span>식단과 관련된 음식의 영양소 정보를 작성합니다.</span>
 				</div>
 				<div class="main-content-info">
 					<div class="content-desc">
-						<form action="fupdate.do" method="post" id="mForm">
-							<input type="hidden" name="food_id" value="${food.food_id }">
+						<form action="finsert.do" method="post" id="mForm">
 							<div class="content-desc-item">
 								<h3>식품명</h3>
-								<input type="text" name="food" id="foodName" value=${food.food }
-									readonly="readonly"> <span></span>
+								<input type="text" name="food" id="foodName"> <span></span>
 							</div>
 							<hr>
 							<div class="content-desc-item">
 								<div>
 									<span style="margin-block: 30px; font-weight: bold;">영양소</span><span
 										style="font-size: medium">영양소 정보는 100g을 기준으로 입력합니다.</span> <span>탄수화물</span>
-									<input type="number" name="carbo" value="${food.carbo }"
-										step="0.01"> <span>단백질</span> <input type="number"
-										name="protein" value="${food.protein }" step="0.01"> <span>지방</span>
-									<input type="number" name="fat" value="${food.fat }"
-										step="0.01"> <span>칼로리</span> <input type="number"
-										name="calories" value="${food.calories }" step="0.01">
+									<input type="number" name="carbo" value="0" step="0.01">
+									<span>단백질</span> <input type="number" name="protein" value="0"
+										step="0.01"> <span>지방</span> <input type="number"
+										name="fat" value="0" step="0.01"> <span>칼로리</span> <input
+										type="number" name="calories" value="0" step="0.01">
 								</div>
 							</div>
 						</form>

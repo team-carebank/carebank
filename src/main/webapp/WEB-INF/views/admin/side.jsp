@@ -25,14 +25,19 @@
 			onclick="window.location.href='${pageContext.request.contextPath}/admin/meal.do?page=1'">Meal</span><span
 			id="food"
 			onclick="window.location.href='${pageContext.request.contextPath}/admin/food.do?page=1'">Food</span>
-		<span id="exer">Exercise</span> <span id="supple">Supplement</span> <span
-			id="medi">Meditation</span>
+		<span id="exer"
+			onclick="window.location.href='${pageContext.request.contextPath}/admin/exer.do?page=1'">Exercise</span>
+		<span id="supple"
+			onclick="window.location.href='${pageContext.request.contextPath}/admin/supple.do?page=1'">Supplement</span>
+		<span id="medi"
+			onclick="window.location.href='${pageContext.request.contextPath}/admin/medi.do?page=1'">Meditation</span>
 		<!--메뉴 구분선-->
 		<h4>User Management</h4>
-		<span>Member</span> <span>Report</span>
+		<span>Member</span>
 		<!--메뉴 구분선-->
 		<h4>Customer Service</h4>
-		<span>Notice</span> <span>QnA</span> <span>FAQ</span>
+		<span>Notice</span> <span>QnA</span> <span
+			onclick="window.location.href='${pageContext.request.contextPath}/faqlist.do'">FAQ</span>
 	</div>
 </body>
 </html>
