@@ -104,19 +104,19 @@ html::-webkit-scrollbar {
 function click_add(){
 	var url = "schedulePopup.do";
 	var name = "schedulePopup";
-	var option = "width=600, height=600, left=200, top=50, location=no";
+	var option = "width=600, height=600, left=500, top=60, location=no, resizable=no";
 	window.open(url,name,option)
 };
 function click_mood(){
 	var url = "moodPopup.do";
 	var name = "moodPopup";
-	var option = "width=400, height=400, left=200, top=50, location=no";
+	var option = "width=600, height=600, left=500, top=60, location=no, resizable=no";
 	window.open(url,name,option)
 };
 function click_pills(){
 	var url = "pillsPopup.do";
 	var name = "pillsPopup";
-	var option = "width=400, height=400, left=200, top=50, location=no";
+	var option = "width=360, height=320, left=600, top=150, location=no, resizable=no";
 	window.open(url,name,option)
 };
 $(function(){

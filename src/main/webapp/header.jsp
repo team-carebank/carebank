@@ -66,7 +66,7 @@
 					<ul class="nav-sub">
 						<li><a href="#">공지사항</a></li>
 						<li><a href="${pageContext.request.contextPath}/faqlist.do">FAQ</a></li>
-						<li><a href="#">QNA</a></li>
+						<li><a href="${pageContext.request.contextPath}/qna.do">QNA</a></li>
 					</ul></li>
 			</ul>
 		</div>

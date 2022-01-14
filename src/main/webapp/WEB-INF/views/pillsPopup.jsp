@@ -15,6 +15,53 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<style>
+body{
+	display : grid;
+	width : 100vh;
+	height : 100vh;
+	justify-items : center;
+	align-items : center;
+}
+body>div{
+	display : grid;
+	width : 100vh;
+	height: 100vh;
+	box-shadow: 0 0 10px gainsboro;
+}
+.group{
+	background-color: beige;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	justify-items: center;
+	display: grid;
+}
+.top{
+	display: grid;
+	align-items: center;
+	justify-items: center;
+}
+.domain{
+	display: grid;
+	align-items: center;
+	justify-items: center;
+}
+.domain>*{
+	margin-block-end: 10px;
+}
+.ok-button{
+	width: 100%;
+	height: 50px;
+	font-size: large;
+	border: none;
+	background-color: transparent;
+}
+.ok-button:hover {
+	font-weight: bold;
+	cursor: pointer;
+}
+</style>
 <script type="text/javascript">
 $(function(){
 	$.datepicker.setDefaults({
@@ -74,7 +121,7 @@ $.fn.serializeObject = function(){
 <body>
 	<div class="group" id="popupGroup">
 		<div class = "group-head">
-			<h1 class = "zTree-h1">영양제 기록</h1>
+			<h1 class = "zTree-h1">&#128155 영양제 기록 &#128138</h1>
 		</div>
 		<div class = "group-body">
 			<form id = "pillsData">
@@ -88,7 +135,7 @@ $.fn.serializeObject = function(){
 					<input class="date" id="startDate" type="text" name="regdate">
 				</div>
 			</form>
-				<button class="ok-button" type="button" onclick="click_ok();">영양제 섭취</button>
+				<button class="ok-button" type="button" onclick="click_ok();">영양제 기록하기!</button>
 		</div>
 	</div>
 </body>

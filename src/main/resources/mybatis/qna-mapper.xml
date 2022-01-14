@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace = "qna">
+  
+  	<resultMap type="qnaDto" id="qnaMap">
+  		<result property="qa_no" column="QA_NO"/>
+  		<result property="qa_gpno" column="QA_GPNO"/>
+  		<result property="qa_gpsq" column="QA_GPSQ"/>
+  		<result property="user_no" column="USER_NO"/>
+  		<result property="title" column="TITLE"/>
+  		<result property="content" column="CONTENT"/>
+  		<result property="regdate" column="REGDATE"/>
+  		<result property="status" column="STATUS"/>
+  	</resultMap>
+  	
+  	<insert id="insert" parameterType="qnaDto">
+		INSERT INTO QNA
+		VALUES(qnanosq.nextval, groupnosq.nextval, 0, ${user_no}, #{title}, #{content}, SYSDATE, DEFAULT)
+  	</insert>
+  
+  	<select id="selectList" resultMap="qnaMap" parameterType="int">
+  		SELECT * FROM QNA
+  		WHERE USER_NO = #{user_no}
+  	</select>
+  </mapper>

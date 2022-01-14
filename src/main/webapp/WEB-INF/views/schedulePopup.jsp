@@ -18,66 +18,50 @@
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 
 <style type="text/css">
-	html, body{
-	width : 100%;
-	height : 100%;
-	padding : 0%;
-	margin : 0%;
+body{
+	display : grid;
+	width : 100vh;
+	height : 100vh;
+	justify-items : center;
+	align-items : center;
 }
-body.bodygroup:before{
-	content : '';
-	position : fixed;
-	left : 0;
-	right : 0;
-	top : 0;
-	bottom : 0;
-	background-color : rgba(255,255,255, 0.75);
-	-webkit-backdrop-filter : blur(5px);
-	backdrop-filter : blur(5px);
+body>div{
+	display : grid;
+	width : 100vh;
+	height: 100vh;
+	box-shadow: 0 0 10px gainsboro;
 }
-.group {
-    z-index: 1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    min-width: 300px;
-    max-width: 600px;
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 2px 55px -25px rgb(0 0 0 / 100%);
+.group{
+	background-color: beige;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	justify-items: center;
+	display: grid;
 }
-.group > .group-head{
-    border-radius: 15px 15px 0 0;
-    min-height: 40px;
-    color: #fff;
-    background-color: #b66;
-    padding: 10px 15px;
-    box-sizing: border-box;
-    font-weight: bold;
+.top{
+	display: grid;
+	align-items: center;
+	justify-items: center;
 }
-.popup > .content {
-    padding: 20px;
-    box-sizing: border-box;
+.domain{
+	display: grid;
+	align-items: center;
+	justify-items: center;
 }
-.popup > .group-body {
-    bottom: 0;
-    min-height: 40px;
-    padding: 15px 15px;
-    box-sizing: border-box;
-    border-radius: 0 0 15px 15px;
-    min-height: 40px;
-    text-align: right;
+.domain>*{
+	margin-block-end: 10px;
 }
-.popup > .group-body .ok-button {
-    border-radius: 8px;
-    padding: 5px 10px;
-    border: 1px solid #aaa;
+.ok-button{
+	width: 100%;
+	height: 50px;
+	font-size: large;
+	border: none;
+	background-color: transparent;
 }
-.popup > .group-body .ok-button:hover {
-    color: #fff;
-    background-color: #000;
-    border-color: #000;
+.ok-button:hover {
+	font-weight: bold;
+	cursor: pointer;
 }
 </style>
 <script type="text/javascript">
@@ -144,7 +128,7 @@ $.fn.serializeObject = function(){
 <body class="bodygroup">
 	<div class="group" id="popupGroup">
 		<div class = "group-head">
-			<h1 class = "zTree-h1">병원 기록</h1>
+			<h1 class = "zTree-h1">&#128198 병원 기록 &#127973</h1>
 		</div>
 		<div class = "group-body">
 			<form id = "scheduleData">
@@ -173,10 +157,10 @@ $.fn.serializeObject = function(){
 					<h3 class="zTree-h3">메모 </h3>
 				</div>
 				<div class="domain">
-					<textarea rows="10" cols="70" class="memo" id="memo" name="memo" style="resize:none;"></textarea>
+					<textarea rows="10" cols="60" class="memo" id="memo" name="memo" style="resize:none;"></textarea>
 				</div>
 			</form>
-				<button class="ok-button" type="button" onclick="click_ok();">확인</button>
+				<button class="ok-button" type="button" onclick="click_ok();">다이어리에 기록하기!</button>
 		</div>
 	</div>
 </body>
