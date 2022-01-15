@@ -107,3 +107,19 @@ body{
     content: "\2796"; /* 마이너스 (-) 유니코드*/
 }
 
+#write_img{
+	width:300px; 
+	height:70px; 
+	margin: 100px
+	
+}
+.comment-write {
+    display: grid ;
+    align-items: center ;
+    justify-content: center ;
+}
+
+input {
+    width: 1000px;
+}
+

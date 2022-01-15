@@ -51,6 +51,12 @@ public class FaqController {
 	}
 	
 	//작성 
+	@RequestMapping("/faqPopup.do")
+	public String faqPopup() {
+		return "faqPopup";
+	}
+	
+	
 	@RequestMapping("/faqinsert.do")
 
 	@ResponseBody
