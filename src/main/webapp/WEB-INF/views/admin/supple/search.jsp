@@ -21,6 +21,12 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 	color: black !important;
 	cursor: default !important;
 }
+
+.content-admin-side>#supple {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	box-shadow: -10px 0 0 white;
+}
 </style>
 <script>
 	$(document).on("submit", '#search-keyword-data', function(e) {
