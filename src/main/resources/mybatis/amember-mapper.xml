@@ -36,4 +36,49 @@
 		SELECT * FROM CARE_USER WHERE
 		USER_NO = #{user_no}
 	</select>
+	<select id="searchByKeyword" parameterType="map"
+		resultType="userDto">
+		SELECT
+		*
+		FROM
+		(SELECT ROWNUM AS POSTNO, C.* FROM (SELECT
+		USER_NO, USER_ID,
+		USER_NAME, BIRTH, PHONE, EMAIL, ENABLED_YN, USER_TYPE
+		FROM CARE_USER WHERE USER_NAME LIKE '%${keyword}%' OR USER_ID
+		LIKE
+		'%${keyword}%' OR EMAIL
+		LIKE '%${keyword}%' ORDER BY
+		USER_NO) C)
+		WHERE
+		POSTNO BETWEEN #{start} AND
+		#{end} ORDER BY
+		POSTNO
+	</select>
+	<select id="searchByEnabled" parameterType="map"
+		resultType="userDto">
+		SELECT
+		*
+		FROM
+		(SELECT ROWNUM AS POSTNO, C.* FROM (SELECT
+		USER_NO, USER_ID,
+		USER_NAME, BIRTH, PHONE, EMAIL, ENABLED_YN, USER_TYPE
+		FROM CARE_USER WHERE ENABLED_YN = 'Y'
+		ORDER BY USER_NO) C)
+		WHERE
+		POSTNO
+		BETWEEN #{start}
+		AND
+		#{end} ORDER BY
+		POSTNO
+	</select>
+	<select id="getCntByEnabled" resultType="int">
+		SELECT COUNT(*) FROM
+		CARE_USER WHERE ENABLED_YN = 'Y'
+	</select>
+	<select id="getCntByKeyword" resultType="int">
+		SELECT COUNT(*) FROM
+		CARE_USER WHERE USER_NAME LIKE '%${keyword}%' OR USER_ID
+		LIKE
+		'%${keyword}%' OR EMAIL LIKE '%${keyword}%'
+	</select>
 </mapper>
