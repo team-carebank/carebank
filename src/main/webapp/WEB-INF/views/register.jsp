@@ -49,7 +49,13 @@
 	font-size:10pt;
 	
 }
-
+ em{
+ 	color: red;
+ }
+ 
+ #require_note{
+ 	font-size:10pt;
+ }
 
 </style>
 </head>
@@ -66,6 +72,7 @@
       
                       <p class="text-center h1 fw-bold mx-1 mx-md-4 mt-4">회원가입</p>
                       <p class="text-center h6 fw-bold mb-1 mx-1 mx-md-4 mt-4">기본정보</p>
+                      <p id = "require_note">* 필수 입력사항</p>
       
 
                       <form class="mx-1 mx-md-4" action = "regis.do" method = "post" autocomplete = "off" onsubmit="return validate();">
@@ -73,7 +80,7 @@
       
                         <div class="d-flex flex-row align-items-center">
                           <div class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="user_name">이름</label>
+                            <label class="form-label" for="user_name">이름</label><em>*</em>
                             <input type="text" id="user_name" class="form-control" name = "user_name" required = "true" autofocus/>
                             
                           </div>
@@ -81,7 +88,7 @@
       
                         <div class="d-flex flex-row align-items-center">
                           <div class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="user_id">아이디</label>
+                            <label class="form-label" for="user_id">아이디</label><em>*</em>
                             <input type="text" id="user_id" class="form-control" name = "user_id" required = "true"/>
                             <div class = row>
                               <div class = "col-md-6">
@@ -91,7 +98,7 @@
 
                             <div class="d-flex flex-row align-items-center">
                               <div class="form-outline flex-fill mb-0">
-                                <label class="form-label" for="user_pw">비밀번호</label>
+                                <label class="form-label" for="user_pw">비밀번호</label><em>*</em>
 
                                 <input type="password" id="user_pw" class="form-control" name = "user_pw" 
                                 required = "true" placeholder="8-12자리 영문, 숫자 조합" 
@@ -103,7 +110,11 @@
                             <div class="d-flex flex-row align-items-center">
                               <div class="form-outline flex-fill mb-0">
                                 <label class="form-label" for="pwchk">비밀번호 확인</label>
-                                <input type="password" id="pwchk" class="form-control" required = "true" />
+                                <input type="password" id="user_pw_re" class="form-control" required = "true" onchange = "pwchk();"/>
+                                <div class = "col-md-6">
+
+                           		<span class = "pwchk"></span><br>
+                 			</div>
                               </div>
                             </div>
                             </div>
@@ -113,13 +124,13 @@
                         <div class="d-flex flex-row align-items-center">
                           <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="email">이메일</label>
-                            <input type="email" id="email" class="form-control" name = "email" required = "true" placeholder="careuser@carebank.com"/>
+                            <input type="email" id="email" class="form-control" name = "email" placeholder="careuser@carebank.com"/>
                           </div>
                         </div>
                         <div class="d-flex flex-row align-items-center">
                           <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="phone">휴대폰</label>
-                            <input type="number" id="phone" class="form-control" name = "phone" required = "true" placeholder="'-'없이 숫자만 입력하세요."/>
+                            <input type="number" id="phone" class="form-control" name = "phone" placeholder="'-'없이 숫자만 입력하세요."/>
 
                             
                           </div>
@@ -127,7 +138,9 @@
                         <div class="d-flex flex-row align-items-center">
                           <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="birth">생년월일</label>
-                            <input type="date" id="birth" class="form-control" name = "birth" required = "true"/>
+                            <input type="date" id="birth" class="form-control" name = "birth" 
+                            value = "2022-01-01" max = "2021-01-18">
+                          
                           </div>
                         </div>
                          	
@@ -213,6 +226,29 @@
  	function validate(){
  		if(pw_chk() == fale){
  			return false;
+ 		}
+ 	}
+ 	
+ 	function pwchk(){
+ 		
+ 		var pw1 = $("#user_pw").val().trim();
+ 		var pw2 = $("#user_pw_re").val().trim();
+ 		var pwchk = document.getElementsByClassName("pwchk")[0];
+ 		
+ 		if(pw1 == pw2){
+ 			pwchk.innerHTML = "비밀번호가 일치합니다";
+ 				$('.pwchk').css({
+					'color': 'green',
+					'font-size' : '9pt'
+				});
+ 		}
+ 		else if(pw1 != pw2){
+ 			
+ 			pwchk.innerHTML = "비밀번호가 틀립니다";
+				$('.pwchk').css({
+				'color': 'red',
+				'font-size' : '9pt'
+			});
  		}
  	}
  	

@@ -40,9 +40,9 @@
             <div class="faq-one">
                 <!-- faq question -->
       
-                		<h1 class="faq-title" id = "${faqdto.faqno }">
+                		<h5 class="faq-title" id = "${faqdto.faqno }">
                 		${faqdto.faqtitle}
-                		</h1>
+                		</h5>
               
                 <!-- faq answer -->
                 <div class = "faq-body">
@@ -51,9 +51,9 @@
                     </p>
 					<c:if test = "${login_info.user_type == 'ADMIN' }">
 		                	<div class = "modify_btns">
-		                		<input type = "button" value = "수정" onclick = "change_area(${faqdto.faqno}, this);">
+		                		<input type = "button" class = 'btn btn-primary' value = "수정" onclick = "change_area(${faqdto.faqno}, this);">
 		                		<!-- <input type = "button" value = "삭제" onclick = "location.href='faqdelete.do?faqno=${faqdto.faqno}';"> -->
-		                		<input type = "button" value = "삭제" onclick = "deleteFunc(${faqdto.faqno});">	
+		                		<input type = "button"  class = 'btn btn-primary'value = "삭제" onclick = "deleteFunc(${faqdto.faqno});">	
 		                		
 		                	</div>
 					</c:if>
@@ -61,24 +61,14 @@
             </div>
             <hr class="hr-line">
 			</c:forEach>
+        <!-- 관리자 로그인시 작성 버튼 추가 -->
 				<c:if test="${login_info.user_type == 'ADMIN' }">
-					<div>
-						<input type="button" value="작성" onclick="show();">
-					</div>
+					
+					<img src="resources/img/faq_write.png" 
+                         style = "width:300px; height:70px; margin-left: 550px; margin-top: 100px; cursor:pointer" onclick = "insertPop();">
 				</c:if>
             	
-        <!-- 관리자 로그인시 보여질 화면 -->
-        <c:if test = "${login_info.user_type == 'ADMIN' }">
-            		
-        <div class="insert-area" id = "insert-area">
-				<h2>작성</h2>
-				<div class="comment-write">
-					<input type = "text" class = "new-faq-title" id = "new-faq-title" placeholder="FAQ 제목">
-					<textarea class = "new-faq-content" id="new-faq-content" placeholder="내용을 입력하세요."></textarea>
-					<input type="button" class = "new-faq" value="작성" id="insert-button" onclick = "insert();">
-				</div>	
-		</div>	
-        </c:if>
+
         </section>
         
     </main>
@@ -105,52 +95,30 @@
 		};
     };
     
-    	function show(){
-    		var insertArea = document.getElementById("insert-area");
-    		insertArea.show();
-    	}
-		
-    	//관리자 FAQ 작성
-		function insert(){
-			var faqtitle = document.getElementById("new-faq-title").value.trim();
-			var faqcontent = document.getElementById("new-faq-content").value.trim();
-			var newfaq = {"faqtitle" : faqtitle, "faqcontent" : faqcontent};
-			//console.log(newfaq);
-			
-			if(faqtitle == null ||faqtitle == "")
-			{
-				alert("제목을 입력하세요.")
-			}
-			else if(	faqcontent == null || faqcontent == ""){
-				alert("내용을 입력하세요.")
-			}
-			else{
-				$.ajax({
-					url: "faqinsert.do",
-					type: "post",
-					data: JSON.stringify(newfaq),
-					contentType: "application/json",
-					dataType: "json",
-					success: 
-						function(res){
-						
-							if(res > 0){
-								alert("새로운 FAQ가 작성되었습니다.")
-								window.location.reload();
-							}
-							else{
-								alert("작성에 실패하였습니다. 다시 시도해주세요.")
-							}
-						}
-					,
-					error:
-						function(){
-						alert("통신실패");
-					}	
-				});
-			}
-		}
+    function insertPop(){
+    	var w = 600;
+    	var h = 600;
     	
+    	var option = getOption(w,h);
+    	var url = "faqPopup.do"
+    	var name = "faqPopup";
+    	
+    	window.open(url, name, option);
+    	
+    	
+    }
+    function getOption(w, h){
+        //팝업이 화면의 중앙에 오게 설정
+        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+        var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+        return "width="+w+", height="+h+", left="+left+", top="+top+", location=no, resizable=no";
+    }
+
 
     	//수정시 화면변경
     	function change_area(faqno, currentButton){
@@ -163,7 +131,7 @@
     		faqtitle.hide();
     		
     		var new_title = "<h1 class='faq-title' id='modify'><input type='text' class='new-faq-title' id='"+faqno+"' value='"+faqtitle.text().trim()+"'></h1>"
-    		var new_area = "<div class='new-faq-content'><textarea class='new-faq-textarea' id='"+faqno+"'>" + faqcontent + "</textarea><input type = 'button' onclick = 'faqupdate("+faqno+");' value = '수정'></button><input type = 'button' onclick = 'cancel();' value = '취소'></div>";
+    		var new_area = "<div class='new-faq-content'><textarea col = '10' rows = '10' class='new-faq-textarea' id='"+faqno+" style = 'resize: none;''>" + faqcontent + "</textarea><input type = 'button' onclick = 'faqupdate("+faqno+");' value = '수정'></button><input type = 'button' onclick = 'cancel();' value = '취소'></div>";
     		
     		faqone.prepend(new_title);
     		faqbody.append(new_area);

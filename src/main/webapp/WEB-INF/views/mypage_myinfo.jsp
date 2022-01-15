@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <style>
         body {
@@ -143,12 +144,12 @@
 
         .board-content-name {
             grid-column: 2/4;
-            
             border:none;
         }
+
         
   		.board-content-title{
-            grid-column: 2/4;
+            grid-column: 1/3;
          }
        
 
@@ -159,10 +160,43 @@
 			width: 50px;
 			height:30px;
 		}
+		
+		.sub_title{
+			font-weight: bold;
+		}
    
-
+   		.preferlist_btn{
+   			text-align:center;
+   			width: 200px;
+   			height:50px;
+   			margin: 10px;
+   			font-size: 12pt;
+   			border-radius: 10px;
+   			border: none;
+   			background-color: #287743;
+   			color: white;
+   		
+   		
+   		}
+   		.preferlist{
+   			margin-left: 600px;
+   		
+   		}
+   		
+   		.menu_subtitle:hover{
+   			background-color:  #287743;
+   			color: white;
+   		
+   		}
+   		
+   		 #myinfo{
+   			background-color:#287743;
+   			color: white;
+   		}
      
-
+		input{
+			height: 30px;
+		}
         
     </style>
 </head>
@@ -178,18 +212,18 @@
                     <h3>마이페이지</h3>
                     <!--메뉴 구분선-->
                     <h4>Information</h4>
-                    <span>내 정보</span>
-                    <span><a href="${pageContext.request.contextPath}/regis_prefer.do">관심사설정 </a></span>
-                    <span>대시보드</span>
+                    <span class = "menu_subtitle" id = "myinfo" onclick = "location.href='${pageContext.request.contextPath}/myinfo.do'">내 정보</span>
+                    <span class = "menu_subtitle" onclick = "location.href='${pageContext.request.contextPath}/regis_prefer.do'">관심사설정</span>
+                    <span class = "menu_subtitle">대시보드</span>
                     <!--메뉴 구분선-->
                     <h4></h4>
                   
                   
                     <!--메뉴 구분선-->
                     <h4>Customer Service</h4>
-                    <span>공지사항</span>
-                    <span>QnA</span>
-                    <span>FAQ</span>
+                    <span class = "menu_subtitle">공지사항</span>
+                    <span class = "menu_subtitle">QnA</span>
+                    <span class = "menu_subtitle" onclick = "location.href='${pageContext.request.contextPath}/faqlist.do'">FAQ</span>
                 </div>
             </div>
             <div class="content-admin-main">
@@ -201,35 +235,31 @@
                 <div class="admin-main-content">
                     <div class="main-content-board">
                         <div class="board-header">
-                            <div class="board-header-content">
-                                
-                                <span class="board-content-title">기본정보</span>
-                               
-                            </div>
+                         
                         </div>
                         <div class="board-body">
                             <div class="board-body-content">
-                                <span>이름</span>
+                                <span class = "sub_title">이름</span>
                                 <input type = "text" class="board-content-name" id = "user_name" value = "${login_info.user_name}" readonly = "true">
                                	<input type = "hidden" value = "${login_info.user_no }" id = "user_no">
                             </div>
                             <div class="board-body-content">
-                                <span>아이디</span>
+                                <span class = "sub_title">아이디</span>
                                 <input type = "text" class="board-content-name" id = "user_id" value = "${login_info.user_id }" readonly = "true">
                                 
                             </div>
                             <div class="board-body-content">
-                                <span>핸드폰 번호:</span>
+                                <span class = "sub_title">핸드폰 번호:</span>
                                 <input type = "number" class="board-content-name" id = "phone" value = "${login_info.phone }" readonly = "true">
                                
                             </div>
                             <div class="board-body-content">
-                                <span>이메일:</span>
+                                <span class = "sub_title">이메일:</span>
                                 <input type = "email" class="board-content-name" id = "email" value = "${login_info.email }" readonly = "true">
                        
                             </div>
                             <div class="board-body-content">
-                                <span>생년월일</span>
+                                <span class = "sub_title">생년월일</span>
                                 <input type = "date" class="board-content-name" id = "birth" value = "${login_info.birth }" readonly = "true">
                                
                             </div>
@@ -243,7 +273,7 @@
                               <span class="board-content-config" id="add" onclick = "">비밀번호 재설정</span>
                             </div>
                             <div class="board-header-content">
-                                <span class="board-content-config" id="add" onclick = "location.href = 'disable.do?user_no=${login_info.user_no}'">회원탈퇴</span>
+                                <span class="board-content-config" id="add" onclick = "disable(${login_info.user_no})">회원탈퇴</span>
                                 								
                             </div>
                         </div>
@@ -252,42 +282,26 @@
                                 <h1>${login_info.user_name } 님의 관심사</h1>
                             </div>
                         
-                            <div class="board-header-content">
-                                <span class="board-content-title">관심사</span><hr>
-                            </div>
                         </div>
-                        <div class="board-body">
-                            <div class="board-body-content">
-                                 <div class="board-header-content">
-                                <span class="board-content-title">만성질환</span>
+                        
+                           <div class = "perferlist">
+                           <c:choose>
+                           		<c:when test = "${fn:length(preferlist) == 0 }">
+                           			<div>관심사가 없습니다. </div>
+                           		</c:when>
+                           		
+                           		<c:otherwise>
+                             		 <c:forEach items ="${preferlist }" var = "preferDto">
+                                		<input type = "button" class = "preferlist_btn" value = "#${preferDto.subcat_name }">
+                               		 </c:forEach>
+                                		</div>
+                                        <input type = button class = "preferset_btn" value = "관심사 설정하러가기" onclick = "location.href = 'regis_prefer.do?user_no=${login_info.user_no}'">
+                           		</c:otherwise>
+                           </c:choose>
+                             </div>
                             </div>
-                                <c:forEach items ="${preferlist }" var = "preferDto">
-                                	
-                                <div>${preferDto.subcat_name }</div>
-                                
-                                </c:forEach>
-                            </div>
-                            <div class="board-body-content">
-                                <span>건강증진</span>
-                                    <c:forEach items ="${preferlist }" var = "preferDto">
-                                	
-                                		<div>${preferDto.subcat_name }</div>
-                                
-                                	</c:forEach>
-                            </div>
-                            <div class="board-body-content">
-                                <span>멘탈케어</span>
-                               
-                            </div>
-                            <div class="board-body-content">
-                                <span>다이어트</span>
-                              
-                            </div>
-                            
-   
-                            
                         </div> 
-                        <input type = button value = "관심사 설정하러가기" onclick = "location.href = 'regis_prefer.do?user_no=${login_info.user_no}'">
+        
                         
                         
                     </div>
@@ -361,7 +375,25 @@
   			});//ajax end
     	};
     
-
+		function disable(user_no){
+			var result = confirm("정말 탈퇴하시겠습니까?");
+			
+			if(result){
+				var idchk = prompt("탈퇴를 위해 회원님의 아이디를 입력해주세요", "");
+				var user_id = "${login_info.user_id}";
+				if (user_id === idchk){
+					alert("탈퇴되었습니다.")
+					location.href = "disable.do?user_no="+user_no;
+				}
+				else{
+					alert("아이디가 일치하지않습니다. 다시시도하세요.");
+					return;
+				}
+			}
+			else{
+				alert("취소되었습니다.")
+			}
+		}
     
     
     </script>
