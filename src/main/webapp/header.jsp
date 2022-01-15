@@ -64,9 +64,9 @@
 				
 				<li class="nav-component"><a>고객센터</a>
 					<ul class="nav-sub">
-						<li><a href="#">공지사항</a></li>
-						<li><a href="${pageContext.request.contextPath}/faqlist.do">FAQ</a></li>
-						<li><a href="${pageContext.request.contextPath}/qna.do">QNA</a></li>
+					
+						<li><a href="${pageContext.request.contextPath}/faqlist.do">자주묻는 질문</a></li>
+						<li><a href="${pageContext.request.contextPath}/qna.do">문의하기</a></li>
 					</ul></li>
 			</ul>
 		</div>
