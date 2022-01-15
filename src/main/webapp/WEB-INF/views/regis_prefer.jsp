@@ -163,7 +163,7 @@
 				function(res){
 				if(res){
 				alert("선호도가 설정되었습니다.");
-			 	location.href = "main.do";
+			 	location.href = "myinfo.do";
 					
 				}
 				else{
