@@ -13,7 +13,7 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 <style>
-.content-admin-side>#meal {
+.content-admin-side>#supple {
 	background: linear-gradient(to right, #04AA6D, #05C480);
 	color: white;
 	box-shadow: -10px 0 0 white;
