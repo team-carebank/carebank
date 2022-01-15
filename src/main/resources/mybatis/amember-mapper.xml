@@ -81,4 +81,168 @@
 		LIKE
 		'%${keyword}%' OR EMAIL LIKE '%${keyword}%'
 	</select>
+
+	<!-- 관리자 통계용 -->
+	<select id="getStatMYMEAL"
+		resultType="com.yee.carebank.model.dto.StatDto">
+		SELECT *
+		FROM (
+		SELECT
+		COUNT(*) AS CNT,
+		USER_NAME,
+		USER_ID
+		FROM
+		MY_MEAL
+		JOIN
+		CARE_USER
+		USING(USER_NO)
+		WHERE
+	<![CDATA[
+		REGDATE >=
+		TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		]]>
+		GROUP BY
+		(USER_ID,
+		USER_NAME)
+		ORDER BY
+		COUNT(*) DESC
+		)
+		WHERE ROWNUM BETWEEN
+		1 AND 5
+	</select>
+	<select id="getStatMYEXER"
+		resultType="com.yee.carebank.model.dto.StatDto">
+		SELECT *
+		FROM (
+		SELECT
+		COUNT(*) AS CNT,
+		USER_NAME,
+		USER_ID
+		FROM
+		MY_EXERCISE
+		JOIN
+		CARE_USER
+		USING(USER_NO)
+		WHERE
+	<![CDATA[
+		REGDATE >=
+		TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		]]>
+		GROUP BY
+		(USER_ID,
+		USER_NAME)
+		ORDER BY
+		COUNT(*) DESC
+		)
+		WHERE ROWNUM BETWEEN
+		1 AND 5
+	</select>
+	<select id="getStatMYVISIT"
+		resultType="com.yee.carebank.model.dto.StatDto">
+		SELECT *
+		FROM (
+		SELECT
+		COUNT(*) AS CNT,
+		USER_NAME,
+		USER_ID
+		FROM
+		MY_VISIT
+		JOIN
+		CARE_USER
+		USING(USER_NO)
+		WHERE
+	<![CDATA[
+		REGDATE >=
+		TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		]]>
+		GROUP BY
+		(USER_ID,
+		USER_NAME)
+		ORDER BY
+		COUNT(*) DESC
+		)
+		WHERE ROWNUM BETWEEN
+		1 AND 5
+	</select>
+	<select id="getStatMYPILLS"
+		resultType="com.yee.carebank.model.dto.StatDto">
+		SELECT *
+		FROM (
+		SELECT
+		COUNT(*) AS CNT,
+		USER_NAME,
+		USER_ID
+		FROM
+		MY_PILLS
+		JOIN
+		CARE_USER
+		USING(USER_NO)
+		WHERE
+	<![CDATA[
+		REGDATE >=
+		TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		]]>
+		GROUP BY
+		(USER_ID,
+		USER_NAME)
+		ORDER BY
+		COUNT(*) DESC
+		)
+		WHERE ROWNUM BETWEEN
+		1 AND 5
+	</select>
+	<select id="getStatMCOMMENT"
+		resultType="com.yee.carebank.model.dto.StatDto">
+		SELECT *
+		FROM (
+		SELECT
+		COUNT(*) AS CNT,
+		USER_NAME,
+		USER_ID
+		FROM
+		MEAL_COMMENT
+		JOIN
+		CARE_USER
+		USING(USER_NO)
+		WHERE
+	<![CDATA[
+		REGDATE >=
+		TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		]]>
+		GROUP BY
+		(USER_ID,
+		USER_NAME)
+		ORDER BY
+		COUNT(*) DESC
+		)
+		WHERE ROWNUM BETWEEN
+		1 AND 5
+	</select>
+	<select id="getStatSCOMMENT"
+		resultType="com.yee.carebank.model.dto.StatDto">
+		SELECT *
+		FROM (
+		SELECT
+		COUNT(*) AS CNT,
+		USER_NAME,
+		USER_ID
+		FROM
+		SUPPLE_COMMENT
+		JOIN
+		CARE_USER
+		USING(USER_NO)
+		WHERE
+	<![CDATA[
+		REGDATE >=
+		TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		]]>
+		GROUP BY
+		(USER_ID,
+		USER_NAME)
+		ORDER BY
+		COUNT(*) DESC
+		)
+		WHERE ROWNUM BETWEEN
+		1 AND 5
+	</select>
 </mapper>
