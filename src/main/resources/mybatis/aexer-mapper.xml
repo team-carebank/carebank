@@ -58,11 +58,12 @@
 
 	<update id="update" parameterType="exerciseDto">
 		UPDATE EXERCISE_TMP E SET
+		E.EXER_NAME=#{exer_name},
 		E.EXER_THUM=#{exer_thum},
 		E.EXER_DESCRIPTION=#{exer_description},
 		E.EXER_TYPE=#{exer_type},
 		E.SUBCAT_ID=#{subcat_id}
-		WHERE
+		WHERE EXER_ID = #{exer_id}
 	</update>
 	<!-- -->
 
