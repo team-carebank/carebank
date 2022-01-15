@@ -8,17 +8,62 @@
     <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <style>
+
+ 
+    @font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+ }
+* {
+    font-family: 'S-CoreDream-3Light'; 
+    margin: 0;
+}
+body{
+    background-color: #bcccc1;
+
+}
     .new-faq-title{
         width: 500px;
-        height: 30px;
+        height: 20px;
+        border-radius: 10px;
+        border:none;
+        margin-bottom: 10px;
+        padding: 30px;
     }
     .new-faq-content{
         width: 500px;
         height: 300px;
         resize: none;
+        border-radius:10px;
+        margin-bottom: 10px;
+        padding: 30px;
+        border:none;
     }
+h2{
+    margin-bottom: 30px;
+    margin-top:10px;
+    
+}
 
+ .insert-area{
+    display:grid;
+    justify-items: center;
 
+ }
+
+ #insert-button{
+     width: 80px;
+     height: 50px;
+     border:none;
+     border-radius:4px;
+
+ }
+ 
+ #insert-button:hover{
+    background-color: #96b5a0;
+}
 
 </style>
 <body>

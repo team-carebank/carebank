@@ -56,6 +56,13 @@
  #require_note{
  	font-size:10pt;
  }
+ 
+ #regis_img{
+ 		width: 600px;
+	height: 400px;
+
+ 
+ }
 
 </style>
 </head>
@@ -151,8 +158,8 @@
                    
                     </div>
                     <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-      
-                      <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/draw1.png" class="img-fluid">
+      					<img src = "resources/img/regis.png"class="img-fluid" id = "regis_img">
+                     
       
                     </div>
                   </div>

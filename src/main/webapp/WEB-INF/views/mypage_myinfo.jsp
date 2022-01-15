@@ -163,6 +163,7 @@
 		
 		.sub_title{
 			font-weight: bold;
+			text-align: left;
 		}
    
    		.preferlist_btn{
@@ -196,7 +197,28 @@
      
 		input{
 			height: 30px;
+			font-size: 12pt;
+			background-color:#f1f2f0;
+			border-radius: 8px;
+			text-align: center;
+		
 		}
+        .update_img{
+        width:250x; 
+        height:60px;
+        cursor: pointer;
+        margin-top: 30px;
+        
+        }
+        
+        .new_btn{
+        	height: 40px;
+        	width: 80px;
+        	margin-left: 10px;
+        	background-color: #F6D860;
+        	
+        	border: none;
+        } 
         
     </style>
 </head>
@@ -239,12 +261,14 @@
                         </div>
                         <div class="board-body">
                             <div class="board-body-content">
-                                <span class = "sub_title">이름</span>
+                                <span class = "sub_title">이름:</span>
+                            
+                             
                                 <input type = "text" class="board-content-name" id = "user_name" value = "${login_info.user_name}" readonly = "true">
                                	<input type = "hidden" value = "${login_info.user_no }" id = "user_no">
                             </div>
                             <div class="board-body-content">
-                                <span class = "sub_title">아이디</span>
+                                <span class = "sub_title">아이디:</span>
                                 <input type = "text" class="board-content-name" id = "user_id" value = "${login_info.user_id }" readonly = "true">
                                 
                             </div>
@@ -259,7 +283,7 @@
                        
                             </div>
                             <div class="board-body-content">
-                                <span class = "sub_title">생년월일</span>
+                                <span class = "sub_title">생년월일:</span>
                                 <input type = "date" class="board-content-name" id = "birth" value = "${login_info.birth }" readonly = "true">
                                
                             </div>
@@ -267,9 +291,11 @@
                             
                         </div>
                         <div class="board-header" id="footer">
-                        		<input type = "button" id = "update"onclick = "change();" value = "수정하기">
+                            <img src="resources/img/info_update.png" class = "update_img" onclick = "change();" >
+                        
+                        	
                             <div class="board-header-content">
-                             
+                          
                               <span class="board-content-config" id="add" onclick = "">비밀번호 재설정</span>
                             </div>
                             <div class="board-header-content">
@@ -295,7 +321,8 @@
                                 		<input type = "button" class = "preferlist_btn" value = "#${preferDto.subcat_name }">
                                		 </c:forEach>
                                 		</div>
-                                        <input type = button class = "preferset_btn" value = "관심사 설정하러가기" onclick = "location.href = 'regis_prefer.do?user_no=${login_info.user_no}'">
+                                		<img src="resources/img/prefer_btn.png" class = "update_img" onclick = "location.href = 'regis_prefer.do?user_no=${login_info.user_no}'" >
+                                     
                            		</c:otherwise>
                            </c:choose>
                              </div>
@@ -325,6 +352,7 @@
     		
     		//수정버튼 클릭시 수정버튼 숨김/ 취소버튼 보이기
    			var update_btn = $("#footer").children().hide();
+    	
    			$("#footer").append(new_btn);
     	};
     	
@@ -390,9 +418,7 @@
 					return;
 				}
 			}
-			else{
-				alert("취소되었습니다.")
-			}
+			
 		}
     
     

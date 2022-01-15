@@ -50,6 +50,12 @@
 	
 }
 
+#prefer_img{
+	width: 600px;
+	height: 500px;
+
+}
+
 
 </style>
 </head>
@@ -64,8 +70,8 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
       
-                      <p class="text-center h1 fw-bold mx-1 mx-md-4 mt-4">회원가입</p>
-                      <p class="text-center h6 fw-bold mb-1 mx-1 mx-md-4 mt-4">관심사 설정</p>
+                      <p class="text-center h1 fw-bold mx-1 mx-md-4 mt-4">관심사 설정</p>
+                    
       
                         <div class="d-flex flex-row align-items-center">
                             <div class="form-outline flex-fill mb-0">
@@ -80,7 +86,8 @@
                                     <input type = "checkbox" name = "prefer" value = "7">심장의 뻐근함/혈액순환<br>
                                     <input type = "checkbox" name = "prefer" value = "8">디스크/허리통증/관절<br>
                                     <input type = "checkbox" name = "prefer" value = "9">고지혈증/고혈압<br>
-                                <hr>
+                              <br>
+                              <br>
                             </div>
 
                             <div class="form-outline flex-fill mb-0">
@@ -92,7 +99,7 @@
                                     <input type = "checkbox" name = "prefer" value = "13">남성건강<br>
                                     <input type = "checkbox" name = "prefer" value = "14">눈건강<br>
                                     <input type = "checkbox" name = "prefer" value = "15">흡연자를 위한<br>
-                                <hr>
+                              
                                 </div>
 
 
@@ -108,17 +115,17 @@
                                   <input type = "checkbox" name = "prefer" value = "18">불면증/수면관리<br>
                                   <input type = "checkbox" name = "prefer" value = "19">명상<br>
 
-                                  <hr>
+                                 
                             </div>
       
                             <div class="form-outline flex-fill mb-0">
-                                <h3>다이어트</h3>
+                                <h3>체중관리</h3>
                                 <!--<label class="form-label" for="user_id">다이어트</label><br><br>-->
            
                                 <input type = "checkbox" name = "prefer" value = "20">균형잡힌 식단<br>
                                 <input type = "checkbox" name = "prefer" value = "21">체중감량<br>
                                 <input type = "checkbox" name = "prefer" value = "22">체중증량<br>
-                                <hr>
+                                
                             </div>
                         </div><!--end22-->
                         	<input type = "hidden" name = "user_no" id = "user_no" value = "${login_info.user_no }">
@@ -128,7 +135,7 @@
                     </div>
                     <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
       
-                        <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/draw1.png" class="img-fluid">
+                        <img src="resources/img/prefer.png" class="img-fluid" id = "prefer_img">
         
                       </div>
                    
