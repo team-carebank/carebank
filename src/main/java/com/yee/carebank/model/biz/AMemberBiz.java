@@ -9,6 +9,7 @@ import com.yee.carebank.model.dto.UserDto;
 import static com.yee.carebank.model.biz.Admin1stBiz.createParameter;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AMemberBiz {
@@ -36,4 +37,25 @@ public class AMemberBiz {
 		return dao.updatePassword(dto);
 	}
 
+	public List<UserDto> search(String searchType, String keyword, int page) {
+		switch (searchType) {
+		case "type":
+			return dao.search("searchByEnabled", createParameter(page), keyword);
+		case "name":
+			return dao.search("searchByKeyword", createParameter(page), keyword);
+		default:
+			return dao.selectList(createParameter(page));
+		}
+	}
+
+	public int getCnt(String searchType, String keyword) {
+		switch (searchType) {
+		case "type":
+			return dao.getCnt("getCntByEnabled", keyword);
+		case "name":
+			return dao.getCnt("getCntByKeyword", keyword);
+		default:
+			return dao.getCnt();
+		}
+	}
 }

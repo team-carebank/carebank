@@ -117,6 +117,29 @@ public class AMemberController {
 		}
 	}
 
+	@RequestMapping("admin/usearch.do")
+	public String search(HttpSession session, Model model, @RequestParam("keyword") String keyword,
+			@RequestParam("search") String searchType, @RequestParam("page") int page) {
+		logger.info("SEARCH KEYWORD [MEMBER] : KEYWORD = " + keyword + ", SEARCH TYPE = " + searchType);
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		if (check(loginUser)) {
+			return "redirect: ../main.do";
+		}
+
+		if (keyword.equals("all") & searchType.equals("type")) {
+			return "redirect: user.do";
+		}
+
+		model.addAttribute("res", biz.search(searchType, keyword, page));
+		model.addAttribute("cnt", biz.getCnt(searchType, keyword));
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("search", searchType);
+		model.addAttribute("page", page);
+
+		return "admin/user/search";
+	}
+
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	public void exceptionHandler(MissingServletRequestParameterException e, HttpServletResponse response,
 			HttpServletRequest request) {

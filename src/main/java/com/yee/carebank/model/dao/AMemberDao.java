@@ -59,4 +59,22 @@ public class AMemberDao {
 			return -1;
 		}
 	}
+
+	public List<UserDto> search(String selectId, Map<String, Object> map, String keyword) {
+		map.put("keyword", keyword);
+
+		try {
+			return sqlSession.selectList(NAMESPACE + selectId, map);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public int getCnt(String selectId, String keyword) {
+		try {
+			return sqlSession.selectOne(NAMESPACE + selectId, keyword);
+		} catch (Exception e) {
+			return -1;
+		}
+	}
 }

@@ -397,8 +397,8 @@ public class Admin1stController {
 			redirectURL = "/carebank/admin/supple.do?page=1";
 		} else if (url.contains("admin/e")) {
 			redirectURL = "/carebank/admin/exer.do?page=1";
-		}
-
+		} else if (url.contains("admin/u"))
+			redirectURL = "/carebank/admin/user.do?page=1";
 		else {
 			redirectURL = "/carebank/admin/main.do";
 		}

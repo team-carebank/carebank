@@ -36,7 +36,7 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 
 	$(document).on("click", ".pagination-page span", function(e) {
 		let span = e.currentTarget;
-		let path = "${pageContext.request.contextPath}/admin/user.do?page=";
+		let path = "${pageContext.request.contextPath}/admin/usearch.do?keyword=${keyword}&search=${searchType}&page=";
 		if (span.id == 'prev') {
 			window.location.href = path + "${page-1}";
 		} else if (span.id == 'next') {
@@ -166,7 +166,14 @@ body>div.container>div>div.content-admin-main>div.admin-main-content>div.main-co
 			<div class="content-admin-main">
 				<div class="admin-main-description">
 					<h1>Management : Member</h1>
-					<span>회원 정보를 관리합니다.</span>
+					<c:choose>
+						<c:when test="${keyword eq 'enabled' }">
+							<span>활성화(가입) 상태인 회원 정보를 관리합니다.</span>
+						</c:when>
+						<c:otherwise>
+							<span>"${keyword }"로 검색한 결과입니다.</span>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="admin-main-content">
 					<div class="main-content-board">
