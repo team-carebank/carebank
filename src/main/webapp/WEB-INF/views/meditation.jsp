@@ -50,7 +50,7 @@ body{
   height:800px; 
   perspective: 800px; 
   position: absolute;
-  top:0px;
+  top:10vh;
 }
 .carousel .carousel-item{
   width:300px;  
@@ -117,13 +117,30 @@ body{
 .button-68:hover {
   box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
 }
+
+#return{
+position:absolute;
+top:5vh;
+left:5vw;
+opacity:60%;
+z-index:1;
+}
+
+
 </style>
 </head>
 
 <body>
+
+
+<div id="return">   
+	<p><img src="resources/img/return.png"  onclick="location.href='main.do'" style="width:10%; height:10%;cursor:pointer; "></p>
+	</div>
+	
+	
     <div class="textcontainer">
         <div class="textbox">
-            <h2 style="font-size: 20px; color:rgb(190, 190, 190)">오늘만은 깊은 잠을..</h2>
+            <h2 style="font-size: 20px; color:rgb(190, 190, 190);position:relative;top:5vh;">오늘만은 깊은 잠을..</h2>
         </div>
     </div>
 

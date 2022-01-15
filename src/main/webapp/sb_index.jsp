@@ -52,6 +52,7 @@ body {
        }
 
 /*button */ 
+
 .button-68 {
   appearance: none;
   backface-visibility: hidden;
@@ -108,9 +109,6 @@ body {
   
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js'></script>
 
-  
-  
-
     <script type="text/javascript">
         var nodes = new vis.DataSet([
   {label: "migraine"},
@@ -140,7 +138,7 @@ var options = {
       font:{color:'#fff'},
       border:'#90ba00', 
       //color:'#287743'
-      color:{background:'#287743', highlight:{background:'#90ba00', border: '#b9a600', borderWidth:0}}
+      color:{background:'#287743', highlight:{background:'#90ba00', border: '#b9a600', borderWidth:100}}
     },
     //color:{background:'#287743', highlight:{background:'#59a600', border: '#b9a600', borderWidth:100}}
     //color:'#fc2b00'

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,19 +14,19 @@ body{
  background-image: url('resources/img/background1.jpg');
  background-size: cover;
  background-repeat:no-repeat;
- width: 100%; 
+ width: 100%;  
  }
 .textbox{
- top:100px;
- left:40px;
+ top:10vh;
+ left:10vw;
  position: relative;
  font-size:large;
  font-family: 'PT Serif', serif;
  
   display: inline-block; 
   padding: 10px;
-  animation: fadein 3s; 
-  -webkit-animation: fadein 10s;  
+  animation: fadein 12s; 
+  -webkit-animation: fadein 18s;  
 } 
 @-webkit-keyframes fadein { 
     from {
@@ -39,11 +40,11 @@ body{
  display: flex; 
   flex-direction: column;
   align-items: center;
-  margin-top:150px;
+  margin-top:40vh;
   
 }
 .icons{ 
-  top:200px; 
+  top:10vh; 
   width: 100%;
    text-align: center;
 } 
@@ -68,19 +69,19 @@ img{
 input[type=range] { width:30%; -webkit-appearance: none; background: transparent; }
 
   input[type=range]::-webkit-slider-runnable-track { 
-    width: 100%;
-     height: 2.4px; 
+    width: 70%;
+     height: 0.5vh; 
      cursor: pointer; 
      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    background: #ffffff; 
-    border-radius: 1.3px; 
-    opacity:60%;
+   background: rgb(17,50,28);
+background: linear-gradient(90deg, rgba(17,50,28,1) 0%, rgba(74,149,141,1) 60%, rgba(13,130,16,1) 100%);
+   opacity:50%;
     /* border: 0.2px solid #010101;  */
   }
     
     input[type=range]:focus::-webkit-slider-runnable-track {
-       background: #cbcec0;
-       opacity:100%; }
+        background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,12,1) 29%, rgba(0,103,124,1) 100%);opacity:100%; }
        
        input[type=range]::-webkit-slider-thumb { 
          -webkit-appearance: none; 
@@ -89,20 +90,21 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
          /* border: 1px solid #000000;  */
          height: 15px; 
          width: 10px; 
-         opacity:100%;
+         opacity:80%;
          margin-top: -14px; 
          box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; 
          border-radius: 1.3px; }
 
-.play-btn {
-  width: 45px;
-  height: 45px;
-  /* background: radial-gradient( rgba(167, 138, 185, 0.8) 20%, rgba(255, 255, 255, 1) 92%); */
+.play-btn { 
   background: transparent;
-  border-radius: 50%;
-  top:-33px;
+  border-radius: 50%; 
   position: relative; 
   box-shadow: 0px 0px 25px 3px rgba(7, 61, 3, 0.8);
+  width:3vw;
+  height:3vh;
+  bottom: 3vh;
+  cursor:pointer;
+
 }
 
 /* triangle */
@@ -221,12 +223,24 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
     background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
     box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
 } 
-
+#return{
+position:absolute;
+top:40vh;
+left:5vw;
+opacity:80%;
+}
+ 
 </style>
 </head>
 
 
 <body>
+
+<div id="return">   
+	<p><img src="resources/img/return.png"  onclick="location.href='newmeditation.do'" style="width:10%; height:10%;cursor:pointer; "></p>
+	</div>
+	
+	
     <div>
 	    <div class="textbox"> 
 	    <div style="width:400px;">${dto.med_quote }</div>
@@ -243,11 +257,10 @@ input[type=range] { width:30%; -webkit-appearance: none; background: transparent
 	<div class="playlist_container">
         <div class="icons">
             <div class="icons-first"> 
-            <input type="image" name="button" src="resources/img/med_prev.png" style="width: 5%;"onclick="previousVideo();">
-            <button class="play-btn"  onclick="playYoutube();"></button>
-            <input type="image" name="button" src="resources/img/med_pause.png"  style="width: 5%;"onclick="pauseYoutube();">
-            <input type="image" name="button" src="resources/img/med_next.png" style="width: 5%;"onclick="nextYoutube();">
-            <!-- <input type="image" name="button" src="resources/img/med_sleep.png" style="width: 4%;"onclick=" ();">-->
+            <input type="image" name="button"  id="leftbutton"  src="resources/img/med_prev.png" style="width: 3vw; padding-right:2vw; margin-left: 2vw;"onclick="previousVideo();">
+            <button class="play-btn"style="padding:2vw;" onclick="playYoutube();"></button>
+            <input type="image" name="button" src="resources/img/med_pause.png"  style="padding-right:2vw; padding-left:2vw;width: 3vw;"onclick="pauseYoutube();">
+            <input type="image" name="button" src="resources/img/med_next.png" style="padding-right:2vw;width: 3vw;"onclick="nextYoutube();"> 
             </div>
             <div class="icons-second">
             <input type="range" value="50" min="0" max="100" onChange="soundControl(this.value);"/>
