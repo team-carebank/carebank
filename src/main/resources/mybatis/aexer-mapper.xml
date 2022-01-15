@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.exer">
+	<select id="selectList" parameterType="map"
+		resultType="exerciseDto">
+		SELECT * FROM (SELECT
+		ROWNUM AS POSTNO, E.*
+		FROM (SELECT
+		EXER_ID, EXER_NAME,
+		EXER_TYPE, SUBCAT_NAME FROM
+		EXERCISE_TMP JOIN
+		CATEGORY USING(SUBCAT_ID)
+		ORDER BY EXER_ID) E) WHERE
+		POSTNO BETWEEN
+		#{start} AND #{end} ORDER BY
+		POSTNO
+	</select>
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*) FROM
+		EXERCISE_TMP
+	</select>
+	<select id="selectOne" parameterType="int"
+		resultType="exerciseDto">
+		SELECT EXER_ID, EXER_NAME, EXER_TYPE, SUBCAT_ID,
+		SUBCAT_NAME, EXER_THUM, EXER_DESCRIPTION FROM EXERCISE_TMP JOIN
+		CATEGORY USING(SUBCAT_ID) WHERE EXER_ID=#{exer_id}
+	</select>
+	<insert id="merge" parameterType="exerciseDto">
+		<selectKey resultType="int" keyProperty="exer_id"
+			order="AFTER">
+			SELECT EXER_ID FROM EXERCISE_TMP E
+			WHERE
+			E.EXER_NAME=#{exer_name}
+			AND ROWNUM = 1
+		</selectKey>
+		MERGE INTO EXERCISE_TMP E
+		USING DUAL
+		ON (E.EXER_NAME=#{exer_name})
+		WHEN
+		NOT MATCHED THEN
+		INSERT(EXER_ID,
+		EXER_NAME,
+		EXER_TYPE,
+		EXER_DESCRIPTION,
+		SUBCAT_ID, EXER_THUM)
+		VALUES(EXER_SEQ.NEXTVAL,
+		#{exer_name},
+		#{exer_type},
+		#{exer_description}, #{subcat_id},
+		#{exer_thum})
+	</insert>
+	<delete id="delete" parameterType="int">
+		DELETE FROM EXERCISE_TMP WHERE
+		EXER_ID = #{exer_id}
+	</delete>
+
+	<update id="update" parameterType="exerciseDto">
+		UPDATE EXERCISE_TMP E SET
+		E.EXER_NAME=#{exer_name},
+		E.EXER_THUM=#{exer_thum},
+		E.EXER_DESCRIPTION=#{exer_description},
+		E.EXER_TYPE=#{exer_type},
+		E.SUBCAT_ID=#{subcat_id}
+		WHERE EXER_ID = #{exer_id}
+	</update>
+	<!-- -->
+
+	<select id="searchByType" parameterType="map"
+		resultType="exerciseDto">
+		SELECT * FROM (SELECT
+		ROWNUM AS POSTNO, EXER_ID, EXER_NAME,
+		EXER_TYPE, SUBCAT_NAME FROM
+		EXERCISE_TMP JOIN CATEGORY USING(SUBCAT_ID)
+		WHERE EXER_TYPE LIKE '%${keyword}%'
+		ORDER BY EXER_ID) WHERE
+		POSTNO
+		BETWEEN #{start} AND #{end} ORDER BY
+		POSTNO
+	</select>
+	<select id="getByType" resultType="int">
+		SELECT COUNT(*) FROM
+		EXERCISE_TMP WHERE EXER_TYPE LIKE '%${keyword}%'
+	</select>
+
+	<!-- -->
+
+	<select id="searchByName" parameterType="map"
+		resultType="exerciseDto">
+		SELECT * FROM (SELECT
+		ROWNUM AS POSTNO, EXER_ID, EXER_NAME,
+		EXER_TYPE, SUBCAT_NAME FROM
+		EXERCISE_TMP JOIN CATEGORY USING(SUBCAT_ID)
+		WHERE EXER_NAME LIKE '%${keyword}%'
+		ORDER BY EXER_ID) WHERE
+		POSTNO
+		BETWEEN #{start} AND #{end} ORDER BY
+		POSTNO
+	</select>
+	<select id="getByName" resultType="int">
+		SELECT COUNT(*) FROM
+		EXERCISE_TMP WHERE EXER_NAME LIKE '%${keyword}%'
+	</select>
+
+	<!-- -->
+
+	<select id="searchByCategory" parameterType="map"
+		resultType="exerciseDto">
+		SELECT * FROM (SELECT
+		ROWNUM AS POSTNO, EXER_ID, EXER_NAME,
+		EXER_TYPE, SUBCAT_NAME FROM
+		EXERCISE_TMP JOIN CATEGORY USING(SUBCAT_ID)
+		WHERE SUBCAT_NAME LIKE '%${keyword}%'
+		ORDER BY EXER_ID) WHERE
+		POSTNO
+		BETWEEN #{start} AND #{end} ORDER BY
+		POSTNO
+	</select>
+	<select id="getByCategory" resultType="int">
+		SELECT COUNT(*) FROM
+		EXERCISE_TMP JOIN CATEGORY USING(SUBCAT_ID) WHERE SUBCAT_NAME LIKE
+		'%${keyword}%'
+	</select>
+</mapper>

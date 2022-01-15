@@ -11,7 +11,7 @@ import com.yee.carebank.model.dao.SuppleDao;
 import com.yee.carebank.model.dto.EfficacyDto;
 import com.yee.carebank.model.dto.SuppleDto;
 
-import static com.yee.carebank.model.biz.AdminBiz.createParameter;
+import static com.yee.carebank.model.biz.Admin1stBiz.createParameter;
 
 @Service
 public class Admin2ndBiz {

@@ -15,27 +15,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yee.carebank.model.biz.Admin2ndBiz;
-import com.yee.carebank.model.biz.AdminBiz;
+import com.yee.carebank.model.biz.Admin1stBiz;
 import com.yee.carebank.model.dto.EfficacyDto;
 import com.yee.carebank.model.dto.SuppleDto;
 import com.yee.carebank.model.dto.UserDto;
 
-import static com.yee.carebank.controller.AdminController.check;
-import static com.yee.carebank.controller.AdminController.redirectPath;
+import static com.yee.carebank.controller.Admin1stController.check;
+import static com.yee.carebank.controller.Admin1stController.redirectPath;
 
 import java.util.List;
 
-import static com.yee.carebank.controller.AdminController.handleMissingParams;
+import static com.yee.carebank.controller.Admin1stController.handleMissingParams;
 
 @Controller
 public class Admin2ndController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	AdminBiz biz;
+	Admin1stBiz a1;
 
 	@Autowired
-	Admin2ndBiz biz2;
+	Admin2ndBiz a2;
 
 	@RequestMapping("admin/supple.do")
 	public String selectList(HttpSession session, Model model, @RequestParam("page") int page) {
@@ -46,13 +46,13 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		List<SuppleDto> res = biz2.selectSupple(page);
+		List<SuppleDto> res = a2.selectSupple(page);
 
 		model.addAttribute("res", res);
-		model.addAttribute("maps", biz2.selectCatBySId(res));
-		model.addAttribute("cnt", biz2.getSuppleCnt());
+		model.addAttribute("maps", a2.selectCatBySId(res));
+		model.addAttribute("cnt", a2.getSuppleCnt());
 		model.addAttribute("page", page);
-		model.addAttribute("category", biz.selectCList());
+		model.addAttribute("category", a1.selectCList());
 
 		return "admin/supple/list";
 	}
@@ -66,7 +66,7 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		EfficacyDto res = biz2.selectEffi(supple_id);
+		EfficacyDto res = a2.selectEffi(supple_id);
 		model.addAttribute("res", res);
 
 		return "admin/supple/detail";
@@ -74,14 +74,14 @@ public class Admin2ndController {
 
 	@RequestMapping("admin/swrite.do")
 	public String write(HttpSession session, Model model) {
-		logger.info("MODIFY PAGE [SUPPLEMENT]");
+		logger.info("WRITE PAGE [SUPPLEMENT]");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
 		if (check(loginUser)) {
 			return "redirect: ../main.do";
 		}
 
-		model.addAttribute("category", biz.selectCList());
+		model.addAttribute("category", a1.selectCList());
 
 		return "admin/supple/write";
 	}
@@ -95,7 +95,7 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		int res = biz2.updateS(dto);
+		int res = a2.updateS(dto);
 
 		if (res > 0) {
 			model.addAttribute("msg", "데이터가 추가되었습니다.");
@@ -116,9 +116,9 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		EfficacyDto res = biz2.selectEffi(supple_id);
+		EfficacyDto res = a2.selectEffi(supple_id);
 		model.addAttribute("res", res);
-		model.addAttribute("category", biz.selectCList());
+		model.addAttribute("category", a1.selectCList());
 
 		return "admin/supple/modify";
 
@@ -133,7 +133,7 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		int res = biz2.updateS(dto);
+		int res = a2.updateS(dto);
 
 		if (res > 0) {
 			model.addAttribute("msg", "데이터가 수정되었습니다.");
@@ -154,7 +154,7 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		int res = biz2.deleteSupple(supple_id);
+		int res = a2.deleteSupple(supple_id);
 
 		if (res > 0) {
 			model.addAttribute("msg", "데이터가 삭제되었습니다.");
@@ -177,19 +177,19 @@ public class Admin2ndController {
 			return "redirect: ../main.do";
 		}
 
-		List<SuppleDto> res = biz2.searchSupple(searchType, keyword, page);
+		List<SuppleDto> res = a2.searchSupple(searchType, keyword, page);
 
 		for (int i = 0; i < res.size(); i++) {
 			System.out.println(res.get(i));
 		}
 
 		model.addAttribute("res", res);
-		model.addAttribute("maps", biz2.selectCatBySId(res));
-		model.addAttribute("cnt", biz2.getSuppleCount(searchType, keyword));
+		model.addAttribute("maps", a2.selectCatBySId(res));
+		model.addAttribute("cnt", a2.getSuppleCount(searchType, keyword));
 		model.addAttribute("page", page);
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("category", biz.selectCList());
+		model.addAttribute("category", a1.selectCList());
 
 		return "admin/supple/search";
 	}
