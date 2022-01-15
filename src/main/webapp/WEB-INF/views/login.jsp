@@ -130,6 +130,13 @@ img{
     text-align: center;
 }
 
+#kakao{
+	width: 350px;
+}
+
+#loginimg{
+	width: 500px;
+}
 </style>
 
 <body>
@@ -139,9 +146,10 @@ img{
         <div class="login-main-text">
            <h2>CARE BANK<br></h2>
            <br>
-           <h6>케어뱅크는 개인화된 헬스 케어 서비스를 제공하는 플랫폼입니다.</h3>
-           <h6>케어뱅크와 식단, 운동, 영양소의 밸런스를 손쉽게 유지해 보세요!</h3>
-           </pre>
+        
+           <h6>케어뱅크는 개인화된 헬스 케어 서비스를 제공하는 플랫폼입니다.</h6>
+           <h6>케어뱅크와 식단, 운동, 영양소의 밸런스를 손쉽게 유지해 보세요!</h6>
+          <img src="resources/img/login_dash.png" id = "loginimg">
         </div>
      </div>
      <div class="main">
@@ -171,7 +179,14 @@ img{
           </div>  <hr>
             <div class="row">
                 <div class = "container-fluid">
+                      <img src="resources/img/kakao_login_wide.png" 
+                            id = "kakao">
                     <div class = "row">
+                     <div class="col-sm-2 col-2 offset-sm-3">
+                     
+                     </div>
+                    
+                    <!-- 
                         <div class="col-sm-2 col-2 offset-sm-3">
                             <img class = "img-fluid rounded-circle" src="resources/img/kakao.png" 
                             id = "kakao">
@@ -182,6 +197,7 @@ img{
                         <div class="col-sm-2 col-2">
                         <img class = "img-fluid rounded-circle" src="resources/img/google.png" onclick = "">
                         </div>
+                         -->
                     </div>
                 </div> 
             </div>
