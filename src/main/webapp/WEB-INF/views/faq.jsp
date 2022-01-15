@@ -8,12 +8,177 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/faq_style.css">
-    
+   
     
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <style>
+    @font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+
+body{	
+    font-family: 'S-CoreDream-3Light';
+}
+.faq-heading{
+    border-bottom: #777;
+    padding: 20px 60px;
+}
+.search-container{
+    display: flex;
+    
+}
+.search{
+    width: 100px;
+    height: 50px;
+    text-align: center;
+   
+}
+.search_btn{
+    margin-left: auto;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    
+}
+.faq-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.search{
+    width:10%;
+    height:50px;
+    padding:2px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.hr-line{
+  width: 60%;
+  margin: auto;
+  
+}
+
+.faq-title {
+    /* background-color: #eee; */
+    color: #444;
+    cursor: pointer;
+    padding: 20px 10px;
+    width: 60%;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin: auto;
+}
+.faq-title *{
+	font-size: 13pt !important;
+}
+.faq-body{
+    margin: auto;
+    /* text-align: center; */
+   width: 50%; 
+   padding: auto;
+}
+
+.insert-area{
+    justify-content: center;
+}
+.new-faq-title{
+    width:60%;
+    padding: 10px 10px;
+    display:flex;
+    margin:none;
+}
+.new-faq-content{
+    width:60%;
+    padding: 10px 10px;
+    display:flex
+}
+
+.active,
+.faq-title:hover {
+    background-color: #287743;
+    color: white;
+}
+
+.faq-body {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+.faq-title:after {
+    content: '\02795'; /* 플러스 (+) 유니코드*/
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+.active:after {
+    content: "\2796"; /* 마이너스 (-) 유니코드*/
+}
+
+#write_img{
+	width:300px; 
+	height:70px; 
+	margin: 100px
+	
+}
+
+.newfaq-content{
+   display: grid;
+    align-items: left;
+    justify-content: left;
+    margin-bottom: 30px;
+
+
+}
+.newfaq-title{
+	
+	width: 600px;
+	height: 50px;
+	margin-left: 80px;
+	border: 1px solid RGB(127, 161, 138);
+	border-radius:10px;
+
+} 
+.newfaq-textarea{
+display:grid;
+	align-items: center;
+    justify-content: center;
+	width: 600px;
+	resize:none;
+	border: 1px solid RGB(127, 161, 138);
+	border-radius: 10px;
+}
+
+.new_btn{
+	background-color: #287743;
+	color: white;
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+	grid-column: 1/3;
+	margin-top: 10px;
+}   
+#cancel_btn{
+	
+	margin-bottom: 10px;
+	width: 100px;
+	background-color:RGB(211, 219, 214) !important;
+	color: #287743 !important;
+
+}
+
+
+    
+    </style>
 </head>
 <body>
 <header>
@@ -130,8 +295,8 @@
     		var btn_area = $(".modify_btns").hide();
     		faqtitle.hide();
     		
-    		var new_title = "<h1 class='faq-title' id='modify'><input type='text' class='new-faq-title' id='"+faqno+"' value='"+faqtitle.text().trim()+"'></h1>"
-    		var new_area = "<div class='new-faq-content'><textarea col = '10' rows = '10' class='new-faq-textarea' id='"+faqno+" style = 'resize: none;''>" + faqcontent + "</textarea><input type = 'button' onclick = 'faqupdate("+faqno+");' value = '수정'></button><input type = 'button' onclick = 'cancel();' value = '취소'></div>";
+    		var new_title = "<h1 class='faq-title' id='modify'><input type='text' class ='newfaq-title' id='"+faqno+"' value='"+faqtitle.text().trim()+"' autofocus = 'autofocus'></h1>"
+    		var new_area = "<div class='newfaq-content'><textarea rows = '5' class='newfaq-textarea' id='"+faqno+"''>" + faqcontent + "</textarea><input type = 'button' class = 'new_btn' id = 'update_btn' onclick = 'faqupdate("+faqno+");' value = '수정'></button><input type = 'button' class = 'new_btn' id = 'cancel_btn' onclick = 'cancel();' value = '취소'></div>";
     		
     		faqone.prepend(new_title);
     		faqbody.append(new_area);
@@ -139,7 +304,7 @@
     	
     	//수정-취소 시
     	function cancel(){
-    		$(".new-faq-content").remove();
+    		$(".newfaq-content").remove();
     		$(".faq-title").show();
     		$("#modify").remove();
     		$(".faq-content").show();
@@ -154,8 +319,8 @@
     	function faqupdate(faqno){
     		
     		
-    		var faqtitle = $("#"+faqno+".new-faq-title").val().trim();
-    		var faqcontent = $("#" + faqno + ".new-faq-textarea").val().trim();
+    		var faqtitle = $("#"+faqno+".newfaq-title").val().trim();
+    		var faqcontent = $("#" + faqno + ".newfaq-textarea").val().trim();
     		var faq_update = {"faqtitle" : faqtitle, "faqcontent" : faqcontent, "faqno":faqno};
     		
     		
