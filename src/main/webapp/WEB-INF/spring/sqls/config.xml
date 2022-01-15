@@ -28,6 +28,7 @@
 		<typeAlias type="com.yee.carebank.model.dto.QnaDto" alias="qnaDto" />
 		<typeAlias type="com.yee.carebank.model.dto.CategoryDto" alias="categoryDto"/>
 		<typeAlias type = "com.yee.carebank.model.dto.PreferenceDto" alias = "preferDto"/>
+		<typeAlias type="com.yee.carebank.model.dto.TmMealDto" alias="TmMealDto"/>
 	</typeAliases>
 
 	<mappers>
@@ -51,6 +52,7 @@
   		<mapper resource = "/mybatis/asupple-mapper.xml"/>
   		<mapper resource = "/mybatis/aexer-mapper.xml"/>
   		<mapper resource = "/mybatis/amember-mapper.xml"/>
+  		<mapper resource = "/mybatis/tmmeal-mapper.xml"/>
 	</mappers>
 
 </configuration>

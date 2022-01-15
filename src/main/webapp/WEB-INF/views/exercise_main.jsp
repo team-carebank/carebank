@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <title>Document</title>
-
-
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap'); 
-
 *{
  font-family: 'Noto Sans KR', sans-serif !important; 
 }
@@ -23,7 +20,9 @@
    align-items: stretch; 
 }
 .textbox{
-   min-height:20px; 
+   min-height:20px;
+   position:relative;
+   top:5vh; 
 }
 .skipbutton{
 	top:100px;
@@ -39,7 +38,6 @@
     min-height: 20px;
     margin-right: 40px;
 }
- /* carousel */
 body{
   margin:0;
   padding:0;
@@ -49,20 +47,16 @@ body{
    height:800px;
    perspective:1500px; 
    position:absolute;
-   top:0px;
+   top:10vh;
 }
- 
-  
 .carousel .carousel-item{
    width:300px; 
 }
- 
 .carousel .carousel-item img{
    width:100%;
 box-shadow: 3px 6px 27px -1px rgba(140,140,140,0.7);
 -webkit-box-shadow: 3px 6px 27px -1px rgba(140,140,140,0.7);
 -moz-box-shadow: 3px 6px 27px -1px rgba(140,140,140,0.7);
-
 -webkit-transform:scale(1);
 -moz-transform:scale(1);
 -ms-transform:scale(1);
@@ -74,21 +68,16 @@ box-shadow: 3px 6px 27px -1px rgba(140,140,140,0.7);
     -o-transition:.3s;
     transition:.3s;
 }
-
 .carousel .carousel-item img:hover{ 
-
 transform: translate(0px,-50px);
 -webkit-transform: translate(0px,-50px);
 -moz-transform: translate(0px,-50px);
-
 -webkit-transform:scale(1.05);
 -moz-transform: scale(1.05);
 -ms-transform:scale(1.05);   
 -o-transform:scale(1.05);
 transform: scale(1.05);
 }
- 
-  
 .carousel .carousel-item h3{
    margin:-5px 0 0 ;
    padding:0;
@@ -99,8 +88,6 @@ transform: scale(1.05);
    font-size:1.5em;
    text-align: center;
 }
-
-/*button*/
 .button-68 {
   appearance: none;
   backface-visibility: hidden;
@@ -111,7 +98,6 @@ transform: scale(1.05);
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  /* display: inline-block; */
   font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -143,12 +129,25 @@ transform: scale(1.05);
 }
 .button-68:hover {
   box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
+} 
+
+#return{
+position:absolute;
+top:5vh;
+left:5vw;
+opacity:100%;
+z-index:1;
 }
+
 </style>
 </head>
 
 
 <body> 
+	
+<div id="return">   
+	<p><img src="resources/img/return.png"  onclick="location.href='main.do'" style="width:10%; height:10%;cursor:pointer; "></p>
+	</div>
 	
     <div class="textcontainer">
         <div class="textbox">
@@ -163,32 +162,23 @@ transform: scale(1.05);
     		</c:when>
     	<c:otherwise>
     		<c:forEach items="${list }" var="dto">
-    		
     		<div class="carousel-item">
     		<img src="${dto.exer_thum }" >
     			<h3 onclick="location.href='exerdetail.do?exer_id=${dto.exer_id}'" style="cursor: pointer; ">${dto.exer_title}</h3>
     		</div>
-    		
     		</c:forEach>
-    	
-    	
     	</c:otherwise>
-    	
     	</c:choose>
  </div>
-  
- 
- 
-    <div class="skipbutton">
+
+<div class="skipbutton">
         <div class="textbox2">
             <p>오늘은 마음을 챙겨볼게요</p> 
             <button class="button-68"  onclick="location.href='newmeditation.do'">meditation</button>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.4.1.js"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        
     <script type="text/javascript">
          $(document).ready(function(){
 		    $('.carousel').carousel();

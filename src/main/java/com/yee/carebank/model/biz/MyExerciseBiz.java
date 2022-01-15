@@ -15,12 +15,6 @@ public interface MyExerciseBiz {
 	public int insert( MyExerciseDto dto);
  
 
-	//public int selectOne(int user_no); 
-	 
-	//public int insert(Integer exer_count);
- 
-	
-	
 	
 }
 

@@ -9,8 +9,7 @@
 		VALUES(RECORD_SEQ.NEXTVAL, #{user_no}, #{meal_name}, #{meal_time},
 		#{regdate})
 	</insert>
-	<select id="selectList" parameterType="int"
-		resultType="myMealDto">
+	<select id="selectList" parameterType="int" resultType="myMealDto">
 		SELECT RECORD_ID, MEAL_NAME, MEAL_TIME, REGDATE FROM
 		MY_MEAL WHERE USER_NO = ${user_no}
 	</select>

@@ -24,7 +24,7 @@ public class MeditationDaoImpl implements MeditationDao{
 		List<MeditationDto> list=new ArrayList<MeditationDto>();
 		
 		try {
-		list=sqlSession.selectList(NAMESPACE+"selectList"); //예제 네임스페이스는 myboard.  
+		list=sqlSession.selectList(NAMESPACE+"selectList"); 
 		}catch(Exception e) {
 			System.out.println("error, select list");
 			e.printStackTrace();

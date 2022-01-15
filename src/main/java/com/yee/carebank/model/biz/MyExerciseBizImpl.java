@@ -24,18 +24,9 @@ public class MyExerciseBizImpl implements MyExerciseBiz{
 
 	@Override
 	public int insert(MyExerciseDto dto) { 
-		//return dao.insert(exer_count); 
 		return dao.insert(dto);
 	}
 
  
  
-
-//	public int selectOne(int user_no) { 
-//		return dao.selectOne(user_no);
-//	}
-//	 
-	
-	
-
 }
