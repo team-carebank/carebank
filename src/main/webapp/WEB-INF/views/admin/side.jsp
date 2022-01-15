@@ -37,7 +37,9 @@
 			onclick="window.location.href='${pageContext.request.contextPath}/admin/user.do?page=1'">Member</span>
 		<!--메뉴 구분선-->
 		<h4>Customer Service</h4>
-		<span>QnA</span> <span
+		<span
+			onclick="window.location.href='${pageContext.request.contextPath}/faqlist.do'">QnA</span>
+		<span
 			onclick="window.location.href='${pageContext.request.contextPath}/faqlist.do'">FAQ</span>
 	</div>
 </body>
