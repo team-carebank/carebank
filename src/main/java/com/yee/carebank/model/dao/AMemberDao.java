@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yee.carebank.model.dto.StatDto;
 import com.yee.carebank.model.dto.UserDto;
 
 @Repository
@@ -75,6 +76,15 @@ public class AMemberDao {
 			return sqlSession.selectOne(NAMESPACE + selectId, keyword);
 		} catch (Exception e) {
 			return -1;
+		}
+	}
+
+	public List<StatDto> getStat(String selectId) {
+		try {
+			return sqlSession.selectList(NAMESPACE + selectId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

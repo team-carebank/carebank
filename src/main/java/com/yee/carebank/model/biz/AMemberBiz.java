@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yee.carebank.model.dao.AMemberDao;
+import com.yee.carebank.model.dto.StatDto;
 import com.yee.carebank.model.dto.UserDto;
 
 import static com.yee.carebank.model.biz.Admin1stBiz.createParameter;
@@ -57,5 +58,24 @@ public class AMemberBiz {
 		default:
 			return dao.getCnt();
 		}
+	}
+
+	public List<StatDto> getStat(String table_name) {
+		switch (table_name) {
+		case "MY_MEAL":
+			return dao.getStat("getStatMYMEAL");
+		case "MY_EXERCISE":
+			return dao.getStat("getStatMYEXER");
+		case "MY_VISIT":
+			return dao.getStat("getStatMYVISIT");
+		case "MY_PILLS":
+			return dao.getStat("getStatMYPILLS");
+		case "MEAL_COMMENT":
+			return dao.getStat("getStatMCOMMENT");
+		case "SUPPLE_COMMENT":
+			return dao.getStat("getStatSCOMMENT");
+		}
+
+		return null;
 	}
 }

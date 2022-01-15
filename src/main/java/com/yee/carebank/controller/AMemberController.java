@@ -140,6 +140,24 @@ public class AMemberController {
 		return "admin/user/search";
 	}
 
+	@RequestMapping("admin/ustat.do")
+	public String getStat(HttpSession session, Model model) {
+		logger.info("GET STATISTICS DATA");
+
+		if (check((UserDto) session.getAttribute("login_info"))) {
+			return "redirect: ../main.do";
+		}
+
+		model.addAttribute("mymeal", biz.getStat("MY_MEAL"));
+		model.addAttribute("myexer", biz.getStat("MY_EXERCISE"));
+		model.addAttribute("myvisit", biz.getStat("MY_VISIT"));
+		model.addAttribute("mypills", biz.getStat("MY_PILLS"));
+		model.addAttribute("mcomment", biz.getStat("MEAL_COMMENT"));
+		model.addAttribute("scomment", biz.getStat("SUPPLE_COMMENT"));
+
+		return "admin/user/stat";
+	}
+
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	public void exceptionHandler(MissingServletRequestParameterException e, HttpServletResponse response,
 			HttpServletRequest request) {

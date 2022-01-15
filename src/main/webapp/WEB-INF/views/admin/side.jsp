@@ -35,6 +35,8 @@
 		<h4>User Management</h4>
 		<span id="user"
 			onclick="window.location.href='${pageContext.request.contextPath}/admin/user.do?page=1'">Member</span>
+		<span id="stat"
+			onclick="window.location.href='${pageContext.request.contextPath}/admin/ustat.do?page=1'">Statistics</span>
 		<!--메뉴 구분선-->
 		<h4>Customer Service</h4>
 		<span
