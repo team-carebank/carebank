@@ -33,7 +33,8 @@
 			onclick="window.location.href='${pageContext.request.contextPath}/admin/medi.do?page=1'">Meditation</span>
 		<!--메뉴 구분선-->
 		<h4>User Management</h4>
-		<span>Member</span>
+		<span id="user"
+			onclick="window.location.href='${pageContext.request.contextPath}/admin/user.do?page=1'">Member</span>
 		<!--메뉴 구분선-->
 		<h4>Customer Service</h4>
 		<span>Notice</span> <span>QnA</span> <span
