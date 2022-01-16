@@ -67,25 +67,26 @@
 				</div>
 			</div>
 			<div class="col-md-9">
-				<form action="insertQna.do" method="post">
+				<form action="updateQna.do" method="post">
 				<div class="contact-form">
 					<div class="form-group">
+							<input type="hidden" class="form-control" name="qa_no" value="${qna.qa_no }">
 						<label class="control-label col-sm-2" for="ftitle">제목 : </label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id=""
-								placeholder="제목을 작성해 주세요." name="title">
+							<input type="text" class="form-control" name="title" value="${qna.title }">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="comment">내용 :</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" rows="13" id=""
-								style="resize: none;" name="content"></textarea>
+								style="resize: none;" name="content">${qna.content }</textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default" >작성완료</button>
+							<button type="submit" class="btn btn-default" >수정하기</button>
+							<button type="button" class="btn btn-default" onclick="location.href='qnadelete.do?qa_no=${qna.qa_no}'">삭제하기</button>
 							<button type="button" class="btn btn-default" onclick="location.href='qna.do'">취소</button>
 						</div>
 					</div>
