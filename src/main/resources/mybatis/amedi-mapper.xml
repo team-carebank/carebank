@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.medi">
+	<select id="selectList" parameterType="map"
+		resultType="MeditationDto">
+		SELECT MEDITATE_ID, MED_TITLE, SUBCAT_NAME
+		FROM (SELECT
+		ROWNUM AS POST_NO, M.* FROM
+		(SELECT MEDITATE_ID , MED_TITLE,
+		subcat_name FROM MEDITATION JOIN CATEGORY c USING(subcat_id) ORDER BY
+		MEDITATE_ID) M)
+		WHERE POST_NO BETWEEN
+		#{start} AND #{end}
+	</select>
+	<select id="getCnt" resultType="int">
+		SELECT COUNT(*) FROM MEDITATION
+	</select>
+	<select id="selectOne" parameterType="map"
+		resultType="MeditationDto">
+		SELECT MEDITATE_ID, MED_TITLE, MED_THUM, MED_QUOTE,
+		SUBCAT_ID, subcat_name FROM
+		MEDITATION m join category using(subcat_id)
+		WHERE MEDITATE_ID = #{meditate_id}
+	</select>
+	<insert id="insert" parameterType="MeditationDto">
+		INSERT INTO
+		MEDITATION(MEDITATE_ID, MED_TITLE, MED_THUM, MED_QUOTE, SUBCAT_ID)
+		VALUES(MEDI_SEQ.NEXTVAL, #{med_title}, #{med_thum}, #{med_quote},
+		#{subcat_id})
+	</insert>
+	<update id="update" parameterType="MeditationDto">
+		UPDATE MEDITATION SET
+		med_title=#{med_title}, MED_THUM=#{med_thum}, MED_QUOTE=#{med_quote},
+		SUBCAT_ID=#{subcat_id}
+		WHERE MEDITATE_ID = #{meditate_id}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM MEDITATION
+		WHERE
+		MEDITATE_ID = #{meditate_id}
+	</delete>
+	<select id="searchByCategory" parameterType="map"
+		resultType="MeditationDto">
+		SELECT MEDITATE_ID, MED_TITLE, SUBCAT_NAME
+		FROM (SELECT
+		ROWNUM AS POST_NO, M.* FROM
+		(SELECT MEDITATE_ID , MED_TITLE,
+		subcat_name FROM MEDITATION JOIN CATEGORY c USING(subcat_id)
+		WHERE
+		SUBCAT_NAME LIKE '%${keyword}%'
+		ORDER BY
+		MEDITATE_ID) M)
+		WHERE POST_NO
+		BETWEEN
+		#{start} AND #{end}
+	</select>
+	<select id="searchByName" parameterType="map"
+		resultType="MeditationDto">
+		SELECT MEDITATE_ID, MED_TITLE, SUBCAT_NAME
+		FROM (SELECT
+		ROWNUM AS POST_NO, M.* FROM
+		(SELECT MEDITATE_ID , MED_TITLE,
+		subcat_name FROM MEDITATION JOIN CATEGORY c USING(subcat_id)
+		WHERE
+		MED_TITLE LIKE '%${keyword}%'
+		ORDER BY MEDITATE_ID) M)
+		WHERE POST_NO
+		BETWEEN
+		#{start} AND #{end}
+	</select>
+	<select id="getCntByCategory" parameterType="String"
+		resultType="int">
+		SELECT COUNT(*) FROM MEDITATION JOIN CATEGORY
+		USING(SUBCAT_ID)
+		WHERE SUBCAT_NAME LIKE '%${subcat_name}%'
+	</select>
+	<select id="getCntByName" parameterType="String"
+		resultType="int">
+		SELECT COUNT(*) FROM MEDITATION
+		WHERE MED_TITLE LIKE
+		'%${subcat_name}%'
+	</select>
+	<select id="selectPlaylist" resultType="MeditationDto"
+		parameterType="int">
+		SELECT MEDITATE_ID, MED_TITLE, MED_URL_PLAY ,
+		MED_URL_PLAYLIST1 ,
+		MED_URL_PLAYLIST2 , MED_URL_PLAYLIST3 FROM
+		MEDITATION m2 WHERE
+		MEDITATE_ID = #{meditate_id}
+	</select>
+	<update id="updatePlaylist" parameterType="MeditationDto">
+		UPDATE MEDITATION
+		SET
+		MED_URL_PLAY=#{med_url_play},
+		MED_URL_PLAYLIST1=#{med_url_playlist1},
+		MED_URL_PLAYLIST2=#{med_url_playlist2},
+		MED_URL_PLAYLIST3=#{med_url_playlist3}
+		WHERE
+		MEDITATE_ID =
+		#{meditate_id}
+	</update>
+</mapper>

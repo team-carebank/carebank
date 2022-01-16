@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ taglib
-	uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ taglib
+	prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,25 +30,6 @@
 	align-items: center;
 }
 
-#one>#add-food, #zero>#add-food {
-	grid-column: 1/3;
-}
-
-#remove-food, #add-food, #cancle-img {
-	border: none;
-	border-radius: 2px;
-	padding: 5px 10px;
-}
-
-#remove-food:hover, #add-food:hover, #cancle-img:hover {
-	background-color: green;
-	color: white;
-}
-
-#one>#remove-food, #zero>#remove-food {
-	display: none;
-}
-
 .desc-item-img {
 	display: grid !important;
 	grid-gap: 10px;
@@ -58,7 +40,7 @@
 	width: 300px;
 }
 
-.content-admin-side>#exer {
+.content-admin-side>#medi {
 	background: linear-gradient(to right, #04AA6D, #05C480);
 	color: white;
 	box-shadow: -10px 0 0 white;
@@ -83,8 +65,6 @@
 				$(this).removeAttr("id");
 			}
 		});
-		
-		$("#exerType>option[value='${res.exer_type}']").attr("selected", "selected");
 	});
 </script>
 <script>
@@ -96,20 +76,12 @@
 		resize(e.currentTarget);
 	});
 
-	$(document).on("click", "input[name='exer_thum']", function(e){
+	$(document).on("click", "input[name='med_thum']", function(e){
 		let img = e.currentTarget.nextElementSibling;
 		navigator.clipboard.readText().then(clipText =>{
 			e.currentTarget.value = clipText
 			img.setAttribute("src", clipText);
 		});
-	});
-	
-	$(document).on("click", "#cancle-img", function(e){
-		let src = document.querySelector("input[name='exer_thum']");
-		let img = src.nextElementSibling;
-		
-		src.value = "${res.exer_thum}";
-		img.setAttribute("src", "${res.exer_thum}");
 	});
 	
 	$(document).on("click", "#submit", function(e){
@@ -129,62 +101,32 @@
 			<%@ include file="../side.jsp"%>
 			<div class="content-admin-main">
 				<div class="admin-main-description">
-					<h1>Modify : Exercise</h1>
-					<span>운동 정보를 수정합니다.</span>
+					<h1>Write : Meditation</h1>
+					<span>명상 정보를 작성합니다.</span>
 				</div>
 				<div class="main-content-info">
 					<div class="content-desc">
-						<form action="eupdate.do" method="post" id="mForm">
-							<input type="hidden" name="exer_id" value="${res.exer_id }">
+						<form action="mtinsert.do" method="post" id="mForm">
 							<div class="content-desc-title">
-								<h3>이름</h3>
-								<input type="text" name="exer_name" value="${res.exer_name }">
+								<h3>타이틀</h3>
+								<input type="text" name="med_title">
 							</div>
 							<hr>
 							<div class="content-image-content">
-								<input type="text" name="exer_thum" readonly="readonly"
-									value="${res.exer_thum }">
-								<c:choose>
-									<c:when test="${fn:contains(res.exer_thum, 'resources/img/')}">
-										<img id=""
-											src="${pageContext.request.contextPath }/${res.exer_thum }"
-											alt="${res.exer_name }">
-									</c:when>
-									<c:otherwise>
-										<img alt="${res.exer_name }" src="${res.exer_thum }">
-									</c:otherwise>
-								</c:choose>
-								<input type="button" id="cancle-img" value="사진 되돌리기">
+								<input type="text" name="med_thum" readonly="readonly">
+								<img alt="" src="" id="Img">
 							</div>
 							<hr>
 							<div class="content-desc-item">
-								<h3>설명</h3>
-								<textarea rows="" cols="" name="exer_description">${res.exer_description }</textarea>
-							</div>
-							<hr>
-							<div class="content-desc-item">
-								<h3>운동 유형</h3>
-								<select name="exer_type" id="exerType">
-									<option value="유산소">유산소</option>
-									<option value="무산소">무산소</option>
-									<option value="기타">기타</option>
-								</select>
-								<h3>1회당 소모 칼로리</h3>
-								<input type="number" name="exer_kcal" value="${res.exer_kcal}">
+								<h3>설명(인용문구)</h3>
+								<textarea rows="" cols="" name="med_quote"></textarea>
 							</div>
 							<hr>
 							<div class="content-desc-item">
 								<h3>카테고리</h3>
-								<select name="subcat_id" id="category">
+								<select name="subcat_id">
 									<c:forEach var="item" items="${category }">
-										<c:choose>
-											<c:when test="${item.subcat_id eq res.subcat_id }">
-												<option value="${item.subcat_id }" selected>${item.subcat_name }</option>
-											</c:when>
-											<c:otherwise>
-												<option value="${item.subcat_id }" selected>${item.subcat_name }</option>
-											</c:otherwise>
-										</c:choose>
+										<option value="${item.subcat_id }">${item.subcat_name }</option>
 									</c:forEach>
 								</select>
 							</div>

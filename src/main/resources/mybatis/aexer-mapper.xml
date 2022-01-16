@@ -10,60 +10,67 @@
 		FROM (SELECT
 		EXER_ID, EXER_NAME,
 		EXER_TYPE, SUBCAT_NAME FROM
-		EXERCISE_TMP JOIN
-		CATEGORY USING(SUBCAT_ID)
+		EXERCISE JOIN
+		CATEGORY
+		USING(SUBCAT_ID)
 		ORDER BY EXER_ID) E) WHERE
 		POSTNO BETWEEN
-		#{start} AND #{end} ORDER BY
+		#{start} AND
+		#{end} ORDER BY
 		POSTNO
 	</select>
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*) FROM
-		EXERCISE_TMP
+		EXERCISE
 	</select>
 	<select id="selectOne" parameterType="int"
 		resultType="exerciseDto">
 		SELECT EXER_ID, EXER_NAME, EXER_TYPE, SUBCAT_ID,
-		SUBCAT_NAME, EXER_THUM, EXER_DESCRIPTION FROM EXERCISE_TMP JOIN
+		SUBCAT_NAME, EXER_THUM, EXER_DESCRIPTION, EXER_KCAL FROM EXERCISE JOIN
 		CATEGORY USING(SUBCAT_ID) WHERE EXER_ID=#{exer_id}
 	</select>
 	<insert id="merge" parameterType="exerciseDto">
 		<selectKey resultType="int" keyProperty="exer_id"
 			order="AFTER">
-			SELECT EXER_ID FROM EXERCISE_TMP E
+			SELECT EXER_ID FROM EXERCISE E
 			WHERE
 			E.EXER_NAME=#{exer_name}
-			AND ROWNUM = 1
+			AND
+			ROWNUM = 1
 		</selectKey>
-		MERGE INTO EXERCISE_TMP E
+		MERGE INTO EXERCISE E
 		USING DUAL
 		ON (E.EXER_NAME=#{exer_name})
 		WHEN
-		NOT MATCHED THEN
+		NOT
+		MATCHED THEN
 		INSERT(EXER_ID,
 		EXER_NAME,
 		EXER_TYPE,
 		EXER_DESCRIPTION,
-		SUBCAT_ID, EXER_THUM)
+		SUBCAT_ID, EXER_THUM, EXER_KCAL)
 		VALUES(EXER_SEQ.NEXTVAL,
 		#{exer_name},
 		#{exer_type},
 		#{exer_description}, #{subcat_id},
-		#{exer_thum})
+		#{exer_thum},
+		#{exer_kcal})
 	</insert>
 	<delete id="delete" parameterType="int">
-		DELETE FROM EXERCISE_TMP WHERE
+		DELETE FROM EXERCISE WHERE
 		EXER_ID = #{exer_id}
 	</delete>
 
 	<update id="update" parameterType="exerciseDto">
-		UPDATE EXERCISE_TMP E SET
-		E.EXER_NAME=#{exer_name},
-		E.EXER_THUM=#{exer_thum},
-		E.EXER_DESCRIPTION=#{exer_description},
-		E.EXER_TYPE=#{exer_type},
-		E.SUBCAT_ID=#{subcat_id}
-		WHERE EXER_ID = #{exer_id}
+		UPDATE EXERCISE E SET
+		EXER_NAME=#{exer_name},
+		EXER_THUM=#{exer_thum},
+		EXER_DESCRIPTION=#{exer_description},
+		EXER_TYPE=#{exer_type},
+		SUBCAT_ID=#{subcat_id},
+		EXER_KCAL=#{exer_kcal}
+		WHERE EXER_ID =
+		#{exer_id}
 	</update>
 	<!-- -->
 
@@ -72,7 +79,7 @@
 		SELECT * FROM (SELECT
 		ROWNUM AS POSTNO, EXER_ID, EXER_NAME,
 		EXER_TYPE, SUBCAT_NAME FROM
-		EXERCISE_TMP JOIN CATEGORY USING(SUBCAT_ID)
+		EXERCISE JOIN CATEGORY USING(SUBCAT_ID)
 		WHERE EXER_TYPE LIKE '%${keyword}%'
 		ORDER BY EXER_ID) WHERE
 		POSTNO
@@ -81,7 +88,8 @@
 	</select>
 	<select id="getByType" resultType="int">
 		SELECT COUNT(*) FROM
-		EXERCISE_TMP WHERE EXER_TYPE LIKE '%${keyword}%'
+		EXERCISE
+		WHERE EXER_TYPE LIKE '%${keyword}%'
 	</select>
 
 	<!-- -->
@@ -91,7 +99,7 @@
 		SELECT * FROM (SELECT
 		ROWNUM AS POSTNO, EXER_ID, EXER_NAME,
 		EXER_TYPE, SUBCAT_NAME FROM
-		EXERCISE_TMP JOIN CATEGORY USING(SUBCAT_ID)
+		EXERCISE JOIN CATEGORY USING(SUBCAT_ID)
 		WHERE EXER_NAME LIKE '%${keyword}%'
 		ORDER BY EXER_ID) WHERE
 		POSTNO
@@ -100,7 +108,8 @@
 	</select>
 	<select id="getByName" resultType="int">
 		SELECT COUNT(*) FROM
-		EXERCISE_TMP WHERE EXER_NAME LIKE '%${keyword}%'
+		EXERCISE
+		WHERE EXER_NAME LIKE '%${keyword}%'
 	</select>
 
 	<!-- -->
@@ -110,7 +119,7 @@
 		SELECT * FROM (SELECT
 		ROWNUM AS POSTNO, EXER_ID, EXER_NAME,
 		EXER_TYPE, SUBCAT_NAME FROM
-		EXERCISE_TMP JOIN CATEGORY USING(SUBCAT_ID)
+		EXERCISE JOIN CATEGORY USING(SUBCAT_ID)
 		WHERE SUBCAT_NAME LIKE '%${keyword}%'
 		ORDER BY EXER_ID) WHERE
 		POSTNO
@@ -119,7 +128,7 @@
 	</select>
 	<select id="getByCategory" resultType="int">
 		SELECT COUNT(*) FROM
-		EXERCISE_TMP JOIN CATEGORY USING(SUBCAT_ID) WHERE SUBCAT_NAME LIKE
+		EXERCISE JOIN CATEGORY USING(SUBCAT_ID) WHERE SUBCAT_NAME LIKE
 		'%${keyword}%'
 	</select>
 </mapper>

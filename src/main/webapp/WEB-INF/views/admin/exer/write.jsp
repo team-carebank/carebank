@@ -148,6 +148,8 @@
 									<option value="무산소">무산소</option>
 									<option value="기타">기타</option>
 								</select>
+								<h3>1회당 소모 칼로리</h3>
+								<input type="number" name="exer_kcal">
 							</div>
 							<hr>
 							<div class="content-desc-item">

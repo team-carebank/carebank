@@ -53,6 +53,7 @@
   		<mapper resource = "/mybatis/aexer-mapper.xml"/>
   		<mapper resource = "/mybatis/amember-mapper.xml"/>
   		<mapper resource = "/mybatis/tmmeal-mapper.xml"/>
+  		<mapper resource = "/mybatis/amedi-mapper.xml"/>
 	</mappers>
 
 </configuration>

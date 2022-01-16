@@ -186,6 +186,7 @@ public class SuppleController {
 			} catch (Exception e) {
 				logger.error("PREFERENCE IS NOT SET");
 				model.addAttribute("msg", "선호도를 체크한 후에 이용이 가능합니다!");
+				model.addAttribute("url", "regis_prefer.do");
 
 				return "msg/alert";
 			}
