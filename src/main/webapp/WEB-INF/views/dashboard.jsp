@@ -298,8 +298,8 @@ function drawChart() {
 <div class="dashcontainer">
 	
 	<div id="nutrientcontainer"> 
-           <h3>nutrient</h3>
-        <p>오늘 섭취한 영양정보</p>
+           <h3>nutrients</h3>
+        <p>이번주 섭취한 영양정보</p>
 		<div id="nutrient">
         </div>
 	</div> 
