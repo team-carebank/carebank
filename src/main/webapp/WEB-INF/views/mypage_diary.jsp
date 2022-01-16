@@ -178,12 +178,12 @@ $(function(){
 	});
 			// 캘린더 랜더링
 	getMyMeal(calendar); // 다이어리-식단 기록 내용 불러오기
+	getMyExer(calendar);
 	calendar.render();
 	
 });
 </script>
 <script>
-// 왼쪽에 있는 공백을 제거한다. 
 function getMyMeal(calendar) {
 	$.ajax({
 		url: 'mymeallist.do',
@@ -191,6 +191,23 @@ function getMyMeal(calendar) {
 			if(res != null || res != undefiend){
 			var mealList = res.res;
 				mealList.forEach(function(mealData) {
+					let time = mealData.meal_time;
+					let color;
+					switch(time){
+						case '아침' :
+							color = '#fda403'
+							break;
+						case '점심' :
+							color = '#e8751a'
+							break;
+						case '저녁' :
+							color = '#c51350'
+							break;
+						default :
+							color = '#8a1253'
+							break;
+					}
+					
 					calendar.addEventSource( {
 						events: [
 							{
@@ -198,7 +215,7 @@ function getMyMeal(calendar) {
 								title: mealData.meal_time+":"+mealData.meal_name,
 								start: mealData.regdate
 							}],
-						color: 'orange',
+						color: color,
 						className: 'calendar-mymeal'
 					});
 				});
@@ -211,7 +228,32 @@ function getMyMeal(calendar) {
 		}
 	});
 }
-
+function getMyExer(calendar) {
+	$.ajax({
+		url: 'myexerlist.do',
+		success: function(res) {
+			if(res != null || res != undefiend){
+			var exerList = res.res;
+				exerList.forEach(function(data) {
+					calendar.addEventSource( {
+						events: [
+							{
+								title: data.exer_name,
+								start: data.regdate
+							}],
+						color: '#5585b5',
+						className: 'calendar-myexer'
+					});
+				});
+			}else {
+				window.location.href="loginform.do";
+			}
+		},
+		error: function() {
+			alert("통신 오류");
+		}
+	});
+}
 function getOption(w, h){
 	//팝업이 화면의 중앙에 오게 설정
 	var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
@@ -247,6 +289,10 @@ $(document).on("click", ".add-button#my_meal", function(e){
 	
 	window.open(url, name, option);
 });
+
+$(document).on("click", ".add-button#my_exer", function(e){
+	window.open("${pageContext.request.contextPath}/exerciselist.do");
+});
 </script>
 </head>
 <body>
@@ -258,10 +304,12 @@ $(document).on("click", ".add-button#my_meal", function(e){
 		<div id='calendar-container'>
 			<div id='calendar'></div>
 			<div class="calendar-button">
-				<button class="add-button" type="button" onclick="click_add();">병원 기록</button>
+				<button class="add-button" type="button" onclick="click_add();">병원
+					기록</button>
 				<button class="pill-button add-button" type="button"
 					onclick="click_pills();">영양제 기록</button>
 				<button class="add-button" type="button" id="my_meal">식단 기록</button>
+				<button class="add-button" type="button" id="my_exer">운동 기록</button>
 			</div>
 		</div>
 	</div>

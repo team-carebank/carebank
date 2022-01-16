@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yee.carebank.model.dao.MyMealDao;
+import com.yee.carebank.model.dto.MyExerciseDto;
 import com.yee.carebank.model.dto.MyMealDto;
 
 @Service
@@ -32,5 +33,9 @@ public class MyMealBiz {
 
 	public int delete(int record_id) {
 		return dao.delete(record_id);
+	}
+
+	public List<MyExerciseDto> selectList(int user_no, int i) {
+		return dao.selectList(user_no, 1);
 	}
 }
