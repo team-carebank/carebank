@@ -27,4 +27,10 @@ public class UserBiz {
 	public int idchk(String user_id) {
 		return userdao.idchk(user_id);
 	}
+
+	public int updatePassword(UserDto login_info) {
+		return userdao.updatePassword(login_info);
+	
+	}
+
 }

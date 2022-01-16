@@ -51,5 +51,18 @@ public class UserDao {
 		}
 		return res;
 	}
+
+
+	public int updatePassword(UserDto login_info) {
+		int res = 0;
+
+		try {
+			res = sqlSession.update(NAMESPACE + "updatePwd", login_info);
+		} catch (Exception e) {
+			System.out.println("[error] : updatePwd");
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
 }
