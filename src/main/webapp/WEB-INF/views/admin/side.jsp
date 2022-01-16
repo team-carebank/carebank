@@ -14,6 +14,7 @@
 	background: linear-gradient(to right, #04AA6D, #05C480);
 	color: white;
 }
+
 </style>
 </head>
 <body>
