@@ -49,10 +49,25 @@ body>div {
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 10 * 1024 * 1024; // 10MB
+	
 	$(document).on("click", "#upload", function(e) {
 		var formData = new FormData();
+		var file = $("#file")[0].files[0];
 
-		formData.append('file', $("#file")[0].files[0]);
+		
+		if(file.size >= maxSize){
+			alert("업로드 가능한 크기를 초과하였습니다. 최대 10MB까지 업로드 가능합니다.");
+			return false;
+		}
+		
+		if(regex.test(file.name)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+
+		formData.append('file', file);
 
 		$.ajax({
 			url : 'upload.do',
