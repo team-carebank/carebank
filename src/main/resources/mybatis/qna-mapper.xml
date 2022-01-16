@@ -22,7 +22,25 @@
   	</insert>
   
   	<select id="selectList" resultMap="qnaMap" parameterType="int">
-  		SELECT * FROM QNA
-  		WHERE USER_NO = #{user_no}
+  		SELECT * FROM QNA 
+  		WHERE USER_NO = ${user_no} 
+  		ORDER BY QA_NO DESC
   	</select>
+  	
+  	<select id="selectOne" parameterType="int" resultMap="qnaMap">
+  		SELECT * FROM QNA 
+  		WHERE QA_NO = ${qa_no}
+  	</select>  	
+  	
+  	<update id="update" parameterType="qnaDto">
+  		UPDATE QNA
+  		SET TITLE = #{title}, CONTENT = #{content}
+  		WHERE QA_NO = ${qa_no}
+  	</update>  
+  	
+  	<delete id="delete" parameterType="int">
+  		DELETE FROM QNA
+  		WHERE QA_NO = ${qa_no}
+  	</delete>  		
+  	
   </mapper>

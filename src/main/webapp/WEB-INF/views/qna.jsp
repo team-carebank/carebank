@@ -171,7 +171,7 @@ tr{
            		<c:forEach items="${list }" var="list">
             		<tr>	
                 		<td>${list.qa_no }</td>
-                		<td>${list.title }</td>
+                		<td><a href="qnaupdateform.do?qa_no=${list.qa_no }">${list.title }</a></td>
                 		<td>${list.status }</td>
             		</tr>
             	</c:forEach>
