@@ -20,41 +20,37 @@ import com.yee.carebank.model.dto.UserDto;
 @Controller
 public class ExerciseController {
 
-	private static Logger logger=LoggerFactory.getLogger(ExerciseController.class);
-	
-	
+	private static Logger logger = LoggerFactory.getLogger(ExerciseController.class);
+
 	@Autowired
 	private ExerciseBiz biz;
-	
+
 	@Autowired
 	private MyExerciseBiz mybiz;
-	
+
 	@RequestMapping("/exerciselist.do")
 	public String exerciselist(Model model) {
 		logger.info("exercise list");
-		
-		model.addAttribute("list", biz.selectList()); 
-		
+
+		model.addAttribute("list", biz.selectList());
+
 		return "exercise_main";
 	}
-	
-	
-	
-	
-	
+
 	@RequestMapping("/exerdetail.do")
-	public String detail(Model model, Integer exer_id,MyExerciseDto dto,HttpSession session) {
-	 
-		logger.info("exerlist detail"); 
+	public String detail(Model model, Integer exer_id, MyExerciseDto dto, HttpSession session) {
+
+		logger.info("exerlist detail");
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
-		
-		 
-		int user_no=dto.setUser_no(loginUser.getUser_no());
-		model.addAttribute("dto", biz.selectOne(exer_id)); 
-		model.addAttribute("mydtooo",mybiz.selectList(user_no));
-		 
+
+		try {
+			model.addAttribute("dto", biz.selectOne(exer_id));
+			model.addAttribute("mydtooo", mybiz.selectList(loginUser.getUser_no()));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect: main.do";
+		}
 		return "exercise_detail";
 	}
-	 
-}
 
+}
