@@ -112,7 +112,6 @@ public class Admin3rdController {
 		} else {
 			model.addAttribute("msg", "데이터가 추가되지 않았습니다. 이미 데이터가 존재합니다.");
 		}
-
 		model.addAttribute("url", "exer.do");
 
 		return redirectPath;
@@ -150,8 +149,7 @@ public class Admin3rdController {
 		} else {
 			model.addAttribute("msg", "데이터가 수정되지 않았습니다.");
 		}
-
-		model.addAttribute("url", "exer.do");
+		model.addAttribute("url", "einfo.do?id=" + dto.getExer_id());
 
 		return redirectPath;
 	}
@@ -303,8 +301,7 @@ public class Admin3rdController {
 		} else {
 			model.addAttribute("msg", "데이터가 수정되지 않았습니다.");
 		}
-
-		model.addAttribute("url", "medi.do");
+		model.addAttribute("url", "mtinfo.do?id=" + dto.getMeditate_id());
 
 		return redirectPath;
 	}

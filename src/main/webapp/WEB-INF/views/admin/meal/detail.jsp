@@ -18,6 +18,10 @@
 	color: white;
 	box-shadow: -10px 0 0 white;
 }
+
+.content-option-menu {
+	grid-template-columns: repeat(5, 1fr);
+}
 </style>
 <script>
 	$(document).on("click", "button#delete", function(e) {
@@ -83,7 +87,11 @@
 				</div>
 				<div class="main-content-option">
 					<div class="content-option-menu">
-						<button onclick="history.back()">목록</button>
+						<button id="prev"
+							onclick="window.location.href='minfo.do?id=${meal.meal_id-1}'">이전</button>
+						<button id="next"
+							onclick="window.location.href='minfo.do?id=${meal.meal_id+1}'">다음</button>
+						<button onclick="window.location.href='meal.do'">목록</button>
 						<button
 							onclick="window.location.href='mmodi.do?id=${meal.meal_id}'">수정</button>
 						<button id="delete">삭제</button>
