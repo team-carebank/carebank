@@ -248,7 +248,7 @@ public class Admin1stController {
 		model.addAttribute("cnt", biz.getFTotalCount());
 		model.addAttribute("page", page);
 
-		return "admin/food/flist";
+		return "admin/food/list";
 	}
 
 	@RequestMapping("admin/fdel.do")
@@ -282,7 +282,7 @@ public class Admin1stController {
 			return "redirect: ../main.do";
 		}
 
-		return "admin/food/fwrite";
+		return "admin/food/write";
 	}
 
 	@RequestMapping("admin/finsert.do")
@@ -333,7 +333,7 @@ public class Admin1stController {
 
 		model.addAttribute("food", biz.selectFood(food_id));
 
-		return "admin/food/fmodi";
+		return "admin/food/modify";
 
 	}
 
@@ -373,7 +373,7 @@ public class Admin1stController {
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("page", page);
 
-		return "admin/food/fsearch";
+		return "admin/food/search";
 	}
 
 	/*
