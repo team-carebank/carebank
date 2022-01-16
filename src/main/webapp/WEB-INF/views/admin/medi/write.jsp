@@ -15,31 +15,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/admin.js"></script>
 <style>
-#mForm input[type="text"], #mForm textarea, #mForm select, #mForm>.content-desc-item>div>span,
-	#mForm input[type="number"] {
-	width: 300px;
-	min-height: 50px;
-	font-size: large;
-}
-
-#mForm>.content-desc-item>div>div {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	margin-block: 20px;
-	align-items: center;
-}
-
-.desc-item-img {
-	display: grid !important;
-	grid-gap: 10px;
-	justify-items: starat;
-}
-
-.desc-item-img img {
-	width: 300px;
-}
-
 .content-admin-side>#medi {
 	background: linear-gradient(to right, #04AA6D, #05C480);
 	color: white;
@@ -87,11 +65,6 @@
 	$(document).on("click", "#submit", function(e){
 		document.getElementById("mForm").submit();
 	});
-	
-	function resize(obj) {
-		obj.style.height = "1px";
-		obj.style.height = (obj.scrollHeight) + "px";
-	}
 </script>
 </head>
 <%@ include file="../header.jsp"%>
@@ -113,8 +86,12 @@
 							</div>
 							<hr>
 							<div class="content-image-content">
-								<input type="text" name="med_thum" readonly="readonly">
-								<img alt="" src="" id="Img">
+								<h3>이미지</h3>
+								<div class="desc-item-img">
+									<input type="text" name="med_thum" readonly="readonly">
+									<img alt="이미지" src="" id="preview-img"><input
+										type="button" id="upload" value="사진 업로드하기">
+								</div>
 							</div>
 							<hr>
 							<div class="content-desc-item">

@@ -15,48 +15,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/admin.js"></script>
 <style>
-#mForm input[type="text"], #mForm textarea, #mForm select, #mForm>.content-desc-item>div>span,
-	#mForm input[type="number"] {
-	width: 300px;
-	min-height: 50px;
-	font-size: large;
-}
-
-#mForm>.content-desc-item>div>div {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	margin-block: 20px;
-	align-items: center;
-}
-
 #one>#add-food, #zero>#add-food {
 	grid-column: 1/3;
 }
 
-#remove-food, #add-food, #cancle-img {
-	border: none;
-	border-radius: 2px;
-	padding: 5px 10px;
-}
-
-#remove-food:hover, #add-food:hover, #cancle-img:hover {
-	background-color: green;
-	color: white;
-}
-
 #one>#remove-food, #zero>#remove-food {
 	display: none;
-}
-
-.desc-item-img {
-	display: grid !important;
-	grid-gap: 10px;
-	justify-items: starat;
-}
-
-.desc-item-img img {
-	width: 300px;
 }
 
 .content-admin-side>#exer {
@@ -106,11 +73,6 @@
 	$(document).on("click", "#submit", function(e){
 		document.getElementById("mForm").submit();
 	});
-	
-	function resize(obj) {
-		obj.style.height = "1px";
-		obj.style.height = (obj.scrollHeight) + "px";
-	}
 </script>
 </head>
 <%@ include file="../header.jsp"%>
@@ -133,7 +95,8 @@
 							<hr>
 							<div class="content-image-content">
 								<input type="text" name="exer_thum" readonly="readonly">
-								<img alt="" src="" id="Img">
+								<img alt="" src="" id="preview-img">
+								<input type="button" id="upload" value="사진 업로드하기">
 							</div>
 							<hr>
 							<div class="content-desc-item">
