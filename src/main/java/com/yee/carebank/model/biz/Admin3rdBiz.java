@@ -127,4 +127,12 @@ public class Admin3rdBiz {
 	public int updatePlaylist(MeditationDto dto) {
 		return medi.updatePlaylist(dto);
 	}
+
+	public ExerciseDto selectTM(int exer_id) {
+		return exer.selectTM(exer_id);
+	}
+
+	public int updateTM(ExerciseDto dto) {
+		return exer.updateTM(dto);
+	}
 }

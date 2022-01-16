@@ -200,12 +200,12 @@
 }
 
 .content-option-menu:nth-child(1) {
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	justify-self: start;
 }
 
 .content-option-menu:nth-child(2) {
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	justify-self: end;
 }
 
@@ -238,8 +238,22 @@
 
 .content-image-content>img {
 	object-fit: cover !important;
-	width: 600px;
+	width: 300px;
 	height: 100%;
+}
+
+#playlist, #teachable {
+	background: none;
+	font-size: medium;
+	border: none;
+	margin-block: 0;
+	padding: 10px 20px;
+}
+
+#playlist:hover, #teachable:hover {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	cursor: pointer;
 }
 
 @media screen and (max-width:1200px) {

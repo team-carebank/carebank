@@ -133,4 +133,13 @@ public class ExerciseDto {
 		this.exer_tm_url = exer_tm_url;
 	}
 
+	@Override
+	public String toString() {
+		return "ExerciseDto [exer_id=" + exer_id + ", exer_name=" + exer_name + ", exer_type=" + exer_type
+				+ ", exer_description=" + exer_description + ", subcat_id=" + subcat_id + ", subcat_name=" + subcat_name
+				+ ", exer_thum=" + exer_thum + ", exer_title=" + exer_title + ", exer_kcal=" + exer_kcal
+				+ ", exer_notice=" + exer_notice + ", exer_video_url=" + exer_video_url + ", exer_tm_url=" + exer_tm_url
+				+ "]";
+	}
+
 }
