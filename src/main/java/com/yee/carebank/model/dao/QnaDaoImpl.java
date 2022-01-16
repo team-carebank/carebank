@@ -43,6 +43,46 @@ public class QnaDaoImpl implements QnaDao{
 		return list;
 	}
 
+	@Override
+	public QnaDto selectOne(int qa_no) {
+		QnaDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", qa_no);
+		} catch (Exception e) {
+			System.out.println("[error : qna selectOne]");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public int update(QnaDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"update", dto);
+		} catch (Exception e) {
+			System.out.println("[error : QNA UPDATE]");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int delete(int qa_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"delete", qa_no);
+		} catch (Exception e) {
+			System.out.println("[error : QNA DELETE");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 	
 
 }

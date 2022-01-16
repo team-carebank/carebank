@@ -24,4 +24,19 @@ public class QnaBizImpl implements QnaBiz{
 		return dao.selectList(user_no);
 	}
 
+	@Override
+	public QnaDto selectOne(int qa_no) {
+		return dao.selectOne(qa_no);
+	}
+
+	@Override
+	public int update(QnaDto dto) {
+		return dao.update(dto);
+	}
+
+	@Override
+	public int delete(int qa_no) {
+		return dao.delete(qa_no);
+	}
+
 }

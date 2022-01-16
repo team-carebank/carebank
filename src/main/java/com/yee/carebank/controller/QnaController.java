@@ -73,4 +73,46 @@ public class QnaController {
 		}
 		
 	}
+	
+	@RequestMapping("/qnaupdateform.do")
+	public String updateform(Model model, int qa_no) {
+		logger.info("QNA updateForm");
+		
+		model.addAttribute("qna",biz.selectOne(qa_no));
+		
+		return "qnaupdate";
+	}
+	
+	@RequestMapping("/updateQna.do")
+	public String update(QnaDto dto) {
+		logger.info("QNA UPDATE");
+		
+		int res = biz.update(dto);
+		
+		if(res>0) {
+			return "redirect:qna.do?user_no="+dto.getUser_no();
+		}else {
+			return "redirect:qnaupdateform.do?user_no"+dto.getUser_no();
+		}
+			
+	}
+	
+	@RequestMapping("/qnadelete.do")
+	public String delete(int qa_no) {
+		logger.info("QNA DELETE");
+		
+		int res = biz.delete(qa_no);
+		
+		if(res>0) {
+			return "redirect:qna.do";
+		}else {
+			return "redirect:qnaupdateform.do";
+		}
+	}
+	
+	
+	
+	
+	
+	
 }
