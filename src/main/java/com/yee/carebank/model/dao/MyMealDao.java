@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yee.carebank.model.dto.MyExerciseDto;
 import com.yee.carebank.model.dto.MyMealDto;
 
 @Repository
@@ -53,5 +54,14 @@ public class MyMealDao {
 		res = sqlSession.delete(NAMESPACE + "delete", record_id);
 
 		return res;
+	}
+
+	public List<MyExerciseDto> selectList(int user_no, int i) {
+		try {
+			return sqlSession.selectList(NAMESPACE + "selectExer", user_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

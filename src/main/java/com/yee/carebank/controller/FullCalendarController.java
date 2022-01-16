@@ -47,28 +47,15 @@ public class FullCalendarController {
 		logger.info("mypage_diary");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
-		/*
-		 * if(loginUser != null) List<Dto> list = sBiz.selectList(parameter값으로 loginUser
-		 * getUser_no) else {
-		 * 
-		 * List<Dto> list = sBiz.selectList(1011); }
-		 * 
-		 * model.addattribute("list", list);
-		 */
 
 		List<ScheduleDto> list = null;
+		List<PillsDto> Pills = null;
+
 		if (loginUser != null) {
 			list = sBiz.selectList(loginUser.getUser_no());
-		} else {
-			list = sBiz.selectList(1011);
-			// return "main";
-		}
-
-		List<PillsDto> Pills = null;
-		if (loginUser != null) {
 			Pills = pBiz.selectList(loginUser.getUser_no());
 		} else {
-			Pills = pBiz.selectList(1011);
+			return "redirect: main.do";
 		}
 
 		model.addAttribute("dto", list); // list

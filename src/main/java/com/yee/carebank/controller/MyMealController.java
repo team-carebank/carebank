@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.MyMealBiz;
+import com.yee.carebank.model.dto.MyExerciseDto;
 import com.yee.carebank.model.dto.MyMealDto;
 import com.yee.carebank.model.dto.UserDto;
 
@@ -165,4 +166,24 @@ public class MyMealController {
 		}
 		return map;
 	}
+
+	@RequestMapping("/myexerlist.do")
+	@ResponseBody
+	public Map<String, List<MyExerciseDto>> selectExer(HttpSession session) {
+		Map<String, List<MyExerciseDto>> map = new HashMap<String, List<MyExerciseDto>>();
+
+		/*
+		 * 로그인 기능 연결시 수정
+		 */
+		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		try {
+			map.put("res", biz.selectList(loginUser.getUser_no(), 1));
+		} catch (Exception e) {
+			return null;
+		}
+
+		return map;
+	}
+
 }
