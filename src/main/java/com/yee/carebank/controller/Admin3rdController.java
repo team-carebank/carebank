@@ -376,4 +376,36 @@ public class Admin3rdController {
 		else
 			return false;
 	}
+
+	@RequestMapping("admin/exertm.do")
+	public String selectTM(HttpSession session, Model model, @RequestParam("id") int exer_id) {
+		logger.info("GET PLAYLIST DATA [MEDITATION]");
+
+		if (check((UserDto) session.getAttribute("login_info"))) {
+			return "redirect: ../main.do";
+		}
+
+		model.addAttribute("res", a3.selectTM(exer_id));
+
+		return "admin/exer/api";
+	}
+
+	@RequestMapping("admin/exerapi.do")
+	@ResponseBody
+	public boolean updateTM(HttpSession session, ExerciseDto dto) {
+		logger.info("UPDATE PLAYLIST DATA [MEDITATION]");
+
+		if (check((UserDto) session.getAttribute("login_info"))) {
+			return false;
+		}
+
+		System.out.println(dto);
+
+		int res = a3.updateTM(dto);
+
+		if (res > 0)
+			return true;
+		else
+			return false;
+	}
 }

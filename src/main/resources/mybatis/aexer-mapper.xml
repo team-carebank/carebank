@@ -131,4 +131,22 @@
 		EXERCISE JOIN CATEGORY USING(SUBCAT_ID) WHERE SUBCAT_NAME LIKE
 		'%${keyword}%'
 	</select>
+	<select id="selectTM" resultType="ExerciseDto"
+		parameterType="int">
+		SELECT E.EXER_NAME, TM.*
+		FROM EXERCISE E JOIN TM_EXERCISE
+		TM ON(E.EXER_ID = TM.EXER_ID)
+		WHERE TM.EXER_ID = #{exer_id}
+	</select>
+	<update id="updateTM" parameterType="ExerciseDto">
+		MERGE INTO TM_EXERCISE T
+		USING DUAL 
+		ON (T.EXER_ID = #{exer_id})
+		WHEN MATCHED THEN
+		UPDATE SET T.EXER_TITLE=#{exer_title}, T.EXER_NOTICE=#{exer_notice},
+		T.EXER_VIDEO_URL=#{exer_video_url}, T.EXER_TM_URL=#{exer_tm_url}
+		WHEN NOT MATCHED THEN
+		INSERT (T.EXER_ID, T.EXER_TITLE, T.EXER_NOTICE, T.EXER_VIDEO_URL, T.EXER_TM_URL)
+		VALUES (#{exer_id}, #{exer_title},#{exer_notice}, #{exer_video_url}, #{exer_tm_url})
+	</update>
 </mapper>

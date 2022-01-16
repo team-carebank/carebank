@@ -89,4 +89,31 @@ public class AExerDao {
 			return -1;
 		}
 	}
+
+	public ExerciseDto selectTM(int exer_id) {
+		ExerciseDto dto = null;
+
+		try {
+			dto = sqlSession.selectOne(NAMESPACE + "selectTM", exer_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		if (dto == null) {
+			dto = new ExerciseDto();
+			dto.setExer_id(exer_id);
+		}
+
+		return dto;
+	}
+
+	public int updateTM(ExerciseDto dto) {
+		try {
+			return sqlSession.update(NAMESPACE + "updateTM", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
 }

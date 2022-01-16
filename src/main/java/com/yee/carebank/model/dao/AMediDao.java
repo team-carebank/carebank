@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yee.carebank.model.dto.ExerciseDto;
 import com.yee.carebank.model.dto.MeditationDto;
 
 @Repository
