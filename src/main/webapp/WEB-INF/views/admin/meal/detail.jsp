@@ -45,6 +45,18 @@
 							<h1>${meal.meal_name }</h1>
 						</div>
 						<hr>
+						<div class="content-image-content">
+							<c:choose>
+								<c:when test="${meal.src ne null }">
+									<img id="" src="${meal.src }" alt="${meal.meal_name }">
+								</c:when>
+								<c:otherwise>
+									<img id="" alt="${meal.meal_name }"
+										src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg">
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<hr>
 						<div class="content-desc-item">
 							<h3>카테고리</h3>
 							<span style="font-size: large">${meal.subcat_name }</span>
@@ -64,18 +76,6 @@
 								</c:forEach>
 							</div>
 						</div>
-						<hr>
-					</div>
-					<div class="content-image-content">
-						<c:choose>
-							<c:when test="${meal.src ne null }">
-								<img id="" src="${meal.src }" alt="${meal.meal_name }">
-							</c:when>
-							<c:otherwise>
-								<img id="" alt="${meal.meal_name }"
-									src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg">
-							</c:otherwise>
-						</c:choose>
 					</div>
 				</div>
 				<div>
@@ -83,8 +83,7 @@
 				</div>
 				<div class="main-content-option">
 					<div class="content-option-menu">
-						<button id="prev"
-							onclick="window.location.href='minfo.do?id=${meal.meal_id-1}'">이전</button>
+						<button id="prev" onclick="history.back()">이전</button>
 						<button onclick="window.location.href='meal.do'">목록</button>
 						<button id="next"
 							onclick="window.location.href='minfo.do?id=${meal.meal_id+1}'">다음</button>

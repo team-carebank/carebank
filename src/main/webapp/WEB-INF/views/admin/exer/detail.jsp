@@ -33,6 +33,30 @@
 			return false;
 		}
 	})
+	
+	$(document).on("click", "#teachable", function(e) {
+		var w = 600;
+		var h = 600;
+		
+		var option = getOption(w, h);
+		
+		var url = "exertm.do?id=" + ${exer.exer_id};
+		var name = "Teachable Machine 정보 변경";
+		
+		 window.open(url, name, option);
+	});
+	
+	function getOption(w, h){
+		//팝업이 화면의 중앙에 오게 설정
+		var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+	    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+	    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+	    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+	    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+	    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+		return "width="+w+", height="+h+", left="+left+", top="+top+", location=no, resizable=no";
+	}
 </script>
 </head>
 <%@ include file="../header.jsp"%>
@@ -83,6 +107,12 @@
 							<h3>카테고리</h3>
 							<span>${exer.subcat_name}</span>
 						</div>
+						<hr>
+						<div class="content-desc-item">
+							<span style="margin-right: 10px;">Teachable Machine을
+								연결해보세요!</span>
+							<button id="teachable">클릭하여 설정하기</button>
+						</div>
 					</div>
 				</div>
 				<div>
@@ -90,8 +120,7 @@
 				</div>
 				<div class="main-content-option">
 					<div class="content-option-menu">
-						<button id="prev"
-							onclick="window.location.href='einfo.do?id=${exer.exer_id-1}'">이전</button>
+						<button id="prev" onclick="history.back()">이전</button>
 						<button onclick="window.location.href='exer.do'">목록</button>
 						<button id="next"
 							onclick="window.location.href='einfo.do?id=${exer.exer_id+1}'">다음</button>

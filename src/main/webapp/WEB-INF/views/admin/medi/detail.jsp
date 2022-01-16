@@ -24,20 +24,6 @@
 .content-image-content img {
 	width: 300px;
 }
-
-#playlist {
-	background: none;
-	font-size: medium;
-	border: none;
-	margin-block: 0;
-	padding: 10px 20px;
-}
-
-#playlist:hover {
-	background: linear-gradient(to right, #04AA6D, #05C480);
-	color: white;
-	cursor: pointer;
-}
 </style>
 <script>
 	$(document).on("click", "button#delete", function(e) {
@@ -71,7 +57,6 @@
 
 		return "width="+w+", height="+h+", left="+left+", top="+top+", location=no, resizable=no";
 	}
-	
 </script>
 </head>
 <%@ include file="../header.jsp"%>
@@ -125,8 +110,7 @@
 				</div>
 				<div class="main-content-option">
 					<div class="content-option-menu">
-						<button id="prev"
-							onclick="window.location.href='mtinfo.do?id=${res.meditate_id-1}'">이전</button>
+						<button id="prev" onclick="history.back()">이전</button>
 						<button onclick="window.location.href='medi.do'">목록</button>
 						<button id="next"
 							onclick="window.location.href='mtinfo.do?id=${res.meditate_id+1}'">다음</button>
