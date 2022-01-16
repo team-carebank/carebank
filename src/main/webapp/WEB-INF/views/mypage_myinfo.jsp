@@ -230,7 +230,7 @@ input {
 
 						</div>
 						<div class="board-header" id="footer">
-							<img src="resources/img/info_update.png" class="update_img"
+							<img src="resources/img/myinfo_update.png" class="update_img"
 								onclick="change();">
 
 
@@ -264,11 +264,11 @@ input {
 											value="#${preferDto.subcat_name }">
 									</c:forEach>
 						</div>
-						<img src="resources/img/prefer_btn.png" class="update_img"
-							onclick="location.href = 'regis_prefer.do?user_no=${login_info.user_no}'">
 
 						</c:otherwise>
 						</c:choose>
+						<img src="resources/img/prefer_set_btn.png" class="update_img"
+							onclick="location.href = 'regis_prefer.do?user_no=${login_info.user_no}'">
 					</div>
 				</div>
 			</div>
