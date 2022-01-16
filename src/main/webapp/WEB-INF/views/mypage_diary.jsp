@@ -258,9 +258,7 @@ $(document).on("click", ".add-button#my_meal", function(e){
 		<div id='calendar-container'>
 			<div id='calendar'></div>
 			<div class="calendar-button">
-				<button class="add-button" type="button" onclick="click_add();">병원기록</button>
-				<button class="mood-button add-button" type="button"
-					onclick="click_mood();">기분상태</button>
+				<button class="add-button" type="button" onclick="click_add();">병원 기록</button>
 				<button class="pill-button add-button" type="button"
 					onclick="click_pills();">영양제 기록</button>
 				<button class="add-button" type="button" id="my_meal">식단 기록</button>
