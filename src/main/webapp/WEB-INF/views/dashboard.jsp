@@ -115,28 +115,10 @@ margin-left:40px;
             place-content: center;
         }
 
-        .content-admin-side {
-            min-width: 300px;
-            height: 105vh;
-            min-height: 1000px;
-            box-shadow: 0px 10px 10px gainsboro;
-        }
-
-        .content-admin-side,
-        .content-admin-side div {
-            justify-self: stretch;
-        }
-
-        .content-admin-side div * {
-            display: block;
-            padding-block: 20px;
-            padding-left: 20px;
-            border-bottom: 1px solid gainsboro;
-        }
-
-        .content-admin-side div span:hover {
-            cursor: pointer;
-        }
+#dashboard {
+	background-color: #287743;
+	color: white;
+}
 
 </style>
 
@@ -272,33 +254,14 @@ function drawChart() {
      <div class="container">
      
         <div class="body-content">
-            <div class="content-admin-side">
-                <div>
-                    <h3>마이페이지</h3>
-                    <!--메뉴 구분선-->
-                    <h4>Information</h4>
-                    <span>내 정보</span>
-                    <span>관심사 </span>
-                    <span>대시보드</span>
-                    <!--메뉴 구분선-->
-                    <h4></h4>
-                  
-                  
-                    <!--메뉴 구분선-->
-                    <h4>Customer Service</h4>
-                    <span>공지사항</span>
-                    <span>QnA</span>
-                    <span>FAQ</span>
-                </div>
-            </div>
-           
+       		<%@ include file="mypage_side.jsp"%>
         </div>
     </div>
      
 <div class="dashcontainer">
 	
 	<div id="nutrientcontainer"> 
-           <h3>nutrients</h3>
+           <h3>nutrient</h3>
         <p>이번주 섭취한 영양정보</p>
 		<div id="nutrient">
         </div>
