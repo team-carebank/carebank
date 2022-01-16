@@ -91,7 +91,7 @@
 							onclick="window.location.href='minfo.do?id=${meal.meal_id-1}'">이전</button>
 						<button id="next"
 							onclick="window.location.href='minfo.do?id=${meal.meal_id+1}'">다음</button>
-						<button onclick="meal.do">목록</button>
+						<button onclick="window.location.href='meal.do'">목록</button>
 						<button
 							onclick="window.location.href='mmodi.do?id=${meal.meal_id}'">수정</button>
 						<button id="delete">삭제</button>

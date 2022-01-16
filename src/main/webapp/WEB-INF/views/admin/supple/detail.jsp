@@ -74,7 +74,7 @@
 				</div>
 				<div class="main-content-option">
 					<div class="content-option-menu">
-						<button onclick="supple.do">목록</button>
+						<button onclick="window.location.href='supple.do'">목록</button>
 						<button
 							onclick="window.location.href='smodi.do?id=${res.supple.supple_id}'">수정</button>
 						<button id="delete">삭제</button>

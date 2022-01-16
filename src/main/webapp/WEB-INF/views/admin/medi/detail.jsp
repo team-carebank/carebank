@@ -25,8 +25,18 @@
 	width: 300px;
 }
 
-.content-option-menu {
-	grid-template-columns: repeat(4, 1fr);
+#playlist {
+	background: none;
+	font-size: medium;
+	border: none;
+	margin-block: 0;
+	padding: 10px 20px;
+}
+
+#playlist:hover {
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+	cursor: pointer;
 }
 </style>
 <script>
@@ -103,6 +113,11 @@
 							<h3>카테고리</h3>
 							<span>${res.subcat_name}</span>
 						</div>
+						<hr>
+						<div class="content-desc-item">
+							<span style="margin-right: 10px;">플레이리스트를 수정해야하나요?</span>
+							<button id="playlist">여기를 클릭하세요!</button>
+						</div>
 					</div>
 				</div>
 				<div>
@@ -110,8 +125,7 @@
 				</div>
 				<div class="main-content-option">
 					<div class="content-option-menu">
-						<button onclick="medi.do">목록</button>
-						<button id="playlist">플레이리스트</button>
+						<button onclick="window.location.href='medi.do'">목록</button>
 						<button
 							onclick="window.location.href='mtmodi.do?id=${res.meditate_id}'">수정</button>
 						<button id="delete">삭제</button>
