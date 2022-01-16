@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	alert("${msg}");
-	window.location.href = "${pageContext.request.contextPath}/main.do"
+	window.location.href = "${pageContext.request.contextPath}/${url}";
 </script>
 </head>
 <body>

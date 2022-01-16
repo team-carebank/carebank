@@ -26,9 +26,6 @@ public class DashboardController {
 	private MyExerciseBiz mybiz;
 
 	@Autowired
-	private MyMealBiz mealbiz;
-
-	@Autowired
 	private TmMealBiz tmbiz;
 
 	@RequestMapping("/dashboard.do")
