@@ -125,7 +125,13 @@
 				</div>
 				<div class="main-content-option">
 					<div class="content-option-menu">
+						<button id="prev"
+							onclick="window.location.href='mtinfo.do?id=${res.meditate_id-1}'">이전</button>
 						<button onclick="window.location.href='medi.do'">목록</button>
+						<button id="next"
+							onclick="window.location.href='mtinfo.do?id=${res.meditate_id+1}'">다음</button>
+					</div>
+					<div class="content-option-menu">
 						<button
 							onclick="window.location.href='mtmodi.do?id=${res.meditate_id}'">수정</button>
 						<button id="delete">삭제</button>

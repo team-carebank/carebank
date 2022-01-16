@@ -205,14 +205,15 @@
 						</form>
 					</div>
 				</div>
-			</div>
-			<div>
-				<hr>
-			</div>
-			<div class="main-content-option">
-				<div class="content-option-menu">
-					<button id="submit">작성</button>
-					<button id="cancle" onclick="history.back();">취소</button>
+				<div>
+					<hr>
+				</div>
+				<div class="main-content-option">
+					<div class="content-option-menu"></div>
+					<div class="content-option-menu">
+						<button id="submit">작성</button>
+						<button id="cancle" onclick="history.back();">취소</button>
+					</div>
 				</div>
 			</div>
 		</div>

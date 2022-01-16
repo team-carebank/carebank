@@ -169,8 +169,49 @@
 */
 .main-content-option {
 	display: grid;
+	grid-template-columns: repeat(2, 1fr);
 	justify-items: center;
 	align-items: center;
+}
+
+.content-option-menu {
+	display: grid;
+	justify-items: center;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.content-option-menu>* {
+	margin-inline-start: 10px;
+	font-size: medium;
+}
+
+.content-option-menu>*:hover {
+	cursor: pointer;
+	background: linear-gradient(to right, #04AA6D, #05C480);
+	color: white;
+}
+
+.content-option-menu>button {
+	padding: 10px 30px;
+	border: none;
+	border-radius: 4px;
+	transition: 0.2s;
+}
+
+.content-option-menu:nth-child(1) {
+	grid-template-columns: repeat(2, 1fr);
+	justify-self: start;
+}
+
+.content-option-menu:nth-child(2) {
+	grid-template-columns: repeat(3, 1fr);
+	justify-self: end;
+}
+
+.content-option-menu:nth-child(1)>* {
+	margin-inline-start: 0 !important;
+	margin-inline-end: 10px;
 }
 
 .content-desc-item, .content-desc-title {
@@ -199,33 +240,6 @@
 	object-fit: cover !important;
 	width: 600px;
 	height: 100%;
-}
-
-.content-option-menu {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	justify-items: center;
-	justify-self: end;
-	margin-top: 10px;
-	margin-bottom: 20px;
-}
-
-.content-option-menu>* {
-	margin-inline-start: 10px;
-	font-size: medium;
-}
-
-.content-option-menu>*:hover {
-	cursor: pointer;
-	background: linear-gradient(to right, #04AA6D, #05C480);
-	color: white;
-}
-
-.content-option-menu>button {
-	padding: 10px 30px;
-	border: none;
-	border-radius: 4px;
-	transition: 0.2s;
 }
 
 @media screen and (max-width:1200px) {
