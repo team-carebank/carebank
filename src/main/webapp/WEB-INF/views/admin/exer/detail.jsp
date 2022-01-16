@@ -74,6 +74,10 @@
 							<h3>운동 유형</h3>
 							<span>${exer.exer_type }</span>
 						</div>
+						<div class="content-desc-item">
+							<h3>1회당 소모 칼로리</h3>
+							<span>${exer.exer_kcal }</span>
+						</div>
 						<hr>
 						<div class="content-desc-item">
 							<h3>카테고리</h3>
