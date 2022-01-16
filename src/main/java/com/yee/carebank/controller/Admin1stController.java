@@ -389,7 +389,9 @@ public class Admin1stController {
 		String redirectURL = null;
 
 		// 현재 오류가 어디서 발생한 것인지 확인
-		if (url.contains("admin/m")) {
+		if (url.contains("medi.do") || url.contains("admin/mt")) {
+			redirectURL = "/carebank/admin/medi.do?page=1";
+		} else if (url.contains("admin/m")) {
 			redirectURL = "/carebank/admin/meal.do?page=1";
 		} else if (url.contains("admin/f")) {
 			redirectURL = "/carebank/admin/food.do?page=1";
