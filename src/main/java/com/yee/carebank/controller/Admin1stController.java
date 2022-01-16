@@ -77,7 +77,7 @@ public class Admin1stController {
 		model.addAttribute("page", 1);
 		model.addAttribute("category", biz.selectCList());
 
-		return "admin/meal/mlist";
+		return "admin/meal/list";
 	}
 
 	@RequestMapping("admin/meal.do")
@@ -98,7 +98,7 @@ public class Admin1stController {
 		model.addAttribute("page", page);
 		model.addAttribute("category", biz.selectCList());
 
-		return "admin/meal/mlist";
+		return "admin/meal/list";
 	}
 
 	@RequestMapping("admin/minfo.do")
@@ -113,7 +113,7 @@ public class Admin1stController {
 		model.addAttribute("meal", mBiz.selectOne(meal_id));
 		model.addAttribute("food", mBiz.selectIngredient(meal_id));
 
-		return "admin/meal/minfo";
+		return "admin/meal/detail";
 	}
 
 	@RequestMapping("admin/mwrite.do")
@@ -126,7 +126,7 @@ public class Admin1stController {
 		}
 
 		model.addAttribute("category", biz.selectCList());
-		return "admin/meal/mwrite";
+		return "admin/meal/write";
 	}
 
 	@RequestMapping("admin/minsert.do")
@@ -163,7 +163,7 @@ public class Admin1stController {
 		model.addAttribute("food", mBiz.selectIngredient(meal_id));
 		model.addAttribute("category", biz.selectCList());
 
-		return "admin/meal/mmodify";
+		return "admin/meal/modify";
 
 	}
 
@@ -227,7 +227,7 @@ public class Admin1stController {
 		model.addAttribute("page", page);
 		model.addAttribute("category", biz.selectCList());
 
-		return "admin/meal/msearch";
+		return "admin/meal/search";
 	}
 
 	/*

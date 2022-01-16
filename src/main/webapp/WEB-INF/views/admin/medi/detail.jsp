@@ -110,7 +110,7 @@
 				</div>
 				<div class="main-content-option">
 					<div class="content-option-menu">
-						<button onclick="history.back()">목록</button>
+						<button onclick="medi.do">목록</button>
 						<button id="playlist">플레이리스트</button>
 						<button
 							onclick="window.location.href='mtmodi.do?id=${res.meditate_id}'">수정</button>

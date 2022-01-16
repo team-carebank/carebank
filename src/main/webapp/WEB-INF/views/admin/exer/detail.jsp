@@ -90,7 +90,7 @@
 				</div>
 				<div class="main-content-option">
 					<div class="content-option-menu">
-						<button onclick="history.back()">목록</button>
+						<button onclick="exer.do">목록</button>
 						<button
 							onclick="window.location.href='emodi.do?id=${exer.exer_id}'">수정</button>
 						<button id="delete">삭제</button>
