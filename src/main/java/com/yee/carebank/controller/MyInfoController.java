@@ -1,5 +1,7 @@
 package com.yee.carebank.controller;
 
+import static com.yee.carebank.controller.Admin1stController.check;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yee.carebank.model.biz.MyInfoBiz;
 import com.yee.carebank.model.biz.PreferenceBiz;
+import com.yee.carebank.model.biz.UserBiz;
 import com.yee.carebank.model.dto.UserDto;
 
 
@@ -28,6 +32,13 @@ private MyInfoBiz infobiz;
 
 @Autowired
 private PreferenceBiz preferbiz;
+
+@Autowired
+private UserBiz userbiz;
+
+@Autowired
+private BCryptPasswordEncoder passwordEncoder;
+
 
 	//기본정보 조회
 	@RequestMapping("/myinfo.do")
@@ -105,6 +116,47 @@ private PreferenceBiz preferbiz;
 		if(res > 0) {
 			return true;
 		}
+		else {
+			return false;
+		}
+	}
+	
+	@RequestMapping("/changePop.do")
+	public String changePop() {
+		logger.info("CHANGE PW POPUP");
+		
+		return "changepw_Popup";
+	}
+	
+	@RequestMapping("/pwchk.do")
+	@ResponseBody
+	public boolean chkpw(HttpSession session, @RequestParam("old_pw") String user_pw) {
+		logger.info("PASSWORD CHECK");
+		
+		UserDto login_info = (UserDto) session.getAttribute("login_info");
+		
+		if (passwordEncoder.matches(user_pw,login_info.getUser_pw())) {
+		
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@RequestMapping("/changepw.do")
+	@ResponseBody
+	public boolean changepw(HttpSession session, @RequestParam String new_pw) {
+		
+		UserDto login_info = (UserDto)session.getAttribute("login_info");
+		login_info.setUser_pw(passwordEncoder.encode(new_pw));
+
+		int res = userbiz.updatePassword(login_info);
+
+		if (res > 0) {
+			return true;
+			
+		} 
 		else {
 			return false;
 		}

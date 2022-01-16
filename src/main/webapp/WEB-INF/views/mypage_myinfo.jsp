@@ -1,344 +1,288 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style>
-        body {
-            overflow: scroll;
-        }
+body {
+	overflow: scroll;
+}
 
-        .container {
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: auto;
-            justify-content: center;
-            justify-content: center;
-        }
+.container {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto;
+	justify-content: center;
+	justify-content: center;
+}
 
-        .admin-info {
-            width: 100%;
-            height: 100px;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0px 0px 2px gainsboro;
-            background-color: #04AA6D;
-            color: white;
-            position: sticky !important;
-        }
+.admin-info {
+	width: 100%;
+	height: 100px;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0px 0px 2px gainsboro;
+	background-color: #04AA6D;
+	color: white;
+	position: sticky !important;
+}
 
-        .admin-info * {
-            justify-self: center;
-            align-self: center;
-        }
+.admin-info * {
+	justify-self: center;
+	align-self: center;
+}
 
-        .admin-info *:not(.admin-info *:nth-child(2)):hover {
-            cursor: pointer;
-        }
+.admin-info *:not(.admin-info *:nth-child(2)):hover {
+	cursor: pointer;
+}
 
-        .admin-info *:nth-child(2) {
-            grid-column: 2/4;
-        }
+.admin-info *:nth-child(2) {
+	grid-column: 2/4;
+}
 
-        .body-content {
-            width: 100%;
-            display: grid;
-            grid-gap: 0;
-            grid-template-columns: repeat(5, 1fr);
-            justify-items: center;
-            place-content: center;
-        }
+.body-content {
+	width: 100%;
+	display: grid;
+	grid-gap: 0;
+	grid-template-columns: repeat(5, 1fr);
+	justify-items: center;
+	place-content: center;
+}
 
-        .content-admin-side {
-            min-width: 300px;
-            height: 105vh;
-            min-height: 1000px;
-            box-shadow: 0px 10px 10px gainsboro;
-        }
+#add {
+	cursor: pointer;
+}
 
-        .content-admin-side,
-        .content-admin-side div {
-            justify-self: stretch;
-        }
+.content-admin-main {
+	width: 80%;
+	min-width: 1000px;
+	grid-column: 2/6;
+	justify-self: center;
+}
 
-        .content-admin-side div * {
-            display: block;
-            padding-block: 20px;
-            padding-left: 20px;
-            border-bottom: 1px solid gainsboro;
-        }
+.admin-main-description {
+	height: 100px;
+}
 
-        .content-admin-side div span:hover {
-            cursor: pointer;
-        }
-        
-        #add{
-        	cursor: pointer;
-        
-        }
-        .content-admin-main {
-            width: 80%;
-            min-width: 1000px;
-            grid-column: 2/6;
-            justify-self: center;
-        }
+.admin-main-description>h1 {
+	grid-column: 1/3;
+}
 
+.admin-main-description>span {
+	grid-column: 3/5;
+}
 
-        .admin-main-description {
-            height: 100px;
-        }
+.board-header-content, .board-body-content {
+	margin-block: 15px;
+}
 
-        .admin-main-description>h1 {
-            grid-column: 1/3;
-        }
+.board-header-content, .board-body-content, .admin-main-description {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	justify-items: center;
+	align-items: center;
+}
 
-        .admin-main-description>span {
-            grid-column: 3/5;
-        }
+.board-body-content {
+	padding-block: 10px;
+}
 
-        .board-header-content,
-        .board-body-content {
-            margin-block: 15px;
-        }
+.board-header, .board-body {
+	background-color: white;
+}
 
-        .board-header-content,
-        .board-body-content,
-        .admin-main-description {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            justify-items: center;
-            align-items: center;
-        }
+.board-header {
+	margin-block-end: 0;
+	font-weight: bold;
+}
 
-        .board-body-content {
-            padding-block: 10px;
-        }
+.board-body {
+	margin-block-start: 0;
+}
 
-        .board-header,
-        .board-body {
-            background-color: white;
-        }
+.board-header {
+	border-top: 1px solid gainsboro;
+	border-bottom: 1px solid gainsboro;
+}
 
-        .board-header {
-            margin-block-end: 0;
-            font-weight: bold;
-        }
+.board-content-name {
+	grid-column: 2/4;
+	border: none;
+}
 
-        .board-body {
-            margin-block-start: 0;
-        }
+.board-content-title {
+	grid-column: 1/3;
+}
 
-        .board-header {
-            border-top: 1px solid gainsboro;
-            border-bottom: 1px solid gainsboro;
-        }
+.board-header#footer * {
+	grid-column: 5;
+}
 
-        .board-content-name {
-            grid-column: 2/4;
-            border:none;
-        }
+.cancle {
+	width: 50px;
+	height: 30px;
+}
 
-        
-  		.board-content-title{
-            grid-column: 1/3;
-         }
-       
+.preferlist_btn {
+	text-align: center;
+	width: 200px;
+	height: 50px;
+	margin: 10px;
+	font-size: 12pt;
+	border-radius: 10px;
+	border: none;
+	background-color: #287743;
+	color: white;
+}
 
-        .board-header#footer * {
-            grid-column: 5;
-        }
-		.cancle{
-			width: 50px;
-			height:30px;
-		}
-		
-		.sub_title{
-			font-weight: bold;
-			text-align: left;
-		}
-   
-   		.preferlist_btn{
-   			text-align:center;
-   			width: 200px;
-   			height:50px;
-   			margin: 10px;
-   			font-size: 12pt;
-   			border-radius: 10px;
-   			border: none;
-   			background-color: #287743;
-   			color: white;
-   		
-   		
-   		}
-   		.preferlist{
-   			margin-left: 600px;
-   		
-   		}
-   		
-   		.menu_subtitle:hover{
-   			background-color:  #287743;
-   			color: white;
-   		
-   		}
-   		
-   		 #myinfo{
-   			background-color:#287743;
-   			color: white;
-   		}
-     
-		input{
-			height: 30px;
-			font-size: 12pt;
-			background-color:#f1f2f0;
-			border-radius: 8px;
-			text-align: center;
-		
-		}
-        .update_img{
-        width:250x; 
-        height:60px;
-        cursor: pointer;
-        margin-top: 30px;
-        
-        }
-        
-        .new_btn{
-        	height: 40px;
-        	width: 80px;
-        	margin-left: 10px;
-        	background-color: #F6D860;
-        	
-        	border: none;
-        } 
-        
-    </style>
+.preferlist {
+	margin-left: 600px;
+}
+
+#myinfo {
+	background-color: #287743;
+	color: white;
+}
+
+input {
+	height: 30px;
+	font-size: 12pt;
+	background-color: #f1f2f0;
+	border-radius: 8px;
+	text-align: center;
+}
+
+.update_img {
+	width: 250x;
+	height: 60px;
+	cursor: pointer;
+	margin-top: 30px;
+}
+
+.new_btn {
+	height: 40px;
+	width: 80px;
+	margin-left: 10px;
+	background-color: #F6D860;
+	border: none;
+}
+</style>
 </head>
 <body>
-<header>
-<%@include file = "../../header.jsp" %>
-</header>
-    <div class="container">
-     
-        <div class="body-content">
-            <div class="content-admin-side">
-                <div>
-                    <h3>마이페이지</h3>
-                    <!--메뉴 구분선-->
-                    <h4>Information</h4>
-                    <span class = "menu_subtitle" id = "myinfo" onclick = "location.href='${pageContext.request.contextPath}/myinfo.do'">내 정보</span>
-                    <span class = "menu_subtitle" onclick = "location.href='${pageContext.request.contextPath}/regis_prefer.do'">관심사설정</span>
-                    <span class = "menu_subtitle">대시보드</span>
-                    <!--메뉴 구분선-->
-                    <h4></h4>
-                  
-                  
-                    <!--메뉴 구분선-->
-                    <h4>Customer Service</h4>
-                    <span class = "menu_subtitle">공지사항</span>
-                    <span class = "menu_subtitle">QnA</span>
-                    <span class = "menu_subtitle" onclick = "location.href='${pageContext.request.contextPath}/faqlist.do'">FAQ</span>
-                </div>
-            </div>
-            <div class="content-admin-main">
-                <div class="admin-main-description">
-                    <h1>${login_info.user_name } 님의 정보</h1>
-                  
-                    
-                </div>
-                <div class="admin-main-content">
-                    <div class="main-content-board">
-                        <div class="board-header">
-                         
-                        </div>
-                        <div class="board-body">
-                            <div class="board-body-content">
-                                <span class = "sub_title">이름:</span>
-                            
-                             
-                                <input type = "text" class="board-content-name" id = "user_name" value = "${login_info.user_name}" readonly = "true">
-                               	<input type = "hidden" value = "${login_info.user_no }" id = "user_no">
-                            </div>
-                            <div class="board-body-content">
-                                <span class = "sub_title">아이디:</span>
-                                <input type = "text" class="board-content-name" id = "user_id" value = "${login_info.user_id }" readonly = "true">
-                                
-                            </div>
-                            <div class="board-body-content">
-                                <span class = "sub_title">핸드폰 번호:</span>
-                                <input type = "number" class="board-content-name" id = "phone" value = "${login_info.phone }" readonly = "true">
-                               
-                            </div>
-                            <div class="board-body-content">
-                                <span class = "sub_title">이메일:</span>
-                                <input type = "email" class="board-content-name" id = "email" value = "${login_info.email }" readonly = "true">
-                       
-                            </div>
-                            <div class="board-body-content">
-                                <span class = "sub_title">생년월일:</span>
-                                <input type = "date" class="board-content-name" id = "birth" value = "${login_info.birth }" readonly = "true">
-                               
-                            </div>
-   
-                            
-                        </div>
-                        <div class="board-header" id="footer">
-                            <img src="resources/img/info_update.png" class = "update_img" onclick = "change();" >
-                        
-                        	
-                            <div class="board-header-content">
-                          
-                              <span class="board-content-config" id="add" onclick = "">비밀번호 재설정</span>
-                            </div>
-                            <div class="board-header-content">
-                                <span class="board-content-config" id="add" onclick = "disable(${login_info.user_no})">회원탈퇴</span>
-                                								
-                            </div>
-                        </div>
-                            <div class="board-header">
-                            <div class="admin-main-description">
-                                <h1>${login_info.user_name } 님의 관심사</h1>
-                            </div>
-                        
-                        </div>
-                        
-                           <div class = "perferlist">
-                           <c:choose>
-                           		<c:when test = "${fn:length(preferlist) == 0 }">
-                           			<div>관심사가 없습니다. </div>
-                           		</c:when>
-                           		
-                           		<c:otherwise>
-                             		 <c:forEach items ="${preferlist }" var = "preferDto">
-                                		<input type = "button" class = "preferlist_btn" value = "#${preferDto.subcat_name }">
-                               		 </c:forEach>
-                                		</div>
-                                		<img src="resources/img/prefer_btn.png" class = "update_img" onclick = "location.href = 'regis_prefer.do?user_no=${login_info.user_no}'" >
-                                     
-                           		</c:otherwise>
-                           </c:choose>
-                             </div>
-                            </div>
-                        </div> 
-        
-                        
-                        
-                    </div>
-              
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script type = "text/javascript">
+	<header>
+		<%@include file="../../header.jsp"%>
+	</header>
+	<div class="container">
+
+		<div class="body-content">
+			<%@ include file="mypage_side.jsp"%>
+			<div class="content-admin-main">
+				<div class="admin-main-description">
+					<h1>${login_info.user_name }님의 정보</h1>
+
+
+				</div>
+				<div class="admin-main-content">
+					<div class="main-content-board">
+						<div class="board-header"></div>
+						<div class="board-body">
+							<div class="board-body-content">
+								<span class="sub_title">이름:</span> <input type="text"
+									class="board-content-name" id="user_name"
+									value="${login_info.user_name}" readonly="true"> <input
+									type="hidden" value="${login_info.user_no }" id="user_no">
+							</div>
+							<div class="board-body-content">
+								<span class="sub_title">아이디:</span> <input type="text"
+									class="board-content-name" id="user_id"
+									value="${login_info.user_id }" readonly="true">
+
+							</div>
+							<div class="board-body-content">
+								<span class="sub_title">핸드폰 번호:</span> <input type="number"
+									class="board-content-name" id="phone"
+									value="${login_info.phone }" readonly="true">
+
+							</div>
+							<div class="board-body-content">
+								<span class="sub_title">이메일:</span> <input type="email"
+									class="board-content-name" id="email"
+									value="${login_info.email }" readonly="true">
+
+							</div>
+							<div class="board-body-content">
+								<span class="sub_title">생년월일:</span> <input type="date"
+									class="board-content-name" id="birth"
+									value="${login_info.birth }" readonly="true">
+
+							</div>
+
+
+						</div>
+						<div class="board-header" id="footer">
+							<img src="resources/img/myinfo_update.png" class="update_img"
+								onclick="change();">
+
+
+							<div class="board-header-content">
+
+								<span class="board-content-config" id="add" onclick="changePop();">비밀번호
+									재설정</span>
+							</div>
+							<div class="board-header-content">
+								<span class="board-content-config" id="add"
+									onclick="disable(${login_info.user_no})">회원탈퇴</span>
+
+							</div>
+						</div>
+						<div class="board-header">
+							<div class="admin-main-description">
+								<h1>${login_info.user_name }님의 관심사</h1>
+							</div>
+
+						</div>
+
+						<div class="perferlist">
+							<c:choose>
+								<c:when test="${fn:length(preferlist) == 0 }">
+									<div>관심사가 없습니다.</div>
+								</c:when>
+
+								<c:otherwise>
+									<c:forEach items="${preferlist }" var="preferDto">
+										<input type="button" class="preferlist_btn"
+											value="#${preferDto.subcat_name }">
+									</c:forEach>
+						</div>
+
+						</c:otherwise>
+						</c:choose>
+						<img src="resources/img/prefer_set_btn.png" class="update_img"
+							onclick="location.href = 'regis_prefer.do?user_no=${login_info.user_no}'">
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+
+	</div>
+	</div>
+	</div>
+	</div>
+
+	<script type="text/javascript">
     
     	//속성 변경
     	function change(){
@@ -419,12 +363,37 @@
 				}
 			}
 			
+		};
+		
+		function changePop(){
+	    	var w = 300;
+	    	var h = 300;
+	    	
+	    	var option = getOption(w,h);
+	    	var url = "changePop.do"
+	    	var name = "changepw_Popup";
+	    
+	    	window.open(url, name, option);
+			
+			
 		}
+		
+		 function getOption(w, h){
+		        //팝업이 화면의 중앙에 오게 설정
+		        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+		        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+		        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+		        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+		        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+		        var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+		        return "width="+w+", height="+h+", left="+left+", top="+top+", location=no, resizable=no";
+		    }
     
     
     </script>
-    
-    
-    
+
+
+
 </body>
 </html>
