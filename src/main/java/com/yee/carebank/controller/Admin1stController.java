@@ -142,11 +142,10 @@ public class Admin1stController {
 
 		if (res > 0) {
 			model.addAttribute("msg", "데이터가 등록되었습니다.");
-			model.addAttribute("url", "meal.do");
 		} else {
 			model.addAttribute("msg", "데이터가 등록되지 않았습니다.");
-			model.addAttribute("url", "meal.do");
 		}
+		model.addAttribute("url", "meal.do");
 
 		return redirectPath;
 	}
@@ -181,11 +180,10 @@ public class Admin1stController {
 
 		if (res > 0) {
 			model.addAttribute("msg", "데이터가 수정되었습니다.");
-			model.addAttribute("url", "meal.do");
 		} else {
 			model.addAttribute("msg", "데이터가 수정되지 않았습니다.");
-			model.addAttribute("url", "meal.do");
 		}
+		model.addAttribute("url", "minfo.do?id=" + meal.getMeal_id());
 
 		return redirectPath;
 	}

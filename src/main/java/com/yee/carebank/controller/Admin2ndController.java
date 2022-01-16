@@ -140,7 +140,7 @@ public class Admin2ndController {
 		} else {
 			model.addAttribute("msg", "데이터가 수정되지 않았습니다.");
 		}
-		model.addAttribute("url", "supple.do");
+		model.addAttribute("url", "sinfo.do?id=" + dto.getSupple().getSupple_id());
 
 		return redirectPath;
 	}
