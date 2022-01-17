@@ -33,7 +33,7 @@ public class QnaController {
 		if(loginUser != null) {
 			list = biz.selectList(loginUser.getUser_no());
 		}else {
-			return "redirect:main.do";
+			return "redirect:loginform.do";
 		}
 		
 		model.addAttribute("list",list);
