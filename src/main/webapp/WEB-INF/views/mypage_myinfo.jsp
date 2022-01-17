@@ -163,8 +163,6 @@ input {
 }
 
 .update_img {
-	width: 250x;
-	height: 60px;
 	cursor: pointer;
 	margin-top: 30px;
 }
