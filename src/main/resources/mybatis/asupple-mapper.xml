@@ -5,7 +5,9 @@
 	<select id="selectList" parameterType="map"
 		resultType="suppleDto">
 		SELECT * FROM (SELECT ROWNUM AS POST_NO, S.* FROM
-		SUPPLEMENT S) WHERE POST_NO BETWEEN #{start} AND #{end}
+		(SELECT *
+		FROM SUPPLEMENT ORDER BY SUPPLE_ID) S) WHERE POST_NO BETWEEN #{start}
+		AND #{end}
 	</select>
 	<select id="getCnt" resultType="int">
 		SELECT COUNT(*) FROM SUPPLEMENT
@@ -81,9 +83,13 @@
 	<select id="searchByDesc" parameterType="map"
 		resultType="suppleDto">
 		SELECT * FROM (SELECT ROWNUM AS POST_NO, S.* FROM
-		SUPPLEMENT
-		S WHERE SUPPLE_ID IN (SELECT SUPPLE_ID FROM EFFICACY e WHERE
-		DESCRIPTION LIKE '%${keyword}%')) WHERE POST_NO
+		(SELECT *
+		FROM SUPPLEMENT ORDER BY SUPPLE_ID)
+		S WHERE SUPPLE_ID IN (SELECT
+		SUPPLE_ID FROM EFFICACY e WHERE
+		DESCRIPTION LIKE '%${keyword}%') S)
+		WHERE
+		POST_NO
 		BETWEEN #{start} AND
 		#{end}
 	</select>
@@ -98,11 +104,16 @@
 	<select id="searchAll" parameterType="map"
 		resultType="suppleDto">
 		SELECT * FROM (SELECT ROWNUM AS POST_NO, S.* FROM
-		SUPPLEMENT S WHERE SUPPLE_NAME LIKE '%${keyword}%' OR SUPPLE_ID
+		(SELECT *
+		FROM SUPPLEMENT WHERE SUPPLE_NAME LIKE
+		'%${keyword}%' OR SUPPLE_ID
 		IN
-		(SELECT SUPPLE_ID FROM EFFICACY WHERE DESCRIPTION LIKE
-		'%${keyword}%')) WHERE POST_NO
-		BETWEEN #{start} AND #{end}
+		(SELECT SUPPLE_ID FROM EFFICACY WHERE
+		DESCRIPTION LIKE
+		'%${keyword}%')
+		ORDER BY SUPPLE_ID) S) WHERE POST_NO
+		BETWEEN #{start} AND
+		#{end}
 	</select>
 	<select id="getCountAll" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM SUPPLEMENT WHERE SUPPLE_ID IN
@@ -116,11 +127,13 @@
 	<select id="searchByCategory" parameterType="map"
 		resultType="suppleDto">
 		SELECT * FROM (SELECT ROWNUM AS POST_NO, S.* FROM
-		SUPPLEMENT
-		S WHERE SUPPLE_ID IN (SELECT SUPPLE_ID FROM EFFICACY e JOIN
+		( SELECT *
+		FROM SUPPLEMENT WHERE SUPPLE_ID IN (SELECT SUPPLE_ID FROM EFFICACY e
+		JOIN
 		CATEGORY
 		USING(SUBCAT_ID) WHERE
-		SUBCAT_NAME LIKE '%${keyword}%')) WHERE
+		SUBCAT_NAME LIKE '%${keyword}%'
+		ORDER BY SUPPLE_ID)) S) WHERE
 		POST_NO
 		BETWEEN #{start} AND
 		#{end}

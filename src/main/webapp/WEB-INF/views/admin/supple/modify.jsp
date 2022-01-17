@@ -15,48 +15,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/admin.js"></script>
 <style>
-#mForm input[type="text"], #mForm textarea, #mForm select, #mForm>.content-desc-item>div>span,
-	#mForm input[type="number"] {
-	width: 300px;
-	min-height: 50px;
-	font-size: large;
-}
-
-#mForm>.content-desc-item>div>div {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	margin-block: 20px;
-	align-items: center;
-}
-
 #one>#add-food, #zero>#add-food {
 	grid-column: 1/3;
 }
 
-#remove-food, #add-food, #cancle-img {
-	border: none;
-	border-radius: 2px;
-	padding: 5px 10px;
-}
-
-#remove-food:hover, #add-food:hover, #cancle-img:hover {
-	background-color: green;
-	color: white;
-}
-
 #one>#remove-food, #zero>#remove-food {
 	display: none;
-}
-
-.desc-item-img {
-	display: grid !important;
-	grid-gap: 10px;
-	justify-items: starat;
-}
-
-.desc-item-img img {
-	width: 300px;
 }
 
 .content-admin-side>#supple {
@@ -174,10 +141,11 @@
 								<h3>이미지</h3>
 								<div class="desc-item-img">
 									<input type="text" name="supple.src"
-										placeholder="클릭 시 클립보드에 복사된 내용을 붙여넣습니다." readonly="readonly"
+										placeholder="클릭 시 클립보드에 복사된 내용을 붙여넣습니다." id="supple-src" readonly="readonly"
 										value="${res.supple.src }"> <img alt="이미지"
-										src="${res.supple.src }"> <input type="button"
-										id="cancle-img" value="사진 되돌리기">
+										src="${res.supple.src }" id="preview-img"> <input
+										type="button" id="upload" value="사진 업로드하기"><input
+										type="button" id="cancle-img" value="사진 되돌리기">
 								</div>
 							</div>
 							<hr>

@@ -13,21 +13,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/admin.js"></script>
 <style>
-#mForm input[type="text"], #mForm textarea, #mForm select, #mForm>.content-desc-item>div>span,
-	#mForm input[type="number"] {
-	width: 300px;
-	min-height: 50px;
-	font-size: large;
-}
-
-#mForm>.content-desc-item>div {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	margin-block: 20px;
-	align-items: center;
-}
-
 .content-admin-side>#food {
 	background: linear-gradient(to right, #04AA6D, #05C480);
 	color: white;
@@ -51,11 +39,6 @@
 
 		document.getElementById("mForm").submit();
 	});
-
-	function resize(obj) {
-		obj.style.height = "1px";
-		obj.style.height = (12 + obj.scrollHeight) + "px";
-	}
 </script>
 </head>
 <%@ include file="../header.jsp"%>

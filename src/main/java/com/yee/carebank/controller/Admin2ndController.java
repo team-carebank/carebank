@@ -179,10 +179,6 @@ public class Admin2ndController {
 
 		List<SuppleDto> res = a2.searchSupple(searchType, keyword, page);
 
-		for (int i = 0; i < res.size(); i++) {
-			System.out.println(res.get(i));
-		}
-
 		model.addAttribute("res", res);
 		model.addAttribute("maps", a2.selectCatBySId(res));
 		model.addAttribute("cnt", a2.getSuppleCount(searchType, keyword));

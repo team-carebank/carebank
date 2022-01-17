@@ -5,8 +5,10 @@
 <mapper namespace="admin.food">
 	<select id="selectFList" resultType="foodDto"
 		parameterType="map">
-		SELECT * FROM (SELECT ROWNUM AS POSTNO, N.* FROM
-		NUTRIENTS N) WHERE POSTNO BETWEEN #{start} AND #{end} ORDER BY POSTNO
+		SELECT *
+		FROM (SELECT ROWNUM AS POSTNO, N.* FROM
+		(SELECT * FROM NUTRIENTS ORDER BY FOOD_ID) N) WHERE POSTNO BETWEEN
+		#{start} AND #{end}
 	</select>
 	<select id="getTotalCnt" resultType="int">
 		SELECT COUNT(*)
@@ -37,13 +39,9 @@
 	</update>
 	<select id="searchFood" parameterType="map" resultType="foodDto">
 		SELECT *
-		FROM
-		(SELECT ROWNUM
-		AS POSTNO, N.* FROM
-		NUTRIENTS N WHERE FOOD LIKE
-		'%${keyword}%') WHERE
-		POSTNO BETWEEN #{start} AND #{end} ORDER BY
-		POSTNO
+		FROM (SELECT ROWNUM AS POSTNO, N.* FROM (SELECT * FROM NUTRIENTS
+		WHERE FOOD LIKE '%${keyword}%' ORDER BY FOOD_ID) N) WHERE POSTNO BETWEEN
+		#{start} AND #{end}
 	</select>
 	<select id="getSearchCnt" parameterType="String"
 		resultType="int">

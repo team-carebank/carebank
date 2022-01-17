@@ -15,48 +15,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/admin.js"></script>
 <style>
-#mForm input[type="text"], #mForm textarea, #mForm select, #mForm>.content-desc-item>div>span,
-	#mForm input[type="number"] {
-	width: 300px;
-	min-height: 50px;
-	font-size: large;
-}
-
-#mForm>.content-desc-item>div>div {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	margin-block: 20px;
-	align-items: center;
-}
-
 #one>#add-food, #zero>#add-food {
 	grid-column: 1/3;
 }
 
-#remove-food, #add-food, #cancle-img {
-	border: none;
-	border-radius: 2px;
-	padding: 5px 10px;
-}
-
-#remove-food:hover, #add-food:hover, #cancle-img:hover {
-	background-color: green;
-	color: white;
-}
-
 #one>#remove-food, #zero>#remove-food {
 	display: none;
-}
-
-.desc-item-img {
-	display: grid !important;
-	grid-gap: 10px;
-	justify-items: starat;
-}
-
-.desc-item-img img {
-	width: 300px;
 }
 
 .content-admin-side>#supple {
@@ -171,9 +138,10 @@
 								<h3>이미지</h3>
 								<div class="desc-item-img">
 									<input type="text" name="supple.src"
-										placeholder="클릭 시 클립보드에 복사된 내용을 붙여넣습니다." readonly="readonly"
-										value=""> <img alt="이미지" src=""> <input
-										type="button" id="cancle-img" value="사진 되돌리기">
+										placeholder="클릭 시 클립보드에 복사된 내용을 붙여넣습니다." id="supple-src"
+										readonly="readonly" value=""> <img alt="이미지" src=""
+										id="preview-img"> <input type="button" id="upload"
+										value="사진 업로드하기">
 								</div>
 							</div>
 							<hr>
@@ -181,18 +149,10 @@
 								<h3>효능</h3>
 								<div class="content-sub-item" id="one">
 									<div>
-										<label for="subcat">기존 : ${item.subcat_name }</label> <select
-											name="subcat_id" id="subcat" id="select-category">
+										<select name="subcat_id" id="subcat" id="select-category">
 											<option disabled selected>카테고리 선택</option>
 											<c:forEach var="cat" items="${category }">
-												<c:choose>
-													<c:when test="${cat.subcat_id eq item.subcat_id }">
-														<option value="${cat.subcat_id }" selected>${cat.subcat_name }</option>
-													</c:when>
-													<c:otherwise>
-														<option value="${cat.subcat_id }">${cat.subcat_name }</option>
-													</c:otherwise>
-												</c:choose>
+												<option value="${cat.subcat_id }">${cat.subcat_name }</option>
 											</c:forEach>
 										</select>
 									</div>

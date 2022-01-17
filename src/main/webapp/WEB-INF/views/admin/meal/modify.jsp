@@ -15,46 +15,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/admin.js"></script>
 <style>
-#mForm input[type="text"], #mForm textarea, #mForm select, #mForm>.content-desc-item>div>span,
-	#mForm input[type="number"] {
-	width: 300px;
-	min-height: 50px;
-	font-size: large;
-}
-
-#mForm>.content-desc-item>div>div {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	margin-block: 20px;
-	align-items: center;
-}
-
-#remove-food, #add-food, #cancle-img {
-	border: none;
-	border-radius: 2px;
-	padding: 5px 10px;
-}
-
-#remove-food:hover, #add-food:hover, #cancle-img:hover {
-	background-color: green;
-	color: white;
-}
-
-#one>#remove-food, #zero>#remove-food {
-	display: none;
-}
-
-.desc-item-img {
-	display: grid !important;
-	grid-gap: 10px;
-	justify-items: starat;
-}
-
-.desc-item-img img {
-	width: 300px;
-}
-
 .content-admin-side>#meal {
 	background: linear-gradient(to right, #04AA6D, #05C480);
 	color: white;
@@ -135,11 +98,6 @@
 		
 		document.getElementById("mForm").submit();
 	});
-	
-	function resize(obj) {
-		obj.style.height = "1px";
-		obj.style.height = (12 + obj.scrollHeight) + "px";
-	}
 </script>
 </head>
 <%@ include file="../header.jsp"%>
@@ -160,6 +118,19 @@
 								<h3>식단명</h3>
 								<input type="text" name="meal_name" value="${meal.meal_name }">
 							</div>
+							<hr>
+							<div class="content-desc-item">
+								<h3>이미지</h3>
+								<div class="desc-item-img">
+									<input type="text" name="src"
+										placeholder="클릭 시 클립보드에 복사된 내용을 붙여넣습니다." readonly="readonly"
+										value=${meal.src }> <img alt="이미지" id="preview-img"
+										src="${meal.src }"> <input type="button" id="upload"
+										value="사진 업로드하기"> <input type="button" id="cancle-img"
+										value="사진 되돌리기">
+								</div>
+							</div>
+							<hr>
 							<div class="content-desc-item">
 								<h3>카테고리</h3>
 								<select name="subcat_id">
@@ -179,16 +150,6 @@
 							<div class="content-desc-item">
 								<h3>레시피</h3>
 								<textarea name="recipe" placeholder="레시피를 입력하세요!">${meal.recipe }</textarea>
-							</div>
-							<hr>
-							<div class="content-desc-item">
-								<h3>이미지</h3>
-								<div class="desc-item-img">
-									<input type="text" name="src"
-										placeholder="클릭 시 클립보드에 복사된 내용을 붙여넣습니다." readonly="readonly"
-										value=${meal.src }> <img alt="이미지" src="${meal.src }">
-									<input type="button" id="cancle-img" value="사진 되돌리기">
-								</div>
 							</div>
 							<hr>
 							<div class="content-desc-item">

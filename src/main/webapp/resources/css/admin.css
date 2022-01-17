@@ -214,6 +214,13 @@
 	margin-inline-end: 10px;
 }
 
+#mForm>.content-desc-item>div>div {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	margin-block: 20px;
+	align-items: center;
+}
+
 .content-desc-item, .content-desc-title {
 	margin-block: 20px;
 }
@@ -254,6 +261,39 @@
 	background: linear-gradient(to right, #04AA6D, #05C480);
 	color: white;
 	cursor: pointer;
+}
+
+#remove-food, #add-food, #cancle-img, #upload {
+	border: none;
+	border-radius: 2px;
+	padding: 5px 10px;
+	font-size: medium;
+	margin-block: 5px;
+}
+
+#remove-food:hover, #add-food:hover, #cancle-img:hover, #upload:hover {
+	background-color: green;
+	color: white;
+}
+
+#mForm input[type="text"], #mForm textarea, #mForm select, #mForm>.content-desc-item>div>span,
+	#mForm input[type="number"] {
+	width: 300px;
+	min-height: 50px;
+	font-size: large;
+}
+
+#one>#remove-food, #zero>#remove-food {
+	display: none;
+}
+
+.desc-item-img {
+	display: grid !important;
+	grid-gap: 10px;
+}
+
+.desc-item-img img {
+	width: 300px;
 }
 
 @media screen and (max-width:1200px) {
