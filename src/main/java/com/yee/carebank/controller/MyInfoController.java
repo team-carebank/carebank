@@ -45,7 +45,12 @@ private BCryptPasswordEncoder passwordEncoder;
 	public String myinfo(HttpSession session, Model model) {
 		logger.info("MYPAGE");
 		
+		if(session == null) {
+			return "redirect:loginform.do";
+		}
+		
 		UserDto login_info = (UserDto)session.getAttribute("login_info");
+		
 		int user_no = login_info.getUser_no();
 		model.addAttribute("preferlist", preferbiz.selectAll(user_no));
 		return "mypage_myinfo";
