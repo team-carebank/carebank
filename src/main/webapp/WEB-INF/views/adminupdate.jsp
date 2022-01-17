@@ -88,8 +88,16 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="comment">답변 작성:</label>
 						<div class="col-sm-10">
+						<c:choose>
+						<c:when test="${qna.status eq '답변완료' }">
+							<textarea class="form-control" rows="6" id="" name="answer"
+								style="resize: none;" placeholder="답변을 해주세요." readonly="readonly">${qna.answer }</textarea>
+						</c:when>
+						<c:otherwise>
 							<textarea class="form-control" rows="6" id="" name="answer"
 								style="resize: none;" placeholder="답변을 해주세요.">${qna.answer }</textarea>
+						</c:otherwise>
+						</c:choose>
 						</div>
 					</div>
 					<div class="form-group">
