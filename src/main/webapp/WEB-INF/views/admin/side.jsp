@@ -41,7 +41,7 @@
 		<!--메뉴 구분선-->
 		<h4>Customer Service</h4>
 		<span
-			onclick="window.location.href='${pageContext.request.contextPath}/faqlist.do'">QnA</span>
+			onclick="window.location.href='${pageContext.request.contextPath}/adminqna.do'">QnA</span>
 		<span
 			onclick="window.location.href='${pageContext.request.contextPath}/faqlist.do'">FAQ</span>
 	</div>

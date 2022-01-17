@@ -94,7 +94,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<c:if test="${qna.status ne 'Y' }">
+							<c:if test="${qna.status ne '답변완료' }">
 								<button type="submit" class="btn btn-default">답변완료</button>
 							</c:if>
 							<button type="button" class="btn btn-default" onclick="history.back();">돌아가기</button>
