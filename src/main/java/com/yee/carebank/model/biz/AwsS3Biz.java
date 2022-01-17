@@ -3,8 +3,6 @@ package com.yee.carebank.model.biz;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
