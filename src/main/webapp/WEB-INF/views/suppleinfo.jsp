@@ -189,7 +189,7 @@ function update(comm_no){
 							<li>${item.maker }</li>
 							<li><img alt="네이버 쇼핑 링크"
 								src="${pageContext.request.contextPath }/resources/img/naver_shopping_logo.png"
-								onclick="window.location.href='${item.link}'"></li>
+								onclick="window.open('${item.link}');"></li>
 						</ul>
 					</c:forEach>
 					<br> <a
