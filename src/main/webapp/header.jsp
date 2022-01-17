@@ -64,10 +64,20 @@
 				
 				<li class="nav-component"><a>고객센터</a>
 					<ul class="nav-sub">
-					
+					<c:if test="${not empty login_info }">
+					<c:choose>
+						<c:when test="${login_info.user_type ne 'ADMIN' }">
 						<li><a href="${pageContext.request.contextPath}/faqlist.do">자주묻는 질문</a></li>
 						<li><a href="${pageContext.request.contextPath}/qna.do">문의하기</a></li>
-					</ul></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="">자주묻는 질문</a></li>
+							<li><a href="${pageContext.request.contextPath}/adminqna.do">문의하기</a></li>
+						</c:otherwise>
+					</c:choose>
+					</c:if>
+					</ul>
+				</li>
 			</ul>
 		</div>
 		<div class="header-user">

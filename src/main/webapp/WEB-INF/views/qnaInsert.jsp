@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <style type = "text/css">
 	body{
-		background-color: seagreen;
+		background-color: #287743;
 	}
 	.contact{
 		padding: 4%;
@@ -68,19 +68,19 @@
 			</div>
 			<div class="col-md-9">
 				<form action="insertQna.do" method="post">
+				<input type="hidden" name="answer" value=" ">
 				<div class="contact-form">
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="ftitle">제목 : </label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id=""
-								placeholder="제목을 작성해 주세요." name="title">
+							<input type="text" class="form-control" id="" name="title" placeholder="제목을 작성해 주세요.">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="comment">내용 :</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" rows="13" id=""
-								style="resize: none;" name="content"></textarea>
+							<textarea class="form-control" rows="6" id="" name="content"
+								style="resize: none;"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -90,7 +90,7 @@
 						</div>
 					</div>
 				</div>
-				</form>
+			</form>
 			</div>
 		</div>
 	</div>
