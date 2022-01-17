@@ -23,6 +23,7 @@
      	ON MY_EXERCISE.USER_NO=CARE_USER.USER_NO
      	<!-- WHERE MY_EXERCISE.USER_NO='1000'-->
      	WHERE MY_EXERCISE.USER_NO=${user_no}
+     	ORDER BY REGDATE DESC
 </select>  
   
 	<insert id="insert" parameterType="myexerciseDto">
