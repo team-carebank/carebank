@@ -32,9 +32,10 @@
 <body>
 	<div class="header">
 		<div class="header-logo">
-			<h1>
-				<a href="${pageContext.request.contextPath }/main.do">CareBank</a>
-			</h1>
+			<a href="${pageContext.request.contextPath }/main.do"> <img
+				alt="LOGO" id="logo_img"
+				src="${pageContext.request.contextPath }/resources/img/logo_white2.png">
+			</a>
 		</div>
 		<div class="header-nav">
 			<ul class="nav-list">
@@ -61,22 +62,23 @@
 							href="${pageContext.request.contextPath}/newmeditation.do"
 							target="_blank">명상</a></li>
 					</ul></li>
-				
+
 				<li class="nav-component"><a>고객센터</a>
 					<ul class="nav-sub">
-					
-						<li><a href="${pageContext.request.contextPath}/faqlist.do">자주묻는 질문</a></li>
-					<c:choose>
-						<c:when test = "${login_info.user_type ne 'ADMIN'}">
-						<li><a href="${pageContext.request.contextPath}/qna.do">문의하기</a></li>
-						</c:when>
-						
-						<c:otherwise>
-							<li><a href="${pageContext.request.contextPath}/adminqna.do">문의하기</a></li>
-						</c:otherwise>
-					</c:choose>
-					</ul>
-				</li>
+
+						<li><a href="${pageContext.request.contextPath}/faqlist.do">자주묻는
+								질문</a></li>
+						<c:choose>
+							<c:when test="${login_info.user_type ne 'ADMIN'}">
+								<li><a href="${pageContext.request.contextPath}/qna.do">문의하기</a></li>
+							</c:when>
+
+							<c:otherwise>
+								<li><a
+									href="${pageContext.request.contextPath}/adminqna.do">문의하기</a></li>
+							</c:otherwise>
+						</c:choose>
+					</ul></li>
 			</ul>
 		</div>
 		<div class="header-user">

@@ -1,47 +1,53 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import
+	url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css')
+	;
 
 @font-face {
-    font-family: 'S-CoreDream-3Light';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
- }
+	font-family: 'S-CoreDream-3Light';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 * {
-    font-family: 'S-CoreDream-3Light';
-    margin: 0;
+	font-family: 'S-CoreDream-3Light';
+	margin: 0;
 }
 
 /*
     헤더의 전반적인 스타일을 적용
 */
 .header {
-    display: grid;
- 
-    grid-gap: 10px;
-    background-color: #287743;
-    position: sticky;
-    padding: 50px;
+	display: grid;
+	grid-gap: 10px;
+	background-color: #287743;
+	position: sticky;
+	padding: 50px;
+	align-items: center;
+	justify-content: space-around;
 }
 
 .header * {
-    color: white !important;
-    text-decoration: none;
+	color: white !important;
+	text-decoration: none;
 }
 
-.header h1{
-    margin-block-start: 0;
-    margin-block-end: 0;
+.header h1 {
+	margin-block-start: 0;
+	margin-block-end: 0;
 }
 
 .header ul, li {
-    list-style-type: none;
-    padding: 0;
+	list-style-type: none;
+	padding: 0;
 }
 
 .header div {
-    grid-row: 1;
-    vertical-align: middle;
-    text-align: center;
+	grid-row: 1;
+	vertical-align: middle;
+	text-align: center;
 }
 /*
     헤더에서 로고/네비게이션/사용자 영역으로 나누고
@@ -65,23 +71,22 @@
     메뉴에 대한 스타일 적용
 */
 .nav-list, .user-login {
-    display: inline-flex;
+	display: inline-flex;
 }
 
 .nav-component {
-    margin-inline: 30px;
+	margin-inline: 30px;
 }
 
 .nav-component * {
-    display: block;
+	display: block;
 }
 
 .nav-component:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .nav-sub li {
-    display: none;
-    margin-block: 5px;
-
+	display: none;
+	margin-block: 5px;
 }
