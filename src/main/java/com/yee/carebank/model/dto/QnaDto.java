@@ -16,15 +16,17 @@ public class QnaDto {
 	private int user_no;
 	private String title;
 	private String content;
+	private String answer;
 	private Date regdate;
 	private String status;
+	private String user_type;
 
 	public QnaDto() {
 		super();
 	}
 
-	public QnaDto(int qa_no, int qa_gpno, int qa_gpsq, int user_no, String title, String content,
-			Date regdate, String status) {
+	public QnaDto(int qa_no, int qa_gpno, int qa_gpsq, int user_no, String title, String content, String answer,
+			Date regdate, String status, String user_type) {
 		super();
 		this.qa_no = qa_no;
 		this.qa_gpno = qa_gpno;
@@ -32,8 +34,10 @@ public class QnaDto {
 		this.user_no = user_no;
 		this.title = title;
 		this.content = content;
+		this.answer = answer;
 		this.regdate = regdate;
 		this.status = status;
+		this.user_type = user_type;
 	}
 
 	public int getQa_no() {
@@ -84,6 +88,14 @@ public class QnaDto {
 		this.content = content;
 	}
 
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
 	public Date getRegdate() {
 		return regdate;
 	}
@@ -100,4 +112,14 @@ public class QnaDto {
 		this.status = status;
 	}
 
+	public String getUser_type() {
+		return user_type;
+	}
+
+	public void setUser_type(String user_type) {
+		this.user_type = user_type;
+	}
+
+	
+	
 }

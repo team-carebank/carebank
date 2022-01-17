@@ -110,9 +110,42 @@ public class QnaController {
 		}
 	}
 	
+	@RequestMapping("/adminqna.do")
+	public String adminqna(Model model, String user_type) {
+		logger.info("admin QNA");
+		
+		model.addAttribute("list",biz.selectList());
+		
+		return "adminQNA";
+	}
+	
+	@RequestMapping("/adminupdateform.do")
+	public String adminupdate(int qa_no, Model model) {
+		logger.info("admin QNA update");
+		
+		model.addAttribute("qna", biz.selectOne(qa_no));
+		
+		return "adminupdate";
+	}
+	
+	@RequestMapping("/updateadmin.do")
+	public String updateAdmin(QnaDto Dto) {
+		logger.info("ADMIN QNA ANSWER");
+		
+		
+			int res = biz.updateAdmin(Dto);
+			System.out.println(res);
+			System.out.println(Dto.getQa_no());
+			System.out.println(Dto.getStatus());
+			System.out.println(Dto.getAnswer());
+			if(res > 0) {
+				return "redirect:adminqna.do?qa_no="+Dto.getQa_no();
+			} else {
+				return "redirect:adminupdateform.do?qa_no"+Dto.getQa_no();
+			}
+		} 
+
+	}
 	
 	
 	
-	
-	
-}

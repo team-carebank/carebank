@@ -11,4 +11,7 @@ public interface QnaBiz {
 	public QnaDto selectOne(int qa_no);
 	public int update(QnaDto dto);
 	public int delete(int qa_no);
+	public List<QnaDto> selectList();
+	public int updateAdmin(QnaDto Dto);
+	/* public int insertAdmin(QnaDto dto); */
 }

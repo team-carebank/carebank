@@ -83,6 +83,44 @@ public class QnaDaoImpl implements QnaDao{
 		return res;
 	}
 
-	
+	@Override
+	public List<QnaDto> selectList() {
+		List<QnaDto> dto = new ArrayList<QnaDto>();
+		
+		try {
+			dto = sqlSession.selectList(NAMESPACE+"selectlist");
+		} catch (Exception e) {
+			System.out.println("[error : admin QnA selectList]");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public int updateAdmin(QnaDto Dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateAdmin", Dto);
+		} catch (Exception e) {
+			System.out.println("[error : QNA UPDATE]");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	/* @Override
+	public int insertAdmin(QnaDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertAdmin", dto);
+		} catch (Exception e) {
+			System.out.println("[error : QNA ADMIN INSERT]");
+			e.printStackTrace();
+		}
+		return res;
+	}*/
 
 }

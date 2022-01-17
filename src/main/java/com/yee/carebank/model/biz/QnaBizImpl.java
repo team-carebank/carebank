@@ -39,4 +39,18 @@ public class QnaBizImpl implements QnaBiz{
 		return dao.delete(qa_no);
 	}
 
+	@Override
+	public List<QnaDto> selectList() {
+		return dao.selectList();
+	}
+
+	@Override
+	public int updateAdmin(QnaDto Dto) {
+		return dao.updateAdmin(Dto);
+	}
+
+	/*
+	 * @Override public int insertAdmin(QnaDto dto) { return dao.insertAdmin(dto); }
+	 */
+
 }
