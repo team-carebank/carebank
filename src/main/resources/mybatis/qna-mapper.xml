@@ -12,19 +12,20 @@
   		<result property="user_no" column="USER_NO"/>
   		<result property="title" column="TITLE"/>
   		<result property="content" column="CONTENT"/>
+  		<result property="answer" column="ANSWER"/>
   		<result property="regdate" column="REGDATE"/>
   		<result property="status" column="STATUS"/>
   	</resultMap>
   	
   	<insert id="insert" parameterType="qnaDto">
 		INSERT INTO QNA
-		VALUES(qnanosq.nextval, groupnosq.nextval, 0, ${user_no}, #{title}, #{content}, SYSDATE, DEFAULT)
+		VALUES(qnanosq.nextval, groupnosq.nextval, 0, ${user_no}, #{title}, #{content}, #{answer}, SYSDATE, '진행중')
   	</insert>
   
   	<select id="selectList" resultMap="qnaMap" parameterType="int">
   		SELECT * FROM QNA 
   		WHERE USER_NO = ${user_no} 
-  		ORDER BY QA_NO DESC
+  		ORDER BY QA_NO ASC
   	</select>
   	
   	<select id="selectOne" parameterType="int" resultMap="qnaMap">
@@ -42,5 +43,25 @@
   		DELETE FROM QNA
   		WHERE QA_NO = ${qa_no}
   	</delete>  		
+  	
+  	<select id="selectlist" resultType="qnaDto">
+  		SELECT QNA.QA_NO, QNA.TITLE, QNA.STATUS, CARE_USER.USER_TYPE
+  		FROM QNA, CARE_USER
+  		WHERE CARE_USER.USER_TYPE = 'USER' AND QNA.USER_NO = CARE_USER.USER_NO
+  		ORDER BY QA_NO ASC
+  	</select>
+  	
+  	<update id="updateAdmin" parameterType="qnaDto">
+  		UPDATE QNA 
+  		SET ANSWER = #{answer}, STATUS = '답변완료'
+  		WHERE QA_NO = #{qa_no}
+  	</update>  
+  	
+  	<!-- <insert id="insertAdmin" parameterType="qnaDto">
+  		INSERT INTO QNA
+  		VALUES(qnanosq.nextval,
+  		(SELECT QA_GPNO FROM QNA WHERE QA_NO = ${qa_no}),  
+  		1, ${user_no}, #{title}, #{content}, #{answer}, SYSDATE, 'Y')
+  	</insert> -->
   	
   </mapper>
