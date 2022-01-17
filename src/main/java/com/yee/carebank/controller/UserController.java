@@ -72,7 +72,7 @@ public class UserController {
 
 		session.invalidate();
 		System.out.println(session);
-		return "redirect:loginform.do";
+		return "redirect:sb_index.jsp";
 	}
 
 	// 회원가입 페이지 이동

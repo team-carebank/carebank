@@ -23,7 +23,7 @@
  }
 
 
-body{	
+body, pre{	
     font-family: 'S-CoreDream-3Light';
 }
 .faq-heading{
@@ -175,7 +175,10 @@ display:grid;
 	color: #287743 !important;
 
 }
-
+ pre{
+ white-space: pre-wrap;
+ font-size: 12pt;
+ }
 
     
     </style>
@@ -211,9 +214,7 @@ display:grid;
               
                 <!-- faq answer -->
                 <div class = "faq-body">
-                    <p class = "faq-content" id = "${faqdto.faqno }">
-                    		${faqdto.faqcontent}
-                    </p>
+                    <pre class = "faq-content" id = "${faqdto.faqno }">${faqdto.faqcontent}</pre>
 					<c:if test = "${login_info.user_type == 'ADMIN' }">
 		                	<div class = "modify_btns">
 		                		<input type = "button" class = 'btn btn-primary' value = "수정" onclick = "change_area(${faqdto.faqno}, this);">
