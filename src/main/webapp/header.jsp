@@ -80,8 +80,6 @@
 						</c:choose>
 					</ul></li>
 			</ul>
-		</div>
-		<div class="header-user">
 			<ul class="user-login">
 				<c:if test="${not empty login_info }">
 					<c:choose>

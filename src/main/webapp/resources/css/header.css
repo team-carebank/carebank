@@ -76,6 +76,11 @@
 
 .nav-component {
 	margin-inline: 30px;
+	width: 100px;
+}
+
+.nav-list {
+	transform: translateX(-50%);
 }
 
 .nav-component * {
