@@ -44,8 +44,8 @@
   		WHERE QA_NO = ${qa_no}
   	</delete>  		
   	
-  	<select id="selectlist" resultType="qnaDto">
-  		SELECT QNA.QA_NO, QNA.TITLE, QNA.STATUS, CARE_USER.USER_TYPE
+  	<select id="selectlist" resultType="qnaDto">	
+  		SELECT QNA.QA_NO, QNA.TITLE, QNA.STATUS, CARE_USER.USER_ID
   		FROM QNA, CARE_USER
   		WHERE CARE_USER.USER_TYPE = 'USER' AND QNA.USER_NO = CARE_USER.USER_NO
   		ORDER BY QA_NO ASC
