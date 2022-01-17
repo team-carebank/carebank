@@ -366,7 +366,7 @@ input {
 		};
 		
 		function changePop(){
-	    	var w = 300;
+	    	var w = 400;
 	    	var h = 300;
 	    	
 	    	var option = getOption(w,h);
