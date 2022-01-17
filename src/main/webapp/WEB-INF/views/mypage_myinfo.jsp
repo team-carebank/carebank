@@ -174,6 +174,10 @@ input {
 	background-color: #F6D860;
 	border: none;
 }
+
+img{
+	width: 150px;
+}
 </style>
 </head>
 <body>
