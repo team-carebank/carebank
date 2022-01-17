@@ -42,21 +42,29 @@ public class FullCalendarController {
 
 	private Logger logger = LoggerFactory.getLogger(FullCalendarController.class);
 
+	public static boolean checkLogin(UserDto loginUser) {
+		if (loginUser == null) {
+			return true;
+		}
+
+		return false;
+	}
+
 	@RequestMapping("/diary.do")
 	public String diary(Model model, HttpSession session) {
 		logger.info("mypage_diary");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
+		if (checkLogin(loginUser)) {
+			return "redirect: main.do";
+		}
+
 		List<ScheduleDto> list = null;
 		List<PillsDto> Pills = null;
 
-		if (loginUser != null) {
-			list = sBiz.selectList(loginUser.getUser_no());
-			Pills = pBiz.selectList(loginUser.getUser_no());
-		} else {
-			return "redirect: main.do";
-		}
+		list = sBiz.selectList(loginUser.getUser_no());
+		Pills = pBiz.selectList(loginUser.getUser_no());
 
 		model.addAttribute("dto", list); // list
 		model.addAttribute("pills", Pills);
@@ -90,6 +98,11 @@ public class FullCalendarController {
 		logger.info("update schedule");
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		if (checkLogin(loginUser)) {
+			return "-1";
+		}
+
 		ScheduleDto dto = new ScheduleDto(Integer.parseInt(data.get("hospital_no")), 0, data.get("hospital_name"), null,
 				null, data.get("memo"));
 
@@ -97,14 +110,9 @@ public class FullCalendarController {
 		dto.setRegdate(new_regdate);
 		Date new_resdate = new Date(data.get("resdate").replace('T', ' ').replace('-', '/'));
 		dto.setResdate(new_resdate);
+		dto.setUser_no(loginUser.getUser_no());
 
-		int res = 0;
-		try {
-			dto.setUser_no(loginUser.getUser_no());
-			res = sBiz.update(dto);
-		} catch (Exception e) {
-			return "-1";
-		}
+		int res = sBiz.update(dto);
 
 		String st = Integer.toString(res);
 
@@ -117,7 +125,14 @@ public class FullCalendarController {
 	public Map<Object, Object> insert(HttpSession session, @RequestBody Map<String, String> data) {
 		logger.info("insert");
 
+		Map<Object, Object> map = new HashMap<Object, Object>();
+
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
+
+		if (checkLogin(loginUser)) {
+			map.put("res", -1);
+		}
+
 		ScheduleDto dto = new ScheduleDto(0, 0, data.get("hospital_name"), null, null, data.get("memo"));
 
 		Date new_regdate = new Date(data.get("regdate").replace('T', ' ').replace('-', '/'));
@@ -125,15 +140,8 @@ public class FullCalendarController {
 		Date new_resdate = new Date(data.get("resdate").replace('T', ' ').replace('-', '/'));
 		dto.setResdate(new_resdate);
 
-		Map<Object, Object> map = new HashMap<Object, Object>();
-
-		int res = 0;
-		try {
-			dto.setUser_no(loginUser.getUser_no());
-			res = sBiz.insert(dto);
-		} catch (Exception e) {
-			res = -1;
-		}
+		dto.setUser_no(loginUser.getUser_no());
+		int res = sBiz.insert(dto);
 
 		map.put("res", res);
 
@@ -178,14 +186,12 @@ public class FullCalendarController {
 
 		UserDto loginUser = (UserDto) session.getAttribute("login_info");
 
-		if (loginUser != null) {
-			dto.setUser_no(loginUser.getUser_no());
-		} else {
-			dto.setUser_no(1011);
+		if (checkLogin(loginUser)) {
+			return "-1";
 		}
 
+		dto.setUser_no(loginUser.getUser_no());
 		int res = pBiz.insert(dto);
-
 		String pills = Integer.toString(res);
 
 		return pills;
