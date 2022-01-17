@@ -63,7 +63,7 @@ h3 {
 
 			<!--메뉴 구분선-->
 			<h3>고객센터</h3>
-			<span class="menu_subtitle">QnA</span> <span class="menu_subtitle"
+			<span class="menu_subtitle" onclick="location.href='${pageContext.request.contextPath}/qna.do'">QnA</span> <span class="menu_subtitle"
 				onclick="location.href='${pageContext.request.contextPath}/faqlist.do'">FAQ</span>
 		</div>
 	</div>
