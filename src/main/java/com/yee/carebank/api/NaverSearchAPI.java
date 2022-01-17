@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 
 import com.google.gson.Gson;
@@ -23,9 +26,13 @@ import com.google.gson.reflect.TypeToken;
 import com.yee.carebank.model.dto.ShoppingDto;
 
 @Repository
+@PropertySource("classpath:api/Api_Key.properties")
 public class NaverSearchAPI {
-	private String clientId = "XWbs5VJDpECEvNAce2FI"; // 애플리케이션 클라이언트 아이디값"
-	private String clientSecret = "a4d6vgC3Jg"; // 애플리케이션 클라이언트 시크릿값"
+	@Value("${clientId}")
+	private String clientId;
+	
+	@Value("${clientSecret}")
+	private String clientSecret;
 
 	public JsonArray shopping(String item) {
 		String text = null;
