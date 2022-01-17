@@ -138,7 +138,7 @@ tr{
                     <div class="FAQ_wrap">
                         <p>Q&A</p>
                         <div class="FAQ_box">
-                            <p>궁금한 점을 남겨주시면 케어뱅크가 답해드립니다.<br>진행상태가 'N'이면 진행중이고 'Y'이면 답변완료</p>
+                            <p>궁금한 점을 남겨주시면 케어뱅크가 답해드립니다.<br>진행상태가 "진행중" 및 "답변완료"로 확인해보세요.</p>
                         </div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@ tr{
                 <th>글번호</th>
                 <th>제목</th>
                 <th>진행상태</th>
-                <th>회원정보</th>
+                <th>회원아이디</th>
             </tr>
             <c:choose>
             	<c:when test="${empty list }">
@@ -175,7 +175,7 @@ tr{
                 		<td>${list.qa_no }</td>
                 		<td><a href="adminupdateform.do?qa_no=${list.qa_no }">${list.title }</a></td>
                 		<td>${list.status }</td>
-                		<td>${list.user_type }</td>
+                		<td>${list.user_id }</td>
             		</tr>
             	</c:forEach>
             </c:otherwise>
