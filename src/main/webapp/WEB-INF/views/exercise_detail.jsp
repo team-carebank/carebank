@@ -319,7 +319,7 @@ left:5vw;
             contentType: "application/json",
             success : function(data) {
 				alert("운동 횟수가 기록되었습니다!")
-				location.href = "dashboard.do";
+				location.href = "diary.do";
              },
             error : function() {
                 alert("error");

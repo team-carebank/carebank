@@ -29,8 +29,13 @@ public class ExerciseController {
 	private MyExerciseBiz mybiz;
 
 	@RequestMapping("/exerciselist.do")
-	public String exerciselist(Model model) {
+	public String exerciselist(HttpSession session, Model model) {
 		logger.info("exercise list");
+		
+		
+		if(session.getAttribute("login_info") == null) {
+			return "redirect: loginform.do";
+		}
 
 		model.addAttribute("list", biz.selectList());
 

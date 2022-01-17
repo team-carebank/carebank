@@ -90,9 +90,9 @@ public class QnaController {
 		int res = biz.update(dto);
 		
 		if(res>0) {
-			return "redirect:qna.do?user_no="+dto.getUser_no();
+			return "redirect:qnaupdateform.do?qa_no="+dto.getQa_no();
 		}else {
-			return "redirect:qnaupdateform.do?user_no"+dto.getUser_no();
+			return "redirect:qnaupdateform.do?user_no="+dto.getUser_no();
 		}
 			
 	}
