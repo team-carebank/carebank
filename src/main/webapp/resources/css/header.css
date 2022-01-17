@@ -79,10 +79,6 @@
 	width: 100px;
 }
 
-.nav-list {
-	transform: translateX(-50%);
-}
-
 .nav-component * {
 	display: block;
 }
