@@ -21,6 +21,13 @@
 	color: white;
 	box-shadow: -10px 0 0 white;
 }
+
+#mForm>.content-desc-item>div {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	margin-block: 20px;
+	align-items: center;
+}
 </style>
 <script>
 	$(document).on("keydown", "textarea", function(e) {
