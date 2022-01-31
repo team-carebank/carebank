@@ -9,6 +9,7 @@
     <title>Document</title>
 
 <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <style>
@@ -60,14 +61,14 @@
   }
  
   label{
-    font-size: 18pt;
+    font-size: 16pt;
     line-height: 40px;
     transition: all 0.2s;
   }
 
   label:hover{
       font-weight: bold;
-      font-size: 20pt;
+      font-size: 18pt;
   }
   
 
@@ -76,6 +77,28 @@ input[type='checkbox']{
   transform: scale(2.0);
   
 }
+
+input[type='checkbox']:checked + label {
+
+font-style: italic;
+font-weight: bold;
+font-size:18pt;
+
+border: 1px solid black;
+border-radius: 10px;
+border-width: 30px;
+border:none;
+
+color: #F16466;
+
+
+} 
+
+input[type='checkbox'	] + label {
+ 
+  font-style: normal;
+  
+} 
 
 #prefer_btn{
 
@@ -111,6 +134,18 @@ input[type='checkbox']{
     width: 400px;
 }
 
+#title_m{
+margin-top:30px;
+
+}
+
+
+#margin{
+	margin-top: 100px;
+	margin-bottom:0;
+}
+
+
 
 </style>
 </head>
@@ -122,41 +157,41 @@ input[type='checkbox']{
         <div id = "whitespace">
             
             <div class = "cat">
-                <h3>#만성질환</h3>
-	                <label><input type = "checkbox" name = "prefer" value = "1">편두통</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "2">변비</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "3">여드름/두피염/아토피</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "4">빈혈과 어지러움/저혈압</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "5">비염</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "6">소화불량</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "7">심장의 뻐근함/혈액순환</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "8">디스크/허리통증/관절</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "9">고지혈증/고혈압</label>
-                
-                <h3>#멘탈관리</h3>
-	               <label><input type = "checkbox" name = "prefer" value = "16">스트레스 완화</label><br>
-	               <label><input type = "checkbox" name = "prefer" value = "17">세로토닌 완화</label><br>
-	               <label><input type = "checkbox" name = "prefer" value = "18">불면증/수면관리</label><br>
-	               <label><input type = "checkbox" name = "prefer" value = "19">명상</label><br><br>
+					<h3>#만성질환</h3>
+					<c:forEach var = "allCat" items = "${allCat }">
+							<c:if test = "${allCat.supercat_id eq 1 }">
+									<input type = "checkbox" name = "prefer" id = "${allCat.subcat_id }" value = "${allCat.subcat_id }">
+									<label for = "${allCat.subcat_id }">${allCat.subcat_name }</label><br>
+								
+							</c:if>
+					</c:forEach>		
+					<h3>#건강증진</h3>
+					<c:forEach var = "allCat" items = "${allCat }">
+							<c:if test = "${allCat.supercat_id eq 3 }">
+									<input type = "checkbox" name = "prefer" id = "${allCat.subcat_id }" value = "${allCat.subcat_id }">
+									<label for = "${allCat.subcat_id }">${allCat.subcat_name }</label><br> 
+							</c:if>
+					</c:forEach>		
             </div>
             
             <div class = "cat2">
-                <h3>#건강증진</h3>
-	                <label><input type = "checkbox" name = "prefer" value = "10">노화예방</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "11">면역력 강화</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "12">여성건강</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "13">남성건강</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "14">눈건강</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "15">흡연자를 위한</label><br>
-	                <p class = "hidden">&nbsp;</p>
-	                <p class = "hidden">&nbsp;</p>
-	                <p class = "hidden">&nbsp;</p>
-
-                <h3>#체중관리</h3>
-	                <label><input type = "checkbox" name = "prefer" value = "20">균형잡힌 식단</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "21">체중감량</label><br>
-	                <label><input type = "checkbox" name = "prefer" value = "22">체중증량</label><br>
-	                <p class = "hidden">&nbsp;</p>
+            		<h3 id = "title_m">#멘탈관리</h3>
+					<c:forEach var = "allCat" items = "${allCat }">
+							<c:if test = "${allCat.supercat_id eq 2 }">
+									<input type = "checkbox" name = "prefer" id = "${allCat.subcat_id }" value = "${allCat.subcat_id }">
+									<label for = "${allCat.subcat_id }">${allCat.subcat_name }</label><br> 
+							</c:if>
+					</c:forEach>	
+					<p class = "hidden" id = "margin">&nbsp;</p>
+		
+					<h3 id = "title_w">#체중관리</h3>
+					<c:forEach var = "allCat" items = "${allCat }">
+							<c:if test = "${allCat.supercat_id eq 4 }">
+									<input type = "checkbox" name = "prefer" id = "${allCat.subcat_id }" value = "${allCat.subcat_id }">
+									<label for = "${allCat.subcat_id }">${allCat.subcat_name }</label><br> 
+							</c:if>
+					</c:forEach>	
+					<br><br>
             </div>
             <div>
                 <img src="resources/img/prefer1.png" id = "prefer_img">

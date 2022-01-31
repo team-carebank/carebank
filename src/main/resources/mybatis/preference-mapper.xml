@@ -9,6 +9,11 @@
   		<result property = "subcat_id" column = "SUBCAT_ID"/>
   	</resultMap>
   
+  
+   <select id = "allCat" resultType = "preferDto">
+  		SELECT SUBCAT_ID, SUBCAT_NAME,SUPERCAT_ID FROM CATEGORY  	
+  </select>
+  
   <select id = "selectAll" resultType = "preferDto">
   		SELECT CATEGORY.SUBCAT_NAME, CATEGORY.SUPERCAT_ID
   		FROM PREFERENCES, CATEGORY

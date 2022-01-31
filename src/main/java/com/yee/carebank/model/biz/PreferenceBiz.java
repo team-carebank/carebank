@@ -22,4 +22,8 @@ public class PreferenceBiz {
 	public int setprefer(List<Integer> subcat_id, int user_no) {
 		return preferdao.setprefer(subcat_id, user_no);
 	}
+
+	public List<PreferenceDto> allCat() {
+		return preferdao.allCat();
+	}
 }

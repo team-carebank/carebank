@@ -52,5 +52,18 @@ public class PreferenceDao {
 		
 		return res;
 	}
+
+	public List<PreferenceDto> allCat() {
+		List<PreferenceDto> allCat = new ArrayList<PreferenceDto>();
+			
+			try {
+				allCat = sqlSession.selectList(NAMESPACE + "allCat");
+			} catch (Exception e) {
+				System.out.println("[error]: select preferlist");
+				e.printStackTrace();
+			}
+			return allCat;
+	}
+
 	
 }
