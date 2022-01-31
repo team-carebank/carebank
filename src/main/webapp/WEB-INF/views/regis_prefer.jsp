@@ -53,9 +53,6 @@
   h3{
     font-size: 1.75rem;
     border-bottom: 1px solid lightgray;
-    
-    
-    
     width: 200px;
     padding: 10px;
     text-align: center;
@@ -79,12 +76,6 @@ input[type='checkbox']{
   transform: scale(2.0);
   
 }
-input[type='checkbox']:checked + label {
-  color: red;}
-
-
-
-	
 
 #prefer_btn{
 
@@ -179,11 +170,6 @@ input[type='checkbox']:checked + label {
  
  <script type="text/javascript">
  	
- 
- 
- 
- 
- 
 	function setprefer(){
 		var user_no = Number($("#user_no").val());
 		var subcat_id = new Array();
