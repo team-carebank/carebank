@@ -199,16 +199,16 @@ img{
 						<div class="board-header"></div>
 						<div class="board-body">
 							<div class="board-body-content">
-								<span class="sub_title">이름:</span> <input type="text"
-									class="board-content-name" id="user_name"
-									value="${login_info.user_name}" readonly="true"> <input
-									type="hidden" value="${login_info.user_no }" id="user_no">
-							</div>
-							<div class="board-body-content">
 								<span class="sub_title">아이디:</span> <input type="text"
 									class="board-content-name" id="user_id"
 									value="${login_info.user_id }" readonly="true">
 
+							</div>
+							<div class="board-body-content">
+								<span class="sub_title">이름:</span> <input type="text"
+									class="board-content-name" id="user_name"
+									value="${login_info.user_name}" readonly="true"> <input
+									type="hidden" value="${login_info.user_no }" id="user_no">
 							</div>
 							<div class="board-body-content">
 								<span class="sub_title">핸드폰 번호:</span> <input type="number"
@@ -291,10 +291,10 @@ img{
     		var input= $('.board-content-name');
     		var new_btn = "<input type = 'button' id = 'new_update' onclick = 'update();' class = 'new_btn' value = '수정'><input type = 'button' id = 'cancel' onclick = 'cancel();' class = 'new_btn' value = '취소'>";
     		    		//readonly 속성 제거 후 focus
-    		for(var i = 0; i < input.length; i++){
+    		for(var i = 1; i < input.length; i++){
 		   		input[i].removeAttribute('readonly')
     		}
-    		input[0].focus();
+    		input[1].focus();
     		
     		//수정버튼 클릭시 수정버튼 숨김/ 취소버튼 보이기
    			var update_btn = $("#footer").children().hide();

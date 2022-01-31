@@ -94,7 +94,8 @@ private BCryptPasswordEncoder passwordEncoder;
 	
 	//관심사 설정페이지
 	@RequestMapping("/regis_prefer.do")
-	public String regisPrefer() {
+	public String regisPrefer(Model model) {
+		model.addAttribute("allCat", preferbiz.allCat());
 		return "regis_prefer";
 	}
 

@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <style>
@@ -24,133 +24,187 @@
       font-family: 'S-CoreDream-3Light';
     
   }
-  .regis_1{
-    width: 100%;
-    height: 100%;
-    padding-top: 30px;
-    padding-bottom: 30px;
+  #container{
+      display: grid;
+      place-items: center;
+      
   }
- input{
-   margin-bottom: 5px;
- }
-.form-label{
-  margin-bottom:0px;
+  #whitespace{
+
+    width: 1300px;
+    min-height: 90vh;
+    margin:30px;
+   
+    background-color: white;
+    border-radius: 20pt;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 3fr 1fr 1fr;
+    
+  }
+
+
+ 
+  img{
+      margin-top:60px;
+      width: 500px;
+      height:550px;
+  }
+
+  h3{
+    font-size: 1.75rem;
+    border-bottom: 1px solid lightgray;
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    
+  }
+ 
+  label{
+    font-size: 16pt;
+    line-height: 40px;
+    transition: all 0.2s;
+  }
+
+  label:hover{
+      font-weight: bold;
+      font-size: 18pt;
+  }
+  
+
+input[type='checkbox']{
+  margin-right: 30px;
+  transform: scale(2.0);
+  
 }
 
-/* 중복아이디 체크 */
-.id_chk{
+input[type='checkbox']:checked + label {
 
-	display : none;
-	font-size: 9pt;
-	
+font-style: italic;
+font-weight: bold;
+font-size:18pt;
+
+border: 1px solid black;
+border-radius: 10px;
+border-width: 30px;
+border:none;
+
+color: #F16466;
+
+
+} 
+
+input[type='checkbox'	] + label {
+ 
+  font-style: normal;
+  
+} 
+
+#prefer_btn{
+
+  width: 300px;
+  height:50px;
+  margin-left: 80px;
+  font-size:15pt;
+  font-family: 'S-CoreDream-3Light';
+
+  position: relative;
+  border: none;
+  display: inline-block;
+  padding: 15px;
+  border-radius: 15px;
+  
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.25s;
+  background-color: #77af9c;
+  color: #d7fff1;
 }
-.btn{
-	width: 100px !important;
-	font-size:10pt;
-	
+#prefer_btn:hover {
+  letter-spacing: 2px;
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-#prefer_img{
-	width: 600px;
-	height: 500px;
+#prefer_btn:active {
+    transform: scale(1.5);
+}
+.cat{
+    width: 400px;
+}
+
+#title_m{
+margin-top:30px;
 
 }
+
+
+#margin{
+	margin-top: 100px;
+	margin-bottom:0;
+}
+
 
 
 </style>
 </head>
 <body>
    
-    <section class="regis_1">
-        <div class="container">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-12 col-xl-11">
-              <div class="card text-black" style="border-radius: 25px;">
-                <div class="card-body p-md-5">
-                  <div class="row justify-content-center">
-                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-      
-                      <p class="text-center h1 fw-bold mx-1 mx-md-4 mt-4">관심사 설정</p>
-                    
-      
-                        <div class="d-flex flex-row align-items-center">
-                            <div class="form-outline flex-fill mb-0">
-                                <h3>만성질환</h3>
-                                <!--<label class="form-label" for="user_id">만성질환</label><br><br>-->
-                                    <input type = "checkbox" name = "prefer" value = "1">편두통<br>
-                                    <input type = "checkbox" name = "prefer" value = "2">변비<br>
-                                    <input type = "checkbox" name = "prefer" value = "3">여드름/두피염/아토피<br>
-                                    <input type = "checkbox" name = "prefer" value = "4">빈혈과 어지러움/저혈압<br>
-                                    <input type = "checkbox" name = "prefer" value = "5">비염<br>
-                                    <input type = "checkbox" name = "prefer" value = "6">소화불량<br>
-                                    <input type = "checkbox" name = "prefer" value = "7">심장의 뻐근함/혈액순환<br>
-                                    <input type = "checkbox" name = "prefer" value = "8">디스크/허리통증/관절<br>
-                                    <input type = "checkbox" name = "prefer" value = "9">고지혈증/고혈압<br>
-                              <br>
-                              <br>
-                            </div>
+<div id = "container">
+       
 
-                            <div class="form-outline flex-fill mb-0">
-                                    <h3>건강증진</h3>
-                                    <!--<label class="form-label" for="user_id">건강증진</label><br><br>-->
-                                    <input type = "checkbox" name = "prefer" value = "10">노화예방<br>
-                                    <input type = "checkbox" name = "prefer" value = "11">면역력 강화<br>
-                                    <input type = "checkbox" name = "prefer" value = "12">여성건강<br>
-                                    <input type = "checkbox" name = "prefer" value = "13">남성건강<br>
-                                    <input type = "checkbox" name = "prefer" value = "14">눈건강<br>
-                                    <input type = "checkbox" name = "prefer" value = "15">흡연자를 위한<br>
-                              
-                                </div>
-
-
-                            </div><!--end-->
-                            
-                        <div class="d-flex flex-row align-items-center">
-                            <div class="form-outline flex-fill mb-0">
-                                <h3>멘탈관리</h3>
-                                  <!--<label class="form-label" for="user_id">멘탈관리</label><br><br>-->
-                                
-                                  <input type = "checkbox" name = "prefer" value = "16">스트레스 완화<br>
-                                  <input type = "checkbox" name = "prefer" value = "17">세로토닌 완화<br>
-                                  <input type = "checkbox" name = "prefer" value = "18">불면증/수면관리<br>
-                                  <input type = "checkbox" name = "prefer" value = "19">명상<br>
-
-                                 
-                            </div>
-      
-                            <div class="form-outline flex-fill mb-0">
-                                <h3>체중관리</h3>
-                                <!--<label class="form-label" for="user_id">다이어트</label><br><br>-->
-           
-                                <input type = "checkbox" name = "prefer" value = "20">균형잡힌 식단<br>
-                                <input type = "checkbox" name = "prefer" value = "21">체중감량<br>
-                                <input type = "checkbox" name = "prefer" value = "22">체중증량<br>
-                                
-                            </div>
-                        </div><!--end22-->
-                        	<input type = "hidden" name = "user_no" id = "user_no" value = "${login_info.user_no }">
-                      	<input type = "button" onclick ="setprefer();" value = "설정">
-                      </form>
-      
-                    </div>
-                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-      
-                        <img src="resources/img/prefer.png" class="img-fluid" id = "prefer_img">
-        
-                      </div>
-                   
-                  </div>
-                </div>
-              </div>
+        <div id = "whitespace">
+            
+            <div class = "cat">
+					<h3>#만성질환</h3>
+					<c:forEach var = "allCat" items = "${allCat }">
+							<c:if test = "${allCat.supercat_id eq 1 }">
+									<input type = "checkbox" name = "prefer" id = "${allCat.subcat_id }" value = "${allCat.subcat_id }">
+									<label for = "${allCat.subcat_id }">${allCat.subcat_name }</label><br>
+								
+							</c:if>
+					</c:forEach>		
+					<h3>#건강증진</h3>
+					<c:forEach var = "allCat" items = "${allCat }">
+							<c:if test = "${allCat.supercat_id eq 3 }">
+									<input type = "checkbox" name = "prefer" id = "${allCat.subcat_id }" value = "${allCat.subcat_id }">
+									<label for = "${allCat.subcat_id }">${allCat.subcat_name }</label><br> 
+							</c:if>
+					</c:forEach>		
             </div>
-          </div>
+            
+            <div class = "cat2">
+            		<h3 id = "title_m">#멘탈관리</h3>
+					<c:forEach var = "allCat" items = "${allCat }">
+							<c:if test = "${allCat.supercat_id eq 2 }">
+									<input type = "checkbox" name = "prefer" id = "${allCat.subcat_id }" value = "${allCat.subcat_id }">
+									<label for = "${allCat.subcat_id }">${allCat.subcat_name }</label><br> 
+							</c:if>
+					</c:forEach>	
+					<p class = "hidden" id = "margin">&nbsp;</p>
+		
+					<h3 id = "title_w">#체중관리</h3>
+					<c:forEach var = "allCat" items = "${allCat }">
+							<c:if test = "${allCat.supercat_id eq 4 }">
+									<input type = "checkbox" name = "prefer" id = "${allCat.subcat_id }" value = "${allCat.subcat_id }">
+									<label for = "${allCat.subcat_id }">${allCat.subcat_name }</label><br> 
+							</c:if>
+					</c:forEach>	
+					<br><br>
+            </div>
+            <div>
+                <img src="resources/img/prefer1.png" id = "prefer_img">
+                <input type = "hidden" name = "user_no" id = "user_no" value = "${login_info.user_no }">
+                <input type = "button" onclick ="setprefer();" value = "설정" id = "prefer_btn">
+            </div>
         </div>
-      </section>
-
+    </div>    
 
 
  
  <script type="text/javascript">
+ 	
 	function setprefer(){
 		var user_no = Number($("#user_no").val());
 		var subcat_id = new Array();
@@ -189,11 +243,6 @@
 		
 		};
 		
-		
-	
- 	
- 	
- 
 </script>
 
 
